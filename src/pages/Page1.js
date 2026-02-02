@@ -1,17 +1,24 @@
 
-// Frontend code (BASE FROM GEEKSFORGEEKS)
+// Referenced: (BASE FROM GEEKSFORGEEKS)
+// Referenced: https://stackoverflow.com/questions/41296668/how-do-i-add-validation-to-the-form-in-my-react-component
 
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 
+// Login Page
 export function Page1(){
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        let result = await fetch(
-        'http://localhost:5000/register', {
+        if (!email){ // Ensuring Email Validation
+            setError("Email Required.");
+            return;
+        }
+        setError("");
+        let result = await fetch("http://localhost:5000/register", {
             method: "post",
             body: JSON.stringify({ name, email }),
             headers: {
@@ -19,24 +26,25 @@ export function Page1(){
             }
         })
         result = await result.json();
-        console.warn(result);
-        if (result) {
-            alert("Data saved successfully");
-            setEmail("");
-            setName("");
-            navigate("/home"); // Navigating back home after sign-up/log-in
-        }
+        if (!result.ok){ // Email Validation Duplication
+            setError("Email In Use");
+        }           
+        alert("Data saved successfully");
+        setEmail("");
+        setName("");
+        navigate("/home"); // Navigating back home after sign-up/log-in
     }
     return (
         <>
             <h1>This is React WebApp </h1>
             <form action="">
-                <input type="text" placeholder="name" 
+                <input placeholder="name" 
                 value={name} onChange={(e) => setName(e.target.value)} />
-                <input type="email" placeholder="email" 
+                <input placeholder="email" 
                 value={email} onChange={(e) => setEmail(e.target.value)} />
                 <button type="submit" 
                 onClick={handleOnSubmit}>submit</button>
+                {error && <p style={{ color:'red' }}>{error}</p>}
             </form>
 
         </>
