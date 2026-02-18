@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #215631;
-  padding: 10px;
+  background-color: #2E03A5;
+  padding: 20px;
   position: top;
   bottom: 0;
   width: 100%;
@@ -11,8 +11,8 @@
 }
 
 .navbar-item {
-  background-color: #8ec578;
-  color: rgb(12, 54, 18);
+  background-color: #F97000;
+  color: rgb(249, 249, 249);
   border: none;
   padding: 10px 15px;
   margin: 0 5px;
@@ -22,7 +22,7 @@
 }
 
 .navbar-item:hover {
-  background-color: #477b4b;
+  background-color: #ac4d00;
 }
 
 .navbar-user {
@@ -35,5 +35,5 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 40px;
 }

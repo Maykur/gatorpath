@@ -25,7 +25,9 @@ export function MajorPage(){
 
     return (
         <div>
-            <h1>hi</h1>
+            <Link to="/home">
+                <h1>←</h1>
+            </Link>
             <ul>
                 {courses.map(course => (
                     <li key={course.code}>
@@ -33,7 +35,6 @@ export function MajorPage(){
                     </li>
                 ))}
             </ul>        
-            <Link to="/home">Go Back Home</Link>
         </div>
     )
 }

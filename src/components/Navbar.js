@@ -2,14 +2,24 @@
 
 import React from "react";
 import "./Navbar.css";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 
 export function NavBar(){
+    const location = useLocation();
     const navigate = useNavigate();
     const items = ['LoginPage', 'MajorListPage'];
     const pages = ['/', '/home']
     const loggedIn = !!localStorage.getItem("token");
-    const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+    let user = null;
+    const storeUser = localStorage.getItem("user");
+    if(storeUser){
+        try{
+            user = JSON.parse(storeUser);
+        }catch(e){
+            console.error("Failed to parse", e);
+            user = null;
+        }
+    }
     const handleSignOut = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -23,7 +33,7 @@ export function NavBar(){
                         if(index === 0){
                             return(
                                 <Link to={pages.at(index)}>
-                                    <button key={index} className="navbar-item">{item}</button>
+                                    <button key={index} className="navbar-item">Sign Up/Login Page</button>
                                 </Link>
                             );
                         }
@@ -40,7 +50,11 @@ export function NavBar(){
             </div>
             {loggedIn && (
                 <div className="navbar-right">
-                    <span className="navbar-user">Hi, {user.name}</span>
+                    {user?(
+                        <span className="navbar-user">Hi, {user.name}</span>) : (
+                            <span className="navbar-user">SIGN IN</span>
+                        )
+                    }
                     <button className="navbar-item" onClick={handleSignOut}>Sign Out</button>
                 </div>              
             )}

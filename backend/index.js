@@ -40,6 +40,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    major: {
+        type: String,
+        required: true,
+    },
+    year: {
+        type: String,
+        required: true,
+    },
     date: {
         type: Date,
         default: Date.now,
@@ -132,7 +140,7 @@ app.get("/", (req, resp) => {
 // ---------- USER LOGIN/SIGN-IN PART ---------- 
 // API to register a user
 app.post("/register", async (req, resp) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, major, year } = req.body;
     const emailPresent = await User.findOne({email: email});
     if (emailPresent){
         return resp.status(400).json({message: "email in use"});
@@ -141,10 +149,27 @@ app.post("/register", async (req, resp) => {
     const user = new User({
         name,
         email,
-        password: hashPass
+        password: hashPass,
+        major,
+        year
     });
     let result = await user.save();
-    resp.status(201).json({message: "All Good!"});
+    const token = jwt.sign(
+        {userID: user._id},
+        process.env.JWT_Key,
+        { expiresIn: "1h"}
+    );
+    resp.status(201).json({
+        message: "Login Successful",
+        token,
+        user: {
+            id: result._id,
+            name: result.name,
+            email: result.email,
+            major: result.major,
+            year: result.year
+        }
+    })
 });
 
 // API to grab user information
