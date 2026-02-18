@@ -2,19 +2,48 @@
 
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export function NavBar(){
+    const navigate = useNavigate();
     const items = ['LoginPage', 'MajorListPage'];
     const pages = ['/', '/home']
-
+    const loggedIn = !!localStorage.getItem("token");
+    const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+    const handleSignOut = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/");
+    }
     return (
         <nav className="navbar">
-            {items.map((item, index) => (
-                <Link to={pages.at(index)}>
-                    <button key={index} className="navbar-item">{item}</button>
-                </Link>
-            ))}
-            </nav>
+            <div className="navbar-left">
+                {items.map((item, index) => {
+                    if (!loggedIn){
+                        if(index === 0){
+                            return(
+                                <Link to={pages.at(index)}>
+                                    <button key={index} className="navbar-item">{item}</button>
+                                </Link>
+                            );
+                        }
+                    } else {
+                       if(index != 0){
+                            return(
+                                <Link to={pages.at(index)}>
+                                    <button key={index} className="navbar-item">{item}</button>
+                                </Link>
+                            );
+                        } 
+                    }
+                })}
+            </div>
+            {loggedIn && (
+                <div className="navbar-right">
+                    <span className="navbar-user">Hi, {user.name}</span>
+                    <button className="navbar-item" onClick={handleSignOut}>Sign Out</button>
+                </div>              
+            )}
+        </nav>
     );
 }

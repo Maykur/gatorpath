@@ -8,7 +8,6 @@ export function Home(){
     <>
         <h1>Home Page</h1>
         <SearchPage/>
-        <Link to="/">Go Back to Login</Link>
     </>
   );
 }

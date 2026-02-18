@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   background-color: #215631;
   padding: 10px;
@@ -23,4 +23,17 @@
 
 .navbar-item:hover {
   background-color: #477b4b;
+}
+
+.navbar-user {
+  color: #fff;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
