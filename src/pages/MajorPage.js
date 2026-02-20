@@ -38,7 +38,7 @@ export function MajorPage(){
         }}>
             <Link to="/home" style={{ textDecoration: "none" }}>
                 <button style={{
-                    backgroundColor: "#0021A5", // UF Blue
+                    backgroundColor: "#0021A5",
                     color: "white",
                     border: "none",
                     padding: "12px 20px",
@@ -54,8 +54,8 @@ export function MajorPage(){
             </Link>
 
             <h1 style={{
-                color: "#0021A5", // UF Blue
-                borderBottom: "3px solid #FA4616", // UF Orange
+                color: "#0021A5",
+                borderBottom: "3px solid #FA4616",
                 paddingBottom: "15px",
                 marginBottom: "20px",
                 fontSize: "28px",
@@ -74,10 +74,10 @@ export function MajorPage(){
                 {majorInfo.university}
             </p>
 
-            {/* Core Coursework Section */}
+            {/* Core Coursework */}
             <div style={{ marginBottom: "40px" }}>
                 <h2 style={{
-                    backgroundColor: "#0021A5", // UF Blue
+                    backgroundColor: "#0021A5",
                     color: "white",
                     padding: "15px 20px",
                     borderRadius: "4px",
@@ -101,10 +101,10 @@ export function MajorPage(){
                             backgroundColor: "white",
                             borderRadius: "3px",
                             border: "1px solid #dee2e6",
-                            borderLeft: "3px solid #0021A5" // UF Blue accent
+                            borderLeft: "3px solid #0021A5"
                         }}>
                             <strong style={{ 
-                                color: "#0021A5", // UF Blue
+                                color: "#0021A5", 
                                 fontSize: "14px",
                                 fontWeight: "600"
                             }}>
@@ -117,11 +117,11 @@ export function MajorPage(){
                 </div>
             </div>
 
-            {/* Required Foundation Section */}
+            {/* Required Foundation */}
             {majorInfo.required_foundation && majorInfo.required_foundation.length > 0 && (
                 <div style={{ marginBottom: "40px" }}>
                     <h2 style={{
-                        backgroundColor: "#FA4616", // UF Orange
+                        backgroundColor: "#FA4616",
                         color: "white",
                         padding: "15px 20px",
                         borderRadius: "4px",
@@ -145,10 +145,10 @@ export function MajorPage(){
                                 backgroundColor: "white",
                                 borderRadius: "3px",
                                 border: "1px solid #dee2e6",
-                                borderLeft: "3px solid #FA4616" // UF Orange accent
+                                borderLeft: "3px solid #FA4616"
                             }}>
                                 <strong style={{ 
-                                    color: "#FA4616", // UF Orange
+                                    color: "#FA4616",
                                     fontSize: "14px",
                                     fontWeight: "600"
                                 }}>
@@ -162,11 +162,11 @@ export function MajorPage(){
                 </div>
             )}
 
-            {/* Elective Areas Section */}
+            {/* Elective Areas */}
             {majorInfo.elective_areas && majorInfo.elective_areas.length > 0 && (
                 <div style={{ marginBottom: "60px" }}>
                     <h2 style={{
-                        backgroundColor: "#2c3e50", // Professional grey
+                        backgroundColor: "#2c3e50",
                         color: "white",
                         padding: "15px 20px",
                         borderRadius: "4px",
@@ -190,7 +190,7 @@ export function MajorPage(){
                                 backgroundColor: "white",
                                 borderRadius: "3px",
                                 border: "1px solid #dee2e6",
-                                borderLeft: "3px solid #0021A5" // UF Blue accent
+                                borderLeft: "3px solid #0021A5"
                             }}>
                                 <span style={{ 
                                     color: "#333",
