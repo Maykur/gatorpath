@@ -6,6 +6,7 @@ const authRoutes = require("./routes/auth_routes");
 const majorsRoutes = require("./routes/majors_routes");
 const programsRoutes = require("./routes/programs_routes");
 const scrapeRoutes = require("./routes/scrape_routes");
+const searchRoutes = require("./routes/search_routes");
 
 const app = express();
 
@@ -22,5 +23,7 @@ app.use("/majors", majorsRoutes);
 app.use("/programs", programsRoutes);
 // /scrape endpoint
 app.use("/scrape", scrapeRoutes);
+// /searches endpoints
+app.use("/searches", searchRoutes);
 
 module.exports = app;
