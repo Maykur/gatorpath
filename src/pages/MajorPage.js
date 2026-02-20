@@ -9,7 +9,7 @@ export function MajorPage(){
     useEffect(() => {
         async function fetchInfo() {
             try {
-                let result = await fetch(`http://localhost:5000/data/major/${id}`, {
+                let result = await fetch(`http://localhost:5000/majors/${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type" : "application/json",
