@@ -4,10 +4,13 @@
   align-items: center;
   background-color: #2E03A5;
   padding: 20px;
-  position: top;
-  bottom: 0;
+  position: fixed; /* Changed from 'top' to 'fixed' */
+  top: 0; /* Changed from 'bottom: 0' to 'top: 0' */
+  left: 0; /* Added for proper positioning */
   width: 100%;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; /* Added to include padding in width */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Changed from -2px to 2px */
+  z-index: 1000; /* Added to keep navbar on top */
 }
 
 .navbar-item {

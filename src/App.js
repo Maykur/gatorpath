@@ -11,13 +11,18 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<StartUp/>}/>
-        <Route path="/login" element={<LogIn/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/home" element={<Protected><Home/></Protected>}/>
-        <Route path="/major/:id" element={<Protected><MajorPage/></Protected>}/>
-      </Routes>
+      <div style={{ 
+        paddingTop: "80px", // Space for the fixed navbar
+        width: "100%"
+      }}>
+        <Routes>
+          <Route path="/" element={<StartUp/>}/>
+          <Route path="/login" element={<LogIn/>}/>
+          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/home" element={<Protected><Home/></Protected>}/>
+          <Route path="/major/:id" element={<Protected><MajorPage/></Protected>}/>
+        </Routes>
+      </div>
     </Router>
   )
 }
