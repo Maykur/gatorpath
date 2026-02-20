@@ -18,7 +18,7 @@ const SearchSubmissionSchema = new mongoose.Schema(
 
         // Search Section A
         academic: {
-            majorID: {
+            majorId: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true
             },

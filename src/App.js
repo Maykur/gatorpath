@@ -6,6 +6,7 @@ import { StartUp } from './pages/StartPage'
 import { MajorPage } from './pages/MajorPage'
 import { NavBar } from './components/Navbar'
 import { Protected } from './components/Protected'
+import ForwardSearchPage from './components/ForwardSearchPage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/home" element={<Protected><Home/></Protected>}/>
           <Route path="/majors/:id" element={<Protected><MajorPage/></Protected>}/>
+          <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
         </Routes>
       </div>
     </Router>
