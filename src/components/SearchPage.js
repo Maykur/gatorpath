@@ -8,7 +8,7 @@ function SearchPage() {
     const [info, setInfo] = useState([]);
     useEffect(() => {
         async function fetchInfo() {
-            let result = await fetch("http://localhost:5000/data", {
+            let result = await fetch("http://localhost:5000/majors", {
                 method: "GET",
                 headers: {
                     "Content-Type" : "application/json",
@@ -34,7 +34,7 @@ function SearchPage() {
                 }
             }).map((results) => (
                 <li key={results._id}>
-                    <Link to={`/major/${results._id}`}>
+                    <Link to={`/majors/${results._id}`}>
                         {results.major}
                     </Link>
                 </li>

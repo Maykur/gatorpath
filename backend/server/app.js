@@ -1,0 +1,26 @@
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+
+const authRoutes = require("./routes/auth_routes");
+const majorsRoutes = require("./routes/majors_routes");
+const programsRoutes = require("./routes/programs_routes");
+const scrapeRoutes = require("./routes/scrape_routes");
+
+const app = express();
+
+app.use(express.json());
+app.use(cors({origin: "http://localhost:3000"}));
+
+app.get("/", (req, res) => res.send("App is working"));
+
+// /register /login /profile
+app.use("/", authRoutes);
+// /majors endpoints
+app.use("/majors", majorsRoutes);
+// /programs endpoints
+app.use("/programs", programsRoutes);
+// /scrape endpoint
+app.use("/scrape", scrapeRoutes);
+
+module.exports = app;
