@@ -25,18 +25,13 @@ function SearchPage() {
             <input placeholder="Search For Major:" 
             value={searching} onChange={(e) => setSearching(e.target.value)}/>
         <div>{
-            info.length && info.filter((results) => {
-                if (searching === "") {
-                    return results;
-                } 
-                else if (results.major.toLowerCase().includes(searching.toLowerCase())) {
-                    return results;
-                }
-            }).map((results) => (
-                <li key={results._id}>
-                    <Link to={`/majors/${results._id}`}>
-                        {results.major}
-                    </Link>
+            info.filter((r) => {
+                if (!searching) return true;
+                return r.major?.toLowerCase().includes(searching.toLowerCase());
+            })
+            .map((r) => (
+                <li key={r._id}>
+                    <Link to={`/majors/${r._id}`}>{r.major}</Link>
                 </li>
             ))}
         </div>

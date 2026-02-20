@@ -26,6 +26,7 @@ export function MajorPage(){
         fetchInfo();
     }, [id]);
 
+    console.log(id);
     if (loading) return <div>Loading...</div>;
     if (!majorInfo) return <div>Major not found</div>;
 

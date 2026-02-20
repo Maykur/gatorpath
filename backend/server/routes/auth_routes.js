@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     const hashPass = await bcrypt.hash(password, 10);
     const user = await User.create({name, email, password: hashPass, major, year});
 
-    const token = jwt.sign({userID: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
+    const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
 
     res.status(201).json({
         message: "Registration successful",
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({message: 'Invalid email or password'});
         }
 
-        const token = jwt.sign({userID: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
+        const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
 
         res.json({
             message: "Login successful",
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 
 // Profile route (protected)
 router.get("/profile", authenticateToken, async (req, res) => {
-    const user = await User.findById(req.user.userID).select("-password");
+    const user = await User.findById(req.user.userId).select("-password");
     res.json(user);
 });
 
