@@ -68,15 +68,23 @@ const SearchSubmissionSchema = new mongoose.Schema(
             },
         },
 
-        // // Past (Starred) Searches
-        // starred: {
-        //     type: Boolean,
-        //     default: false
-        // },
+        // Past (Starred) Searches
+        starred: {
+            type: Boolean,
+            default: false
+        },
+
+        // TTL deletion (Unsaved searches kept temporarily JIC of backing out and to make dashboard loading easier)
+        expiresAt: {
+            type: Date,
+            // Default to Null depending on if saved or not saved, 10 days for unsaved, null for saved (no expiration)
+            default: null
+        },
     },
     {timestamps: true}
 );
 
 SearchSubmissionSchema.index({userId: 1, searchName: 1, updatedAt: -1});
+SearchSubmissionSchema.index({expiresAt: 1}, {expireAfterSeconds: 0});
 
 module.exports = mongoose.model('SearchSubmission', SearchSubmissionSchema);

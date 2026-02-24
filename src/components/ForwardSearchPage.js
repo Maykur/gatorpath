@@ -15,7 +15,7 @@ export default function ForwardSearchPage() {
 
     // Section B
     const [expectedGraduationDate, setExpectedGraduationDate] = useState("");
-    const [coursePreferences, setCoursePreferences] = useState("");
+    const [coursePreference, setCoursePreference] = useState("");
     const [searchName, setSearchName] = useState("");
 
     // UI state
@@ -76,7 +76,7 @@ export default function ForwardSearchPage() {
             },
             additional: {
                 expectedGraduationDate,
-                coursePreferences,
+                coursePreference,
             },
         };
 
@@ -173,8 +173,8 @@ export default function ForwardSearchPage() {
                     Course Preferences
                     <input
                         placeholder="e.g., Project Oriented"
-                        value={coursePreferences}
-                        onChange={(e) => setCoursePreferences(e.target.value)}
+                        value={coursePreference}
+                        onChange={(e) => setCoursePreference(e.target.value)}
                     />
                 </label>
 
@@ -189,6 +189,17 @@ export default function ForwardSearchPage() {
 
                 <button type="submit" disabled={submitting}>
                     {submitting ? "Submitting..." : "Submit Search"}
+                </button>
+                <button
+                    type="button"
+                    onClick={() => navigate("/past-searches")}
+                    style={{
+                        marginBottom: 16,
+                        padding: "8px 14px",
+                        cursor: "pointer"
+                    }}
+                    >
+                    View Past Searches
                 </button>
             </form>
         </div>
