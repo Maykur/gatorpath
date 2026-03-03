@@ -51,7 +51,7 @@ export function NavBar(){
             {loggedIn && (
                 <div className="navbar-right">
                     {user?(
-                        <span className="navbar-user">Hi, {user.name}</span>) : (
+                        <span className="navbar-user">Hi, {user.name} <img src={user.profileIcon} alt="profile" style={{ width: 50, height: 50, borderRadius: "50%" }}/></span>) : (
                             <span className="navbar-user">SIGN IN</span>
                         )
                     }

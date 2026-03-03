@@ -2,6 +2,7 @@
 // Referenced: (BASE FROM GEEKSFORGEEKS)
 // Referenced: https://stackoverflow.com/questions/41296668/how-do-i-add-validation-to-the-form-in-my-react-component
 // Referenced: https://stackoverflow.com/questions/45201351/masking-password-input-in-reactjs
+// Referenced: https://www.youtube.com/watch?v=_M4gZfIFGZw (Cloudinary Setup)
 
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -17,7 +18,16 @@ export function SignUp(){
     const [password, setPassword] = useState("");
     const [year, setYear] = useState("");
     const [major, setMajor] = useState("");
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState("");
     const [error, setError] = useState("");
+    const handlePreview = (e) => {
+        const file = e.target.files[0];
+        if (!file)
+            return;
+        setImage(file);
+        setPreview(URL.createObjectURL(file));
+    }
     const handleShow = () => {
         setShowPass(prev => !prev);
     }
@@ -43,15 +53,25 @@ export function SignUp(){
             setError("Year Required.");
             return;
         }
+        if (image === null){
+            setError("Profile Picture Required.");
+            return;
+        }
         setError("");
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("major", major);
+        formData.append("year", year);
+        if (image){
+            formData.append("profileIcon", image);
+        }
         let result = await fetch("http://localhost:5000/register", {
             method: "post",
-            body: JSON.stringify({ name, email, password, major, year }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            body: formData
         });
-        const data = await result.json();
+        let data = await result.json();
         if (!result.ok){ // Email Validation Duplication
             setError("Email In Use");
             return;
@@ -118,6 +138,13 @@ export function SignUp(){
                                 <option value="Junior">Junior</option>
                                 <option value="Senior">Senior</option>
                         </select>
+                    </div>
+                    <div className="field">
+                        <label htmlFor="large-text-box" style = {{fontSize: '24px', color: '#4B4A4A', marginLeft: '8px'}}>
+                            Profile Picture
+                        </label>
+                        <img src={preview} alt="avatar preview here" width={100} height={100}/>
+                        <input type="file" accept="image/*" onChange={handlePreview}/>
                     </div>
                 </div>
                 <div className="center-container-mid">
