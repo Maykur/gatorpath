@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // Schema for users of the app
 const UserSchema = new mongoose.Schema({
     name: {
-        type: String, reqired: true,
+        type: String, required: true,
     },
 
     email: {
@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
     year: {
         type: String, required: true
     }, 
+
+    profileIcon: {
+        type: String
+    },
 
     date: {
         type: Date, default: Date.now

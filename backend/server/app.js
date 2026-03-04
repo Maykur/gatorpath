@@ -16,6 +16,11 @@ app.use(express.json());
 
 app.get("/", (req, res) => res.send("App is working"));
 
+app.use((err, req, res, next) => {
+  console.error("EXPRESS ERROR:", err);
+  res.status(500).json({ message: err.message });
+});
+
 // /register /login /profile
 app.use("/", authRoutes);
 // /majors endpoints
