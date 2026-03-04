@@ -10,8 +10,10 @@ const searchRoutes = require("./routes/search_routes");
 
 const app = express();
 
-app.use(express.json());
 app.use(cors({origin: "http://localhost:3000"}));
+app.use(express.json());
+
+
 app.get("/", (req, res) => res.send("App is working"));
 
 app.use((err, req, res, next) => {
