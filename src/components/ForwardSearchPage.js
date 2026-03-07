@@ -101,7 +101,23 @@ export default function ForwardSearchPage() {
             }
 
             // For now, just go home
-            navigate("/home");
+            const params = new URLSearchParams();
+
+        const selectedMajor = majors.find(m => m._id === majorId);
+
+        if (selectedMajor) {
+        const simplifiedMajor = selectedMajor.major
+  .split("(")[0]     // remove "(CPE)"
+  .split("-")[0]     // remove "- BSCoE"
+  .trim();
+
+params.append("major", simplifiedMajor);
+        }
+        if (minor) params.append("minor", minor);
+        if (certificate) params.append("certifications", certificate);
+        if (coursesTakenText) params.append("skills", coursesTakenText);
+
+        navigate(`/jobResults?${params.toString()}&state=Florida`);
         }
         catch (err) {
             console.error(err);

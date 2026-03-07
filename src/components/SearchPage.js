@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 
-// Used as a template on search bar -> Connected to a basic major/class-related info DB
+// enter in info for search bar (major options)
 function SearchPage() {
     const [searching, setSearching] = useState("");
     const [info, setInfo] = useState([]);
     useEffect(() => {
-        async function fetchInfo() {
+        async function fetchMoreInfo() {
             let result = await fetch("http://localhost:5000/majors", {
                 method: "GET",
                 headers: {
@@ -16,8 +16,8 @@ function SearchPage() {
             });
             const data = await result.json();
             setInfo(data);
-        }
-        fetchInfo(); // Grabs all the majors listed in db 
+            }
+            fetchMoreInfo(); // Grabs all the majors listed in db 
     }, []);
     return (
         // Filters the major list (results) by the searched query (searching)

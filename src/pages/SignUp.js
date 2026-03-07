@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import Navbar from "../components/Navbar"
+import Select from "react-select"
 
 // Sign-In Page
 export function SignUp(){
@@ -16,7 +17,7 @@ export function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [year, setYear] = useState("");
-    const [major, setMajor] = useState("");
+    const [major, setMajor] = useState(null);
     const [error, setError] = useState("");
     const handleShow = () => {
         setShowPass(prev => !prev);
@@ -46,7 +47,7 @@ export function SignUp(){
         setError("");
         let result = await fetch("http://localhost:5000/register", {
             method: "post",
-            body: JSON.stringify({ name, email, password, major, year }),
+            body: JSON.stringify({ name, email, password, major: major?.value, year }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -98,13 +99,22 @@ export function SignUp(){
                 </div>
                 <div className="center-container-right">
                     <div className="field">
+                        <div style={{ marginPaddingLeft: "20px" }}></div>
                         <label htmlFor="large-text-box" style = {{fontSize: '24px', color: '#4B4A4A'}}>
                             Major
                         </label>
-                        <input type='text'
-                            value={major} 
-                            onChange={(e) => setMajor(e.target.value)}
-                            style = {{width: '220px', height: '39px', boxSizing: 'border-box', resize: 'none', fontSize: '20px'}}/>
+                        {/* <div style={{marginLeft: '-50px'}}/> */}
+                        <Select options={[{value: "CPE", label: "Computer Engineering (CPE) - BSCoE"},
+                                         {value: "DAS", label: "Digital Arts and Sciences (DAS)"},
+                                         {value: "CSE", label: "Computer Science (CSE) - College of Engineering"},
+                                         {value: "CSC", label: "Computer Science (CSC) - College of Liberal Arts & Sciences"}]}
+                                         placeholder="Pick your CISE major..."
+                                        
+                            value={major}
+                            onChange={(chosenMajor) => setMajor(chosenMajor)}
+                                styles = {{width: '220px', height: '39px', boxSizing: 'border-box', resize: 'none', fontSize: '20px'}}/> 
+                          
+
                     </div>
                     <div className="small-field">
                         <label htmlFor="large-text-box" style = {{fontSize: '24px', color: '#4B4A4A', marginLeft: '8px'}}>

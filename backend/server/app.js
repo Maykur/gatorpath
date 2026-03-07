@@ -26,5 +26,7 @@ app.use("/programs", programsRoutes);
 app.use("/scrape", scrapeRoutes);
 // /searches endpoints
 app.use("/searches", searchRoutes);
+// job listing endpoints
+app.use("/api/jobListings", require("./routes/jobListings"));
 
 module.exports = app;
