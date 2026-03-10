@@ -37,7 +37,7 @@ export default function PastSearchesPage() {
 
   // When user clicks on a saved search, navigate to dashboard and pass the search data in state
   async function onSelect(search) {
-    navigate("/home", {state: {activeSearch: search}});
+    navigate("/dashboard", {state: {activeSearch: search}});
   }
 
   return (

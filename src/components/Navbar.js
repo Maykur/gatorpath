@@ -8,7 +8,7 @@ export function NavBar(){
     const location = useLocation();
     const navigate = useNavigate();
     const items = ['LoginPage', 'MajorListPage'];
-    const pages = ['/', '/home']
+    const pages = ['/', '/dashboard']
     const loggedIn = !!localStorage.getItem("token");
     let user = null;
     const storeUser = localStorage.getItem("user");

@@ -80,7 +80,7 @@ export function SignUp(){
         if (result.ok){
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-            navigate("/home"); // Navigating back home after sign-up/log-in
+            navigate("/dashboard"); // Navigating back to dashboard after sign-up/log-in
         }
     }
     return (
