@@ -7,7 +7,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom"
 export function NavBar(){
     const location = useLocation();
     const navigate = useNavigate();
-    const items = ['LoginPage', 'MajorListPage'];
+    const items = ['LoginPage', 'Home'];
     const pages = ['/', '/dashboard']
     const loggedIn = !!localStorage.getItem("token");
     let user = null;
