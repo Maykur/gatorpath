@@ -8,6 +8,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-bot
 */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"; // auto select current state unless select a different state
+import {baseUrl} from '../constants.js'
 export function JobResults() {
     const location = useLocation();
     const [jobResults, setJobResults] = useState([]);
@@ -43,7 +44,7 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
 
                 const minor = params.get("minor");
                 const skills = params.get("skills");
-                 const certificate = params.get("certifications");
+                 const certificate = params.get("certificate");
                 // const state = params.get("state");
 
                 const query = new URLSearchParams({
@@ -55,7 +56,7 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
                 });
 
                 const response = await fetch(
-                    `http://localhost:5000/jobListings?${query}`
+                    `${baseUrl}/jobListings?${query}`
                 );
 
                 const data = await response.json();

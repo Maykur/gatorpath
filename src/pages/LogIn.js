@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import Navbar from "../components/Navbar"
 import '../components/CenteredButton.css';
+import { baseUrl } from "../constants";
 
 // Login Page
 export function LogIn(){
@@ -30,7 +31,7 @@ export function LogIn(){
             return;
         }
         setError("");
-        let result = await fetch("http://localhost:5000/login", {
+        let result = await fetch("${baseUrl}/login", {
             method: "post",
             body: JSON.stringify({ email, password }),
             headers: {

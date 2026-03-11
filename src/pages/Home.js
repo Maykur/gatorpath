@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import SearchPage from "../components/SearchPage"
 import Navbar from "../components/Navbar"
 import StarButtonToggle from "../components/StarButtonToggle"
+import { baseUrl } from "../constants";
 
 // Search bar test page
 export function Home(){
@@ -15,7 +16,7 @@ export function Home(){
     const token = localStorage.getItem("token");
     if (!token) return navigate("/searches");
 
-    const res = await fetch("http://localhost:5000/searches/latest", {
+    const res = await fetch("${baseUrl}/searches/latest", {
       headers: {Authorization: `Bearer ${token}`},
     });
 

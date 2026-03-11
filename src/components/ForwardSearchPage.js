@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import { baseUrl } from "../constants";
 
 export default function ForwardSearchPage() {
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("http://localhost:5000/majors");
+            const res = await fetch("${baseUrl}/majors");
             const data = await res.json();
             setMajors(Array.isArray(data) ? data : []);
         } 
@@ -52,7 +53,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("http://localhost:5000/programs?type=Minor");
+            const res = await fetch("${baseUrl}/programs?type=Minor");
             const data = await res.json();
             setMinors(Array.isArray(data) ? data : []);
         } 
@@ -67,7 +68,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("http://localhost:5000/programs?type=Certificate");
+            const res = await fetch("${baseUrl}/programs?type=Certificate");
             const data = await res.json();
             setCerts(Array.isArray(data) ? data : []);
         } 
@@ -126,7 +127,7 @@ export default function ForwardSearchPage() {
         try {
             // Submit search to backend Through POST /searches
             setSubmitting(true);
-            const res = await fetch("http://localhost:5000/searches", {
+            const res = await fetch("${baseUrl}/searches", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

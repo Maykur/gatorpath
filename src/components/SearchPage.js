@@ -1,6 +1,7 @@
 // Referenced: https://www.scaler.com/topics/react/react-searchbar/
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
+import { baseUrl } from "../constants";
 
 // enter in info for search bar (major options)
 function SearchPage() {
@@ -8,7 +9,7 @@ function SearchPage() {
     const [info, setInfo] = useState([]);
     useEffect(() => {
         async function fetchMoreInfo() {
-            let result = await fetch("http://localhost:5000/majors", {
+            let result = await fetch("${baseUrl}/majors", {
                 method: "GET",
                 headers: {
                     "Content-Type" : "application/json",

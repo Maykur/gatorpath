@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import Navbar from "../components/Navbar"
 import Select from "react-select"
+import { baseUrl } from "../constants"
 
 // Sign-In Page
 export function SignUp(){
@@ -68,7 +69,7 @@ export function SignUp(){
         if (image){
             formData.append("profileIcon", image);
         }
-        let result = await fetch("http://localhost:5000/register", {
+        let result = await fetch("${baseUrl}/register", {
             method: "post",
             body: formData
         });

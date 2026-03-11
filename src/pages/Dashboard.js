@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
+import {baseUrl} from "../constants.js";
 
 
 function Dashboard() {
@@ -26,8 +27,8 @@ function Dashboard() {
 
                 // Check if coming from Past Searches, load that specific search - if not, load latest search for logged-in user
                 const endpoint = activeSearch?._id
-                ? `http://localhost:5000/dashboard/${activeSearch._id}`
-                : 'http://localhost:5000/dashboard/latest';
+                ? `${baseUrl}/dashboard/${activeSearch._id}`
+                : '${baseUrl}/dashboard/latest';
 
                 // Await response from backend based on endpoint
                 const response = await fetch(endpoint, {

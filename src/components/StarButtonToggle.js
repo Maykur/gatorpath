@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { baseUrl } from "../constants";
 
 // Toggle button to star/unstar the latest search submission
 export default function StarButtonToggle({search, onUpdated}) {
@@ -28,7 +29,7 @@ export default function StarButtonToggle({search, onUpdated}) {
 
       // Make API call to toggle star status
       const res = await fetch(
-        `http://localhost:5000/searches/${search._id}/${endpoint}`,
+        `${baseUrl}/searches/${search._id}/${endpoint}`,
         {
           method: "PATCH",
           headers: {Authorization: `Bearer ${token}`},
