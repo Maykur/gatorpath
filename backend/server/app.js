@@ -8,6 +8,7 @@ const programsRoutes = require("./routes/programs_routes");
 const scrapeRoutes = require("./routes/scrape_routes");
 const searchRoutes = require("./routes/search_routes");
 const dashboardRoutes = require("./routes/dashboard_routes");
+const jobResults = require("./routes/jobListings");
 
 const app = express();
 
@@ -34,5 +35,7 @@ app.use("/scrape", scrapeRoutes);
 app.use("/searches", searchRoutes);
 // /dashboard endpoints
 app.use("/dashboard", dashboardRoutes);
+// /joblisting endpoint
+app.use("/jobListings", jobResults)
 
 module.exports = app;

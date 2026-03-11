@@ -32,16 +32,16 @@ export function NavBar(){
                     if (!loggedIn){
                         if(index === 0){
                             return(
-                                <Link to={pages.at(index)}>
-                                    <button key={index} className="navbar-item">Sign Up/Login Page</button>
+                                <Link key={index} to={pages.at(index)}>
+                                    <button className="navbar-item">Sign Up/Login Page</button>
                                 </Link>
                             );
                         }
                     } else {
                        if(index != 0){
                             return(
-                                <Link to={pages.at(index)}>
-                                    <button key={index} className="navbar-item">{item}</button>
+                                <Link key={index} to={pages.at(index)}>
+                                    <button className="navbar-item">{item}</button>
                                 </Link>
                             );
                         } 

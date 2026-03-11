@@ -43,19 +43,19 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
 
                 const minor = params.get("minor");
                 const skills = params.get("skills");
-                 const certifications = params.get("certifications");
+                 const certificate = params.get("certifications");
                 // const state = params.get("state");
 
                 const query = new URLSearchParams({
                     major,
                     minor,
-                    certifications,
+                    certificate,
                     skills,
                     state: selectState === "United States" ? "" : selectState
                 });
 
                 const response = await fetch(
-                    `http://localhost:5000/api/jobListings?${query}`
+                    `http://localhost:5000/jobListings?${query}`
                 );
 
                 const data = await response.json();

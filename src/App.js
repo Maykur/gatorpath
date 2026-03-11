@@ -28,6 +28,7 @@ function App() {
           <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
           <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>
           <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}/>
+          <Route path="/jobResults" element={<Protected><JobResults/></Protected>}/>
         </Routes>
       </div>
     </Router>
