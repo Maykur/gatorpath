@@ -69,7 +69,7 @@ export function SignUp(){
         if (image){
             formData.append("profileIcon", image);
         }
-        let result = await fetch("${baseUrl}/register", {
+        let result = await fetch(`${baseUrl}/register`, {
             method: "post",
             body: formData
         });

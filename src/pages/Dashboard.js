@@ -28,7 +28,7 @@ function Dashboard() {
                 // Check if coming from Past Searches, load that specific search - if not, load latest search for logged-in user
                 const endpoint = activeSearch?._id
                 ? `${baseUrl}/dashboard/${activeSearch._id}`
-                : '${baseUrl}/dashboard/latest';
+                : `${baseUrl}/dashboard/latest`;
 
                 // Await response from backend based on endpoint
                 const response = await fetch(endpoint, {

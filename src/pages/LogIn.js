@@ -31,7 +31,7 @@ export function LogIn(){
             return;
         }
         setError("");
-        let result = await fetch("${baseUrl}/login", {
+        let result = await fetch(`${baseUrl}/login`, {
             method: "post",
             body: JSON.stringify({ email, password }),
             headers: {

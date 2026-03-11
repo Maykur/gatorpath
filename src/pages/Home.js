@@ -16,7 +16,7 @@ export function Home(){
     const token = localStorage.getItem("token");
     if (!token) return navigate("/searches");
 
-    const res = await fetch("${baseUrl}/searches/latest", {
+    const res = await fetch(`${baseUrl}/searches/latest`, {
       headers: {Authorization: `Bearer ${token}`},
     });
 

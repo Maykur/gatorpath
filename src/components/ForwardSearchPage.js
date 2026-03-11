@@ -38,7 +38,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("${baseUrl}/majors");
+            const res = await fetch(`${baseUrl}/majors`);
             const data = await res.json();
             setMajors(Array.isArray(data) ? data : []);
         } 
@@ -53,7 +53,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("${baseUrl}/programs?type=Minor");
+            const res = await fetch(`${baseUrl}/programs?type=Minor`);
             const data = await res.json();
             setMinors(Array.isArray(data) ? data : []);
         } 
@@ -68,7 +68,7 @@ export default function ForwardSearchPage() {
     useEffect(() => {
         (async () => {
         try {
-            const res = await fetch("${baseUrl}/programs?type=Certificate");
+            const res = await fetch(`${baseUrl}/programs?type=Certificate`);
             const data = await res.json();
             setCerts(Array.isArray(data) ? data : []);
         } 
@@ -127,7 +127,7 @@ export default function ForwardSearchPage() {
         try {
             // Submit search to backend Through POST /searches
             setSubmitting(true);
-            const res = await fetch("${baseUrl}/searches", {
+            const res = await fetch(`${baseUrl}/searches`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

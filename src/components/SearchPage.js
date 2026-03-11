@@ -9,7 +9,7 @@ function SearchPage() {
     const [info, setInfo] = useState([]);
     useEffect(() => {
         async function fetchMoreInfo() {
-            let result = await fetch("${baseUrl}/majors", {
+            let result = await fetch(`${baseUrl}/majors`, {
                 method: "GET",
                 headers: {
                     "Content-Type" : "application/json",

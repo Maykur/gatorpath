@@ -18,7 +18,7 @@ export default function PastSearchesPage() {
     }
 
     // Fetch saved searches from backend
-    const res = await fetch("${baseUrl}/searches/saved", {
+    const res = await fetch(`${baseUrl}/searches/saved`, {
       headers: {Authorization: `Bearer ${token}`},
     });
 
