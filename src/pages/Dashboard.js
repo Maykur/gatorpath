@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import StarButtonToggle from "../components/StarButtonToggle";
+
 
 function Dashboard() {
     const [searchData, setSearchData] = useState(null);
@@ -16,9 +18,15 @@ function Dashboard() {
                 const token = localStorage.getItem('token');
                 const activeSearch = location.state?.activeSearch;
 
-                // Check if there is an endpoint for the active search - if not, default to latest search endpoint
+                // If no token, send user to search/login entry
+                if (!token) {
+                    navigate("/");
+                    return;
+                }
+
+                // Check if coming from Past Searches, load that specific search - if not, load latest search for logged-in user
                 const endpoint = activeSearch?._id
-                ? `http://localhost:5000/dashboard/search/${activeSearch._id}`
+                ? `http://localhost:5000/dashboard/${activeSearch._id}`
                 : 'http://localhost:5000/dashboard/latest';
 
                 // Await response from backend based on endpoint
@@ -55,8 +63,7 @@ function Dashboard() {
             }
         };
         fetchDashboard();
-    }, 
-    [location.state, navigate]);
+    }, [location.state, navigate]);
 
     // Render loading message
     if (loading) {
@@ -80,6 +87,21 @@ function Dashboard() {
     return (
         <div style={{padding: '2rem'}}>
             <h1>Dashboard</h1>
+
+            <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem" }}>
+                <button onClick={() => navigate("/search")}>
+                    Create New Search
+                </button>
+
+                <button onClick={() => navigate("/past-searches")}>
+                    View Past Searches
+                </button>
+
+                <StarButtonToggle
+                    search={searchData}
+                    onUpdated={(updated) => setSearchData(updated)}
+                />
+            </div>
 
             <section style={{marginBottom: '2rem'}}>
                 <h2>Search Summary</h2>

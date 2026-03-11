@@ -41,23 +41,33 @@ export default function PastSearchesPage() {
   }
 
   return (
-    <div style={{padding: 24}}>
-      <h1>Past (Saved) Searches</h1>
-      {error && <div style={{color: "red"}}>{error}</div>}
+  <div style={{padding: 24}}>
+    <h1>Past (Saved) Searches</h1>
 
-      {saved.length === 0 ? (
-        <div>No saved searches yet.</div>
-      ) : (
-        <ul>
-          {saved.map((s) => (
-            <li key={s._id} style={{marginBottom: 12}}>
-              <div><b>{s.searchName || "(Unnamed Search)"}</b></div>
-              <div>{s.academic?.majorLabel}</div>
-              <button onClick={() => onSelect(s)}>Select</button>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div style={{marginBottom: 16, display: "flex", gap: 12}}>
+      <button onClick={() => navigate("/search")}>
+        Create New Search
+      </button>
+
+      <button onClick={() => navigate("/dashboard")}>
+        Back to Dashboard
+      </button>
     </div>
-  );
-}
+
+    {error && <div style={{color: "red", marginBottom: 12}}>{error}</div>}
+
+    {saved.length === 0 ? (
+      <div>No saved searches yet.</div>
+    ) : (
+      <ul>
+        {saved.map((s) => (
+          <li key={s._id} style={{marginBottom: 12}}>
+            <div><b>{s.searchName || "(Unnamed Search)"}</b></div>
+            <div>{s.academic?.majorLabel}</div>
+            <button onClick={() => onSelect(s)}>Select</button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+)};
