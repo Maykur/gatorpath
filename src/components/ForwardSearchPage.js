@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 export default function ForwardSearchPage() {
     const navigate = useNavigate();
@@ -7,10 +8,16 @@ export default function ForwardSearchPage() {
     // majors list
     const [majors, setMajors] = useState([]);
 
+    // minors list
+    const [minors, setMinors] = useState([]);
+
+    // certs list
+    const [certificates, setCerts] = useState([]);
+
     // Section A
     const [majorId, setMajorId] = useState("");
-    const [minor, setMinor] = useState("");
-    const [certificate, setCertificate] = useState("");
+    const [minorIds, setMinorIds] = useState([]);
+    const [certificateIds, setCertificateIds] = useState([]);
     const [coursesTakenText, setCoursesTakenText] = useState(""); 
 
     // Section B
@@ -21,6 +28,10 @@ export default function ForwardSearchPage() {
     // UI state
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState("");
+
+    // Get minor and cert options from state
+    const minorList = minors.map(n => ({ value: n._id, label: n.program_name }));
+    const certList = certificates.map(c => ({ value: c._id, label: c.program_name }));
 
     // Fetch majors for dropdown
     useEffect(() => {
@@ -33,6 +44,36 @@ export default function ForwardSearchPage() {
         catch (err) {
             console.error(err);
             setError("Failed to load majors.");
+        }
+        })();
+    }, []);
+
+    // Fetch Minors for dropdown
+    useEffect(() => {
+        (async () => {
+        try {
+            const res = await fetch("http://localhost:5000/programs?type=Minor");
+            const data = await res.json();
+            setMinors(Array.isArray(data) ? data : []);
+        } 
+        catch (err) {
+            console.error(err);
+            setError("Failed to load minors.");
+        }
+        })();
+    }, []);
+
+    // Fetch certificates for dropdown
+    useEffect(() => {
+        (async () => {
+        try {
+            const res = await fetch("http://localhost:5000/programs?type=Certificate");
+            const data = await res.json();
+            setCerts(Array.isArray(data) ? data : []);
+        } 
+        catch (err) {
+            console.error(err);
+            setError("Failed to load certificates.");
         }
         })();
     }, []);
@@ -70,8 +111,8 @@ export default function ForwardSearchPage() {
             searchName,
             academic: {
                 majorId,
-                minor,
-                certificate,
+                minorIds,
+                certificateIds,
                 coursesTaken: parseCoursesTaken(coursesTakenText),
             },
             additional: {
@@ -105,16 +146,19 @@ export default function ForwardSearchPage() {
 
         const selectedMajor = majors.find(m => m._id === majorId);
 
+        // Trim and select major from list
         if (selectedMajor) {
-        const simplifiedMajor = selectedMajor.major
-  .split("(")[0]     // remove "(CPE)"
-  .split("-")[0]     // remove "- BSCoE"
-  .trim();
+            const simplifiedMajor = selectedMajor.major
+            .split("(")[0]     // remove "(CPE)"
+            .split("-")[0]     // remove "- BSCoE"
+            .trim();
 
-params.append("major", simplifiedMajor);
+            params.append("major", simplifiedMajor);
         }
-        if (minor) params.append("minor", minor);
-        if (certificate) params.append("certificate", certificate);
+
+        // Add minors, certs, and skills ot dashboard
+        if (minorIds.length > 0) params.append("minor", minorIds.map(id => minorList.find(m => m.value === id)?.label).join(","));
+        if (certificateIds.length > 0) params.append("certificate", certificateIds.map(id => certList.find(c => c.value === id)?.label).join(","));
         if (coursesTakenText) params.append("skills", coursesTakenText);
 
         navigate(`/jobResults?${params.toString()}&state=Florida`);
@@ -137,32 +181,33 @@ params.append("major", simplifiedMajor);
                 <h3>Section A: Academic Information</h3>
 
                 <label>
-                    Major (required)
-                    <select
-                        value={majorId}
-                        onChange={(e) => {
-                            console.log("Selected majorId:", e.target.value); // DEBUG
-                            setMajorId(e.target.value);
-                        }}
-                        >
-                        <option value="">Select a major…</option>
-
-                        {majors.map((m) => (
-                            <option key={m._id} value={m._id}>
-                                {m.major}
-                            </option>
-                        ))}
-                        </select>
+                    Major (Required)
+                    <Select
+                        options={majors.map(m => ({ value: m._id, label: m.major }))}
+                        onChange={(selected) => setMajorId(selected ? selected.value : "")}
+                        placeholder="Select a major..."
+                        isClearable
+                     />
                 </label>
 
                 <label>
-                    Minor
-                    <input value={minor} onChange={(e) => setMinor(e.target.value)} />
+                    Minor (Select Multiple)
+                    <Select
+                        isMulti
+                        options={minorList}
+                        onChange={(selected) => setMinorIds(selected.map(s => s.value))}
+                        placeholder="Select minor(s)..."
+                    />
                 </label>
 
                 <label>
-                    Certificate
-                    <input value={certificate} onChange={(e) => setCertificate(e.target.value)} />
+                    Certificate (Select Multiple)
+                    <Select
+                        isMulti
+                        options={certList}
+                        onChange={(selected) => setCertificateIds(selected.map(s => s.value))}
+                        placeholder="Select certificates(s)..."
+                    />
                 </label>
 
                 <label>
