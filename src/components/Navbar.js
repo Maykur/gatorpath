@@ -7,8 +7,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom"
 export function NavBar(){
     const location = useLocation();
     const navigate = useNavigate();
-    const items = ['LoginPage', 'MajorListPage'];
-    const pages = ['/', '/home']
+    const items = ['LoginPage', 'Home'];
+    const pages = ['/', '/dashboard']
     const loggedIn = !!localStorage.getItem("token");
     let user = null;
     const storeUser = localStorage.getItem("user");
@@ -51,7 +51,7 @@ export function NavBar(){
             {loggedIn && (
                 <div className="navbar-right">
                     {user?(
-                        <span className="navbar-user">Hi, {user.name}</span>) : (
+                        <span className="navbar-user">Hi, {user.name} <img src={user.profileIcon} alt="profile" style={{ width: 50, height: 50, borderRadius: "50%" }}/></span>) : (
                             <span className="navbar-user">SIGN IN</span>
                         )
                     }

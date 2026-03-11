@@ -7,6 +7,7 @@ const majorsRoutes = require("./routes/majors_routes");
 const programsRoutes = require("./routes/programs_routes");
 const scrapeRoutes = require("./routes/scrape_routes");
 const searchRoutes = require("./routes/search_routes");
+const dashboardRoutes = require("./routes/dashboard_routes");
 
 const app = express();
 
@@ -15,6 +16,11 @@ app.use(express.json());
 
 
 app.get("/", (req, res) => res.send("App is working"));
+
+app.use((err, req, res, next) => {
+  console.error("EXPRESS ERROR:", err);
+  res.status(500).json({ message: err.message });
+});
 
 // /register /login /profile
 app.use("/", authRoutes);
@@ -26,7 +32,7 @@ app.use("/programs", programsRoutes);
 app.use("/scrape", scrapeRoutes);
 // /searches endpoints
 app.use("/searches", searchRoutes);
-// job listing endpoints
-app.use("/api/jobListings", require("./routes/jobListings"));
+// /dashboard endpoints
+app.use("/dashboard", dashboardRoutes);
 
 module.exports = app;

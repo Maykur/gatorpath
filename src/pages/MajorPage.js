@@ -37,7 +37,7 @@ export function MajorPage(){
             backgroundColor: "#ffffff",
             color: "#333333"
         }}>
-            <Link to="/home" style={{ textDecoration: "none" }}>
+            <Link to="/dashboard" style={{ textDecoration: "none" }}>
                 <button style={{
                     backgroundColor: "#0021A5",
                     color: "white",
