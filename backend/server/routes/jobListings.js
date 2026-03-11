@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
     console.log("JOB ROUTE HIT");
     // const {major, minor, certifications, skills, state} = req.query; // get job listings based on this data
     // const locationFilter = (!state || state === "null") ? "Florida" : state;
-    const {major, minor, certifications, skills, state} = req.query;
+    const {major, minor, certificate, skills, state} = req.query;
 
 // if "United States" is selected, remove the location filter
 let locationFilter = "";
@@ -56,9 +56,11 @@ const baseKeyword = majorKeywordMap[simplifiedMajor] || simplifiedMajor;
 
 const programKeywords = [
   ...getProgWords(minor),
-  ...getProgWords(certifications)
+  ...getProgWords(certificate)
+  
 ];
-
+console.log("Minor received:", minor);
+console.log("Minor keywords:", getProgWords(minor));
 const searchRoles = [
   baseKeyword,          
   ...programKeywords,    
@@ -66,22 +68,24 @@ const searchRoles = [
   ...onetKeywords
 ].filter(v => v && v !== "null" && v !== "undefined");
 
-const listing = searchRoles.slice(0, 6).join(" ");
+const listing = searchRoles.slice(0, 3).join(" ");
 
 console.log("Adzuna search query:", listing);
 
     let allEntries = [];
     console.log("Search roles:", searchRoles);
     const uniqueRoles = [...new Set(searchRoles)];
-    const comboRoles = uniqueRoles.slice(0, 6).join(" OR ");
+    const comboRoles = uniqueRoles.slice(0, 3).join(" ");
     const whereParameters= locationFilter
   ? `&where=${encodeURIComponent(locationFilter)}`
   : "";
+  for (const role of uniqueRoles.slice(0, 6)) {
+
     for (let page = 1; page <= 1; page++) { // page 3 otherwise too long?
 const response = await fetch(
-`https://api.adzuna.com/v1/api/jobs/us/search/${page}?app_id=${process.env.ADZUNA_APP_ID}&app_key=${process.env.ADZUNA_API_KEY}&results_per_page=20&what=${encodeURIComponent(comboRoles)}${whereParameters}`
+`https://api.adzuna.com/v1/api/jobs/us/search/${page}?app_id=${process.env.ADZUNA_APP_ID}&app_key=${process.env.ADZUNA_API_KEY}&results_per_page=20&what=${encodeURIComponent(role)}${whereParameters}`
 );
-    
+
   // const data = await response.json();
   if (!response.ok) {
     const text = await response.text(); // expecting text input instead bc of the files
@@ -96,6 +100,7 @@ const data = await response.json();
     }
   allEntries = allEntries.concat(data.results || []);
 }
+  }
 
 
     // const response = await fetch(`http://api.adzuna.com/v1/api/jobs/us/search/1?app_id=${process.env.ADZUNA_APP_ID}&app_key=${process.env.ADZUNA_API_KEY}&results_per_page=20&what=${encodeURIComponent(keywordsListing)}&where=${encodeURIComponent(state || "")}`);
@@ -115,15 +120,16 @@ const specializationKeywords = programKeywords.map(k => k.toLowerCase());
 
 if (specializationKeywords.length > 0) {
 
-  const filteredJobs = allEntries.filter(job => {
-    const text = (job.title + " " + job.description).toLowerCase();
+  allEntries = allEntries.filter(job => {
+    // const text = (job.title + " " + job.description).toLowerCase();
+    const text = ((job.title || "") + " " + (job.description || "")).toLowerCase();
 
     return specializationKeywords.some(keyword =>
       text.includes(keyword)
     );
   });
 
-  if (filteredJobs.length > 0) {
+  if (allEntries.length > 0) {
     // needed to comment this out because otherwise includes jobs that don't pertain to undergraduates
     const excludeWords = [
   "fellow",
@@ -154,7 +160,8 @@ allEntries = allEntries.filter(job =>
             minSalary: jobType.salary_min,
             maxSalary: jobType.salary_max,
             description: jobType.description,
-            location : jobType.location.display_name
+            // location : jobType.location.display_name
+            location : jobType.location?.display_name || "Unknown"
         });
     }
     else{

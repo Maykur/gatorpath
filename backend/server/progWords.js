@@ -51,10 +51,13 @@ function getProgWords(progName) {
   if (!progName) return []; // empty array bc we need prog for it
 
 // check to see if we need to convert from upper to lowercase
-const key = progName.trim();
+  const key = progName.toLowerCase().trim();
+console.log("Looking up program:", progName);
+console.log("Available keys:", Object.keys(progKeyOverrides));
 
+console.log("Looking up program:", progName);
 const match = Object.keys(progKeyOverrides)
-  .find(keyInput => keyInput.toLowerCase() === keyInput.toLowerCase());
+  .find(keyInput => keyInput.toLowerCase() === key);
 
 if (match) {
   return progKeyOverrides[match];

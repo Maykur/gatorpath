@@ -114,7 +114,7 @@ export default function ForwardSearchPage() {
 params.append("major", simplifiedMajor);
         }
         if (minor) params.append("minor", minor);
-        if (certificate) params.append("certifications", certificate);
+        if (certificate) params.append("certificate", certificate);
         if (coursesTakenText) params.append("skills", coursesTakenText);
 
         navigate(`/jobResults?${params.toString()}&state=Florida`);
