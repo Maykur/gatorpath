@@ -36,6 +36,8 @@ const removeBtnStyle = {
   lineHeight: 1, flexShrink: 0,
 };
 
+const AVATAR_COLORS = ["#2E03A5", "#F97000", "#e63946", "#2a9d8f", "#6d6875", "#264653"];
+
 export function SignUp() {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
@@ -51,6 +53,9 @@ export function SignUp() {
   const [error, setError] = useState("");
   const [majors, setMajors] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [avatarMode, setAvatarMode] = useState(false);
+  const [avatarColor, setAvatarColor] = useState("#2E03A5");
+  const [avatarStyle, setAvatarStyle] = useState("initials");
 
   const isLoggedIn = !!localStorage.getItem("token");
 
@@ -89,23 +94,37 @@ export function SignUp() {
     setPreview(URL.createObjectURL(file));
   };
 
-  // Minor handlers
-  const updateMinor = (i, val) => {
-    const updated = [...minors];
-    updated[i] = val;
-    setMinors(updated);
-  };
+  const updateMinor = (i, val) => { const updated = [...minors]; updated[i] = val; setMinors(updated); };
   const addMinor = () => setMinors([...minors, ""]);
   const removeMinor = (i) => setMinors(minors.filter((_, idx) => idx !== i));
 
-  // Certificate handlers
-  const updateCert = (i, val) => {
-    const updated = [...certificates];
-    updated[i] = val;
-    setCertificates(updated);
-  };
+  const updateCert = (i, val) => { const updated = [...certificates]; updated[i] = val; setCertificates(updated); };
   const addCert = () => setCertificates([...certificates, ""]);
   const removeCert = (i) => setCertificates(certificates.filter((_, idx) => idx !== i));
+
+  const generateAvatarDataUrl = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 200; canvas.height = 200;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = avatarColor;
+    ctx.beginPath();
+    ctx.arc(100, 100, 100, 0, Math.PI * 2);
+    ctx.fill();
+    if (avatarStyle === "initials") {
+      const initials = name.trim().split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2) || "?";
+      ctx.fillStyle = "white";
+      ctx.font = "bold 80px Georgia, serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(initials, 100, 105);
+    } else {
+      ctx.font = "100px serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("🐊", 100, 110);
+    }
+    return canvas.toDataURL("image/png");
+  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -114,7 +133,7 @@ export function SignUp() {
     if (!major.trim()) { setError("Major Required."); return; }
     if (!year.trim()) { setError("Year Required."); return; }
     if (!isLoggedIn && !password.trim()) { setError("Password Required."); return; }
-    if (!isLoggedIn && image === null) { setError("Profile Picture Required."); return; }
+    if (!isLoggedIn && !image && !avatarMode) { setError("Profile Picture Required."); return; }
     setError("");
 
     const formData = new FormData();
@@ -125,7 +144,19 @@ export function SignUp() {
     formData.append("year", year);
     formData.append("minor", minors.filter(m => m.trim()).join(","));
     formData.append("certificate", certificates.filter(c => c.trim()).join(","));
-    if (image) formData.append("profileIcon", image);
+    if (image) {
+      formData.append("profileIcon", image);
+    }
+    else if (avatarMode) {
+      const dataUrl = generateAvatarDataUrl();
+      const [header, data] = dataUrl.split(',');
+      const mime = header.match(/:(.*?);/)[1];
+      const binary = atob(data);
+      const array = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
+      const blob = new Blob([array], { type: mime });
+      formData.append("profileIcon", new File([blob], "avatar.png", { type: "image/png" }));
+    }
 
     const token = localStorage.getItem("token");
     const url = isLoggedIn ? "http://localhost:5000/profile" : "http://localhost:5000/register";
@@ -134,7 +165,11 @@ export function SignUp() {
 
     let result = await fetch(url, { method, headers, body: formData });
     let data = await result.json();
-    if (!result.ok) { setError(data.message || "Something went wrong."); return; }
+    if (!result.ok) { 
+      console.log("Error response:", JSON.stringify(data));
+      setError(typeof data.message === "string" ? data.message : JSON.stringify(data)); 
+      return; 
+    }
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
@@ -199,8 +234,6 @@ export function SignUp() {
               </button>
             </div>
           </div>
-
-          {/* Major + Year */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
             <div style={fieldStyle}>
               <label style={labelStyle}>Major</label>
@@ -225,35 +258,89 @@ export function SignUp() {
           </div>
         </div>
 
-        {/* Right column: profile picture */}
+        {/* Right column: profile picture / avatar */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
+          {/* Tabs */}
+          <div style={{ display: "flex", borderRadius: "6px", overflow: "hidden", border: "1px solid #ddd", width: "100%" }}>
+            {["Upload Photo", "Choose Avatar"].map((tab, i) => (
+              <button key={tab} onClick={() => { setAvatarMode(i === 1); setImage(null); setPreview(""); }} style={{
+                flex: 1, padding: "10px", border: "none", cursor: "pointer",
+                backgroundColor: avatarMode === (i === 1) ? "#2E03A5" : "transparent",
+                color: avatarMode === (i === 1) ? "white" : "#444",
+                fontSize: "13px", fontWeight: "600", fontFamily: "'Georgia', serif",
+              }}>{tab}</button>
+            ))}
+          </div>
+
+          {/* Preview circle */}
           <div style={{
-            width: "180px", height: "180px", borderRadius: "8px",
+            width: "160px", height: "160px", borderRadius: "50%",
             backgroundColor: "#e8eaf0", display: "flex", alignItems: "center",
             justifyContent: "center", overflow: "hidden", border: "2px solid #ddd",
           }}>
-            {preview ? (
+            {!avatarMode && preview ? (
               <img src={preview} alt="avatar preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            ) : (
+            ) : !avatarMode ? (
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                 <circle cx="40" cy="30" r="18" fill="#2E03A5" opacity="0.4"/>
                 <ellipse cx="40" cy="65" rx="28" ry="16" fill="#2E03A5" opacity="0.4"/>
               </svg>
+            ) : (
+              <div style={{ width: "100%", height: "100%", backgroundColor: avatarColor, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                {avatarStyle === "initials"
+                  ? <span style={{ color: "white", fontSize: "52px", fontWeight: "bold", fontFamily: "Georgia" }}>
+                      {name.trim().split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2) || "?"}
+                    </span>
+                  : <span style={{ fontSize: "72px", lineHeight: 1 }}>🐊</span>
+                }
+              </div>
             )}
           </div>
-          <label style={labelStyle}>Profile Picture</label>
-          <label style={{
-            backgroundColor: "#2E03A5", color: "white", padding: "10px 24px",
-            borderRadius: "4px", cursor: "pointer", fontSize: "14px", fontWeight: "600",
-          }}>
-            Choose File
-            <input type="file" accept="image/*" onChange={handlePreview} style={{ display: "none" }} />
-          </label>
-          {image && <span style={{ fontSize: "12px", color: "#666" }}>{image.name}</span>}
+
+          {/* Upload mode */}
+          {!avatarMode && (
+            <>
+              <label style={labelStyle}>Profile Picture</label>
+              <label style={{
+                backgroundColor: "#2E03A5", color: "white", padding: "10px 24px",
+                borderRadius: "4px", cursor: "pointer", fontSize: "14px", fontWeight: "600",
+              }}>
+                Choose File
+                <input type="file" accept="image/*" onChange={handlePreview} style={{ display: "none" }} />
+              </label>
+              {image && <span style={{ fontSize: "12px", color: "#666" }}>{image.name}</span>}
+            </>
+          )}
+
+          {/* Avatar mode */}
+          {avatarMode && (
+            <div style={{ width: "100%" }}>
+              <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginBottom: "14px" }}>
+                {[["initials", "Initials"], ["gator", "🐊 Gator"]].map(([val, label]) => (
+                  <button key={val} onClick={() => setAvatarStyle(val)} style={{
+                    padding: "8px 18px", borderRadius: "20px", border: "2px solid #2E03A5",
+                    backgroundColor: avatarStyle === val ? "#2E03A5" : "transparent",
+                    color: avatarStyle === val ? "white" : "#2E03A5",
+                    cursor: "pointer", fontSize: "13px", fontWeight: "600", fontFamily: "'Georgia', serif",
+                  }}>{label}</button>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
+                {AVATAR_COLORS.map(color => (
+                  <div key={color} onClick={() => setAvatarColor(color)} style={{
+                    width: "32px", height: "32px", borderRadius: "50%", backgroundColor: color,
+                    cursor: "pointer",
+                    border: avatarColor === color ? "3px solid #333" : "3px solid transparent",
+                    transition: "border 0.15s",
+                  }} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Minor + Certificate — full width below the grid */}
+      {/* Minor + Certificate */}
       <div style={{
         backgroundColor: "rgba(255,255,255,0.5)", borderRadius: "10px",
         boxShadow: "0 6px 28px rgba(0,0,0,0.12)", padding: "28px 40px",
@@ -261,41 +348,22 @@ export function SignUp() {
         display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px",
         marginBottom: "24px",
       }}>
-        {/* Minors */}
         <div>
           <label style={labelStyle}>Minor(s)</label>
           {minors.map((m, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "8px", gap: "4px" }}>
-              <input
-                style={{ ...inputStyle, flex: 1 }}
-                type="text"
-                value={m}
-                placeholder="e.g. Mathematics"
-                onChange={(e) => updateMinor(i, e.target.value)}
-              />
-              {minors.length > 1 && (
-                <button style={removeBtnStyle} onClick={() => removeMinor(i)}>×</button>
-              )}
+              <input style={{ ...inputStyle, flex: 1 }} type="text" value={m} placeholder="e.g. Mathematics" onChange={(e) => updateMinor(i, e.target.value)} />
+              {minors.length > 1 && <button style={removeBtnStyle} onClick={() => removeMinor(i)}>×</button>}
             </div>
           ))}
           <button style={addBtnStyle} onClick={addMinor}>+ Add another minor</button>
         </div>
-
-        {/* Certificates */}
         <div>
           <label style={labelStyle}>Certificate(s)</label>
           {certificates.map((c, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "8px", gap: "4px" }}>
-              <input
-                style={{ ...inputStyle, flex: 1 }}
-                type="text"
-                value={c}
-                placeholder="e.g. Cybersecurity"
-                onChange={(e) => updateCert(i, e.target.value)}
-              />
-              {certificates.length > 1 && (
-                <button style={removeBtnStyle} onClick={() => removeCert(i)}>×</button>
-              )}
+              <input style={{ ...inputStyle, flex: 1 }} type="text" value={c} placeholder="e.g. Cybersecurity" onChange={(e) => updateCert(i, e.target.value)} />
+              {certificates.length > 1 && <button style={removeBtnStyle} onClick={() => removeCert(i)}>×</button>}
             </div>
           ))}
           <button style={addBtnStyle} onClick={addCert}>+ Add another certificate</button>

@@ -4,12 +4,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../datasets/UserInfo');
 const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const {CloudinaryStorage} = require('multer-storage-cloudinary');
+//const cloudinary = require('cloudinary').v2;
+const upload = multer({ storage: multer.memoryStorage() });
+//const {CloudinaryStorage} = require('multer-storage-cloudinary');
 const authenticateToken = require('../middleware/auth');
 
 const router = express.Router();
 
+/*
 cloudinary.config({
     cloud_name: process.env.cloud_name,
     api_key: process.env.api_key,
@@ -22,6 +24,7 @@ const storage = new CloudinaryStorage({
 });
 
 const upload = multer({ storage });
+*/
 
 // Helper to parse array fields from FormData (comes as comma-separated string or array)
 function parseArrayField(val) {
@@ -31,7 +34,16 @@ function parseArrayField(val) {
 }
 
 // Register route
-router.post('/register', upload.single("profileIcon"), async (req, res) => {
+router.post('/register', (req, res, next) => {
+  upload.single("profileIcon")(req, res, (err) => {
+    if (err) {
+      console.log("MULTER/UPLOAD ERROR:", err.message, err.code, JSON.stringify(err));
+      return res.status(500).json({ message: err.message || "Upload failed" });
+    }
+    next();
+  });
+}, async (req, res) => {
+  try {
     const { name, email, password, major, year } = req.body;
     const minor = parseArrayField(req.body.minor);
     const certificate = parseArrayField(req.body.certificate);
@@ -39,17 +51,23 @@ router.post('/register', upload.single("profileIcon"), async (req, res) => {
     const emailPresent = await User.findOne({ email });
     if (emailPresent) return res.status(400).json({ message: 'Email already in use' });
 
-    const profileIcon = req.file.path;
+    //const profileIcon = req.file.path;
+    const profileIcon = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+
     const hashPass = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashPass, major, minor, certificate, year, profileIcon });
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_Key, { expiresIn: '1h' });
 
     res.status(201).json({
-        message: "Registration successful",
-        token,
-        user: { id: user._id, name: user.name, email: user.email, major: user.major, minor: user.minor, certificate: user.certificate, year: user.year, profileIcon }
+      message: "Registration successful",
+      token,
+      user: { id: user._id, name: user.name, email: user.email, major: user.major, minor: user.minor, certificate: user.certificate, year: user.year, profileIcon }
     });
+  } catch (err) {
+    console.error("REGISTER ERROR:", err.message, err.stack);
+    res.status(500).json({ message: err.message || "Server error" });
+  }
 });
 
 // Login route
@@ -96,7 +114,8 @@ router.put("/profile", authenticateToken, upload.single("profileIcon"), async (r
         if (major) user.major = major;
         if (year) user.year = year;
         if (password) user.password = await bcrypt.hash(password, 10);
-        if (req.file) user.profileIcon = req.file.path;
+        // if (req.file) user.profileIcon = req.file.path;
+        if (req.file) user.profileIcon = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
         user.minor = minor;
         user.certificate = certificate;
 
@@ -110,7 +129,7 @@ router.put("/profile", authenticateToken, upload.single("profileIcon"), async (r
             user: { id: user._id, name: user.name, email: user.email, major: user.major, minor: user.minor, certificate: user.certificate, year: user.year, profileIcon: user.profileIcon }
         });
     } catch (err) {
-        console.error("UPDATE PROFILE ERROR:", err);
+        console.error("UPDATE PROFILE ERROR:", err.message, err.stack);
         res.status(500).json({ message: "Server error" });
     }
 });
