@@ -183,6 +183,7 @@ export function Home() {
     if (location.state?.resetTab) setActiveTab(-1);
   }, [location.state]);
 
+
   // Fetch user's major for col 3
   useEffect(() => {
     if (!latest?.academic?.majorId) return;
@@ -298,6 +299,20 @@ export function Home() {
           {/* Col 3: CISE Majors courses from DB */}
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>CISE Majors</h3>
+
+            {/* User's search info */}
+            {latest && (
+              <div style={{
+                backgroundColor: "rgba(46,3,165,0.06)", borderRadius: "6px",
+                padding: "10px 14px", marginBottom: "16px", fontSize: "13px",
+                color: "#444", borderLeft: "3px solid #2E03A5",
+              }}>
+                <div><strong>Major:</strong> {latest.academic?.majorLabel || "—"}</div>
+                {latest.academic?.minor && <div><strong>Minor:</strong> {latest.academic.minor}</div>}
+                {latest.academic?.certificate && <div><strong>Certificate:</strong> {latest.academic.certificate}</div>}
+              </div>
+            )}
+
             {!majorData && (
               <p style={{ color: "#999", fontSize: "13px", textAlign: "center" }}>Submit a search to see your major's courses here.</p>
             )}

@@ -19,6 +19,14 @@ const UserSchema = new mongoose.Schema({
         type: String, required: true
     },
 
+    minor: {
+        type: [String], default: []
+    },
+ 
+    certificate: {
+        type: [String], default: []
+    },
+
     year: {
         type: String, required: true
     }, 

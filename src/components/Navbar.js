@@ -25,7 +25,7 @@ export function NavBar() {
       <nav className="navbar">
         {/* Left: UF Logo */}
         <div className="navbar-left">
-          <Link to={loggedIn ? "/home" : "/"} style={{ textDecoration: "none" }}>
+          <Link to={loggedIn ? "/dashboard" : "/"} style={{ textDecoration: "none" }}>
             <span className="uf-logo">UF</span>
           </Link>
         </div>
@@ -33,7 +33,7 @@ export function NavBar() {
         {/* Center: Page title / brand (only on dashboard) */}
         {loggedIn && (
           <div className="navbar-center">
-            <Link to="/home" state={{ resetTab: true }} style={{ textDecoration: "none" }}>
+            <Link to="/dashboard" state={{ resetTab: true }} style={{ textDecoration: "none" }}>
               <span className="navbar-title">User Dashboard</span>
             </Link>
           </div>
@@ -73,19 +73,30 @@ export function NavBar() {
           </div>
           <div className="profile-popup-name">{user.name}</div>
           <div className="profile-popup-email">{user.email}</div>
-          <Link to="/home" className="profile-popup-link" onClick={() => setShowProfile(false)}>
+          <Link to="/signup" className="profile-popup-link" onClick={() => setShowProfile(false)}>
             View &amp; Update Profile Information
           </Link>
           <div className="profile-popup-section-title">My Academic Programs</div>
-          {user.major && (
-            <div className="profile-popup-major">
-              <div className="profile-popup-label">Undergraduate</div>
-              <div>Major — {user.major}</div>
+          <div className="profile-popup-major">
+            <div style={{ marginBottom: "6px" }}>
+              <span className="profile-popup-label">Major: </span>
+              <span>{user.major || "—"}</span>
             </div>
-          )}
-          {user.year && (
-            <div className="profile-popup-year">Year: {user.year}</div>
-          )}
+            <div style={{ marginBottom: "6px" }}>
+              <span className="profile-popup-label">Minor: </span>
+              <span>{user.minor || "—"}</span>
+            </div>
+            <div style={{ marginBottom: "6px" }}>
+              <span className="profile-popup-label">Certificate: </span>
+              <span>{user.certificate || "—"}</span>
+            </div>
+            {user.year && (
+              <div>
+                <span className="profile-popup-label">Year: </span>
+                <span>{user.year}</span>
+              </div>
+            )}
+          </div>
           <button className="profile-popup-signout" onClick={handleSignOut}>
             ↪ LOG OUT
           </button>
