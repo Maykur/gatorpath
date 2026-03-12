@@ -123,11 +123,12 @@ function Dashboard() {
   const [majorData, setMajorData] = useState(null);
   const [allMajors, setAllMajors] = useState([]);
   const [selectedMajor, setSelectedMajor] = useState(null);
+  const [jobListings, setJobListings] = useState(null);
+  const [jobsLoading, setJobsLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Ashton's dashboard fetch logic — unchanged
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
@@ -156,9 +157,32 @@ function Dashboard() {
       }
     };
     fetchDashboard();
-
     if (location.state?.resetTab) setActiveTab(-1);
   }, [location.state, navigate]);
+
+  // Fetch job listings when searchData loads
+  useEffect(() => {
+    if (!searchData?.academic?.majorLabel) return;
+    async function loadJobListings() {
+      setJobsLoading(true);
+      try {
+        const params = new URLSearchParams({
+          major: searchData.academic.majorLabel || "",
+          minor: searchData.academic.minor || "",
+          certificate: searchData.academic.certificate || "",
+          state: "Florida",
+        });
+        const res = await fetch(`http://localhost:5000/jobListings?${params}`);
+        const data = await res.json();
+        if (res.ok) setJobListings(data);
+      } catch (err) {
+        console.error("Job listings error:", err);
+      } finally {
+        setJobsLoading(false);
+      }
+    }
+    loadJobListings();
+  }, [searchData]);
 
   // Fetch user's major courses for col 3
   useEffect(() => {
@@ -225,8 +249,9 @@ function Dashboard() {
     </div>
   );
 
-  const careerResults = searchData.careerResults || [];
-  const salaryResults = searchData.salaryResults || [];
+  // Use real job data or fall back to mock
+  const recommendedCareers = jobListings?.recommendedCareers || [];
+  const jobResults = jobListings?.jobs || [];
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture, fontFamily: "'Georgia', serif", paddingTop: "80px" }}>
@@ -266,12 +291,40 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>Career Paths Based on the Information You Entered</h3>
             <p style={{ fontSize: "13px", color: "#777", marginBottom: "20px", fontStyle: "italic" }}>By Best Match</p>
-            {(careerResults.length > 0 ? careerResults : MOCK_CAREERS).map((c, i) => (
-              <div key={i} style={{ marginBottom: "24px" }}>
-                <div style={{ fontWeight: "bold", fontSize: "14px", borderBottom: "2px solid #333", paddingBottom: "4px", marginBottom: "6px", display: "inline-block" }}>{c.title || c.title}</div>
-                <p style={{ fontSize: "13px", color: "#555", margin: 0, lineHeight: "1.5" }}>{c.description || c.company}</p>
-              </div>
-            ))}
+            {jobsLoading ? (
+              <p style={{ color: "#aaa", fontSize: "13px", textAlign: "center" }}>Loading career matches...</p>
+            ) : jobResults.length > 0 ? (
+              <>
+                {jobResults.slice(0, 4).map((job, i) => (
+                  <div key={i} style={{ marginBottom: "20px", paddingBottom: "16px", borderBottom: i < 3 ? "1px solid #eee" : "none" }}>
+                    <div style={{ fontWeight: "bold", fontSize: "14px", color: "#111", marginBottom: "2px" }}>{job.title}</div>
+                    <div style={{ fontSize: "12px", color: "#999", marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                    {job.salary !== "N/A" ? (
+                      <div style={{ fontSize: "15px", fontWeight: "bold", color: "#2E03A5" }}>
+                        {job.salary} <span style={{ fontSize: "11px", fontWeight: "normal", color: "#888" }}>/ year</span>
+                      </div>
+                    ) : (
+                      <div style={{ fontSize: "12px", color: "#bbb" }}>Salary data unavailable</div>
+                    )}
+                  </div>
+                ))}
+                <button onClick={() => setActiveTab(0)} style={{
+                  marginTop: "8px", width: "100%", backgroundColor: "transparent",
+                  border: "1px solid #2E03A5", color: "#2E03A5", borderRadius: "20px",
+                  padding: "8px", fontSize: "13px", cursor: "pointer",
+                  fontFamily: "'Georgia', serif", fontWeight: "600",
+                }}>
+                  View All Career Info →
+                </button>
+              </>
+            ) : (
+              MOCK_CAREERS.map((c, i) => (
+                <div key={i} style={{ marginBottom: "24px" }}>
+                  <div style={{ fontWeight: "bold", fontSize: "14px", borderBottom: "2px solid #333", paddingBottom: "4px", marginBottom: "6px", display: "inline-block" }}>{c.title}</div>
+                  <p style={{ fontSize: "13px", color: "#555", margin: 0, lineHeight: "1.5" }}>{c.description}</p>
+                </div>
+              ))
+            )}
           </div>
 
           {/* Col 2: Resources + Extracurriculars */}
@@ -343,28 +396,84 @@ function Dashboard() {
       {activeTab === 0 && (
         <div style={{ padding: "0 28px 40px" }}>
           <div style={{ ...colStyle, minHeight: "unset" }}>
-            <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>Career Paths Based on the Information You Entered</h2>
+            <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
+              Career Paths Based on the Information You Entered
+            </h2>
             <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "32px" }}>By Best Match</p>
-            {(careerResults.length > 0 ? careerResults : MOCK_CAREERS).map((c, i) => (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? "1px solid #eee" : "none", paddingBottom: "24px", marginBottom: "24px" }}>
-                <div>
-                  <div style={{ fontWeight: "bold", fontSize: "17px", color: "#111", marginBottom: "8px" }}>{c.title}</div>
-                  <div style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>{c.description || c.company}</div>
-                </div>
-                <div>
-                  <span style={{ fontSize: "30px", fontWeight: "bold", color: "#111" }}>${(c.avg || 0).toLocaleString()}</span>
-                  <span style={{ fontSize: "12px", color: "#888" }}> / avg. per year</span>
-                </div>
-                <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#555", marginBottom: "2px" }}>
-                    <span>Annual Salary Range</span>
-                    <span>${((c.rangeMin || 0) / 1000).toFixed(0)}K–{((c.rangeMax || 0) / 1000).toFixed(0)}K</span>
+
+            {jobsLoading ? (
+              <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
+            ) : jobResults.length > 0 ? (
+              <>
+                {/* Location badge */}
+                {jobListings?.location && (
+                  <div style={{ textAlign: "center", marginBottom: "24px" }}>
+                    <span style={{ backgroundColor: "rgba(46,3,165,0.08)", borderRadius: "20px", padding: "6px 16px", fontSize: "13px", color: "#2E03A5", fontWeight: "600" }}>
+                      📍 {jobListings.location}
+                    </span>
                   </div>
-                  <SalaryBar min={c.rangeMin || 0} max={c.rangeMax || 0} overall={salaryOverall} />
-                  <div style={{ fontSize: "11px", color: "#aaa", marginTop: "4px" }}>Range Based on Your Area</div>
+                )}
+                {jobResults.map((job, i) => (
+                  <div key={i} style={{
+                    display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
+                    gap: "24px", alignItems: "center",
+                    borderBottom: i < jobResults.length - 1 ? "1px solid #eee" : "none",
+                    paddingBottom: "20px", marginBottom: "20px",
+                  }}>
+                    {/* Title */}
+                    <div>
+                      <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
+                      <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                    </div>
+                    {/* Salary */}
+                    <div>
+                      <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
+                        {job.salary}
+                      </span>
+                      {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
+                    </div>
+                    {/* View jobs button */}
+                    <div>
+                      <a
+                        href={`https://www.adzuna.com/search?q=${encodeURIComponent(job.title)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
+                          borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
+                          fontWeight: "600", fontFamily: "'Georgia', serif",
+                          display: "inline-block",
+                        }}
+                      >
+                        View Jobs →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              // Fallback to mock
+              MOCK_CAREERS.map((c, i) => (
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? "1px solid #eee" : "none", paddingBottom: "24px", marginBottom: "24px" }}>
+                  <div>
+                    <div style={{ fontWeight: "bold", fontSize: "17px", color: "#111", marginBottom: "8px" }}>{c.title}</div>
+                    <div style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>{c.description}</div>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: "30px", fontWeight: "bold", color: "#111" }}>${c.avg.toLocaleString()}</span>
+                    <span style={{ fontSize: "12px", color: "#888" }}> / avg. per year</span>
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#555", marginBottom: "2px" }}>
+                      <span>Annual Salary Range</span>
+                      <span>${(c.rangeMin / 1000).toFixed(0)}K–{(c.rangeMax / 1000).toFixed(0)}K</span>
+                    </div>
+                    <SalaryBar min={c.rangeMin} max={c.rangeMax} overall={salaryOverall} />
+                    <div style={{ fontSize: "11px", color: "#aaa", marginTop: "4px" }}>Range Based on Your Area</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       )}
