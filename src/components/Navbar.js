@@ -84,11 +84,11 @@ export function NavBar() {
             </div>
             <div style={{ marginBottom: "6px" }}>
               <span className="profile-popup-label">Minor: </span>
-              <span>{user.minor || "—"}</span>
+              <span>{Array.isArray(user.minor) ? user.minor.join(", ") || "—" : user.minor || "—"}</span>
             </div>
             <div style={{ marginBottom: "6px" }}>
               <span className="profile-popup-label">Certificate: </span>
-              <span>{user.certificate || "—"}</span>
+              <span>{Array.isArray(user.certificate) ? user.certificate.join(", ") || "—" : user.certificate || "—"}</span>
             </div>
             {user.year && (
               <div>
