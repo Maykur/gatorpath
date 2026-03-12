@@ -1,3 +1,12 @@
+import React, {useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom"
+import SearchPage from "../components/SearchPage"
+import Navbar from "../components/Navbar"
+import StarButtonToggle from "../components/StarButtonToggle"
+import { baseUrl } from "../constants";
+
+// Search bar test page
+export function Home(){
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";

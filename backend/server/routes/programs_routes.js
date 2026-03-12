@@ -4,7 +4,7 @@ const Program = require('../datasets/Program');
 const router = express.Router();
 
 // GET endpoint to fetch all programs, with optional filtering by program type (minor or certificate)
-router.get('/programs', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         // Get the program type from query parameters
         const {type} = req.query;
