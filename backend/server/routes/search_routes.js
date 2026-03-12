@@ -115,4 +115,17 @@ router.get("/latest", authenticateToken, async (req, res) => {
     res.json(latest);
 });
 
+router.put("/:id/rename", authenticateToken, async (req, res) => {
+  try {
+    const search = await SearchSubmission.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.userId },
+      { searchName: req.body.searchName },
+      { new: true }
+    );
+    if (!search) return res.status(404).json({ message: "Search not found" });
+    res.json(search);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 module.exports = router;
