@@ -8,10 +8,11 @@ const programsRoutes = require("./routes/programs_routes");
 const scrapeRoutes = require("./routes/scrape_routes");
 const searchRoutes = require("./routes/search_routes");
 const dashboardRoutes = require("./routes/dashboard_routes");
+const jobResults = require("./routes/jobListings");
 
 const app = express();
 
-app.use(cors({origin: "http://localhost:3000"}));
+app.use(cors({origin: process.env.FRONTEND_URL || "http://localhost:3000"}));
 app.use(express.json());
 
 
@@ -34,5 +35,7 @@ app.use("/scrape", scrapeRoutes);
 app.use("/searches", searchRoutes);
 // /dashboard endpoints
 app.use("/dashboard", dashboardRoutes);
+// /joblisting endpoint
+app.use("/jobListings", jobResults)
 
 module.exports = app;

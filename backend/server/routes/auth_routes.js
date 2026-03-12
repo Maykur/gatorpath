@@ -40,7 +40,7 @@ router.post('/register', upload.single("profileIcon"), async (req, res) => {
     const hashPass = await bcrypt.hash(password, 10);
     const user = await User.create({name, email, password: hashPass, major, year, profileIcon});
 
-    const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
+    const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '7d'});
 
     res.status(201).json({
         message: "Registration successful",
@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({message: 'Invalid email or password'});
         }
 
-        const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '1h'});
+        const token = jwt.sign({userId: user._id}, process.env.JWT_Key, {expiresIn: '7d'});
 
         res.json({
             message: "Login successful",

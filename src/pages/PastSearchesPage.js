@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { baseUrl } from "../constants";
 
 // Page shows the user's past searches that they have starred/saved. They can click on one to load it in the dashboard and see results for it
 export default function PastSearchesPage() {
@@ -17,7 +18,7 @@ export default function PastSearchesPage() {
     }
 
     // Fetch saved searches from backend
-    const res = await fetch("http://localhost:5000/searches/saved", {
+    const res = await fetch(`${baseUrl}/searches/saved`, {
       headers: {Authorization: `Bearer ${token}`},
     });
 

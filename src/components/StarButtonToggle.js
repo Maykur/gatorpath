@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import { baseUrl } from "../constants";
 
 export default function StarButtonToggle({ search, onUpdated }) {
   const [loading, setLoading] = useState(false);
@@ -13,8 +14,11 @@ export default function StarButtonToggle({ search, onUpdated }) {
       if (!token) { setError("Not logged in."); setLoading(false); return; }
       const endpoint = search.starred ? "unstar" : "star";
       const res = await fetch(
-        `http://localhost:5000/searches/${search._id}/${endpoint}`,
-        { method: "PATCH", headers: { Authorization: `Bearer ${token}` } }
+        `${baseUrl}/searches/${search._id}/${endpoint}`,
+        {
+          method: "PATCH",
+          headers: {Authorization: `Bearer ${token}`},
+        }
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data?.message || "Failed to update star status.");

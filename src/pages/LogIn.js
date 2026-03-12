@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import Navbar from "../components/Navbar"
 import '../components/CenteredButton.css';
+import { baseUrl } from "../constants";
 
 export function LogIn() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export function LogIn() {
     if (!password.trim()) { setError("Password required."); return; }
     setError("");
 
-    const result = await fetch("http://localhost:5000/login", {
+    const result = await fetch(`$(baseUrl)`, {
       method: "post",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },

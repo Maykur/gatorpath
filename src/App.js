@@ -9,6 +9,7 @@ import { Protected } from './components/Protected'
 import Dashboard from './pages/Dashboard'
 import ForwardSearchPage from './components/ForwardSearchPage'
 import PastSearchesPage from './pages/PastSearchesPage'
+import { JobResults } from "./pages/JobResults";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
           <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>
           <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}/>
+          <Route path="/jobResults" element={<Protected><JobResults/></Protected>}/>
         </Routes>
       </div>
     </Router>
