@@ -1,63 +1,96 @@
-// References: https://stackoverflow.com/questions/41080481/in-reactjs-how-to-invoke-link-click-via-button-press
-
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
-import { Link, useNavigate, useLocation } from "react-router-dom"
 
-export function NavBar(){
-    const location = useLocation();
-    const navigate = useNavigate();
-    const items = ['LoginPage', 'Home'];
-    const pages = ['/', '/dashboard']
-    const loggedIn = !!localStorage.getItem("token");
-    let user = null;
-    const storeUser = localStorage.getItem("user");
-    if(storeUser){
-        try{
-            user = JSON.parse(storeUser);
-        }catch(e){
-            console.error("Failed to parse", e);
-            user = null;
-        }
-    }
-    const handleSignOut = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        navigate("/");
-    }
-    return (
-        <nav className="navbar">
-            <div className="navbar-left">
-                {items.map((item, index) => {
-                    if (!loggedIn){
-                        if(index === 0){
-                            return(
-                                <Link key={index} to={pages.at(index)}>
-                                    <button className="navbar-item">Sign Up/Login Page</button>
-                                </Link>
-                            );
-                        }
-                    } else {
-                       if(index != 0){
-                            return(
-                                <Link key={index} to={pages.at(index)}>
-                                    <button className="navbar-item">{item}</button>
-                                </Link>
-                            );
-                        } 
-                    }
-                })}
+export function NavBar() {
+  const navigate = useNavigate();
+  const loggedIn = !!localStorage.getItem("token");
+  const [showProfile, setShowProfile] = useState(false);
+
+  let user = null;
+  const storeUser = localStorage.getItem("user");
+  if (storeUser) {
+    try { user = JSON.parse(storeUser); }
+    catch (e) { user = null; }
+  }
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  return (
+    <>
+      <nav className="navbar">
+        {/* Left: UF Logo */}
+        <div className="navbar-left">
+          <Link to={loggedIn ? "/home" : "/"} style={{ textDecoration: "none" }}>
+            <span className="uf-logo">UF</span>
+          </Link>
+        </div>
+
+        {/* Center: Page title / brand (only on dashboard) */}
+        {loggedIn && (
+          <div className="navbar-center">
+            <Link to="/home" state={{ resetTab: true }} style={{ textDecoration: "none" }}>
+              <span className="navbar-title">User Dashboard</span>
+            </Link>
+          </div>
+        )}
+
+        {/* Right: GatorPath badge + profile */}
+        <div className="navbar-right">
+          {loggedIn && user ? (
+            <button
+              className="gatorpath-badge"
+              onClick={() => setShowProfile((p) => !p)}
+            >
+              GatorPath&nbsp;
+              <img
+                src={user.profileIcon}
+                alt="profile"
+                style={{ width: 28, height: 28, borderRadius: "50%", verticalAlign: "middle" }}
+              />
+            </button>
+          ) : (
+            <span className="gatorpath-badge-plain">GatorPath</span>
+          )}
+        </div>
+      </nav>
+
+      {/* Profile pop-up panel */}
+      {showProfile && loggedIn && user && (
+        <div className="profile-popup">
+          <button className="profile-popup-close" onClick={() => setShowProfile(false)}>✕</button>
+          <div className="profile-popup-header">
+            <img
+              src={user.profileIcon}
+              alt="avatar"
+              style={{ width: 48, height: 48, borderRadius: "50%" }}
+            />
+            <span className="profile-popup-title">Profile</span>
+          </div>
+          <div className="profile-popup-name">{user.name}</div>
+          <div className="profile-popup-email">{user.email}</div>
+          <Link to="/home" className="profile-popup-link" onClick={() => setShowProfile(false)}>
+            View &amp; Update Profile Information
+          </Link>
+          <div className="profile-popup-section-title">My Academic Programs</div>
+          {user.major && (
+            <div className="profile-popup-major">
+              <div className="profile-popup-label">Undergraduate</div>
+              <div>Major — {user.major}</div>
             </div>
-            {loggedIn && (
-                <div className="navbar-right">
-                    {user?(
-                        <span className="navbar-user">Hi, {user.name} <img src={user.profileIcon} alt="profile" style={{ width: 50, height: 50, borderRadius: "50%" }}/></span>) : (
-                            <span className="navbar-user">SIGN IN</span>
-                        )
-                    }
-                    <button className="navbar-item" onClick={handleSignOut}>Sign Out</button>
-                </div>              
-            )}
-        </nav>
-    );
+          )}
+          {user.year && (
+            <div className="profile-popup-year">Year: {user.year}</div>
+          )}
+          <button className="profile-popup-signout" onClick={handleSignOut}>
+            ↪ LOG OUT
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
