@@ -23,7 +23,7 @@ export function LogIn() {
     if (!password.trim()) { setError("Password required."); return; }
     setError("");
 
-    const result = await fetch(`$(baseUrl)`, {
+    const result = await fetch(`${baseUrl}/login`, {
       method: "post",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
@@ -33,7 +33,7 @@ export function LogIn() {
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    navigate("/home");
+    navigate("/dashboard");
   };
 
   return (
