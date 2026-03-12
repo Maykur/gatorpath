@@ -276,7 +276,7 @@ function Dashboard() {
           <Link to="/search" style={{ textDecoration: "none" }}>
             <button style={{
               backgroundColor: "#F97000", color: "white", border: "none",
-              borderRadius: "24px", padding: "12px 28px", fontSize: "16px",
+              borderRadius: "20px", padding: "8px 20px", fontSize: "16px",
               fontWeight: "bold", cursor: "pointer", fontFamily: "'Georgia', serif",
               boxShadow: "0 3px 10px rgba(249,112,0,0.35)",
             }}>Search Page</button>
