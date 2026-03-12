@@ -6,6 +6,7 @@ import { StartUp } from './pages/StartPage'
 import { MajorPage } from './pages/MajorPage'
 import { NavBar } from './components/Navbar'
 import { Protected } from './components/Protected'
+import Dashboard from './pages/Dashboard'
 import ForwardSearchPage from './components/ForwardSearchPage'
 import PastSearchesPage from './pages/PastSearchesPage'
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/majors/:id" element={<Protected><MajorPage/></Protected>}/>
           <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
           <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>
+          <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}/>
         </Routes>
       </div>
     </Router>

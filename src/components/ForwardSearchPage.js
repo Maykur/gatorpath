@@ -100,8 +100,8 @@ export default function ForwardSearchPage() {
                 throw new Error(data?.message || "Failed to submit search.");
             }
 
-            // For now, just go home
-            navigate("/home");
+            // Navigate to the dashboard after search submission
+            navigate("/dashboard");
         }
         catch (err) {
             console.error(err);
