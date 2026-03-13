@@ -150,7 +150,6 @@ export function LogIn() {
           style={{
             marginTop: "8px",
             width: "100%",
-            height: "56px",
             fontSize: "20px",
             fontWeight: "bold",
             borderRadius: "4px",
