@@ -24,8 +24,7 @@ export function NavBar() {
     <>
       <nav style={navStyle}>
         {/* LEFT: UF */}
-        <button
-          onClick={() => navigate("/dashboard")}
+        <div
           style={{
             marginLeft: "12px",
             backgroundColor: "#F97000",
@@ -35,12 +34,15 @@ export function NavBar() {
             padding: "12px 22px",
             fontWeight: "700",
             fontSize: "30px",
-            cursor: "pointer",
             fontFamily: "'Georgia', serif",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            userSelect: "none",
           }}
         >
           UF
-        </button>
+        </div>
 
         {/* CENTER: keep empty spacer (remove User Dashboard button only) */}
         <div style={{ flex: 1 }} />
