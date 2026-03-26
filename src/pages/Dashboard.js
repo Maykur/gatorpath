@@ -325,6 +325,25 @@ function Dashboard() {
               {tab}
             </button>
           ))}
+
+          {activeTab !== -1 && (
+            <button
+              onClick={() => setActiveTab(-1)}
+              style={{
+                padding: "8px 20px",
+                borderRadius: "20px",
+                border: "1px solid #2E03A5",
+                backgroundColor: "white",
+                color: "#2E03A5",
+                fontWeight: "600",
+                cursor: "pointer",
+                fontSize: "14px",
+                fontFamily: "'Georgia', serif",
+              }}
+            >
+              Main Dashboard
+            </button>
+          )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
@@ -488,28 +507,6 @@ function Dashboard() {
               <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
             ) : jobResults.length > 0 ? (
               <>
-                {/* Location badge */}
-                {jobListings?.location && (
-                  <div style={{ textAlign: "center", marginBottom: "26px", marginTop: "10px" }}>
-                    <h1
-                      style={{
-                        fontSize: "68px",
-                        fontWeight: "700",
-                        color: "#2E03A5",
-                        letterSpacing: "3px",
-                        textTransform: "uppercase",
-                        margin: 0,
-                        fontFamily: "'Georgia', serif",
-                        textShadow: "1px 2px 6px rgba(180,180,200,0.35)",
-                      }}
-                    >
-                      User Dashboard
-                    </h1>
-                    <p style={{ marginTop: "8px", color: "#8f8f8f", fontSize: "34px", fontFamily: "'Georgia', serif" }}>
-                      Personalized Career Insights
-                    </p>
-                  </div>
-                )}
                 {jobResults.map((job, i) => (
                   <div key={i} style={{
                     display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
