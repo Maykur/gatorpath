@@ -261,23 +261,59 @@ export default function ForwardSearchPage() {
             <input style={inputStyle} placeholder="e.g., CS_with_DS_and_AI" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
           </div>
 
-          <div style={{ display: "flex", gap: "12px", marginTop: "8px" }}>
-            <button type="submit" disabled={submitting} style={{
-              flex: 1, height: "52px", backgroundColor: "transparent",
-              border: "3px solid #F97000", color: "#F97000",
-              fontSize: "18px", fontWeight: "bold", borderRadius: "4px",
-              cursor: submitting ? "not-allowed" : "pointer",
-              fontFamily: "'Georgia', serif", letterSpacing: "1px",
-            }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: "10px", marginTop: "18px" }}>
+            <button
+              type="submit"
+              disabled={submitting}
+              style={{
+                border: "2px solid #F97000",
+                background: "white",
+                color: "#F97000",
+                borderRadius: "6px",
+                padding: "12px 16px",
+                fontSize: "20px",
+                fontWeight: "700",
+                fontFamily: "'Georgia', serif",
+                cursor: "pointer",
+              }}
+            >
               {submitting ? "Submitting..." : "Submit Search"}
             </button>
-            <button type="button" onClick={() => navigate("/past-searches")} style={{
-              height: "52px", padding: "0 24px", backgroundColor: "transparent",
-              border: "2px solid #2E03A5", color: "#2E03A5",
-              fontSize: "14px", fontWeight: "600", borderRadius: "4px",
-              cursor: "pointer", fontFamily: "'Georgia', serif",
-            }}>
+
+            <button
+              type="button"
+              onClick={() => navigate("/past-searches")}
+              style={{
+                border: "2px solid #2E03A5",
+                background: "white",
+                color: "#2E03A5",
+                borderRadius: "6px",
+                padding: "12px 16px",
+                fontSize: "20px",
+                fontWeight: "700",
+                fontFamily: "'Georgia', serif",
+                cursor: "pointer",
+              }}
+            >
               Past Searches
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate("/dashboard", { state: { resetTab: true } })}
+              style={{
+                border: "2px solid #2E03A5",
+                background: "#2E03A5",
+                color: "white",
+                borderRadius: "6px",
+                padding: "12px 16px",
+                fontSize: "20px",
+                fontWeight: "700",
+                fontFamily: "'Georgia', serif",
+                cursor: "pointer",
+              }}
+            >
+              Back to Dashboard
             </button>
           </div>
         </form>
