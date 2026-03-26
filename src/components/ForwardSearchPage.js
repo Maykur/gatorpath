@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../constants";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -26,6 +27,18 @@ const sectionTitle = {
   marginBottom: "20px", marginTop: "8px",
 };
 
+function parseCoursesTaken(text = "") {
+  return text
+    .split(",")
+    .map((course) => course.trim())
+    .filter(Boolean)
+    .map((code) => ({ code }));
+}
+
+function normalizeText(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
 export default function ForwardSearchPage() {
   const navigate = useNavigate();
 
@@ -43,7 +56,7 @@ export default function ForwardSearchPage() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:5000/majors");
+        const res = await fetch(`${baseUrl}/majors`);
         const data = await res.json();
         setMajors(Array.isArray(data) ? data : []);
       } catch (err) {
@@ -53,34 +66,96 @@ export default function ForwardSearchPage() {
     })();
   }, []);
 
-  function parseCoursesTaken(input) {
-    const codes = input.split(",").map((s) => s.trim()).filter(Boolean);
-    return codes.map((code) => ({ code, title: "" }));
-  }
+  useEffect(() => {
+    if (majors.length === 0) return;
+
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser) {
+        console.log("No user found in localStorage");
+        return;
+      }
+
+      const user = JSON.parse(storedUser);
+      console.log("USER FROM LOCALSTORAGE:", user);
+
+      const academic =
+        user?.academic ||
+        user?.academicPrograms ||
+        user?.profile?.academic ||
+        user;
+
+      const userMajor =
+        academic?.majorLabel ||
+        academic?.major ||
+        "";
+
+      const userMinor = Array.isArray(academic?.minor)
+        ? academic.minor.join(", ")
+        : (academic?.minor || "");
+
+      const userCertificate = Array.isArray(academic?.certificate)
+        ? academic.certificate.join(", ")
+        : (academic?.certificate || "");
+
+      console.log("PREFILL VALUES:", {
+        userMajor,
+        userMinor,
+        userCertificate,
+      });
+
+      setMinor(userMinor);
+      setCertificate(userCertificate);
+
+      const matchedMajor = majors.find(
+        (m) => normalizeText(m.major) === normalizeText(userMajor)
+      );
+
+      console.log("MATCHED MAJOR:", matchedMajor);
+
+      setMajorId(matchedMajor?._id || "");
+    } catch (err) {
+      console.error("Failed to prefill from localStorage:", err);
+    }
+  }, [majors]);
 
   async function onSubmit(e) {
     e.preventDefault();
     setError("");
 
-    if (!majorId) { setError("Major is required."); return; }
+    if (!majorId) {
+      setError("Please select a major.");
+      return;
+    }
 
     const token = localStorage.getItem("token");
-    if (!token) { setError("You are not logged in."); navigate("/login"); return; }
+    if (!token) {
+      setError("You must be logged in.");
+      navigate("/login");
+      return;
+    }
+
+    const selectedMajor = majors.find((m) => m._id === majorId);
 
     const payload = {
       searchName,
       academic: {
-        majorId, minor, certificate,
+        majorId,
+        majorLabel: selectedMajor?.major || "",
+        minor,
+        certificate,
         coursesTaken: parseCoursesTaken(coursesTakenText),
       },
-      additional: { expectedGraduationDate, coursePreference },
+      additional: {
+        expectedGraduationDate,
+        coursePreference,
+      },
     };
-
-    console.log("PAYLOAD BEING SENT:", payload);
 
     try {
       setSubmitting(true);
-      const res = await fetch("http://localhost:5000/searches", {
+
+      const res = await fetch(`${baseUrl}/searches`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,12 +165,15 @@ export default function ForwardSearchPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data?.message || "Failed to submit search.");
 
-      navigate("/dashboard", { state: { activeSearch: data } });
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit search.");
+      }
+
+      navigate("/dashboard");
     } catch (err) {
-      console.error(err);
-      setError(err.message);
+      console.error("SEARCH SUBMIT ERROR:", err);
+      setError(err.message || "Failed to submit search.");
     } finally {
       setSubmitting(false);
     }
@@ -132,10 +210,16 @@ export default function ForwardSearchPage() {
 
           <div style={fieldStyle}>
             <label style={labelStyle}>Major (required)</label>
-            <select value={majorId} onChange={(e) => setMajorId(e.target.value)} style={inputStyle}>
-              <option value="">Select a major…</option>
+            <select
+              value={majorId}
+              onChange={(e) => setMajorId(e.target.value)}
+              style={inputStyle}
+            >
+              <option value="">Select a major</option>
               {majors.map((m) => (
-                <option key={m._id} value={m._id}>{m.major}</option>
+                <option key={m._id} value={m._id}>
+                  {m.major}
+                </option>
               ))}
             </select>
           </div>

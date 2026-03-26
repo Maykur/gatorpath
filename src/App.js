@@ -15,10 +15,7 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <div style={{ 
-        paddingTop: "80px", // Space for the fixed navbar
-        width: "100%"
-      }}>
+      <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA" }}>
         <Routes>
           <Route path="/" element={<StartUp/>}/>
           <Route path="/login" element={<LogIn/>}/>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
@@ -254,10 +254,65 @@ function Dashboard() {
   const jobResults = jobListings?.jobs || [];
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture, fontFamily: "'Georgia', serif", paddingTop: "80px" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#FAF3EA",
+        backgroundImage: texture,
+        backgroundRepeat: "repeat",
+        backgroundPosition: "top left",
+        fontFamily: "'Georgia', serif",
+        paddingTop: "50px", // increase from current value (ex: 10px)
+        marginTop: 0,
+      }}
+    >
+      {/* Page Title */}
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "6px",
+          marginBottom: "24px", // was 10px
+          paddingBottom: "6px",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "48px",
+            fontWeight: "700",
+            color: "#2E03A5",
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            margin: 0,
+            lineHeight: 1.1,
+            fontFamily: "'Georgia', serif",
+            textShadow: "1px 2px 6px rgba(180,180,200,0.35)",
+          }}
+        >
+          User Dashboard
+        </h1>
+        <p
+          style={{
+            marginTop: "6px",
+            color: "#8f8f8f",
+            fontSize: "20px",
+            fontFamily: "'Georgia', serif",
+          }}
+        >
+          Personalized Career Insights
+        </p>
+      </div>
 
       {/* Tabs + actions row */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 28px 14px 28px", flexWrap: "wrap", gap: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "12px 28px 14px 28px", // was 8px top
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {TABS.map((tab, i) => (
             <button key={tab} onClick={() => setActiveTab(i)} style={{
@@ -273,14 +328,42 @@ function Dashboard() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
-          <Link to="/search" style={{ textDecoration: "none" }}>
-            <button style={{
-              backgroundColor: "#F97000", color: "white", border: "none",
-              borderRadius: "20px", padding: "8px 20px", fontSize: "16px",
-              fontWeight: "bold", cursor: "pointer", fontFamily: "'Georgia', serif",
+
+          <button
+            onClick={() => navigate("/past-searches")}
+            style={{
+              backgroundColor: "#2E03A5",
+              color: "white",
+              border: "none",
+              borderRadius: "20px",
+              padding: "8px 20px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              fontFamily: "'Georgia', serif",
+              boxShadow: "0 3px 10px rgba(46,3,165,0.35)",
+            }}
+          >
+            Past Searches
+          </button>
+
+          <button
+            onClick={() => navigate("/search")}
+            style={{
+              backgroundColor: "#F97000",
+              color: "white",
+              border: "none",
+              borderRadius: "20px",
+              padding: "8px 20px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              fontFamily: "'Georgia', serif",
               boxShadow: "0 3px 10px rgba(249,112,0,0.35)",
-            }}>Search Page</button>
-          </Link>
+            }}
+          >
+            Search Page
+          </button>
         </div>
       </div>
 
@@ -358,7 +441,7 @@ function Dashboard() {
               <>
                 {majorData.core_coursework?.length > 0 && (
                   <div style={{ marginBottom: "20px" }}>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#2E03A5", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px" }}>Core Coursework</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#2E03A5", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #2E03A5", paddingBottom: "4px" }}>Core Coursework</div>
                     {majorData.core_coursework.slice(0, 4).map((c, i) => (
                       <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: "2px solid #2E03A5" }}>
                         <span style={{ fontWeight: "bold", fontSize: "13px", color: "#2E03A5" }}>{c.code}</span>
@@ -369,7 +452,7 @@ function Dashboard() {
                 )}
                 {majorData.required_foundation?.length > 0 && (
                   <div style={{ marginBottom: "20px" }}>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#F97000", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px" }}>Required Foundation</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#F97000", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #F97000", paddingBottom: "4px" }}>Required Foundation</div>
                     {majorData.required_foundation.slice(0, 4).map((c, i) => (
                       <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: "2px solid #F97000" }}>
                         <span style={{ fontWeight: "bold", fontSize: "13px", color: "#F97000" }}>{c.code}</span>
@@ -380,7 +463,7 @@ function Dashboard() {
                 )}
                 {majorData.elective_areas?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#555", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px" }}>Elective Areas</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#555", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #aaa", paddingBottom: "4px" }}>Elective Areas</div>
                     {majorData.elective_areas.slice(0, 4).map((area, i) => (
                       <div key={i} style={{ marginBottom: "6px", paddingLeft: "8px", borderLeft: "2px solid #aaa", fontSize: "13px", color: "#444" }}>{area}</div>
                     ))}
@@ -407,10 +490,24 @@ function Dashboard() {
               <>
                 {/* Location badge */}
                 {jobListings?.location && (
-                  <div style={{ textAlign: "center", marginBottom: "24px" }}>
-                    <span style={{ backgroundColor: "rgba(46,3,165,0.08)", borderRadius: "20px", padding: "6px 16px", fontSize: "13px", color: "#2E03A5", fontWeight: "600" }}>
-                      📍 {jobListings.location}
-                    </span>
+                  <div style={{ textAlign: "center", marginBottom: "26px", marginTop: "10px" }}>
+                    <h1
+                      style={{
+                        fontSize: "68px",
+                        fontWeight: "700",
+                        color: "#2E03A5",
+                        letterSpacing: "3px",
+                        textTransform: "uppercase",
+                        margin: 0,
+                        fontFamily: "'Georgia', serif",
+                        textShadow: "1px 2px 6px rgba(180,180,200,0.35)",
+                      }}
+                    >
+                      User Dashboard
+                    </h1>
+                    <p style={{ marginTop: "8px", color: "#8f8f8f", fontSize: "34px", fontFamily: "'Georgia', serif" }}>
+                      Personalized Career Insights
+                    </p>
                   </div>
                 )}
                 {jobResults.map((job, i) => (

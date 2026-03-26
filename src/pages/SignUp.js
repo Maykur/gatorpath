@@ -171,7 +171,9 @@ export function SignUp() {
       return; 
     }
 
-    localStorage.setItem("token", data.token);
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+    }
     localStorage.setItem("user", JSON.stringify(data.user));
     setSuccess(true);
     setTimeout(() => navigate("/dashboard"), 1500);

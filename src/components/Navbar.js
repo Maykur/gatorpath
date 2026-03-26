@@ -22,41 +22,73 @@ export function NavBar() {
 
   return (
     <>
-      <nav className="navbar">
-        {/* Left: UF Logo */}
-        <div className="navbar-left">
-          <Link to={loggedIn ? "/dashboard" : "/"} style={{ textDecoration: "none" }}>
-            <span className="uf-logo">UF</span>
-          </Link>
-        </div>
+      <nav style={navStyle}>
+        {/* LEFT: UF */}
+        <button
+          onClick={() => navigate("/dashboard")}
+          style={{
+            marginLeft: "12px",
+            backgroundColor: "#F97000",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            padding: "12px 22px",
+            fontWeight: "700",
+            fontSize: "30px",
+            cursor: "pointer",
+            fontFamily: "'Georgia', serif",
+          }}
+        >
+          UF
+        </button>
 
-        {/* Center: Page title / brand (only on dashboard) */}
-        {loggedIn && (
-          <div className="navbar-center">
-            <Link to="/dashboard" state={{ resetTab: true }} style={{ textDecoration: "none" }}>
-              <span className="navbar-title">User Dashboard</span>
-            </Link>
-          </div>
-        )}
+        {/* CENTER: keep empty spacer (remove User Dashboard button only) */}
+        <div style={{ flex: 1 }} />
 
-        {/* Right: GatorPath badge + profile */}
-        <div className="navbar-right">
-          {loggedIn && user ? (
-            <button
-              className="gatorpath-badge"
-              onClick={() => setShowProfile((p) => !p)}
-            >
-              GatorPath&nbsp;
-              <img
-                src={user.profileIcon}
-                alt="profile"
-                style={{ width: 28, height: 28, borderRadius: "50%", verticalAlign: "middle" }}
-              />
-            </button>
+        {/* RIGHT: GatorPath/Profile */}
+        <button
+          onClick={() => setShowProfile(true)}
+          style={{
+            marginRight: "12px",
+            backgroundColor: "#efefef",
+            color: "#222",
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            padding: "12px 18px",
+            fontWeight: "700",
+            fontSize: "30px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            fontFamily: "'Georgia', serif",
+          }}
+        >
+          <span>GatorPath</span>
+          {user?.profileIcon ? (
+            <img
+              src={user.profileIcon}
+              alt="avatar"
+              style={{ width: 36, height: 36, borderRadius: "50%", objectFit: "cover" }}
+            />
           ) : (
-            <span className="gatorpath-badge-plain">GatorPath</span>
+            <span
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                backgroundColor: "#d9d9d9",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "18px",
+                lineHeight: 1,
+              }}
+            >
+              👤
+            </span>
           )}
-        </div>
+        </button>
       </nav>
 
       {/* Profile pop-up panel */}
@@ -105,3 +137,28 @@ export function NavBar() {
     </>
   );
 }
+
+const navStyle = {
+  position: "relative",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "82px",
+  backgroundColor: "#2E03A5", // restore gator blue
+  color: "white",
+  border: "none",
+  borderRadius: "0px",
+  padding: "0px",
+  margin: "0px",
+  marginBottom: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  fontFamily: "'Georgia', serif", // was Arial
+  fontSize: "1.2em",
+  fontWeight: "bold",
+  textAlign: "left",
+  zIndex: 10,
+  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.2)",
+  overflow: "hidden",
+};
