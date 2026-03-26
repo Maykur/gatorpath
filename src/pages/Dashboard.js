@@ -381,7 +381,7 @@ function Dashboard() {
               boxShadow: "0 3px 10px rgba(249,112,0,0.35)",
             }}
           >
-            Search Page
+            Career Search
           </button>
         </div>
       </div>
