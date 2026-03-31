@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../constants";
+import {Link} from "react-router-dom";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -178,35 +179,71 @@ export default function ForwardSearchPage() {
       setSubmitting(false);
     }
   }
+return (
+<div style={{
+  minHeight: "100vh",
+  backgroundColor: "#FAF3EA",
+  backgroundImage: texture,
+  fontFamily: "'Georgia', serif",
+  display: "flex",
+  justifyContent: "center"
+}}>
 
-  return (
-    <div style={{
-      minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture,
-      fontFamily: "'Georgia', serif", padding: "40px 5%",
-    }}>
-      {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <h1 style={{
-          fontSize: "36px", fontWeight: "bold", color: "#2E03A5",
-          letterSpacing: "4px", textTransform: "uppercase", margin: 0,
-          textShadow: "1px 2px 6px rgba(180,180,200,0.4)",
-        }}>
-          Career Search
-        </h1>
-        <p style={{ color: "#888", fontSize: "14px", marginTop: "6px", letterSpacing: "1px" }}>
-          Tell us about your academic background
-        </p>
-      </div>
+  <div style={{
+    width: "100%",
+    maxWidth: "800px",
+    padding: "40px 20px"
+  }}>
 
-      {error && <div style={{ color: "red", marginBottom: "16px", fontSize: "14px" }}>{error}</div>}
+    {/* HEADER */}
+    <div style={{ marginBottom: "20px" }}>
+
+      <h1 style={{
+        fontSize: "36px",
+        fontWeight: "bold",
+        color: "#2E03A5",
+        letterSpacing: "4px",
+        textTransform: "uppercase",
+        margin: 0,
+        textShadow: "1px 2px 6px rgba(180,180,200,0.4)",
+        textAlign: "center"
+      }}>
+        Career Search
+      </h1>
+
+      <p style={{
+        color: "#888",
+        fontSize: "14px",
+        letterSpacing: "1px",
+        marginTop: "6px",
+        textAlign: "center"
+      }}>
+        Tell us about your academic background
+      </p>
 
       <div style={{
-        backgroundColor: "rgba(255,255,255,0.6)", borderRadius: "10px",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.08)", padding: "36px 40px",
-        maxWidth: "700px",
+        display: "flex",
+        justifyContent: "flex-end",
+        marginTop: "6px"
       }}>
+        <Link to="/dashboard">
+          Back to Dashboard
+        </Link>
+        </div>
+  </div>
+
+
+    {/* FORM BOX */}
+    <div style={{
+      backgroundColor: "rgba(255,255,255,0.6)",
+      borderRadius: "10px",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+      padding: "36px 40px",
+      width: "100%"  
+    }}>
         <form onSubmit={onSubmit}>
           <div style={sectionTitle}>Section A: Academic Information</div>
+
 
           <div style={fieldStyle}>
             <label style={labelStyle}>Major (required)</label>
@@ -233,6 +270,7 @@ export default function ForwardSearchPage() {
               <label style={labelStyle}>Certificate</label>
               <input style={inputStyle} value={certificate} onChange={(e) => setCertificate(e.target.value)} placeholder="e.g. Cybersecurity" />
             </div>
+            
           </div>
 
           <div style={fieldStyle}>
@@ -261,7 +299,7 @@ export default function ForwardSearchPage() {
             <input style={inputStyle} placeholder="e.g., CS_with_DS_and_AI" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: "10px", marginTop: "18px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "10px", marginTop: "18px" }}>
             <button
               type="submit"
               disabled={submitting}
@@ -297,27 +335,13 @@ export default function ForwardSearchPage() {
             >
               Past Searches
             </button>
-
-            <button
-              type="button"
-              onClick={() => navigate("/dashboard", { state: { resetTab: true } })}
-              style={{
-                border: "2px solid #2E03A5",
-                background: "#2E03A5",
-                color: "white",
-                borderRadius: "6px",
-                padding: "12px 16px",
-                fontSize: "20px",
-                fontWeight: "700",
-                fontFamily: "'Georgia', serif",
-                cursor: "pointer",
-              }}
-            >
-              Back to Dashboard
-            </button>
           </div>
         </form>
       </div>
-    </div>
-  );
+            </div>
+            </div>
+
+
+);
+
 }
