@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
+import {baseUrl} from "../constants";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -58,7 +59,7 @@ function SalaryBar({ min, max, overall }) {
   );
 }
 
-function LearningPathways() {
+function LearningPathways({learningData, loading}) {
   const [showNote, setShowNote] = useState(true);
   return (
     <div style={{ padding: "0 28px 40px", position: "relative" }}>
@@ -66,9 +67,35 @@ function LearningPathways() {
         <div style={{ flex: 1 }}>
           <h2 style={{ fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Proposed Resources for Specified Career:</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "40px" }}>
-            {MOCK_RESOURCES.map((r, i) => (
-              <div key={i} style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "12px 18px", fontSize: "14px", color: "#2E03A5", fontStyle: "italic", backgroundColor: "rgba(255,255,255,0.7)", maxWidth: "500px", cursor: "pointer" }}>{r}</div>
-            ))}
+            {loading ? (
+              <p style={{ color: "#777" }}>Loading learning resources...</p>
+            ) : learningData?.resources?.length ? (
+              learningData.resources.map((r, i) => (
+                <a
+                  key={i}
+                  href={r.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    padding: "12px 18px",
+                    fontSize: "14px",
+                    color: "#2E03A5",
+                    fontStyle: "italic",
+                    backgroundColor: "rgba(255,255,255,0.7)",
+                    maxWidth: "500px",
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    display: "block",
+                  }}
+                >
+                  {r.provider} — {r.title}
+                </a>
+              ))
+            ) : (
+              <div style={{ color: "#777", fontSize: "14px" }}>No resources found yet.</div>
+            )}
           </div>
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
@@ -125,6 +152,8 @@ function Dashboard() {
   const [selectedMajor, setSelectedMajor] = useState(null);
   const [jobListings, setJobListings] = useState(null);
   const [jobsLoading, setJobsLoading] = useState(false);
+  const [learningData, setLearningData] = useState(null);
+  const [learningLoading, setLearningLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -182,6 +211,48 @@ function Dashboard() {
       }
     }
     loadJobListings();
+  }, [searchData]);
+
+  // Fetch learning pathways when searchData loads
+  useEffect(() => {
+    // If no search data or missing ID, skip fetching learning pathways
+    if (!searchData?._id) {
+      return;
+    }
+
+    // Async function to fetch learning pathways from backend API using search ID
+    async function loadLearningPathways() {
+      setLearningLoading(true);
+
+      try {
+        // Auth token
+        const token = localStorage.getItem("token");
+
+        // Fetch learning pathways
+        const res = await fetch(`${baseUrl}/dashboard/learning-pathways/${searchData._id}`, {
+          headers: {"Content-Type": "application/json",Authorization: `Bearer ${token}`},
+        });
+
+        const data = await res.json();
+
+        // If no resulting data then error
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to load learning pathways");
+        }
+
+        setLearningData(data);
+      }
+      // If error then log
+      catch (err) {
+        console.error("Learning pathways error:", err);
+        setLearningData(null);
+      }
+      // Finish loading
+      finally {
+        setLearningLoading(false);
+      }
+    }
+    loadLearningPathways();
   }, [searchData]);
 
   // Fetch user's major courses for col 3
@@ -433,9 +504,33 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>Proposed Resources for Specified Career:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
-              {MOCK_RESOURCES.map((r, i) => (
-                <div key={i} style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", color: "#2E03A5", fontStyle: "italic", backgroundColor: "rgba(255,255,255,0.6)" }}>{r}</div>
-              ))}
+              {learningLoading ? (
+                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
+              ) : learningData?.resources?.length ? (
+                learningData.resources.map((r, i) => (
+                  <a
+                    key={i}
+                    href={r.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "10px 14px",
+                      fontSize: "13px",
+                      color: "#2E03A5",
+                      fontStyle: "italic",
+                      backgroundColor: "rgba(255,255,255,0.6)",
+                      textDecoration: "none",
+                      display: "block",
+                    }}
+                  >
+                    {r.provider} — {r.title}
+                  </a>
+                ))
+              ) : (
+                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
+              )}
             </div>
             <h3 style={colHeaderStyle}>Extracurriculars:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -573,7 +668,7 @@ function Dashboard() {
       )}
 
       {/* LEARNING PATHWAYS TAB */}
-      {activeTab === 1 && <LearningPathways />}
+      {activeTab === 1 && <LearningPathways learningData={learningData} loading={learningLoading} />}
 
       {/* CISE MAJORS TAB */}
       {activeTab === 2 && (
