@@ -3,7 +3,7 @@ const router = express.Router();
 
 const authenticateToken = require("../middleware/auth");
 const SearchSubmission = require("../datasets/SearchSubmission");
-const {buildLearningPathways} = require("../learningPathways_service");
+const {buildLearningPathways} = require("../learningPathways/learningPathways_service");
 
 // GET latest search for logged-in user, used to populate dashboard on page load
 router.get("/latest", authenticateToken, async (req, res) => {

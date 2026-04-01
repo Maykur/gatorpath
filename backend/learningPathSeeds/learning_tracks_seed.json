@@ -1,0 +1,880 @@
+[
+  {
+    "key": "software_engineering",
+    "label": "Software Engineering",
+    "active": true,
+    "triggers": [
+      "software",
+      "programming",
+      "developer",
+      "application",
+      "coding",
+      "computer science"
+    ],
+    "languages": [
+      "Python",
+      "Java",
+      "JavaScript / TypeScript",
+      "C++",
+      "SQL"
+    ],
+    "platforms": [
+      "Git / GitHub",
+      "VS Code",
+      "Docker",
+      "Postman",
+      "CI/CD Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "practice",
+      "projects",
+      "documentation",
+      "tooling",
+      "interview",
+      "backend",
+      "web",
+      "cloud"
+    ],
+    "resourceQueries": [
+      "software engineering learning path",
+      "computer science professional certificate"
+    ],
+    "certificationQueries": [
+      "software developer certification",
+      "cloud practitioner certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "ai_ml",
+    "label": "AI / Machine Learning",
+    "active": true,
+    "triggers": [
+      "artificial intelligence",
+      "ai",
+      "machine learning",
+      "ml",
+      "data science",
+      "deep learning",
+      "nlp"
+    ],
+    "languages": [
+      "Python",
+      "SQL"
+    ],
+    "platforms": [
+      "Jupyter",
+      "TensorFlow / PyTorch",
+      "Hugging Face"
+    ],
+    "resourceTags": [
+      "foundations",
+      "ml",
+      "nlp",
+      "data",
+      "projects",
+      "practice",
+      "documentation",
+      "certification"
+    ],
+    "resourceQueries": [
+      "machine learning learning path",
+      "artificial intelligence professional certificate",
+      "natural language processing learning path"
+    ],
+    "certificationQueries": [
+      "artificial intelligence certification",
+      "data analytics certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "data_analytics",
+    "label": "Data / Analytics",
+    "active": true,
+    "triggers": [
+      "data",
+      "analytics",
+      "statistics",
+      "econometrics",
+      "bioinformatics",
+      "big data",
+      "business intelligence"
+    ],
+    "languages": [
+      "Python",
+      "SQL",
+      "R"
+    ],
+    "platforms": [
+      "Jupyter",
+      "Tableau / Power BI",
+      "Pandas / NumPy"
+    ],
+    "resourceTags": [
+      "foundations",
+      "data",
+      "analytics",
+      "sql",
+      "visualization",
+      "projects",
+      "practice",
+      "documentation",
+      "certification"
+    ],
+    "resourceQueries": [
+      "data analytics learning path",
+      "data engineering certificate",
+      "sql python analytics learning path"
+    ],
+    "certificationQueries": [
+      "data analytics certification",
+      "business intelligence certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "cybersecurity_networking",
+    "label": "Cybersecurity / Networking",
+    "active": true,
+    "triggers": [
+      "security",
+      "cyber",
+      "cybersecurity",
+      "network",
+      "networking",
+      "information assurance",
+      "incident response"
+    ],
+    "languages": [
+      "Python",
+      "SQL",
+      "Bash"
+    ],
+    "platforms": [
+      "Wireshark",
+      "Linux",
+      "Splunk / SIEM"
+    ],
+    "resourceTags": [
+      "foundations",
+      "cybersecurity",
+      "networking",
+      "hands_on_labs",
+      "practice",
+      "tooling",
+      "certification",
+      "cloud"
+    ],
+    "resourceQueries": [
+      "cybersecurity learning path",
+      "network security fundamentals"
+    ],
+    "certificationQueries": [
+      "security+ certification",
+      "networking certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "hardware_embedded",
+    "label": "Hardware / Embedded Systems",
+    "active": true,
+    "triggers": [
+      "electrical",
+      "hardware",
+      "embedded",
+      "materials",
+      "packaging engineering",
+      "nuclear",
+      "circuit",
+      "microcontroller"
+    ],
+    "languages": [
+      "C",
+      "C++",
+      "Python"
+    ],
+    "platforms": [
+      "Arduino / Raspberry Pi",
+      "MATLAB",
+      "KiCad / CAD"
+    ],
+    "resourceTags": [
+      "foundations",
+      "hardware",
+      "embedded",
+      "projects",
+      "tooling",
+      "practice",
+      "documentation",
+      "certification"
+    ],
+    "resourceQueries": [
+      "embedded systems learning path",
+      "computer engineering curriculum"
+    ],
+    "certificationQueries": [
+      "embedded systems certification",
+      "hardware engineering certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "web_product",
+    "label": "Web / Product / UX",
+    "active": true,
+    "triggers": [
+      "web",
+      "product",
+      "ux",
+      "ui",
+      "interface",
+      "frontend",
+      "full stack",
+      "graphic",
+      "advertising"
+    ],
+    "languages": [
+      "JavaScript",
+      "HTML/CSS",
+      "SQL"
+    ],
+    "platforms": [
+      "React",
+      "Figma",
+      "Git / GitHub"
+    ],
+    "resourceTags": [
+      "foundations",
+      "web",
+      "frontend",
+      "backend",
+      "ui_ux",
+      "projects",
+      "documentation",
+      "practice",
+      "tooling",
+      "portfolio"
+    ],
+    "resourceQueries": [
+      "web development learning path",
+      "ux ui design certificate"
+    ],
+    "certificationQueries": [
+      "web development certification",
+      "ux design certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "design_creative_media",
+    "label": "Design / Creative Media",
+    "active": true,
+    "triggers": [
+      "design",
+      "art",
+      "media",
+      "music",
+      "theatre",
+      "dance",
+      "creative",
+      "ceramics",
+      "visual",
+      "media production"
+    ],
+    "languages": [
+      "Design Communication",
+      "Adobe Workflow Literacy"
+    ],
+    "platforms": [
+      "Adobe Creative Cloud",
+      "Figma",
+      "Blender / Creative Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "design",
+      "creative",
+      "projects",
+      "tooling",
+      "portfolio",
+      "documentation"
+    ],
+    "resourceQueries": [
+      "creative media learning path",
+      "graphic design professional certificate"
+    ],
+    "certificationQueries": [
+      "graphic design certification",
+      "creative media certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "game_interactive_media",
+    "label": "Game / Interactive Media",
+    "active": true,
+    "triggers": [
+      "game",
+      "digital arts",
+      "interactive",
+      "animation",
+      "media production",
+      "unreal",
+      "unity"
+    ],
+    "languages": [
+      "C#",
+      "Python",
+      "JavaScript"
+    ],
+    "platforms": [
+      "Unity / Unreal",
+      "Blender",
+      "Git / GitHub"
+    ],
+    "resourceTags": [
+      "foundations",
+      "game_dev",
+      "creative",
+      "projects",
+      "tooling",
+      "practice",
+      "portfolio"
+    ],
+    "resourceQueries": [
+      "game development learning path",
+      "interactive media certificate"
+    ],
+    "certificationQueries": [
+      "unity certification",
+      "game development certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "language_proficiency",
+    "label": "Language Proficiency",
+    "active": true,
+    "triggers": [
+      "arabic",
+      "spanish",
+      "french",
+      "german",
+      "portuguese",
+      "russian",
+      "hebrew",
+      "italian",
+      "language",
+      "linguistics",
+      "sign language",
+      "tesl",
+      "translation"
+    ],
+    "languages": [
+      "Target Language",
+      "English Technical Writing"
+    ],
+    "platforms": [
+      "Language Learning Platforms",
+      "Translation / Dictionary Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "language_learning",
+      "practice",
+      "writing",
+      "communication",
+      "certification"
+    ],
+    "resourceQueries": [
+      "language learning path",
+      "language proficiency preparation"
+    ],
+    "certificationQueries": [
+      "language proficiency certification",
+      "translation certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "translation_localization_nlp",
+    "label": "Translation / Localization / NLP",
+    "active": true,
+    "triggers": [
+      "translation",
+      "localization",
+      "linguistics",
+      "language",
+      "public relations",
+      "communication",
+      "news media",
+      "nlp"
+    ],
+    "languages": [
+      "Python",
+      "Target Language",
+      "SQL"
+    ],
+    "platforms": [
+      "Hugging Face",
+      "Translation Tools",
+      "Jupyter"
+    ],
+    "resourceTags": [
+      "foundations",
+      "translation",
+      "language_learning",
+      "nlp",
+      "documentation",
+      "projects",
+      "writing",
+      "communication"
+    ],
+    "resourceQueries": [
+      "translation localization learning path",
+      "natural language processing learning path"
+    ],
+    "certificationQueries": [
+      "translation certification",
+      "nlp certificate"
+    ],
+    "version": 1
+  },
+  {
+    "key": "business_entrepreneurship",
+    "label": "Business / Entrepreneurship",
+    "active": true,
+    "triggers": [
+      "business",
+      "entrepreneurship",
+      "selling",
+      "sales",
+      "management",
+      "real estate",
+      "retailing",
+      "accounting",
+      "wealth",
+      "hospitality"
+    ],
+    "languages": [
+      "SQL",
+      "Business Analytics"
+    ],
+    "platforms": [
+      "Excel / Sheets",
+      "CRM Tools",
+      "Tableau / Power BI"
+    ],
+    "resourceTags": [
+      "foundations",
+      "translation",
+      "language_learning",
+      "nlp",
+      "documentation",
+      "projects",
+      "writing",
+      "communication"
+    ],
+    "resourceQueries": [
+      "business analytics learning path",
+      "entrepreneurship certificate"
+    ],
+    "certificationQueries": [
+      "project management certification",
+      "sales certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "communication_public_relations",
+    "label": "Communication / Public Relations",
+    "active": true,
+    "triggers": [
+      "communication",
+      "public relations",
+      "media",
+      "public affairs",
+      "political communication",
+      "mass communication",
+      "advertising"
+    ],
+    "languages": [
+      "Professional Writing",
+      "Audience Analysis"
+    ],
+    "platforms": [
+      "Canva / Creative Tools",
+      "Analytics Platforms",
+      "CMS / Publishing Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "business",
+      "analytics",
+      "projects",
+      "communication",
+      "tooling",
+      "certification",
+      "leadership"
+    ],
+    "resourceQueries": [
+      "public relations learning path",
+      "communications certificate"
+    ],
+    "certificationQueries": [
+      "communications certification",
+      "public relations certificate"
+    ],
+    "version": 1
+  },
+  {
+    "key": "education_teaching",
+    "label": "Education / Teaching",
+    "active": true,
+    "triggers": [
+      "education",
+      "teaching",
+      "ufteach",
+      "teacher",
+      "secondary",
+      "curriculum",
+      "early childhood",
+      "educational technology"
+    ],
+    "languages": [
+      "Instructional Design",
+      "Assessment Literacy"
+    ],
+    "platforms": [
+      "Learning Management Systems",
+      "Educational Technology Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "communication",
+      "writing",
+      "analytics",
+      "projects",
+      "portfolio",
+      "documentation",
+      "branding"
+    ],
+    "resourceQueries": [
+      "teacher preparation learning path",
+      "instructional design certificate"
+    ],
+    "certificationQueries": [
+      "teaching certification",
+      "instructional design certificate"
+    ],
+    "version": 1
+  },
+  {
+    "key": "health_public_health",
+    "label": "Health / Public Health",
+    "active": true,
+    "triggers": [
+      "health",
+      "medicine",
+      "medical",
+      "public health",
+      "rehabilitation",
+      "wellness",
+      "healthcare",
+      "disorders",
+      "coaching"
+    ],
+    "languages": [
+      "Health Data Literacy",
+      "Professional Communication"
+    ],
+    "platforms": [
+      "Public Health Data Tools",
+      "Clinical / Research Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "health",
+      "data",
+      "analytics",
+      "research",
+      "documentation",
+      "certification"
+    ],
+    "resourceQueries": [
+      "public health learning path",
+      "healthcare analytics certificate"
+    ],
+    "certificationQueries": [
+      "public health certificate",
+      "healthcare certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "bio_life_sciences",
+    "label": "Biology / Life Sciences",
+    "active": true,
+    "triggers": [
+      "bio",
+      "biology",
+      "botany",
+      "zoology",
+      "genetics",
+      "pathogenesis",
+      "entomology",
+      "primatology",
+      "plant",
+      "chemistry"
+    ],
+    "languages": [
+      "Python",
+      "R"
+    ],
+    "platforms": [
+      "Jupyter",
+      "Bioinformatics Tools",
+      "Lab Data Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "bioinformatics",
+      "research",
+      "data",
+      "projects",
+      "documentation",
+      "lab_tools"
+    ],
+    "resourceQueries": [
+      "bioinformatics learning path",
+      "life sciences data analysis"
+    ],
+    "certificationQueries": [
+      "bioinformatics certificate",
+      "life sciences certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "gis_geospatial",
+    "label": "GIS / Geospatial / Mapping",
+    "active": true,
+    "triggers": [
+      "geospatial",
+      "geomatics",
+      "mapping",
+      "geography",
+      "geoai",
+      "meteorology",
+      "climatology",
+      "uav",
+      "aerial"
+    ],
+    "languages": [
+      "Python",
+      "SQL"
+    ],
+    "platforms": [
+      "ArcGIS / QGIS",
+      "Jupyter",
+      "Remote Sensing Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "gis",
+      "data",
+      "projects",
+      "tooling",
+      "documentation",
+      "certification",
+      "mapping"
+    ],
+    "resourceQueries": [
+      "gis learning path",
+      "geospatial analysis certificate"
+    ],
+    "certificationQueries": [
+      "gis certification",
+      "remote sensing certificate"
+    ],
+    "version": 1
+  },
+  {
+    "key": "environment_sustainability",
+    "label": "Environment / Sustainability",
+    "active": true,
+    "triggers": [
+      "environment",
+      "sustainability",
+      "ecology",
+      "forest",
+      "climate",
+      "resilient energy",
+      "built environment",
+      "policy",
+      "conservation"
+    ],
+    "languages": [
+      "Data Literacy",
+      "Policy Communication"
+    ],
+    "platforms": [
+      "GIS Tools",
+      "Environmental Data Platforms",
+      "Jupyter"
+    ],
+    "resourceTags": [
+      "foundations",
+      "gis",
+      "data",
+      "projects",
+      "tooling",
+      "documentation",
+      "certification",
+      "mapping"
+    ],
+    "resourceQueries": [
+      "sustainability learning path",
+      "environmental policy certificate"
+    ],
+    "certificationQueries": [
+      "sustainability certification",
+      "environmental management certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "policy_law_public_affairs",
+    "label": "Policy / Law / Public Affairs",
+    "active": true,
+    "triggers": [
+      "law",
+      "policy",
+      "public affairs",
+      "public service",
+      "international relations",
+      "campaigning",
+      "legal",
+      "ethics",
+      "society"
+    ],
+    "languages": [
+      "Policy Writing",
+      "Data Literacy"
+    ],
+    "platforms": [
+      "Policy Research Tools",
+      "Civic Data Platforms"
+    ],
+    "resourceTags": [
+      "foundations",
+      "sustainability",
+      "policy",
+      "research",
+      "data",
+      "projects",
+      "documentation"
+    ],
+    "resourceQueries": [
+      "public policy learning path",
+      "law and regulation certificate"
+    ],
+    "certificationQueries": [
+      "policy certificate",
+      "compliance certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "agriculture_natural_resources",
+    "label": "Agriculture / Natural Resources",
+    "active": true,
+    "triggers": [
+      "agric",
+      "horticulture",
+      "soil",
+      "water",
+      "food",
+      "beekeeping",
+      "pest",
+      "fisheries",
+      "natural resource",
+      "forestry",
+      "agroecology"
+    ],
+    "languages": [
+      "Data Literacy",
+      "Field Research Communication"
+    ],
+    "platforms": [
+      "GIS Tools",
+      "Agricultural Data Platforms",
+      "Remote Sensing Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "policy",
+      "research",
+      "writing",
+      "communication",
+      "documentation",
+      "certification",
+      "compliance"
+    ],
+    "resourceQueries": [
+      "precision agriculture learning path",
+      "agriculture technology certificate"
+    ],
+    "certificationQueries": [
+      "agriculture certification",
+      "natural resources certification"
+    ],
+    "version": 1
+  },
+  {
+    "key": "arts_humanities_culture",
+    "label": "Arts / Humanities / Culture",
+    "active": true,
+    "triggers": [
+      "history",
+      "philosophy",
+      "religion",
+      "studies",
+      "classical",
+      "jewish",
+      "holocaust",
+      "anthropology",
+      "sociology"
+    ],
+    "languages": [
+      "Research Writing",
+      "Critical Analysis"
+    ],
+    "platforms": [
+      "Research Databases",
+      "Writing / Citation Tools"
+    ],
+    "resourceTags": [
+      "foundations",
+      "agriculture",
+      "gis",
+      "data",
+      "research",
+      "projects",
+      "documentation",
+      "fieldwork"
+    ],
+    "resourceQueries": [
+      "humanities research learning path",
+      "digital humanities certificate"
+    ],
+    "certificationQueries": [
+      "research certificate",
+      "writing certificate"
+    ],
+    "version": 1
+  }
+]

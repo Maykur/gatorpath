@@ -1,0 +1,3154 @@
+[
+  {
+    "canonicalName": "Computer Science (CSE) - College of Engineering",
+    "programType": "Major",
+    "linkedTracks": [
+      {
+        "trackKey": "software_engineering",
+        "weight": 10
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 6
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 7
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      },
+      {
+        "trackKey": "cybersecurity_networking",
+        "weight": 5
+      }
+    ],
+    "source": "major_family_manual_v1",
+    "confidence": 0.95
+  },
+  {
+    "canonicalName": "Computer Science (CSC) - College of Liberal Arts & Sciences",
+    "programType": "Major",
+    "linkedTracks": [
+      {
+        "trackKey": "software_engineering",
+        "weight": 9
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 8
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 8
+      },
+      {
+        "trackKey": "web_product",
+        "weight": 6
+      },
+      {
+        "trackKey": "cybersecurity_networking",
+        "weight": 5
+      }
+    ],
+    "source": "major_family_manual_v1",
+    "confidence": 0.95
+  },
+  {
+    "canonicalName": "Computer Engineering",
+    "programType": "Major",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 10
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 7
+      },
+      {
+        "trackKey": "cybersecurity_networking",
+        "weight": 6
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 4
+      }
+    ],
+    "source": "major_family_manual_v1",
+    "confidence": 0.95
+  },
+  {
+    "canonicalName": "Digital Arts and Sciences",
+    "programType": "Major",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 10
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 10
+      },
+      {
+        "trackKey": "web_product",
+        "weight": 6
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 4
+      }
+    ],
+    "source": "major_family_manual_v1",
+    "confidence": 0.95
+  },
+  {
+    "canonicalName": "AI and the Arts",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "ai_ml",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Agroecology and Sustainable Food Systems",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "American Sign Language and Deaf Culture",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 11
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Animal Genetics",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Art Education",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      },
+      {
+        "trackKey": "education_teaching",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Artificial Intelligence Fundamentals and Applications",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "ai_ml",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Artificial Intelligence and Data Analytics in Tourism, Hospitality and Event Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 20
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 12
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Artificial Intelligence in Public Health and Healthcare",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 25
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Beekeeping",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Biosecurity and Biological Invasions",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 8
+      },
+      {
+        "trackKey": "cybersecurity_networking",
+        "weight": 5
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "CALS Honors Scholar",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 6
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Ceramics",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Challenge 2050 | Global Leadership and Change",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Community Engagement",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Construction Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 10
+      },
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 7
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Creative Advertising",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 13
+      },
+      {
+        "trackKey": "web_product",
+        "weight": 9
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Dance in Medicine",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 4
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Data Analytics",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 19
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Data, Science, and Technology in Sociocultural Contexts",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 5
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "East-Central European Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Econometric and Data Analysis",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 15
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Emergency Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Emergency Medical Services Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Engineering Innovation",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 5
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Engineering Leadership",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 12
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Engineering Project Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 5
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Entrepreneurship in Tourism, Hospitality and Event Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Environmental Horticulture Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 13
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Environmental Policy, Law, and Regulation",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Ethics and Society",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "European Jewish Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "European Union Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Fire Ecology and Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Forest Health Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 5
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geographic Artificial Intelligence and Big Data",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 18
+      },
+      {
+        "trackKey": "ai_ml",
+        "weight": 14
+      },
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geological Sciences",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 8
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geomatics",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geospatial Information Analysis",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Health and Wellness Coaching",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 23
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Holocaust Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Horticultural Therapy",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 9
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "International Communication",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 6
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "International Relations",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Israel Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Landscape Pest Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Latin American Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Legal History",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Mapping with Small Unmanned Aerial Systems",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 18
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Media Sales",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      },
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 4
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Medical Anthropology",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 4
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Medical Entomology",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 4
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Medical Geography",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Meteorology and Climatology",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music Business and Entrepreneurship",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music Education",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      },
+      {
+        "trackKey": "education_teaching",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music Performance",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music in Medicine",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 4
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Packaging Engineering",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 16
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Pest Control Technology",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Political Campaigning",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Political Communication",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 12
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Primatology",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Public Affairs",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 8
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Recreation Resources Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Russian and East-European Area Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Senior Fire Officer",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Spanish Language News Media",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 11
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 9
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Spanish for the Professions",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sport Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sport and Entertainment Law and Risk Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sport and Health Leaders",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sustainable and Resilient Energy Engineering",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Teaching English as a Second Language",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 9
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 9
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Translation Studies",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Urban Forestry",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Urban Pest Management",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Violence Against Women",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Visual Arts in Medicine",
+    "programType": "Certificate",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 13
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Accounting",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Actuarial Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Aerospace Leadership",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 9
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "African American Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "African Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Agricultural Curriculum and Development",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Communication",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 7
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 6
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Ethics and Policy",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      },
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 7
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Law",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 7
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "American Indian and Indigenous Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Anthropology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Applied Brain Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Arabic Language and Literature",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 9
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Architecture",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 10
+      },
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 7
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Art",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Art History",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Asian American Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Asian Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Astronomy",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 7
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Bioinformatics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Biomechanics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Biomolecular Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 1
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Botany",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Business Administration",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Chemistry",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Classical Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Communication Sciences and Disorders",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 12
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 8
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 6
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Communication Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 6
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Computer and Information Science and Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "software_engineering",
+        "weight": 1
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Dance",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Data Analytics for Applied Economics and Agribusiness",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 19
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Deaf and Hearing Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 8
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 6
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Digital Arts and Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 11
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 9
+      },
+      {
+        "trackKey": "web_product",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Disabilities in Society",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 12
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Early Childhood Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 17
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "East Asian Languages and Literatures",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "East-Central European Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Economics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Education Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Educational Technology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Electrical Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Engineering Innovation",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 5
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "English",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Entomology and Nematology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Entrepreneurship",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Environmental Horticulture",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 13
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Environmental Justice and Policy",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Environmental Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "European Union Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Event Management",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Extension Education",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Family, Youth and Community Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Fisheries and Aquatic Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Florida Teaching",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Food Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 13
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Forest Resources and Conservation",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "French and Francophone Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "GeoAI and Geographic Analysis",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geography",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Geology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 8
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "German",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Golf and Sports Turf Management",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Graphic Design",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 13
+      },
+      {
+        "trackKey": "web_product",
+        "weight": 9
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Great Books and Ideas",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Greek Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Health Administration",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 15
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Health Disparities in Society",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 5
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Health Professions",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 15
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Health Promotion",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 15
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Hebrew",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "History",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Horticultural Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 9
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Information Systems",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 9
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Innovation",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 8
+      },
+      {
+        "trackKey": "software_engineering",
+        "weight": 5
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "International Development and Humanitarian Assistance",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 1
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "International Studies in Agricultural and Life Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 1
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Italian Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Jazz Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Jewish Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Landscape Architecture",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 10
+      },
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 7
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Latin American Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Leadership",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Linguistics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Management and Sales in Agribusiness",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Mass Communication Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 12
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Materials Science and Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Mathematics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Media Production, Management, and Technology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 20
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Medical Geography in Global Health",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 19
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Medieval and Early Modern Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 1
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Meteorology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Military Science and Leadership",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music History | Ethnomusicology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music Performance  | Instrumental or Voice",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Music Theory",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Nonprofit Organizational Leadership",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Nuclear and Radiological Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Nutritional Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 10
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Organic and Sustainable Crop Production",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 9
+      },
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 7
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Packaging Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Pathogenesis",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Philosophy",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Philosophy, Politics, Economics, and Law",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Physics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 7
+      },
+      {
+        "trackKey": "hardware_embedded",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Plant Molecular and Cellular Biology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Plant Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 11
+      },
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 9
+      },
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Portuguese",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Precision Agriculture",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Professional Selling",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Public Health",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 21
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Public Relations",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 8
+      },
+      {
+        "trackKey": "translation_localization_nlp",
+        "weight": 7
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Public Service",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 17
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Real Estate",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 16
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Rehabilitation",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "health_public_health",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Religion",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Retailing",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Russian",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sales Engineering",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Secondary English Language Arts Education",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 9
+      },
+      {
+        "trackKey": "education_teaching",
+        "weight": 8
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 5
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Secondary Social Studies Education",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sociology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sociology of Social Justice and Policy",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      },
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 4
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Soil, Water, and Ecosystem Sciences",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "agriculture_natural_resources",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Spanish",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "language_proficiency",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Statistics",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "data_analytics",
+        "weight": 14
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sustainability Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Sustainability and the Built Environment",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 15
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Teaching English as a Second Language",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      },
+      {
+        "trackKey": "language_proficiency",
+        "weight": 9
+      },
+      {
+        "trackKey": "communication_public_relations",
+        "weight": 9
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 9
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Theatre",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Theatre Production",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "design_creative_media",
+        "weight": 14
+      },
+      {
+        "trackKey": "game_interactive_media",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Theories and Politics of Sexuality",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "policy_law_public_affairs",
+        "weight": 8
+      },
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "UFTeach | Mathematics, Science, or Computer Science",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "education_teaching",
+        "weight": 14
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 10
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Urban and Regional Planning",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 10
+      },
+      {
+        "trackKey": "gis_geospatial",
+        "weight": 7
+      },
+      {
+        "trackKey": "design_creative_media",
+        "weight": 5
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Wealth Management",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "business_entrepreneurship",
+        "weight": 13
+      },
+      {
+        "trackKey": "data_analytics",
+        "weight": 6
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Wildlife Ecology and Conservation",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "environment_sustainability",
+        "weight": 8
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Women's Studies",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "arts_humanities_culture",
+        "weight": 2
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  },
+  {
+    "canonicalName": "Zoology",
+    "programType": "Minor",
+    "linkedTracks": [
+      {
+        "trackKey": "bio_life_sciences",
+        "weight": 4
+      }
+    ],
+    "source": "auto_name_rules_v1",
+    "confidence": 0.72
+  }
+]
