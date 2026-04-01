@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
+import {Tab} from "../App.js";
 
 export function NavBar() {
   const navigate = useNavigate();
+  const { setActiveTab } = useContext(Tab);
   const loggedIn = !!localStorage.getItem("token");
   const [showProfile, setShowProfile] = useState(false);
-
+  const handleNavigate = () => {
+    if (!loggedIn) {
+      return;
+    }
+    if (window.location.hash === "#/dashboard"){
+      setActiveTab(-1);
+      return;
+    }
+    navigate("/dashboard");
+    setActiveTab(-1);
+  }
   let user = null;
   const storeUser = localStorage.getItem("user");
   if (storeUser) {
@@ -39,7 +51,9 @@ export function NavBar() {
             alignItems: "center",
             justifyContent: "center",
             userSelect: "none",
+            cursor: "pointer",
           }}
+          onClick={() => handleNavigate()}
         >
           UF
         </div>
