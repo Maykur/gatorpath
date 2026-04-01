@@ -1,20 +1,71 @@
 const mongoose = require("mongoose");
 
+// Schema for getting unmatched search signals to identify gaps in program taxonomy and improve future matching (i.e., mistyped program searches)
 const UnmatchedSearchSignalSchema = new mongoose.Schema({
-  rawValue: { type: String, required: true, trim: true },
-  normalizedValue: { type: String, default: null },
-  inputType: { type: String, enum: ["Major", "Minor", "Certificate", "Other"], required: true },
-  matchedCanonical: { type: String, default: null },
-  matchedProgramType: { type: String, enum: ["Major", "Minor", "Certificate", null], default: null },
-  confidence: { type: Number, default: 0 },
-  needsReview: { type: Boolean, default: true },
-  seenCount: { type: Number, default: 1 },
-  firstSeenAt: { type: Date, default: Date.now },
-  lastSeenAt: { type: Date, default: Date.now },
-  exampleSearchIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "SearchSubmission" }],
-  notes: { type: String, default: "" }
+  rawValue: {
+    type: String,
+    required: true,
+    trim: true
+  },
+
+  normalizedValue: {
+    type: String,
+    default: null
+  },
+
+  inputType: {
+    type: String,
+    enum: ["Major", "Minor", "Certificate", "Other"],
+    required: true
+  },
+
+  matchedCanonical: {
+    type: String,
+    default: null
+  },
+
+  matchedProgramType: {
+    type: String,
+    enum: ["Major", "Minor", "Certificate", null],
+    default: null
+  },
+
+  confidence: {
+    type: Number,
+    default: 0
+  },
+
+  needsReview: {
+    type: Boolean,
+    default: true
+  },
+
+  seenCount: {
+    type: Number,
+    default: 1
+  },
+
+  firstSeenAt: {
+    type: Date,
+    default: Date.now
+  },
+
+  lastSeenAt: {
+    type: Date,
+    default: Date.now
+  },
+
+  exampleSearchIds: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "SearchSubmission"
+  }],
+
+  notes: {
+    type: String,
+    default: ""
+  }
 });
 
-UnmatchedSearchSignalSchema.index({ rawValue: 1, inputType: 1 }, { unique: true });
+UnmatchedSearchSignalSchema.index({rawValue: 1, inputType: 1 }, { unique: true});
 
 module.exports = mongoose.model("UnmatchedSearchSignal", UnmatchedSearchSignalSchema);

@@ -1,3 +1,4 @@
+// Resource catalog with metadata for each resource, including which tracks they are relevant to and their weighting for recommendation purposes
 const RESOURCE_CATALOG = [
   {
     key: "cs50",

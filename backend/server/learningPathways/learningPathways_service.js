@@ -1,3 +1,23 @@
+/*
+  CITATIONS:
+  https://mongoosejs.com/docs/queries.html
+  - Used as reference for Mongoose query patterns such as find() and findOne().
+
+  https://mongoosejs.com/docs/tutorials/lean.html
+  - Used for lean() query behavior when returning plain JavaScript objects.
+
+  https://mongoosejs.com/docs/tutorials/findoneandupdate.html
+  - Used for findOneAndUpdate() with upsert behavior.
+
+  https://www.mongodb.com/docs/manual/reference/operator/update/setoninsert/
+  - Used for $setOnInsert behavior in unmatched signal tracking.
+
+  https://www.mongodb.com/docs/manual/reference/operator/update/addtoset/
+  - Used for $addToSet behavior when storing example search IDs uniquely.
+
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+  - Used for constructing safe YouTube search URLs.
+*/
 const ProgramAlias = require("../datasets/ProgramAlias");
 const ProgramTrackMap = require("../datasets/ProgramTrackMap");
 const LearningTrack = require("../datasets/LearningTrack");
@@ -5,8 +25,9 @@ const UnmatchedSearchSignal = require("../datasets/UnmatchedSearchSignal");
 const {getProgWords} = require("../progWords");
 const onetData = require("../datasets/oneNetData.json");
 const majorToOnet = require("../datasets/oneNetMap");
-const {RESOURCE_CATALOG} = require("./resource_catalog");
+const {RESOURCE_CATALOG} = require("./utilities/resource_catalog");
 
+// Helper function to normalize text for matching and comparisons
 function normalizeText(value = "") {
   return String(value)
     .toLowerCase()
@@ -18,6 +39,7 @@ function normalizeText(value = "") {
     .trim();
 }
 
+// Helper function to remove duplicates from a simple array of strings
 function unique(arr = []) {
   return [...new Set(arr.filter(Boolean).map((value) => String(value).trim()).filter(Boolean))];
 }
@@ -46,6 +68,7 @@ function buildCareerSeeds(search) {
   return unique([simplifiedMajor, ...careerTitles, ...programKeywords]);
 }
 
+// Helper function to deduplicate link objects by URL
 function uniqueByUrl(items = []) {
   const seen = new Set();
   const results = [];
@@ -85,6 +108,7 @@ function countMatches(values = [], targetSet = new Set()) {
   return count;
 }
 
+// Helper function to score how closely an input value matches a stored alias record
 function scoreAliasMatch(input, aliasDoc) {
   const normalizedInput = normalizeText(input);
   if (!normalizedInput) return 0;
@@ -95,6 +119,7 @@ function scoreAliasMatch(input, aliasDoc) {
     aliasDoc.slug ? aliasDoc.slug.replace(/-/g, " ") : "",
   ].map(normalizeText);
 
+  // Exact alias match gets the highest possible score
   if (aliasValues.includes(normalizedInput)) return 100;
 
   const inputTokens = normalizedInput.split(" ").filter(Boolean);
@@ -106,9 +131,12 @@ function scoreAliasMatch(input, aliasDoc) {
   }
 
   if (!inputTokens.length) return 0;
+
+  // Partial token overlap gets a lower similarity score
   return Math.round((overlap / inputTokens.length) * 80);
 }
 
+// Resolve a user-entered program value into a canonical stored program if possible
 async function resolveProgram(inputValue, expectedType) {
   const rawValue = String(inputValue || "").trim();
   if (!rawValue) return null;
@@ -116,6 +144,7 @@ async function resolveProgram(inputValue, expectedType) {
   const normalizedValue = normalizeText(rawValue);
   if (!normalizedValue) return null;
 
+  // Find all active alias documents for the expected program type
   const aliasDocs = await ProgramAlias.find({
     active: true,
     programType: expectedType,
@@ -124,14 +153,18 @@ async function resolveProgram(inputValue, expectedType) {
   let best = null;
   let bestScore = 0;
 
+  // Compare the input against every alias record of the expected type
   for (const aliasDoc of aliasDocs) {
     const score = scoreAliasMatch(rawValue, aliasDoc);
+
+    // Keep track of the strongest matching alias document, if any
     if (score > bestScore) {
       best = aliasDoc;
       bestScore = score;
     }
   }
 
+  // If the best match is still too weak, return an unmatched result instead
   if (!best || bestScore < 50) {
     return {
       matched: false,
@@ -153,9 +186,11 @@ async function resolveProgram(inputValue, expectedType) {
   };
 }
 
+// Save unmatched user inputs so they can be reviewed later and added to the taxonomy if needed
 async function recordUnmatchedSignal(resolution, searchId) {
   if (!resolution || resolution.matched) return;
 
+  // Use an upsert op to either create a new signal record or update existing one with latest info and inc the seen count
   await UnmatchedSearchSignal.findOneAndUpdate(
     {
       rawValue: resolution.rawValue,
@@ -181,6 +216,7 @@ async function recordUnmatchedSignal(resolution, searchId) {
   );
 }
 
+// Get the stored learning track weights for a successfully resolved program
 async function getTrackWeightsForResolvedProgram(resolution) {
   if (!resolution?.matched) return [];
 
@@ -192,6 +228,7 @@ async function getTrackWeightsForResolvedProgram(resolution) {
   return Array.isArray(mapping?.linkedTracks) ? mapping.linkedTracks : [];
 }
 
+// Build the list of academic inputs from the current search
 function buildSearchInputs(search) {
   return [
     {value: search?.academic?.majorLabel, type: "Major"},
@@ -200,7 +237,7 @@ function buildSearchInputs(search) {
   ].filter((entry) => String(entry.value || "").trim());
 }
 
-// Helper function to normalize labels before deduplicating display values
+// Helper function to normalize display labels before deduplicating them
 function normalizeDisplayValue(value = "") {
   const normalized = String(value)
     .toLowerCase()
@@ -208,6 +245,7 @@ function normalizeDisplayValue(value = "") {
     .replace(/\s+/g, " ")
     .trim();
 
+    // Map common variants to a single canonical display form to improve deduplication
   const canonicalMap = {
     "javascript": "javascript / typescript",
     "javascript / typescript": "javascript / typescript",
@@ -225,6 +263,7 @@ function uniqueDisplayList(items = []) {
   const seen = new Set();
   const results = [];
 
+  // Normalize display values before checking for duplicates, so that similar labels with different formatting are treated as the same
   for (const item of items) {
     const raw = String(item || "").trim();
     if (!raw) continue;
@@ -241,6 +280,7 @@ function uniqueDisplayList(items = []) {
 
 // Helper function to split ranked tracks into primary and secondary groups
 function splitTrackBuckets(rankedTrackKeys = [], trackWeightMap = new Map(), tracksByKey = new Map()) {
+  // Get the full track docs for the ranked track keys, along with their weights, and filter out any missing tracks
   const rankedTracksWithWeights = rankedTrackKeys
     .map((trackKey) => ({
       track: tracksByKey.get(trackKey),
@@ -248,6 +288,7 @@ function splitTrackBuckets(rankedTrackKeys = [], trackWeightMap = new Map(), tra
     }))
     .filter((entry) => entry.track);
 
+  // If no tracks remain after filtering, return empty results
   if (!rankedTracksWithWeights.length) {
     return {
       primaryTracks: [],
@@ -258,7 +299,7 @@ function splitTrackBuckets(rankedTrackKeys = [], trackWeightMap = new Map(), tra
 
   const topWeight = rankedTracksWithWeights[0].weight;
 
-  // Primary tracks = the strongest one or two tracks only
+  // Primary tracks are the strongest one or two tracks only
   const primaryTracks = rankedTracksWithWeights
     .filter((entry, index) => index === 0 || entry.weight >= topWeight * 0.70)
     .slice(0, 2)
@@ -266,7 +307,7 @@ function splitTrackBuckets(rankedTrackKeys = [], trackWeightMap = new Map(), tra
 
   const primaryTrackKeys = new Set(primaryTracks.map((track) => track.key));
 
-  // Secondary tracks = only tracks that are still reasonably close, but not already primary
+  // Secondary tracks are weaker, but still close enough to matter
   const secondaryTracks = rankedTracksWithWeights
     .filter((entry) => !primaryTrackKeys.has(entry.track.key))
     .filter((entry) => entry.weight >= topWeight * 0.65)
@@ -286,6 +327,7 @@ function scoreCatalogResource(resource = {}, tagSet = new Set(), trackKeySet = n
   const excludedTrackKeys = new Set(resource.excludedTrackKeys || []);
   const forbiddenTags = new Set(resource.forbiddenTags || []);
 
+  // If the resource is explicitly excluded for any selected track, do not use it
   for (const selectedTrackKey of trackKeySet) {
     if (excludedTrackKeys.has(selectedTrackKey)) {
       return {
@@ -296,6 +338,7 @@ function scoreCatalogResource(resource = {}, tagSet = new Set(), trackKeySet = n
     }
   }
 
+  // If the resource contains forbidden tags that clash with the selected tracks, do not use it
   for (const tag of resource.tags || []) {
     if (forbiddenTags.has(tag) && tagSet.has(tag)) {
       return {
@@ -309,7 +352,7 @@ function scoreCatalogResource(resource = {}, tagSet = new Set(), trackKeySet = n
   const matchedTrackKeys = countMatches(resourceTrackKeys, trackKeySet);
   const matchedTags = countMatches(resource.tags || [], tagSet);
 
-  // If the resource declares track keys, treat them as a hard scope filter.
+  // If the resource has explicit track keys, require at least one track match
   if (resourceTrackKeys.length && matchedTrackKeys === 0) {
     return {
       score: 0,
@@ -318,7 +361,7 @@ function scoreCatalogResource(resource = {}, tagSet = new Set(), trackKeySet = n
     };
   }
 
-  // For broad resources without trackKeys, require stronger tag evidence.
+  // If the resource is broad and unscoped, require stronger tag overlap
   if (!resourceTrackKeys.length && matchedTags < 3) {
     return {
       score: 0,
@@ -329,17 +372,17 @@ function scoreCatalogResource(resource = {}, tagSet = new Set(), trackKeySet = n
 
   let score = 0;
 
-  // Direct track matches matter much more than broad tag overlap.
+  // Direct track matches matter more than broad tag matches
   score += matchedTrackKeys * 12;
   score += matchedTags * 2;
   score += Number(resource.weight || 0);
 
-  // Small bonus for structured evergreen resources.
+  // Bonus for structured resources
   if (resource.resourceType === "documentation" || resource.resourceType === "roadmap") {
     score += 1;
   }
 
-  // Favor resources that are intentionally scoped instead of globally broad.
+  // Favor resources that are intentionally scoped to fewer tracks
   if (resourceTrackKeys.length > 0 && resourceTrackKeys.length <= 2) {
     score += 2;
   }
@@ -361,6 +404,7 @@ function buildCatalogResourceLinks(trackDocs = []) {
     trackDocs.map((track) => track.key).filter(Boolean)
   );
 
+  // Scored resources based on how well their tags and track keys match the selected tracks, then filtered and sorted by score and diversity
   const scoredResources = RESOURCE_CATALOG
     .map((resource) => {
       const { score, matchedTrackKeys, matchedTags } = scoreCatalogResource(resource, tagSet, trackKeySet);
@@ -389,21 +433,23 @@ function buildCatalogResourceLinks(trackDocs = []) {
   const providerTypeCounts = new Map();
   const links = [];
 
+  // Iterate through scored resources to build list of links, while keeping diversity for resource types and providers
   for (const resource of scoredResources) {
     const typeKey = resource.resourceType || "general";
     const providerTypeKey = resource.providerType || "general";
     const currentTypeCount = typeCounts.get(typeKey) || 0;
     const currentProviderTypeCount = providerTypeCounts.get(providerTypeKey) || 0;
 
-    // Prevent the list from being dominated by one kind of resource.
+    // Prevent the list from being dominated by one type of resource
     if (currentTypeCount >= 2) continue;
 
-    // Also keep variety across docs, courses, and practice platforms.
+    // Keep variety across different provider/resource categories
     if (currentProviderTypeCount >= 2) continue;
 
     typeCounts.set(typeKey, currentTypeCount + 1);
     providerTypeCounts.set(providerTypeKey, currentProviderTypeCount + 1);
 
+    // Links built for each resource
     links.push({
       title: resource.title,
       provider: resource.provider,
@@ -416,10 +462,11 @@ function buildCatalogResourceLinks(trackDocs = []) {
   return uniqueByKey(links, (item) => item.url);
 }
 
-// Build a smaller list of YouTube search links based on track resource queries and seed terms
+// Smaller list of YouTube search links based on track resource queries and seed terms
 function buildYoutubeLinks(trackDocs = [], seedTerms = []) {
   const links = [];
 
+  // First prefer direct track-based YouTube searches
   for (const track of trackDocs) {
     for (const query of track.resourceQueries || []) {
       links.push({
@@ -430,11 +477,13 @@ function buildYoutubeLinks(trackDocs = [], seedTerms = []) {
     }
   }
 
+  // Dedupe track YouTube links
   const dedupedTrackLinks = uniqueByKey(links, (item) => item.url);
   if (dedupedTrackLinks.length >= 4) {
     return dedupedTrackLinks.slice(0, 4);
   }
 
+  // If track queries aren't enough, supplement with career seed-based searches
   for (const term of seedTerms.slice(0, 4)) {
     dedupedTrackLinks.push({
       title: `${term} tutorial`,
@@ -446,6 +495,7 @@ function buildYoutubeLinks(trackDocs = [], seedTerms = []) {
   return uniqueByKey(dedupedTrackLinks, (item) => item.url).slice(0, 4);
 }
 
+// Build the suggested cert list from the selected tracks
 function buildCertificationList(trackDocs = []) {
   return uniqueDisplayList(
     trackDocs.flatMap((track) => track.certificationQueries || [])
@@ -456,6 +506,7 @@ function buildCertificationList(trackDocs = []) {
 async function buildLearningPathways(search) {
   const inputs = buildSearchInputs(search);
 
+  // If no academic inputs exist, return empty rec data
   if (!inputs.length) {
     return {
       resources: [],
@@ -470,65 +521,74 @@ async function buildLearningPathways(search) {
     };
   }
 
+  // Resolve the major, minor, and certificate into canonical program records
   const resolutions = await Promise.all(
     inputs.map(({value, type}) => resolveProgram(value, type))
   );
 
+  // Matched programs
   const matchedPrograms = resolutions.filter((result) => result?.matched);
+  // Unmatched programs, recorded for taxonomical improvements
   const unmatchedPrograms = resolutions.filter((result) => result && !result.matched);
 
+  // Record any unmatched user inputs for later review
   await Promise.all(
     unmatchedPrograms.map((result) => recordUnmatchedSignal(result, search?._id))
   );
 
   const trackWeightMap = new Map();
 
+  // Combine track weights from all matched academic inputs
   for (const program of matchedPrograms) {
     const linkedTracks = await getTrackWeightsForResolvedProgram(program);
 
+    // For each linked track, add up the weights across all matched programs to get combined strength score for each track
     for (const linkedTrack of linkedTracks) {
       const currentWeight = trackWeightMap.get(linkedTrack.trackKey) || 0;
       trackWeightMap.set(linkedTrack.trackKey, currentWeight + Number(linkedTrack.weight || 0));
     }
   }
 
+  // Rank tracks from strongest to weakest based on combined weight
   const rankedTrackKeys = [...trackWeightMap.entries()]
     .sort((a, b) => b[1] - a[1])
     .map(([trackKey]) => trackKey);
 
+  // Pull the full learning track docs for the matched track keys
   const trackDocs = await LearningTrack.find({
     active: true,
     key: {$in: rankedTrackKeys},
   }).lean();
 
+  // Final ranked tracks
   const tracksByKey = new Map(trackDocs.map((track) => [track.key, track]));
   const rankedTracks = rankedTrackKeys
     .map((trackKey) => tracksByKey.get(trackKey))
     .filter(Boolean);
 
-  // Split matched tracks into primary and secondary groups so weaker tracks
-  // do not overly influence the final recommendations
+  // Split matched tracks into primary and secondary groups so weaker tracks without over influencing final recommendations
   const {
     primaryTracks,
     secondaryTracks,
     rankedTracksWithWeights,
   } = splitTrackBuckets(rankedTrackKeys, trackWeightMap, tracksByKey);
 
-  // Use primary + secondary tracks for broader support lists like languages and platforms
+  // Primary + secondary tracks for broader support lists like languages and platforms
   const supportTracks = [...primaryTracks, ...secondaryTracks];
 
-  // Build seed terms for supplemental YouTube search links
+  // Seed terms for supplemental YouTube search links
   const seedTerms = buildCareerSeeds(search);
 
-  // Build the main resource recommendations from the strongest tracks only
+  // Main resource recommendations from the strongest tracks only
   const resources = buildCatalogResourceLinks(primaryTracks.length ? primaryTracks : rankedTracks);
 
-  // Build a smaller secondary list of YouTube search recommendations
+  // Smaller secondary list of YouTube search recommendations
   const youtubeResources = buildYoutubeLinks(supportTracks.length ? supportTracks : rankedTracks, seedTerms);
 
   return {
     resources,
     youtubeResources,
+    // Languages sliced so that only the most relevant ones from the strongest tracks are shown, and to keep the list concise - same for platforms
     languages: uniqueDisplayList(
       (supportTracks.length ? supportTracks : rankedTracks).flatMap((track) => track.languages || [])
     ).slice(0, 8),

@@ -470,13 +470,13 @@
     ],
     "resourceTags": [
       "foundations",
-      "translation",
-      "language_learning",
-      "nlp",
-      "documentation",
+      "business",
+      "analytics",
       "projects",
-      "writing",
-      "communication"
+      "communication",
+      "tooling",
+      "certification",
+      "leadership"
     ],
     "resourceQueries": [
       "business analytics learning path",
@@ -512,13 +512,13 @@
     ],
     "resourceTags": [
       "foundations",
-      "business",
+      "communication",
+      "writing",
       "analytics",
       "projects",
-      "communication",
-      "tooling",
-      "certification",
-      "leadership"
+      "portfolio",
+      "documentation",
+      "branding"
     ],
     "resourceQueries": [
       "public relations learning path",
@@ -554,13 +554,12 @@
     ],
     "resourceTags": [
       "foundations",
-      "communication",
-      "writing",
-      "analytics",
+      "education",
+      "teaching",
       "projects",
       "portfolio",
       "documentation",
-      "branding"
+      "certification"
     ],
     "resourceQueries": [
       "teacher preparation learning path",
@@ -728,13 +727,13 @@
     ],
     "resourceTags": [
       "foundations",
-      "gis",
+      "environment",
+      "sustainability",
       "data",
       "projects",
       "tooling",
       "documentation",
-      "certification",
-      "mapping"
+      "certification"
     ],
     "resourceQueries": [
       "sustainability learning path",
@@ -771,12 +770,13 @@
     ],
     "resourceTags": [
       "foundations",
-      "sustainability",
       "policy",
+      "law",
       "research",
       "data",
       "projects",
-      "documentation"
+      "documentation",
+      "certification"
     ],
     "resourceQueries": [
       "public policy learning path",
@@ -816,13 +816,13 @@
     ],
     "resourceTags": [
       "foundations",
-      "policy",
+      "agriculture",
+      "gis",
+      "data",
       "research",
-      "writing",
-      "communication",
+      "projects",
       "documentation",
-      "certification",
-      "compliance"
+      "fieldwork"
     ],
     "resourceQueries": [
       "precision agriculture learning path",
@@ -859,13 +859,12 @@
     ],
     "resourceTags": [
       "foundations",
-      "agriculture",
-      "gis",
-      "data",
+      "humanities",
       "research",
+      "writing",
       "projects",
       "documentation",
-      "fieldwork"
+      "certification"
     ],
     "resourceQueries": [
       "humanities research learning path",

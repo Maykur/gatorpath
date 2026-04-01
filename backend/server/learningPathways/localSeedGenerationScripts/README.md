@@ -7,11 +7,13 @@ These scripts generate the JSON seed files used by the learning taxonomy layer.
 
 Place these scripts inside:
 
-`backend/learningPathways/`
+`backend/learningPathways/localSeedGenerationScripts/`
 
-and keep your program export in:
+and keep program export in:
 
 `backend/learningPathSeeds/programs.json`
+
+Currently updated to seed through MongoDB programs data set.
 
 The scripts will write these files into `backend/learningPathSeeds/`:
 
@@ -22,7 +24,7 @@ The scripts will write these files into `backend/learningPathSeeds/`:
 
 ## Run everything
 
-From the `backend/learningPathways` folder:
+From the `backend/learningPathways/localSeedGenerationScripts` folder:
 
 ```bash
 node generate_all_learning_seeds.js
@@ -44,5 +46,4 @@ node generate_taxonomy_summary.js
   - `program_type`
 
 - These generators are first-pass heuristics based on names.
-- As you improve mappings, you can update `taxonomy_config.js` instead of hand-editing the generated JSON files.
 - If UF adds new minors/certificates, replace `programs.json` and rerun the generators.

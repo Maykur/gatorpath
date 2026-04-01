@@ -11,13 +11,6 @@ const MOCK_CAREERS = [
   { title: "Software Engineer", description: "Your coursework, optional minor, and certifications would make you an ideal candidate for this role.", avg: 95000, rangeMin: 40000, rangeMax: 150000 },
 ];
 
-const MOCK_RESOURCES = [
-  "Coursera — IBM Data Engineering Professional Certificate",
-  "Data Engineering Zoomcamp",
-  '"Fundamentals of Data Engineering" by Reis & Housley',
-  "Data Engineering Weekly Newsletter",
-];
-
 const TABS = ["Career Information", "Learning Pathways", "CISE Majors"];
 
 const colStyle = {
@@ -44,6 +37,7 @@ function SalaryBar({ min, max, overall }) {
   );
 }
 
+// Learning Pathways function that implements seeded data recommendation system
 function LearningPathways({learningData, loading}) {
   const [showNote, setShowNote] = useState(true);
 

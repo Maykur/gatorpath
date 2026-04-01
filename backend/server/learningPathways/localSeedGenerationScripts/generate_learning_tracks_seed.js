@@ -1,12 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const { LEARNING_TRACKS } = require("./taxonomy_config");
+const { LEARNING_TRACKS } = require("../taxonomy_config");
 
-const outputPath = path.resolve(
-  __dirname,
-  "../../learningPathSeeds/learning_tracks_seed.json"
-);
+const outputPath = path.resolve(__dirname,"../../learningPathSeeds/learning_tracks_seed.json");
 
+// This script generates a JSON file containing the learning tracks defined in the taxonomy config
 async function main() {
   const learningTrackDocs = LEARNING_TRACKS.map((track) => ({
     key: track.key,
