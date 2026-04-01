@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../constants";
 import {Link} from "react-router-dom";
@@ -44,15 +45,22 @@ export default function ForwardSearchPage() {
   const navigate = useNavigate();
 
   const [majors, setMajors] = useState([]);
-  const [majorId, setMajorId] = useState("");
-  const [minor, setMinor] = useState("");
-  const [certificate, setCertificate] = useState("");
+  const [majorId, setMajorId] = useState([]);
+  const [minors, setMinors] = useState([]);
+  const [certificates, setCerts] = useState([]);
+  const [minorIds, setMinorIds] = useState([]);
+  const [certificateIds, setCertificateIds] = useState([]);
+  const [selectedMinors, setSelectedMinors] = useState([]);
+  const [selectedCerts, setSelectedCerts] = useState([]);
   const [coursesTakenText, setCoursesTakenText] = useState("");
   const [expectedGraduationDate, setExpectedGraduationDate] = useState("");
   const [coursePreference, setCoursePreference] = useState("");
   const [searchName, setSearchName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  // Get minor and cert options from state
+  const minorList = minors.map(n => ({ value: n._id, label: n.program_name }));
+  const certList = certificates.map(c => ({ value: c._id, label: c.program_name }));
 
   useEffect(() => {
     (async () => {
@@ -66,6 +74,36 @@ export default function ForwardSearchPage() {
       }
     })();
   }, []);
+
+  // Fetch Minors for dropdown
+    useEffect(() => {
+        (async () => {
+        try {
+            const res = await fetch(`${baseUrl}/programs?type=Minor`);
+            const data = await res.json();
+            setMinors(Array.isArray(data) ? data : []);
+        } 
+        catch (err) {
+            console.error(err);
+            setError("Failed to load minors.");
+        }
+        })();
+    }, []);
+
+    // Fetch certificates for dropdown
+    useEffect(() => {
+        (async () => {
+        try {
+            const res = await fetch(`${baseUrl}/programs?type=Certificate`);
+            const data = await res.json();
+            setCerts(Array.isArray(data) ? data : []);
+        } 
+        catch (err) {
+            console.error(err);
+            setError("Failed to load certificates.");
+        }
+        })();
+    }, []);
 
   useEffect(() => {
     if (majors.length === 0) return;
@@ -105,8 +143,8 @@ export default function ForwardSearchPage() {
         userCertificate,
       });
 
-      setMinor(userMinor);
-      setCertificate(userCertificate);
+      // setMinor(userMinor);
+      // setCertificate(userCertificate);
 
       const matchedMajor = majors.find(
         (m) => normalizeText(m.major) === normalizeText(userMajor)
@@ -143,8 +181,8 @@ export default function ForwardSearchPage() {
       academic: {
         majorId,
         majorLabel: selectedMajor?.major || "",
-        minor,
-        certificate,
+        minor: selectedMinors.map(m => m.label).join(", "),
+        certificate: selectedCerts.map(c => c.label).join(", "),
         coursesTaken: parseCoursesTaken(coursesTakenText),
       },
       additional: {
@@ -171,6 +209,15 @@ export default function ForwardSearchPage() {
         throw new Error(data?.message || "Failed to submit search.");
       }
 
+      const params = new URLSearchParams();
+      const selectedMajor = majors.find(m => m._id === majorId);
+      if (selectedMajor) {
+          const simplifiedMajor = selectedMajor.major.split("(")[0].split("-")[0].trim();
+          params.append("major", simplifiedMajor);
+      }
+      if (selectedMinors.length > 0) params.append("minor", selectedMinors.map(m => m.label).join(","));
+      if (selectedCerts.length > 0) params.append("certificate", selectedCerts.map(c => c.label).join(","));
+      if (coursesTakenText) params.append("skills", coursesTakenText);
       navigate("/dashboard");
     } catch (err) {
       console.error("SEARCH SUBMIT ERROR:", err);
@@ -247,28 +294,40 @@ return (
 
           <div style={fieldStyle}>
             <label style={labelStyle}>Major (required)</label>
-            <select
-              value={majorId}
-              onChange={(e) => setMajorId(e.target.value)}
+            <Select
+              options={majors.map(m => ({ value: m._id, label: m.major }))}
+              value={majors.map(m => ({ value: m._id, label: m.major })).find(o => o.value === majorId) || null}
+              onChange={(selected) => setMajorId(selected ? selected.value : "")}
               style={inputStyle}
-            >
-              <option value="">Select a major</option>
-              {majors.map((m) => (
-                <option key={m._id} value={m._id}>
-                  {m.major}
-                </option>
-              ))}
-            </select>
+              placeholder="Select a Major"
+              />
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div style={fieldStyle}>
-              <label style={labelStyle}>Minor</label>
-              <input style={inputStyle} value={minor} onChange={(e) => setMinor(e.target.value)} placeholder="e.g. Mathematics" />
+              <label style={labelStyle}>Minor (Select Multiple)</label>
+                <Select
+                    isMulti
+                    style = {fieldStyle}
+                    options={minorList}
+                    onChange={(selected) => {
+                        setSelectedMinors(selected || []);
+                        setMinorIds((selected || []).map(s => s.value));
+                    }}
+                    placeholder="e.g., Mathematics"
+                />
             </div>
             <div style={fieldStyle}>
-              <label style={labelStyle}>Certificate</label>
-              <input style={inputStyle} value={certificate} onChange={(e) => setCertificate(e.target.value)} placeholder="e.g. Cybersecurity" />
+              <label style={labelStyle}>Certificate (Select Multiple)</label>
+                <Select
+                    isMulti
+                    options={certList}
+                    onChange={(selected) => {
+                        setSelectedCerts(selected || []);
+                        setCertificateIds((selected || []).map(s => s.value));
+                    }}
+                    placeholder="e.g., Cybersecurity"
+                />
             </div>
             
           </div>
