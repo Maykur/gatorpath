@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle"; 
+import {baseUrl} from "../constants";
+/*
+  This file should be depricated as this is just mock data currently, unless needed for testing
+*/
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -172,7 +176,7 @@ export function Home() {
     async function loadLatest() {
       const token = localStorage.getItem("token");
       if (!token) return navigate("/login");
-      const res = await fetch("http://localhost:5000/searches/latest", {
+      const res = await fetch(`${baseUrl}/searches/latest`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -189,7 +193,7 @@ export function Home() {
     if (!latest?.academic?.majorId) return;
     async function loadMajor() {
       try {
-        const res = await fetch(`http://localhost:5000/majors/${latest.academic.majorId}`);
+        const res = await fetch(`${baseUrl}/majors/${latest.academic.majorId}`);
         const data = await res.json();
         setMajorData(data);
       } catch (err) { console.error(err); }
@@ -201,7 +205,7 @@ export function Home() {
   useEffect(() => {
     async function loadAllMajors() {
       try {
-        const res = await fetch("http://localhost:5000/majors");
+        const res = await fetch(`${baseUrl}/majors`);
         const data = await res.json();
         setAllMajors(Array.isArray(data) ? data : []);
       } catch (err) { console.error(err); }
@@ -215,7 +219,7 @@ export function Home() {
     if (!latest?.academic?.majorId) return;
     async function autoLoad() {
       try {
-        const res = await fetch(`http://localhost:5000/majors/${latest.academic.majorId}`);
+        const res = await fetch(`${baseUrl}/majors/${latest.academic.majorId}`);
         const data = await res.json();
         setSelectedMajor(data);
       } catch (err) { console.error(err); }
@@ -226,7 +230,7 @@ export function Home() {
   async function handleSelectMajor(id) {
     if (selectedMajor?._id === id) { setSelectedMajor(null); return; }
     try {
-      const res = await fetch(`http://localhost:5000/majors/${id}`);
+      const res = await fetch(`${baseUrl}/majors/${id}`);
       const data = await res.json();
       setSelectedMajor(data);
     } catch (err) { console.error(err); }

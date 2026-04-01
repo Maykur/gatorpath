@@ -6,6 +6,7 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
+import {baseUrl} from "../constants"
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -62,7 +63,7 @@ export function SignUp() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:5000/majors");
+        const res = await fetch(`${baseUrl}/majors`);
         const data = await res.json();
         setMajors(Array.isArray(data) ? data : []);
       } catch (err) {
@@ -159,7 +160,7 @@ export function SignUp() {
     }
 
     const token = localStorage.getItem("token");
-    const url = isLoggedIn ? "http://localhost:5000/profile" : "http://localhost:5000/register";
+    const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
     const headers = isLoggedIn ? { Authorization: `Bearer ${token}` } : {};
 

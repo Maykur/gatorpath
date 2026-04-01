@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-04-01T04:13:07.164Z",
+  "totals": {
+    "majors": 4,
+    "scrapedPrograms": 216,
+    "aliasDocs": 219,
+    "trackDocs": 219,
+    "learningTracks": 20
+  },
+  "programTypeCounts": {
+    "Certificate": 79,
+    "Minor": 137
+  },
+  "duplicateProgramNamesAcrossTypes": [
+    {
+      "name": "Artificial Intelligence Fundamentals and Applications",
+      "count": 2
+    },
+    {
+      "name": "East-Central European Studies",
+      "count": 2
+    },
+    {
+      "name": "Engineering Innovation",
+      "count": 2
+    },
+    {
+      "name": "European Union Studies",
+      "count": 2
+    },
+    {
+      "name": "Latin American Studies",
+      "count": 2
+    },
+    {
+      "name": "Teaching English as a Second Language",
+      "count": 2
+    }
+  ],
+  "trackCoverage": {
+    "software_engineering": 9,
+    "hardware_embedded": 15,
+    "ai_ml": 8,
+    "data_analytics": 26,
+    "cybersecurity_networking": 4,
+    "web_product": 5,
+    "design_creative_media": 27,
+    "game_interactive_media": 7,
+    "agriculture_natural_resources": 19,
+    "language_proficiency": 19,
+    "bio_life_sciences": 18,
+    "education_teaching": 14,
+    "health_public_health": 20,
+    "environment_sustainability": 23,
+    "policy_law_public_affairs": 27,
+    "communication_public_relations": 22,
+    "gis_geospatial": 14,
+    "arts_humanities_culture": 46,
+    "business_entrepreneurship": 18,
+    "translation_localization_nlp": 9
+  }
+}

@@ -1,0 +1,3276 @@
+[
+  {
+    "canonicalName": "Computer Science (CSE) - College of Engineering",
+    "programType": "Major",
+    "slug": "computer-science-cse---college-of-engineering",
+    "aliases": [
+      "Computer Science (CSE) - College of Engineering",
+      "Computer Science Engineering",
+      "CSE Computer Science Engineering",
+      "Computer Science COE"
+    ],
+    "tokens": [
+      "computer",
+      "science",
+      "cse",
+      "college",
+      "of",
+      "engineering",
+      "coe"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Computer Science (CSC) - College of Liberal Arts & Sciences",
+    "programType": "Major",
+    "slug": "computer-science-csc---college-of-liberal-arts-and-sciences",
+    "aliases": [
+      "Computer Science (CSC) - College of Liberal Arts & Sciences",
+      "Computer Science CLAS",
+      "CSC Computer Science CLAS",
+      "Computer Science Liberal Arts and Sciences"
+    ],
+    "tokens": [
+      "computer",
+      "science",
+      "csc",
+      "college",
+      "of",
+      "liberal",
+      "arts",
+      "sciences",
+      "clas",
+      "and"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Computer Engineering",
+    "programType": "Major",
+    "slug": "computer-engineering",
+    "aliases": [
+      "Computer Engineering",
+      "Computer Engineering (CPE) - BSCoE",
+      "CPE Computer Engineering"
+    ],
+    "tokens": [
+      "computer",
+      "engineering",
+      "cpe",
+      "bscoe"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Digital Arts and Sciences",
+    "programType": "Major",
+    "slug": "digital-arts-and-sciences",
+    "aliases": [
+      "Digital Arts and Sciences",
+      "Digital Arts and Sciences (DAS)",
+      "DAS"
+    ],
+    "tokens": [
+      "digital",
+      "arts",
+      "and",
+      "sciences",
+      "das"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "AI and the Arts",
+    "programType": "Certificate",
+    "slug": "ai-and-the-arts",
+    "aliases": [
+      "AI and the Arts",
+      "Ai And The Arts"
+    ],
+    "tokens": [
+      "ai"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Agroecology and Sustainable Food Systems",
+    "programType": "Certificate",
+    "slug": "agroecology-and-sustainable-food-systems",
+    "aliases": [
+      "Agroecology and Sustainable Food Systems",
+      "Agroecology And Sustainable Food Systems",
+      "ASFS",
+      "ASFS Agroecology and Sustainable Food Systems",
+      "Agroecology and Sustainable Food Systems ASFS"
+    ],
+    "tokens": [
+      "agroecology",
+      "sustainable",
+      "food",
+      "systems"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "American Sign Language and Deaf Culture",
+    "programType": "Certificate",
+    "slug": "american-sign-language-and-deaf-culture",
+    "aliases": [
+      "American Sign Language and Deaf Culture",
+      "American Sign Language And Deaf Culture",
+      "ASLDC",
+      "ASLDC American Sign Language and Deaf Culture",
+      "American Sign Language and Deaf Culture ASLDC"
+    ],
+    "tokens": [
+      "american",
+      "sign",
+      "language",
+      "deaf",
+      "culture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Animal Genetics",
+    "programType": "Certificate",
+    "slug": "animal-genetics",
+    "aliases": [
+      "Animal Genetics"
+    ],
+    "tokens": [
+      "animal",
+      "genetics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Art Education",
+    "programType": "Certificate",
+    "slug": "art-education",
+    "aliases": [
+      "Art Education"
+    ],
+    "tokens": [
+      "art",
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Artificial Intelligence Fundamentals and Applications",
+    "programType": "Certificate",
+    "slug": "artificial-intelligence-fundamentals-and-applications",
+    "aliases": [
+      "Artificial Intelligence Fundamentals and Applications",
+      "Artificial Intelligence Fundamentals And Applications",
+      "AIFA",
+      "AIFA Artificial Intelligence Fundamentals and Applications",
+      "Artificial Intelligence Fundamentals and Applications AIFA"
+    ],
+    "tokens": [
+      "artificial",
+      "intelligence"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Artificial Intelligence and Data Analytics in Tourism, Hospitality and Event Management",
+    "programType": "Certificate",
+    "slug": "artificial-intelligence-and-data-analytics-in-tourism-hospitality-and-event-management",
+    "aliases": [
+      "Artificial Intelligence and Data Analytics in Tourism, Hospitality and Event Management",
+      "Artificial Intelligence And Data Analytics In Tourism Hospitality And Event Management",
+      "AIDATHEM",
+      "AIDATHEM Artificial Intelligence and Data Analytics in Tourism, Hospitality and Event Management",
+      "Artificial Intelligence and Data Analytics in Tourism, Hospitality and Event Management AIDATHEM"
+    ],
+    "tokens": [
+      "artificial",
+      "intelligence",
+      "data",
+      "analytics",
+      "tourism",
+      "hospitality",
+      "event"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Artificial Intelligence in Public Health and Healthcare",
+    "programType": "Certificate",
+    "slug": "artificial-intelligence-in-public-health-and-healthcare",
+    "aliases": [
+      "Artificial Intelligence in Public Health and Healthcare",
+      "Artificial Intelligence In Public Health And Healthcare",
+      "AIPHH",
+      "AIPHH Artificial Intelligence in Public Health and Healthcare",
+      "Artificial Intelligence in Public Health and Healthcare AIPHH"
+    ],
+    "tokens": [
+      "artificial",
+      "intelligence",
+      "public",
+      "health",
+      "healthcare"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Beekeeping",
+    "programType": "Certificate",
+    "slug": "beekeeping",
+    "aliases": [
+      "Beekeeping"
+    ],
+    "tokens": [
+      "beekeeping"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Biosecurity and Biological Invasions",
+    "programType": "Certificate",
+    "slug": "biosecurity-and-biological-invasions",
+    "aliases": [
+      "Biosecurity and Biological Invasions",
+      "Biosecurity And Biological Invasions",
+      "BBI",
+      "BBI Biosecurity and Biological Invasions",
+      "Biosecurity and Biological Invasions BBI"
+    ],
+    "tokens": [
+      "biosecurity",
+      "biological",
+      "invasions"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "CALS Honors Scholar",
+    "programType": "Certificate",
+    "slug": "cals-honors-scholar",
+    "aliases": [
+      "CALS Honors Scholar",
+      "Cals Honors Scholar",
+      "CHS",
+      "CHS CALS Honors Scholar",
+      "CALS Honors Scholar CHS"
+    ],
+    "tokens": [
+      "cals",
+      "honors",
+      "scholar"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Ceramics",
+    "programType": "Certificate",
+    "slug": "ceramics",
+    "aliases": [
+      "Ceramics"
+    ],
+    "tokens": [
+      "ceramics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Challenge 2050 | Global Leadership and Change",
+    "programType": "Certificate",
+    "slug": "challenge-2050-global-leadership-and-change",
+    "aliases": [
+      "Challenge 2050 | Global Leadership and Change",
+      "Challenge 2050 Global Leadership And Change",
+      "Challenge 2050 / Global Leadership and Change",
+      "Challenge 2050 Global Leadership and Change",
+      "C2GLC",
+      "C2GLC Challenge 2050 | Global Leadership and Change",
+      "Challenge 2050 | Global Leadership and Change C2GLC"
+    ],
+    "tokens": [
+      "challenge",
+      "2050",
+      "global",
+      "leadership",
+      "change"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Community Engagement",
+    "programType": "Certificate",
+    "slug": "community-engagement",
+    "aliases": [
+      "Community Engagement"
+    ],
+    "tokens": [
+      "community",
+      "engagement"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Construction Management",
+    "programType": "Certificate",
+    "slug": "construction-management",
+    "aliases": [
+      "Construction Management"
+    ],
+    "tokens": [
+      "construction"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Creative Advertising",
+    "programType": "Certificate",
+    "slug": "creative-advertising",
+    "aliases": [
+      "Creative Advertising"
+    ],
+    "tokens": [
+      "creative",
+      "advertising"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Dance in Medicine",
+    "programType": "Certificate",
+    "slug": "dance-in-medicine",
+    "aliases": [
+      "Dance in Medicine",
+      "Dance In Medicine"
+    ],
+    "tokens": [
+      "dance",
+      "medicine"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Data Analytics",
+    "programType": "Certificate",
+    "slug": "data-analytics",
+    "aliases": [
+      "Data Analytics"
+    ],
+    "tokens": [
+      "data",
+      "analytics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Data, Science, and Technology in Sociocultural Contexts",
+    "programType": "Certificate",
+    "slug": "data-science-and-technology-in-sociocultural-contexts",
+    "aliases": [
+      "Data, Science, and Technology in Sociocultural Contexts",
+      "Data Science And Technology In Sociocultural Contexts",
+      "DSTSC",
+      "DSTSC Data, Science, and Technology in Sociocultural Contexts",
+      "Data, Science, and Technology in Sociocultural Contexts DSTSC"
+    ],
+    "tokens": [
+      "data",
+      "sociocultural",
+      "contexts"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "East-Central European Studies",
+    "programType": "Certificate",
+    "slug": "east-central-european-studies",
+    "aliases": [
+      "East-Central European Studies",
+      "East-central European Studies",
+      "East",
+      "EES",
+      "EES East",
+      "East EES"
+    ],
+    "tokens": [
+      "east-central",
+      "european"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Econometric and Data Analysis",
+    "programType": "Certificate",
+    "slug": "econometric-and-data-analysis",
+    "aliases": [
+      "Econometric and Data Analysis",
+      "Econometric And Data Analysis",
+      "EDA",
+      "EDA Econometric and Data Analysis",
+      "Econometric and Data Analysis EDA"
+    ],
+    "tokens": [
+      "econometric",
+      "data",
+      "analysis"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Emergency Management",
+    "programType": "Certificate",
+    "slug": "emergency-management",
+    "aliases": [
+      "Emergency Management"
+    ],
+    "tokens": [
+      "emergency"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Emergency Medical Services Management",
+    "programType": "Certificate",
+    "slug": "emergency-medical-services-management",
+    "aliases": [
+      "Emergency Medical Services Management",
+      "EMSM",
+      "EMSM Emergency Medical Services Management",
+      "Emergency Medical Services Management EMSM"
+    ],
+    "tokens": [
+      "emergency",
+      "medical",
+      "services"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Engineering Innovation",
+    "programType": "Certificate",
+    "slug": "engineering-innovation",
+    "aliases": [
+      "Engineering Innovation"
+    ],
+    "tokens": [
+      "engineering",
+      "innovation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Engineering Leadership",
+    "programType": "Certificate",
+    "slug": "engineering-leadership",
+    "aliases": [
+      "Engineering Leadership"
+    ],
+    "tokens": [
+      "engineering",
+      "leadership"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Engineering Project Management",
+    "programType": "Certificate",
+    "slug": "engineering-project-management",
+    "aliases": [
+      "Engineering Project Management",
+      "EPM",
+      "EPM Engineering Project Management",
+      "Engineering Project Management EPM"
+    ],
+    "tokens": [
+      "engineering",
+      "project"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Entrepreneurship in Tourism, Hospitality and Event Management",
+    "programType": "Certificate",
+    "slug": "entrepreneurship-in-tourism-hospitality-and-event-management",
+    "aliases": [
+      "Entrepreneurship in Tourism, Hospitality and Event Management",
+      "Entrepreneurship In Tourism Hospitality And Event Management",
+      "ETHEM",
+      "ETHEM Entrepreneurship in Tourism, Hospitality and Event Management",
+      "Entrepreneurship in Tourism, Hospitality and Event Management ETHEM"
+    ],
+    "tokens": [
+      "entrepreneurship",
+      "tourism",
+      "hospitality",
+      "event"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Environmental Horticulture Management",
+    "programType": "Certificate",
+    "slug": "environmental-horticulture-management",
+    "aliases": [
+      "Environmental Horticulture Management",
+      "EHM",
+      "EHM Environmental Horticulture Management",
+      "Environmental Horticulture Management EHM"
+    ],
+    "tokens": [
+      "environmental",
+      "horticulture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Environmental Policy, Law, and Regulation",
+    "programType": "Certificate",
+    "slug": "environmental-policy-law-and-regulation",
+    "aliases": [
+      "Environmental Policy, Law, and Regulation",
+      "Environmental Policy Law And Regulation",
+      "EPLR",
+      "EPLR Environmental Policy, Law, and Regulation",
+      "Environmental Policy, Law, and Regulation EPLR"
+    ],
+    "tokens": [
+      "environmental",
+      "policy",
+      "law",
+      "regulation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Ethics and Society",
+    "programType": "Certificate",
+    "slug": "ethics-and-society",
+    "aliases": [
+      "Ethics and Society",
+      "Ethics And Society"
+    ],
+    "tokens": [
+      "ethics",
+      "society"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "European Jewish Studies",
+    "programType": "Certificate",
+    "slug": "european-jewish-studies",
+    "aliases": [
+      "European Jewish Studies",
+      "EJS",
+      "EJS European Jewish Studies",
+      "European Jewish Studies EJS"
+    ],
+    "tokens": [
+      "european",
+      "jewish"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "European Union Studies",
+    "programType": "Certificate",
+    "slug": "european-union-studies",
+    "aliases": [
+      "European Union Studies",
+      "EUS",
+      "EUS European Union Studies",
+      "European Union Studies EUS"
+    ],
+    "tokens": [
+      "european",
+      "union"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Fire Ecology and Management",
+    "programType": "Certificate",
+    "slug": "fire-ecology-and-management",
+    "aliases": [
+      "Fire Ecology and Management",
+      "Fire Ecology And Management",
+      "FEM",
+      "FEM Fire Ecology and Management",
+      "Fire Ecology and Management FEM"
+    ],
+    "tokens": [
+      "fire",
+      "ecology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Forest Health Management",
+    "programType": "Certificate",
+    "slug": "forest-health-management",
+    "aliases": [
+      "Forest Health Management",
+      "FHM",
+      "FHM Forest Health Management",
+      "Forest Health Management FHM"
+    ],
+    "tokens": [
+      "forest",
+      "health"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geographic Artificial Intelligence and Big Data",
+    "programType": "Certificate",
+    "slug": "geographic-artificial-intelligence-and-big-data",
+    "aliases": [
+      "Geographic Artificial Intelligence and Big Data",
+      "Geographic Artificial Intelligence And Big Data",
+      "GAIBD",
+      "GAIBD Geographic Artificial Intelligence and Big Data",
+      "Geographic Artificial Intelligence and Big Data GAIBD"
+    ],
+    "tokens": [
+      "geographic",
+      "artificial",
+      "intelligence",
+      "big",
+      "data"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geological Sciences",
+    "programType": "Certificate",
+    "slug": "geological-sciences",
+    "aliases": [
+      "Geological Sciences"
+    ],
+    "tokens": [
+      "geological"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geomatics",
+    "programType": "Certificate",
+    "slug": "geomatics",
+    "aliases": [
+      "Geomatics"
+    ],
+    "tokens": [
+      "geomatics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geospatial Information Analysis",
+    "programType": "Certificate",
+    "slug": "geospatial-information-analysis",
+    "aliases": [
+      "Geospatial Information Analysis",
+      "GIA",
+      "GIA Geospatial Information Analysis",
+      "Geospatial Information Analysis GIA"
+    ],
+    "tokens": [
+      "geospatial",
+      "information",
+      "analysis"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Health and Wellness Coaching",
+    "programType": "Certificate",
+    "slug": "health-and-wellness-coaching",
+    "aliases": [
+      "Health and Wellness Coaching",
+      "Health And Wellness Coaching",
+      "HWC",
+      "HWC Health and Wellness Coaching",
+      "Health and Wellness Coaching HWC"
+    ],
+    "tokens": [
+      "health",
+      "wellness",
+      "coaching"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Holocaust Studies",
+    "programType": "Certificate",
+    "slug": "holocaust-studies",
+    "aliases": [
+      "Holocaust Studies"
+    ],
+    "tokens": [
+      "holocaust"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Horticultural Therapy",
+    "programType": "Certificate",
+    "slug": "horticultural-therapy",
+    "aliases": [
+      "Horticultural Therapy"
+    ],
+    "tokens": [
+      "horticultural",
+      "therapy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "International Communication",
+    "programType": "Certificate",
+    "slug": "international-communication",
+    "aliases": [
+      "International Communication"
+    ],
+    "tokens": [
+      "international",
+      "communication"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "International Relations",
+    "programType": "Certificate",
+    "slug": "international-relations",
+    "aliases": [
+      "International Relations"
+    ],
+    "tokens": [
+      "international",
+      "relations"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Israel Studies",
+    "programType": "Certificate",
+    "slug": "israel-studies",
+    "aliases": [
+      "Israel Studies"
+    ],
+    "tokens": [
+      "israel"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Landscape Pest Management",
+    "programType": "Certificate",
+    "slug": "landscape-pest-management",
+    "aliases": [
+      "Landscape Pest Management",
+      "LPM",
+      "LPM Landscape Pest Management",
+      "Landscape Pest Management LPM"
+    ],
+    "tokens": [
+      "landscape",
+      "pest"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Latin American Studies",
+    "programType": "Certificate",
+    "slug": "latin-american-studies",
+    "aliases": [
+      "Latin American Studies",
+      "LAS",
+      "LAS Latin American Studies",
+      "Latin American Studies LAS"
+    ],
+    "tokens": [
+      "latin",
+      "american"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Legal History",
+    "programType": "Certificate",
+    "slug": "legal-history",
+    "aliases": [
+      "Legal History"
+    ],
+    "tokens": [
+      "legal",
+      "history"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Mapping with Small Unmanned Aerial Systems",
+    "programType": "Certificate",
+    "slug": "mapping-with-small-unmanned-aerial-systems",
+    "aliases": [
+      "Mapping with Small Unmanned Aerial Systems",
+      "Mapping With Small Unmanned Aerial Systems",
+      "MSUAS",
+      "MSUAS Mapping with Small Unmanned Aerial Systems",
+      "Mapping with Small Unmanned Aerial Systems MSUAS"
+    ],
+    "tokens": [
+      "mapping",
+      "small",
+      "unmanned",
+      "aerial",
+      "systems"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Media Sales",
+    "programType": "Certificate",
+    "slug": "media-sales",
+    "aliases": [
+      "Media Sales"
+    ],
+    "tokens": [
+      "media",
+      "sales"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Medical Anthropology",
+    "programType": "Certificate",
+    "slug": "medical-anthropology",
+    "aliases": [
+      "Medical Anthropology"
+    ],
+    "tokens": [
+      "medical",
+      "anthropology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Medical Entomology",
+    "programType": "Certificate",
+    "slug": "medical-entomology",
+    "aliases": [
+      "Medical Entomology"
+    ],
+    "tokens": [
+      "medical",
+      "entomology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Medical Geography",
+    "programType": "Certificate",
+    "slug": "medical-geography",
+    "aliases": [
+      "Medical Geography"
+    ],
+    "tokens": [
+      "medical",
+      "geography"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Meteorology and Climatology",
+    "programType": "Certificate",
+    "slug": "meteorology-and-climatology",
+    "aliases": [
+      "Meteorology and Climatology",
+      "Meteorology And Climatology"
+    ],
+    "tokens": [
+      "meteorology",
+      "climatology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music Business and Entrepreneurship",
+    "programType": "Certificate",
+    "slug": "music-business-and-entrepreneurship",
+    "aliases": [
+      "Music Business and Entrepreneurship",
+      "Music Business And Entrepreneurship",
+      "MBE",
+      "MBE Music Business and Entrepreneurship",
+      "Music Business and Entrepreneurship MBE"
+    ],
+    "tokens": [
+      "music",
+      "business",
+      "entrepreneurship"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music Education",
+    "programType": "Certificate",
+    "slug": "music-education",
+    "aliases": [
+      "Music Education"
+    ],
+    "tokens": [
+      "music",
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music Performance",
+    "programType": "Certificate",
+    "slug": "music-performance",
+    "aliases": [
+      "Music Performance"
+    ],
+    "tokens": [
+      "music",
+      "performance"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music in Medicine",
+    "programType": "Certificate",
+    "slug": "music-in-medicine",
+    "aliases": [
+      "Music in Medicine",
+      "Music In Medicine"
+    ],
+    "tokens": [
+      "music",
+      "medicine"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Packaging Engineering",
+    "programType": "Certificate",
+    "slug": "packaging-engineering",
+    "aliases": [
+      "Packaging Engineering"
+    ],
+    "tokens": [
+      "packaging",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Pest Control Technology",
+    "programType": "Certificate",
+    "slug": "pest-control-technology",
+    "aliases": [
+      "Pest Control Technology",
+      "PCT",
+      "PCT Pest Control Technology",
+      "Pest Control Technology PCT"
+    ],
+    "tokens": [
+      "pest",
+      "control"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Political Campaigning",
+    "programType": "Certificate",
+    "slug": "political-campaigning",
+    "aliases": [
+      "Political Campaigning"
+    ],
+    "tokens": [
+      "political",
+      "campaigning"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Political Communication",
+    "programType": "Certificate",
+    "slug": "political-communication",
+    "aliases": [
+      "Political Communication"
+    ],
+    "tokens": [
+      "political",
+      "communication"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Primatology",
+    "programType": "Certificate",
+    "slug": "primatology",
+    "aliases": [
+      "Primatology"
+    ],
+    "tokens": [
+      "primatology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Public Affairs",
+    "programType": "Certificate",
+    "slug": "public-affairs",
+    "aliases": [
+      "Public Affairs"
+    ],
+    "tokens": [
+      "public",
+      "affairs"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Recreation Resources Management",
+    "programType": "Certificate",
+    "slug": "recreation-resources-management",
+    "aliases": [
+      "Recreation Resources Management",
+      "RRM",
+      "RRM Recreation Resources Management",
+      "Recreation Resources Management RRM"
+    ],
+    "tokens": [
+      "recreation",
+      "resources"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Russian and East-European Area Studies",
+    "programType": "Certificate",
+    "slug": "russian-and-east-european-area-studies",
+    "aliases": [
+      "Russian and East-European Area Studies",
+      "Russian And East-european Area Studies",
+      "Russian and East",
+      "REAS",
+      "REAS Russian and East",
+      "Russian and East REAS"
+    ],
+    "tokens": [
+      "russian",
+      "east-european",
+      "area"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Senior Fire Officer",
+    "programType": "Certificate",
+    "slug": "senior-fire-officer",
+    "aliases": [
+      "Senior Fire Officer",
+      "SFO",
+      "SFO Senior Fire Officer",
+      "Senior Fire Officer SFO"
+    ],
+    "tokens": [
+      "senior",
+      "fire",
+      "officer"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Spanish Language News Media",
+    "programType": "Certificate",
+    "slug": "spanish-language-news-media",
+    "aliases": [
+      "Spanish Language News Media",
+      "SLNM",
+      "SLNM Spanish Language News Media",
+      "Spanish Language News Media SLNM"
+    ],
+    "tokens": [
+      "spanish",
+      "language",
+      "news",
+      "media"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Spanish for the Professions",
+    "programType": "Certificate",
+    "slug": "spanish-for-the-professions",
+    "aliases": [
+      "Spanish for the Professions",
+      "Spanish For The Professions"
+    ],
+    "tokens": [
+      "spanish",
+      "professions"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sport Management",
+    "programType": "Certificate",
+    "slug": "sport-management",
+    "aliases": [
+      "Sport Management"
+    ],
+    "tokens": [
+      "sport"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sport and Entertainment Law and Risk Management",
+    "programType": "Certificate",
+    "slug": "sport-and-entertainment-law-and-risk-management",
+    "aliases": [
+      "Sport and Entertainment Law and Risk Management",
+      "Sport And Entertainment Law And Risk Management",
+      "SELRM",
+      "SELRM Sport and Entertainment Law and Risk Management",
+      "Sport and Entertainment Law and Risk Management SELRM"
+    ],
+    "tokens": [
+      "sport",
+      "entertainment",
+      "law",
+      "risk"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sport and Health Leaders",
+    "programType": "Certificate",
+    "slug": "sport-and-health-leaders",
+    "aliases": [
+      "Sport and Health Leaders",
+      "Sport And Health Leaders",
+      "SHL",
+      "SHL Sport and Health Leaders",
+      "Sport and Health Leaders SHL"
+    ],
+    "tokens": [
+      "sport",
+      "health",
+      "leaders"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sustainable and Resilient Energy Engineering",
+    "programType": "Certificate",
+    "slug": "sustainable-and-resilient-energy-engineering",
+    "aliases": [
+      "Sustainable and Resilient Energy Engineering",
+      "Sustainable And Resilient Energy Engineering",
+      "SREE",
+      "SREE Sustainable and Resilient Energy Engineering",
+      "Sustainable and Resilient Energy Engineering SREE"
+    ],
+    "tokens": [
+      "sustainable",
+      "resilient",
+      "energy",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Teaching English as a Second Language",
+    "programType": "Certificate",
+    "slug": "teaching-english-as-a-second-language",
+    "aliases": [
+      "Teaching English as a Second Language",
+      "Teaching English As A Second Language",
+      "TEASL",
+      "TEASL Teaching English as a Second Language",
+      "Teaching English as a Second Language TEASL"
+    ],
+    "tokens": [
+      "teaching",
+      "english",
+      "second",
+      "language"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Translation Studies",
+    "programType": "Certificate",
+    "slug": "translation-studies",
+    "aliases": [
+      "Translation Studies"
+    ],
+    "tokens": [
+      "translation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Urban Forestry",
+    "programType": "Certificate",
+    "slug": "urban-forestry",
+    "aliases": [
+      "Urban Forestry"
+    ],
+    "tokens": [
+      "urban",
+      "forestry"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Urban Pest Management",
+    "programType": "Certificate",
+    "slug": "urban-pest-management",
+    "aliases": [
+      "Urban Pest Management",
+      "UPM",
+      "UPM Urban Pest Management",
+      "Urban Pest Management UPM"
+    ],
+    "tokens": [
+      "urban",
+      "pest"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Violence Against Women",
+    "programType": "Certificate",
+    "slug": "violence-against-women",
+    "aliases": [
+      "Violence Against Women",
+      "VAW",
+      "VAW Violence Against Women",
+      "Violence Against Women VAW"
+    ],
+    "tokens": [
+      "violence",
+      "against",
+      "women"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Visual Arts in Medicine",
+    "programType": "Certificate",
+    "slug": "visual-arts-in-medicine",
+    "aliases": [
+      "Visual Arts in Medicine",
+      "Visual Arts In Medicine",
+      "VAM",
+      "VAM Visual Arts in Medicine",
+      "Visual Arts in Medicine VAM"
+    ],
+    "tokens": [
+      "visual",
+      "medicine"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Accounting",
+    "programType": "Minor",
+    "slug": "accounting",
+    "aliases": [
+      "Accounting"
+    ],
+    "tokens": [
+      "accounting"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Actuarial Science",
+    "programType": "Minor",
+    "slug": "actuarial-science",
+    "aliases": [
+      "Actuarial Science"
+    ],
+    "tokens": [
+      "actuarial"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Aerospace Leadership",
+    "programType": "Minor",
+    "slug": "aerospace-leadership",
+    "aliases": [
+      "Aerospace Leadership"
+    ],
+    "tokens": [
+      "aerospace",
+      "leadership"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "African American Studies",
+    "programType": "Minor",
+    "slug": "african-american-studies",
+    "aliases": [
+      "African American Studies",
+      "AAS",
+      "AAS African American Studies",
+      "African American Studies AAS"
+    ],
+    "tokens": [
+      "african",
+      "american"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "African Studies",
+    "programType": "Minor",
+    "slug": "african-studies",
+    "aliases": [
+      "African Studies"
+    ],
+    "tokens": [
+      "african"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Agricultural Curriculum and Development",
+    "programType": "Minor",
+    "slug": "agricultural-curriculum-and-development",
+    "aliases": [
+      "Agricultural Curriculum and Development",
+      "Agricultural Curriculum And Development",
+      "ACD",
+      "ACD Agricultural Curriculum and Development",
+      "Agricultural Curriculum and Development ACD"
+    ],
+    "tokens": [
+      "agricultural",
+      "curriculum",
+      "development"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Communication",
+    "programType": "Minor",
+    "slug": "agricultural-and-natural-resource-communication",
+    "aliases": [
+      "Agricultural and Natural Resource Communication",
+      "Agricultural And Natural Resource Communication",
+      "ANRC",
+      "ANRC Agricultural and Natural Resource Communication",
+      "Agricultural and Natural Resource Communication ANRC"
+    ],
+    "tokens": [
+      "agricultural",
+      "natural",
+      "resource",
+      "communication"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Ethics and Policy",
+    "programType": "Minor",
+    "slug": "agricultural-and-natural-resource-ethics-and-policy",
+    "aliases": [
+      "Agricultural and Natural Resource Ethics and Policy",
+      "Agricultural And Natural Resource Ethics And Policy",
+      "ANREP",
+      "ANREP Agricultural and Natural Resource Ethics and Policy",
+      "Agricultural and Natural Resource Ethics and Policy ANREP"
+    ],
+    "tokens": [
+      "agricultural",
+      "natural",
+      "resource",
+      "ethics",
+      "policy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Agricultural and Natural Resource Law",
+    "programType": "Minor",
+    "slug": "agricultural-and-natural-resource-law",
+    "aliases": [
+      "Agricultural and Natural Resource Law",
+      "Agricultural And Natural Resource Law",
+      "ANRL",
+      "ANRL Agricultural and Natural Resource Law",
+      "Agricultural and Natural Resource Law ANRL"
+    ],
+    "tokens": [
+      "agricultural",
+      "natural",
+      "resource",
+      "law"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "American Indian and Indigenous Studies",
+    "programType": "Minor",
+    "slug": "american-indian-and-indigenous-studies",
+    "aliases": [
+      "American Indian and Indigenous Studies",
+      "American Indian And Indigenous Studies",
+      "AIIS",
+      "AIIS American Indian and Indigenous Studies",
+      "American Indian and Indigenous Studies AIIS"
+    ],
+    "tokens": [
+      "american",
+      "indian",
+      "indigenous"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Anthropology",
+    "programType": "Minor",
+    "slug": "anthropology",
+    "aliases": [
+      "Anthropology"
+    ],
+    "tokens": [
+      "anthropology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Applied Brain Science",
+    "programType": "Minor",
+    "slug": "applied-brain-science",
+    "aliases": [
+      "Applied Brain Science",
+      "ABS",
+      "ABS Applied Brain Science",
+      "Applied Brain Science ABS"
+    ],
+    "tokens": [
+      "applied",
+      "brain"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Arabic Language and Literature",
+    "programType": "Minor",
+    "slug": "arabic-language-and-literature",
+    "aliases": [
+      "Arabic Language and Literature",
+      "Arabic Language And Literature",
+      "ALL",
+      "ALL Arabic Language and Literature",
+      "Arabic Language and Literature ALL"
+    ],
+    "tokens": [
+      "arabic",
+      "language",
+      "literature"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Architecture",
+    "programType": "Minor",
+    "slug": "architecture",
+    "aliases": [
+      "Architecture"
+    ],
+    "tokens": [
+      "architecture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Art",
+    "programType": "Minor",
+    "slug": "art",
+    "aliases": [
+      "Art"
+    ],
+    "tokens": [
+      "art"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Art History",
+    "programType": "Minor",
+    "slug": "art-history",
+    "aliases": [
+      "Art History"
+    ],
+    "tokens": [
+      "art",
+      "history"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Asian American Studies",
+    "programType": "Minor",
+    "slug": "asian-american-studies",
+    "aliases": [
+      "Asian American Studies",
+      "AAS",
+      "AAS Asian American Studies",
+      "Asian American Studies AAS"
+    ],
+    "tokens": [
+      "asian",
+      "american"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Asian Studies",
+    "programType": "Minor",
+    "slug": "asian-studies",
+    "aliases": [
+      "Asian Studies"
+    ],
+    "tokens": [
+      "asian"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Astronomy",
+    "programType": "Minor",
+    "slug": "astronomy",
+    "aliases": [
+      "Astronomy"
+    ],
+    "tokens": [
+      "astronomy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Bioinformatics",
+    "programType": "Minor",
+    "slug": "bioinformatics",
+    "aliases": [
+      "Bioinformatics"
+    ],
+    "tokens": [
+      "bioinformatics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Biomechanics",
+    "programType": "Minor",
+    "slug": "biomechanics",
+    "aliases": [
+      "Biomechanics"
+    ],
+    "tokens": [
+      "biomechanics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Biomolecular Engineering",
+    "programType": "Minor",
+    "slug": "biomolecular-engineering",
+    "aliases": [
+      "Biomolecular Engineering"
+    ],
+    "tokens": [
+      "biomolecular",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Botany",
+    "programType": "Minor",
+    "slug": "botany",
+    "aliases": [
+      "Botany"
+    ],
+    "tokens": [
+      "botany"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Business Administration",
+    "programType": "Minor",
+    "slug": "business-administration",
+    "aliases": [
+      "Business Administration"
+    ],
+    "tokens": [
+      "business",
+      "administration"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Chemistry",
+    "programType": "Minor",
+    "slug": "chemistry",
+    "aliases": [
+      "Chemistry"
+    ],
+    "tokens": [
+      "chemistry"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Classical Studies",
+    "programType": "Minor",
+    "slug": "classical-studies",
+    "aliases": [
+      "Classical Studies"
+    ],
+    "tokens": [
+      "classical"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Communication Sciences and Disorders",
+    "programType": "Minor",
+    "slug": "communication-sciences-and-disorders",
+    "aliases": [
+      "Communication Sciences and Disorders",
+      "Communication Sciences And Disorders",
+      "CSD",
+      "CSD Communication Sciences and Disorders",
+      "Communication Sciences and Disorders CSD"
+    ],
+    "tokens": [
+      "communication",
+      "disorders"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Communication Studies",
+    "programType": "Minor",
+    "slug": "communication-studies",
+    "aliases": [
+      "Communication Studies"
+    ],
+    "tokens": [
+      "communication"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Computer and Information Science and Engineering",
+    "programType": "Minor",
+    "slug": "computer-and-information-science-and-engineering",
+    "aliases": [
+      "Computer and Information Science and Engineering",
+      "Computer And Information Science And Engineering",
+      "CISE",
+      "CISE Computer and Information Science and Engineering",
+      "Computer and Information Science and Engineering CISE"
+    ],
+    "tokens": [
+      "computer",
+      "information",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Dance",
+    "programType": "Minor",
+    "slug": "dance",
+    "aliases": [
+      "Dance"
+    ],
+    "tokens": [
+      "dance"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Data Analytics for Applied Economics and Agribusiness",
+    "programType": "Minor",
+    "slug": "data-analytics-for-applied-economics-and-agribusiness",
+    "aliases": [
+      "Data Analytics for Applied Economics and Agribusiness",
+      "Data Analytics For Applied Economics And Agribusiness",
+      "DAAEA",
+      "DAAEA Data Analytics for Applied Economics and Agribusiness",
+      "Data Analytics for Applied Economics and Agribusiness DAAEA"
+    ],
+    "tokens": [
+      "data",
+      "analytics",
+      "applied",
+      "economics",
+      "agribusiness"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Deaf and Hearing Sciences",
+    "programType": "Minor",
+    "slug": "deaf-and-hearing-sciences",
+    "aliases": [
+      "Deaf and Hearing Sciences",
+      "Deaf And Hearing Sciences",
+      "DHS",
+      "DHS Deaf and Hearing Sciences",
+      "Deaf and Hearing Sciences DHS"
+    ],
+    "tokens": [
+      "deaf",
+      "hearing"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Digital Arts and Sciences",
+    "programType": "Minor",
+    "slug": "digital-arts-and-sciences",
+    "aliases": [
+      "Digital Arts and Sciences",
+      "Digital Arts And Sciences",
+      "DAS",
+      "DAS Digital Arts and Sciences",
+      "Digital Arts and Sciences DAS"
+    ],
+    "tokens": [
+      "digital"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Disabilities in Society",
+    "programType": "Minor",
+    "slug": "disabilities-in-society",
+    "aliases": [
+      "Disabilities in Society",
+      "Disabilities In Society"
+    ],
+    "tokens": [
+      "disabilities",
+      "society"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Early Childhood Studies",
+    "programType": "Minor",
+    "slug": "early-childhood-studies",
+    "aliases": [
+      "Early Childhood Studies",
+      "ECS",
+      "ECS Early Childhood Studies",
+      "Early Childhood Studies ECS"
+    ],
+    "tokens": [
+      "early",
+      "childhood"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "East Asian Languages and Literatures",
+    "programType": "Minor",
+    "slug": "east-asian-languages-and-literatures",
+    "aliases": [
+      "East Asian Languages and Literatures",
+      "East Asian Languages And Literatures",
+      "EALL",
+      "EALL East Asian Languages and Literatures",
+      "East Asian Languages and Literatures EALL"
+    ],
+    "tokens": [
+      "east",
+      "asian",
+      "languages",
+      "literatures"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "East-Central European Studies",
+    "programType": "Minor",
+    "slug": "east-central-european-studies",
+    "aliases": [
+      "East-Central European Studies",
+      "East-central European Studies",
+      "East",
+      "EES",
+      "EES East",
+      "East EES"
+    ],
+    "tokens": [
+      "east-central",
+      "european"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Economics",
+    "programType": "Minor",
+    "slug": "economics",
+    "aliases": [
+      "Economics"
+    ],
+    "tokens": [
+      "economics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Education Studies",
+    "programType": "Minor",
+    "slug": "education-studies",
+    "aliases": [
+      "Education Studies"
+    ],
+    "tokens": [
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Educational Technology",
+    "programType": "Minor",
+    "slug": "educational-technology",
+    "aliases": [
+      "Educational Technology"
+    ],
+    "tokens": [
+      "educational"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Electrical Engineering",
+    "programType": "Minor",
+    "slug": "electrical-engineering",
+    "aliases": [
+      "Electrical Engineering"
+    ],
+    "tokens": [
+      "electrical",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Engineering Innovation",
+    "programType": "Minor",
+    "slug": "engineering-innovation",
+    "aliases": [
+      "Engineering Innovation"
+    ],
+    "tokens": [
+      "engineering",
+      "innovation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "English",
+    "programType": "Minor",
+    "slug": "english",
+    "aliases": [
+      "English"
+    ],
+    "tokens": [
+      "english"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Entomology and Nematology",
+    "programType": "Minor",
+    "slug": "entomology-and-nematology",
+    "aliases": [
+      "Entomology and Nematology",
+      "Entomology And Nematology"
+    ],
+    "tokens": [
+      "entomology",
+      "nematology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Entrepreneurship",
+    "programType": "Minor",
+    "slug": "entrepreneurship",
+    "aliases": [
+      "Entrepreneurship"
+    ],
+    "tokens": [
+      "entrepreneurship"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Environmental Horticulture",
+    "programType": "Minor",
+    "slug": "environmental-horticulture",
+    "aliases": [
+      "Environmental Horticulture"
+    ],
+    "tokens": [
+      "environmental",
+      "horticulture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Environmental Justice and Policy",
+    "programType": "Minor",
+    "slug": "environmental-justice-and-policy",
+    "aliases": [
+      "Environmental Justice and Policy",
+      "Environmental Justice And Policy",
+      "EJP",
+      "EJP Environmental Justice and Policy",
+      "Environmental Justice and Policy EJP"
+    ],
+    "tokens": [
+      "environmental",
+      "justice",
+      "policy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Environmental Science",
+    "programType": "Minor",
+    "slug": "environmental-science",
+    "aliases": [
+      "Environmental Science"
+    ],
+    "tokens": [
+      "environmental"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "European Union Studies",
+    "programType": "Minor",
+    "slug": "european-union-studies",
+    "aliases": [
+      "European Union Studies",
+      "EUS",
+      "EUS European Union Studies",
+      "European Union Studies EUS"
+    ],
+    "tokens": [
+      "european",
+      "union"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Event Management",
+    "programType": "Minor",
+    "slug": "event-management",
+    "aliases": [
+      "Event Management"
+    ],
+    "tokens": [
+      "event"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Extension Education",
+    "programType": "Minor",
+    "slug": "extension-education",
+    "aliases": [
+      "Extension Education"
+    ],
+    "tokens": [
+      "extension",
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Family, Youth and Community Sciences",
+    "programType": "Minor",
+    "slug": "family-youth-and-community-sciences",
+    "aliases": [
+      "Family, Youth and Community Sciences",
+      "Family Youth And Community Sciences",
+      "FYCS",
+      "FYCS Family, Youth and Community Sciences",
+      "Family, Youth and Community Sciences FYCS"
+    ],
+    "tokens": [
+      "family",
+      "youth",
+      "community"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Fisheries and Aquatic Sciences",
+    "programType": "Minor",
+    "slug": "fisheries-and-aquatic-sciences",
+    "aliases": [
+      "Fisheries and Aquatic Sciences",
+      "Fisheries And Aquatic Sciences",
+      "FAS",
+      "FAS Fisheries and Aquatic Sciences",
+      "Fisheries and Aquatic Sciences FAS"
+    ],
+    "tokens": [
+      "fisheries",
+      "aquatic"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Florida Teaching",
+    "programType": "Minor",
+    "slug": "florida-teaching",
+    "aliases": [
+      "Florida Teaching"
+    ],
+    "tokens": [
+      "florida",
+      "teaching"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Food Science",
+    "programType": "Minor",
+    "slug": "food-science",
+    "aliases": [
+      "Food Science"
+    ],
+    "tokens": [
+      "food"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Forest Resources and Conservation",
+    "programType": "Minor",
+    "slug": "forest-resources-and-conservation",
+    "aliases": [
+      "Forest Resources and Conservation",
+      "Forest Resources And Conservation",
+      "FRC",
+      "FRC Forest Resources and Conservation",
+      "Forest Resources and Conservation FRC"
+    ],
+    "tokens": [
+      "forest",
+      "resources",
+      "conservation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "French and Francophone Studies",
+    "programType": "Minor",
+    "slug": "french-and-francophone-studies",
+    "aliases": [
+      "French and Francophone Studies",
+      "French And Francophone Studies",
+      "FFS",
+      "FFS French and Francophone Studies",
+      "French and Francophone Studies FFS"
+    ],
+    "tokens": [
+      "french",
+      "francophone"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "GeoAI and Geographic Analysis",
+    "programType": "Minor",
+    "slug": "geoai-and-geographic-analysis",
+    "aliases": [
+      "GeoAI and Geographic Analysis",
+      "Geoai And Geographic Analysis",
+      "GGA",
+      "GGA GeoAI and Geographic Analysis",
+      "GeoAI and Geographic Analysis GGA"
+    ],
+    "tokens": [
+      "geoai",
+      "geographic",
+      "analysis"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geography",
+    "programType": "Minor",
+    "slug": "geography",
+    "aliases": [
+      "Geography"
+    ],
+    "tokens": [
+      "geography"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Geology",
+    "programType": "Minor",
+    "slug": "geology",
+    "aliases": [
+      "Geology"
+    ],
+    "tokens": [
+      "geology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "German",
+    "programType": "Minor",
+    "slug": "german",
+    "aliases": [
+      "German"
+    ],
+    "tokens": [
+      "german"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Golf and Sports Turf Management",
+    "programType": "Minor",
+    "slug": "golf-and-sports-turf-management",
+    "aliases": [
+      "Golf and Sports Turf Management",
+      "Golf And Sports Turf Management",
+      "GSTM",
+      "GSTM Golf and Sports Turf Management",
+      "Golf and Sports Turf Management GSTM"
+    ],
+    "tokens": [
+      "golf",
+      "sports",
+      "turf"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Graphic Design",
+    "programType": "Minor",
+    "slug": "graphic-design",
+    "aliases": [
+      "Graphic Design"
+    ],
+    "tokens": [
+      "graphic",
+      "design"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Great Books and Ideas",
+    "programType": "Minor",
+    "slug": "great-books-and-ideas",
+    "aliases": [
+      "Great Books and Ideas",
+      "Great Books And Ideas",
+      "GBI",
+      "GBI Great Books and Ideas",
+      "Great Books and Ideas GBI"
+    ],
+    "tokens": [
+      "great",
+      "books",
+      "ideas"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Greek Studies",
+    "programType": "Minor",
+    "slug": "greek-studies",
+    "aliases": [
+      "Greek Studies"
+    ],
+    "tokens": [
+      "greek"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Health Administration",
+    "programType": "Minor",
+    "slug": "health-administration",
+    "aliases": [
+      "Health Administration"
+    ],
+    "tokens": [
+      "health",
+      "administration"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Health Disparities in Society",
+    "programType": "Minor",
+    "slug": "health-disparities-in-society",
+    "aliases": [
+      "Health Disparities in Society",
+      "Health Disparities In Society",
+      "HDS",
+      "HDS Health Disparities in Society",
+      "Health Disparities in Society HDS"
+    ],
+    "tokens": [
+      "health",
+      "disparities",
+      "society"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Health Professions",
+    "programType": "Minor",
+    "slug": "health-professions",
+    "aliases": [
+      "Health Professions"
+    ],
+    "tokens": [
+      "health",
+      "professions"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Health Promotion",
+    "programType": "Minor",
+    "slug": "health-promotion",
+    "aliases": [
+      "Health Promotion"
+    ],
+    "tokens": [
+      "health",
+      "promotion"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Hebrew",
+    "programType": "Minor",
+    "slug": "hebrew",
+    "aliases": [
+      "Hebrew"
+    ],
+    "tokens": [
+      "hebrew"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "History",
+    "programType": "Minor",
+    "slug": "history",
+    "aliases": [
+      "History"
+    ],
+    "tokens": [
+      "history"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Horticultural Science",
+    "programType": "Minor",
+    "slug": "horticultural-science",
+    "aliases": [
+      "Horticultural Science"
+    ],
+    "tokens": [
+      "horticultural"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Information Systems",
+    "programType": "Minor",
+    "slug": "information-systems",
+    "aliases": [
+      "Information Systems"
+    ],
+    "tokens": [
+      "information",
+      "systems"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Innovation",
+    "programType": "Minor",
+    "slug": "innovation",
+    "aliases": [
+      "Innovation"
+    ],
+    "tokens": [
+      "innovation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "International Development and Humanitarian Assistance",
+    "programType": "Minor",
+    "slug": "international-development-and-humanitarian-assistance",
+    "aliases": [
+      "International Development and Humanitarian Assistance",
+      "International Development And Humanitarian Assistance",
+      "IDHA",
+      "IDHA International Development and Humanitarian Assistance",
+      "International Development and Humanitarian Assistance IDHA"
+    ],
+    "tokens": [
+      "international",
+      "development",
+      "humanitarian",
+      "assistance"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "International Studies in Agricultural and Life Sciences",
+    "programType": "Minor",
+    "slug": "international-studies-in-agricultural-and-life-sciences",
+    "aliases": [
+      "International Studies in Agricultural and Life Sciences",
+      "International Studies In Agricultural And Life Sciences",
+      "ISALS",
+      "ISALS International Studies in Agricultural and Life Sciences",
+      "International Studies in Agricultural and Life Sciences ISALS"
+    ],
+    "tokens": [
+      "international",
+      "agricultural",
+      "life"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Italian Studies",
+    "programType": "Minor",
+    "slug": "italian-studies",
+    "aliases": [
+      "Italian Studies"
+    ],
+    "tokens": [
+      "italian"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Jazz Studies",
+    "programType": "Minor",
+    "slug": "jazz-studies",
+    "aliases": [
+      "Jazz Studies"
+    ],
+    "tokens": [
+      "jazz"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Jewish Studies",
+    "programType": "Minor",
+    "slug": "jewish-studies",
+    "aliases": [
+      "Jewish Studies"
+    ],
+    "tokens": [
+      "jewish"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Landscape Architecture",
+    "programType": "Minor",
+    "slug": "landscape-architecture",
+    "aliases": [
+      "Landscape Architecture"
+    ],
+    "tokens": [
+      "landscape",
+      "architecture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Latin American Studies",
+    "programType": "Minor",
+    "slug": "latin-american-studies",
+    "aliases": [
+      "Latin American Studies",
+      "LAS",
+      "LAS Latin American Studies",
+      "Latin American Studies LAS"
+    ],
+    "tokens": [
+      "latin",
+      "american"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Leadership",
+    "programType": "Minor",
+    "slug": "leadership",
+    "aliases": [
+      "Leadership"
+    ],
+    "tokens": [
+      "leadership"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Linguistics",
+    "programType": "Minor",
+    "slug": "linguistics",
+    "aliases": [
+      "Linguistics"
+    ],
+    "tokens": [
+      "linguistics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Management and Sales in Agribusiness",
+    "programType": "Minor",
+    "slug": "management-and-sales-in-agribusiness",
+    "aliases": [
+      "Management and Sales in Agribusiness",
+      "Management And Sales In Agribusiness",
+      "MSA",
+      "MSA Management and Sales in Agribusiness",
+      "Management and Sales in Agribusiness MSA"
+    ],
+    "tokens": [
+      "sales",
+      "agribusiness"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Mass Communication Studies",
+    "programType": "Minor",
+    "slug": "mass-communication-studies",
+    "aliases": [
+      "Mass Communication Studies",
+      "MCS",
+      "MCS Mass Communication Studies",
+      "Mass Communication Studies MCS"
+    ],
+    "tokens": [
+      "mass",
+      "communication"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Materials Science and Engineering",
+    "programType": "Minor",
+    "slug": "materials-science-and-engineering",
+    "aliases": [
+      "Materials Science and Engineering",
+      "Materials Science And Engineering",
+      "MSE",
+      "MSE Materials Science and Engineering",
+      "Materials Science and Engineering MSE"
+    ],
+    "tokens": [
+      "materials",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Mathematics",
+    "programType": "Minor",
+    "slug": "mathematics",
+    "aliases": [
+      "Mathematics"
+    ],
+    "tokens": [
+      "mathematics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Media Production, Management, and Technology",
+    "programType": "Minor",
+    "slug": "media-production-management-and-technology",
+    "aliases": [
+      "Media Production, Management, and Technology",
+      "Media Production Management And Technology",
+      "MPMT",
+      "MPMT Media Production, Management, and Technology",
+      "Media Production, Management, and Technology MPMT"
+    ],
+    "tokens": [
+      "media",
+      "production"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Medical Geography in Global Health",
+    "programType": "Minor",
+    "slug": "medical-geography-in-global-health",
+    "aliases": [
+      "Medical Geography in Global Health",
+      "Medical Geography In Global Health",
+      "MGGH",
+      "MGGH Medical Geography in Global Health",
+      "Medical Geography in Global Health MGGH"
+    ],
+    "tokens": [
+      "medical",
+      "geography",
+      "global",
+      "health"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Medieval and Early Modern Studies",
+    "programType": "Minor",
+    "slug": "medieval-and-early-modern-studies",
+    "aliases": [
+      "Medieval and Early Modern Studies",
+      "Medieval And Early Modern Studies",
+      "MEMS",
+      "MEMS Medieval and Early Modern Studies",
+      "Medieval and Early Modern Studies MEMS"
+    ],
+    "tokens": [
+      "medieval",
+      "early",
+      "modern"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Meteorology",
+    "programType": "Minor",
+    "slug": "meteorology",
+    "aliases": [
+      "Meteorology"
+    ],
+    "tokens": [
+      "meteorology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Military Science and Leadership",
+    "programType": "Minor",
+    "slug": "military-science-and-leadership",
+    "aliases": [
+      "Military Science and Leadership",
+      "Military Science And Leadership",
+      "MSL",
+      "MSL Military Science and Leadership",
+      "Military Science and Leadership MSL"
+    ],
+    "tokens": [
+      "military",
+      "leadership"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music History | Ethnomusicology",
+    "programType": "Minor",
+    "slug": "music-history-ethnomusicology",
+    "aliases": [
+      "Music History | Ethnomusicology",
+      "Music History Ethnomusicology",
+      "Music History / Ethnomusicology",
+      "MHE",
+      "MHE Music History | Ethnomusicology",
+      "Music History | Ethnomusicology MHE"
+    ],
+    "tokens": [
+      "music",
+      "history",
+      "ethnomusicology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music Performance  | Instrumental or Voice",
+    "programType": "Minor",
+    "slug": "music-performance-instrumental-or-voice",
+    "aliases": [
+      "Music Performance  | Instrumental or Voice",
+      "Music Performance Instrumental Or Voice",
+      "Music Performance | Instrumental or Voice",
+      "Music Performance / Instrumental or Voice",
+      "Music Performance Instrumental or Voice",
+      "MPIV",
+      "MPIV Music Performance | Instrumental or Voice",
+      "Music Performance | Instrumental or Voice MPIV"
+    ],
+    "tokens": [
+      "music",
+      "performance",
+      "instrumental",
+      "voice"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Music Theory",
+    "programType": "Minor",
+    "slug": "music-theory",
+    "aliases": [
+      "Music Theory"
+    ],
+    "tokens": [
+      "music",
+      "theory"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Nonprofit Organizational Leadership",
+    "programType": "Minor",
+    "slug": "nonprofit-organizational-leadership",
+    "aliases": [
+      "Nonprofit Organizational Leadership",
+      "NOL",
+      "NOL Nonprofit Organizational Leadership",
+      "Nonprofit Organizational Leadership NOL"
+    ],
+    "tokens": [
+      "nonprofit",
+      "organizational",
+      "leadership"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Nuclear and Radiological Engineering",
+    "programType": "Minor",
+    "slug": "nuclear-and-radiological-engineering",
+    "aliases": [
+      "Nuclear and Radiological Engineering",
+      "Nuclear And Radiological Engineering",
+      "NRE",
+      "NRE Nuclear and Radiological Engineering",
+      "Nuclear and Radiological Engineering NRE"
+    ],
+    "tokens": [
+      "nuclear",
+      "radiological",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Nutritional Sciences",
+    "programType": "Minor",
+    "slug": "nutritional-sciences",
+    "aliases": [
+      "Nutritional Sciences"
+    ],
+    "tokens": [
+      "nutritional"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Organic and Sustainable Crop Production",
+    "programType": "Minor",
+    "slug": "organic-and-sustainable-crop-production",
+    "aliases": [
+      "Organic and Sustainable Crop Production",
+      "Organic And Sustainable Crop Production",
+      "OSCP",
+      "OSCP Organic and Sustainable Crop Production",
+      "Organic and Sustainable Crop Production OSCP"
+    ],
+    "tokens": [
+      "organic",
+      "sustainable",
+      "crop",
+      "production"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Packaging Science",
+    "programType": "Minor",
+    "slug": "packaging-science",
+    "aliases": [
+      "Packaging Science"
+    ],
+    "tokens": [
+      "packaging"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Pathogenesis",
+    "programType": "Minor",
+    "slug": "pathogenesis",
+    "aliases": [
+      "Pathogenesis"
+    ],
+    "tokens": [
+      "pathogenesis"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Philosophy",
+    "programType": "Minor",
+    "slug": "philosophy",
+    "aliases": [
+      "Philosophy"
+    ],
+    "tokens": [
+      "philosophy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Philosophy, Politics, Economics, and Law",
+    "programType": "Minor",
+    "slug": "philosophy-politics-economics-and-law",
+    "aliases": [
+      "Philosophy, Politics, Economics, and Law",
+      "Philosophy Politics Economics And Law",
+      "PPEL",
+      "PPEL Philosophy, Politics, Economics, and Law",
+      "Philosophy, Politics, Economics, and Law PPEL"
+    ],
+    "tokens": [
+      "philosophy",
+      "politics",
+      "economics",
+      "law"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Physics",
+    "programType": "Minor",
+    "slug": "physics",
+    "aliases": [
+      "Physics"
+    ],
+    "tokens": [
+      "physics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Plant Molecular and Cellular Biology",
+    "programType": "Minor",
+    "slug": "plant-molecular-and-cellular-biology",
+    "aliases": [
+      "Plant Molecular and Cellular Biology",
+      "Plant Molecular And Cellular Biology",
+      "PMCB",
+      "PMCB Plant Molecular and Cellular Biology",
+      "Plant Molecular and Cellular Biology PMCB"
+    ],
+    "tokens": [
+      "plant",
+      "molecular",
+      "cellular",
+      "biology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Plant Science",
+    "programType": "Minor",
+    "slug": "plant-science",
+    "aliases": [
+      "Plant Science"
+    ],
+    "tokens": [
+      "plant"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Portuguese",
+    "programType": "Minor",
+    "slug": "portuguese",
+    "aliases": [
+      "Portuguese"
+    ],
+    "tokens": [
+      "portuguese"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Precision Agriculture",
+    "programType": "Minor",
+    "slug": "precision-agriculture",
+    "aliases": [
+      "Precision Agriculture"
+    ],
+    "tokens": [
+      "precision",
+      "agriculture"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Professional Selling",
+    "programType": "Minor",
+    "slug": "professional-selling",
+    "aliases": [
+      "Professional Selling"
+    ],
+    "tokens": [
+      "professional",
+      "selling"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Public Health",
+    "programType": "Minor",
+    "slug": "public-health",
+    "aliases": [
+      "Public Health"
+    ],
+    "tokens": [
+      "public",
+      "health"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Public Relations",
+    "programType": "Minor",
+    "slug": "public-relations",
+    "aliases": [
+      "Public Relations"
+    ],
+    "tokens": [
+      "public",
+      "relations"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Public Service",
+    "programType": "Minor",
+    "slug": "public-service",
+    "aliases": [
+      "Public Service"
+    ],
+    "tokens": [
+      "public",
+      "service"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Real Estate",
+    "programType": "Minor",
+    "slug": "real-estate",
+    "aliases": [
+      "Real Estate"
+    ],
+    "tokens": [
+      "real",
+      "estate"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Rehabilitation",
+    "programType": "Minor",
+    "slug": "rehabilitation",
+    "aliases": [
+      "Rehabilitation"
+    ],
+    "tokens": [
+      "rehabilitation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Religion",
+    "programType": "Minor",
+    "slug": "religion",
+    "aliases": [
+      "Religion"
+    ],
+    "tokens": [
+      "religion"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Retailing",
+    "programType": "Minor",
+    "slug": "retailing",
+    "aliases": [
+      "Retailing"
+    ],
+    "tokens": [
+      "retailing"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Russian",
+    "programType": "Minor",
+    "slug": "russian",
+    "aliases": [
+      "Russian"
+    ],
+    "tokens": [
+      "russian"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sales Engineering",
+    "programType": "Minor",
+    "slug": "sales-engineering",
+    "aliases": [
+      "Sales Engineering"
+    ],
+    "tokens": [
+      "sales",
+      "engineering"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Secondary English Language Arts Education",
+    "programType": "Minor",
+    "slug": "secondary-english-language-arts-education",
+    "aliases": [
+      "Secondary English Language Arts Education",
+      "SELAE",
+      "SELAE Secondary English Language Arts Education",
+      "Secondary English Language Arts Education SELAE"
+    ],
+    "tokens": [
+      "secondary",
+      "english",
+      "language",
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Secondary Social Studies Education",
+    "programType": "Minor",
+    "slug": "secondary-social-studies-education",
+    "aliases": [
+      "Secondary Social Studies Education",
+      "SSSE",
+      "SSSE Secondary Social Studies Education",
+      "Secondary Social Studies Education SSSE"
+    ],
+    "tokens": [
+      "secondary",
+      "social",
+      "education"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sociology",
+    "programType": "Minor",
+    "slug": "sociology",
+    "aliases": [
+      "Sociology"
+    ],
+    "tokens": [
+      "sociology"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sociology of Social Justice and Policy",
+    "programType": "Minor",
+    "slug": "sociology-of-social-justice-and-policy",
+    "aliases": [
+      "Sociology of Social Justice and Policy",
+      "Sociology Of Social Justice And Policy",
+      "SSJP",
+      "SSJP Sociology of Social Justice and Policy",
+      "Sociology of Social Justice and Policy SSJP"
+    ],
+    "tokens": [
+      "sociology",
+      "social",
+      "justice",
+      "policy"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Soil, Water, and Ecosystem Sciences",
+    "programType": "Minor",
+    "slug": "soil-water-and-ecosystem-sciences",
+    "aliases": [
+      "Soil, Water, and Ecosystem Sciences",
+      "Soil Water And Ecosystem Sciences",
+      "SWES",
+      "SWES Soil, Water, and Ecosystem Sciences",
+      "Soil, Water, and Ecosystem Sciences SWES"
+    ],
+    "tokens": [
+      "soil",
+      "water",
+      "ecosystem"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Spanish",
+    "programType": "Minor",
+    "slug": "spanish",
+    "aliases": [
+      "Spanish"
+    ],
+    "tokens": [
+      "spanish"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Statistics",
+    "programType": "Minor",
+    "slug": "statistics",
+    "aliases": [
+      "Statistics"
+    ],
+    "tokens": [
+      "statistics"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sustainability Studies",
+    "programType": "Minor",
+    "slug": "sustainability-studies",
+    "aliases": [
+      "Sustainability Studies"
+    ],
+    "tokens": [
+      "sustainability"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Sustainability and the Built Environment",
+    "programType": "Minor",
+    "slug": "sustainability-and-the-built-environment",
+    "aliases": [
+      "Sustainability and the Built Environment",
+      "Sustainability And The Built Environment",
+      "SBE",
+      "SBE Sustainability and the Built Environment",
+      "Sustainability and the Built Environment SBE"
+    ],
+    "tokens": [
+      "sustainability",
+      "built",
+      "environment"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Teaching English as a Second Language",
+    "programType": "Minor",
+    "slug": "teaching-english-as-a-second-language",
+    "aliases": [
+      "Teaching English as a Second Language",
+      "Teaching English As A Second Language",
+      "TEASL",
+      "TEASL Teaching English as a Second Language",
+      "Teaching English as a Second Language TEASL"
+    ],
+    "tokens": [
+      "teaching",
+      "english",
+      "second",
+      "language"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Theatre",
+    "programType": "Minor",
+    "slug": "theatre",
+    "aliases": [
+      "Theatre"
+    ],
+    "tokens": [
+      "theatre"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Theatre Production",
+    "programType": "Minor",
+    "slug": "theatre-production",
+    "aliases": [
+      "Theatre Production"
+    ],
+    "tokens": [
+      "theatre",
+      "production"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Theories and Politics of Sexuality",
+    "programType": "Minor",
+    "slug": "theories-and-politics-of-sexuality",
+    "aliases": [
+      "Theories and Politics of Sexuality",
+      "Theories And Politics Of Sexuality",
+      "TPS",
+      "TPS Theories and Politics of Sexuality",
+      "Theories and Politics of Sexuality TPS"
+    ],
+    "tokens": [
+      "theories",
+      "politics",
+      "sexuality"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "UFTeach | Mathematics, Science, or Computer Science",
+    "programType": "Minor",
+    "slug": "ufteach-mathematics-science-or-computer-science",
+    "aliases": [
+      "UFTeach | Mathematics, Science, or Computer Science",
+      "Ufteach Mathematics Science Or Computer Science",
+      "UFTeach / Mathematics, Science, or Computer Science",
+      "UFTeach Mathematics, Science, or Computer Science",
+      "UMSCS",
+      "UMSCS UFTeach | Mathematics, Science, or Computer Science",
+      "UFTeach | Mathematics, Science, or Computer Science UMSCS"
+    ],
+    "tokens": [
+      "ufteach",
+      "mathematics",
+      "computer"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Urban and Regional Planning",
+    "programType": "Minor",
+    "slug": "urban-and-regional-planning",
+    "aliases": [
+      "Urban and Regional Planning",
+      "Urban And Regional Planning",
+      "URP",
+      "URP Urban and Regional Planning",
+      "Urban and Regional Planning URP"
+    ],
+    "tokens": [
+      "urban",
+      "regional",
+      "planning"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Wealth Management",
+    "programType": "Minor",
+    "slug": "wealth-management",
+    "aliases": [
+      "Wealth Management"
+    ],
+    "tokens": [
+      "wealth"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Wildlife Ecology and Conservation",
+    "programType": "Minor",
+    "slug": "wildlife-ecology-and-conservation",
+    "aliases": [
+      "Wildlife Ecology and Conservation",
+      "Wildlife Ecology And Conservation",
+      "WEC",
+      "WEC Wildlife Ecology and Conservation",
+      "Wildlife Ecology and Conservation WEC"
+    ],
+    "tokens": [
+      "wildlife",
+      "ecology",
+      "conservation"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Women's Studies",
+    "programType": "Minor",
+    "slug": "women-s-studies",
+    "aliases": [
+      "Women's Studies",
+      "Women S Studies",
+      "WSS",
+      "WSS Women's Studies",
+      "Women's Studies WSS"
+    ],
+    "tokens": [
+      "women"
+    ],
+    "active": true
+  },
+  {
+    "canonicalName": "Zoology",
+    "programType": "Minor",
+    "slug": "zoology",
+    "aliases": [
+      "Zoology"
+    ],
+    "tokens": [
+      "zoology"
+    ],
+    "active": true
+  }
+]
