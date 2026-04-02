@@ -6,7 +6,6 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
-import Navbar from "../components/Navbar"
 import '../components/CenteredButton.css';
 import { baseUrl } from "../constants";
 

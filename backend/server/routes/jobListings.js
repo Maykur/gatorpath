@@ -44,14 +44,15 @@ const onetKeywords = relatedCareers.map(c =>
 );
 
 // Map majors → job role keywords
-const majorKeywordMap = {
-  "Computer Engineering": "software engineer",
-  "Computer Science": "software engineer",
-  "Data Science": "data scientist",
-  "Cybersecurity": "security engineer"
-};
+// const majorKeywordMap = {
+//   "Computer Engineering": "software engineer",
+//   "Computer Science": "software engineer",
+//   "Data Science": "data scientist",
+//   "Cybersecurity": "security engineer"
+// };
 
-const baseKeyword = majorKeywordMap[simplifiedMajor] || simplifiedMajor;
+//const baseKeyword = majorKeywordMap[simplifiedMajor] || simplifiedMajor;
+const baseKeyword = simplifiedMajor;
 
 
 const programKeywords = [
@@ -61,7 +62,34 @@ const programKeywords = [
 ];
 console.log("Minor received:", minor);
 console.log("Minor keywords:", getProgWords(minor));
-const searchRoles = [
+
+// Call Flask ML service for career recommendations
+let ML_recs = [];
+try {
+    // Get ML recs from
+    const ML_results = await fetch(`http://localhost:5001/recommend`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            major: simplifiedMajor,
+            minor: minor || "",
+            certificate: certificate || "",
+            courses: skills ? skills.split(",").map(s => s.trim()) : []
+        })
+    });
+    const ML_data = await ML_results.json();
+    ML_recs = ML_data.recommendations || [];
+    console.log(ML_recs)
+} catch (err) {
+  // Continue without ML recs if flask isnt working
+    console.error("ML service error:", err);
+}
+
+// Let ML model do most of the rec
+const ML_career_recs = ML_recs.map(r => r.title.toLowerCase());
+
+// Use ML recs, fallback on key words
+const searchRoles = ML_career_recs.length > 0 ? ML_career_recs : [
   baseKeyword,          
   ...programKeywords,    
   
@@ -102,7 +130,6 @@ const data = await response.json();
 }
   }
 
-
     // const response = await fetch(`http://api.adzuna.com/v1/api/jobs/us/search/1?app_id=${process.env.ADZUNA_APP_ID}&app_key=${process.env.ADZUNA_API_KEY}&results_per_page=20&what=${encodeURIComponent(keywordsListing)}&where=${encodeURIComponent(state || "")}`);
     if (allEntries.length === 0) {
   console.log("Adzuna shows 0 jobs for this combination of keywords and location. Try a different one.");
@@ -111,10 +138,6 @@ const data = await response.json();
     console.log("Total jobs collected:", allEntries.length);
     // const data = await response.json();
     const jobTitles = new Map();
-
-
-
-
 
 const specializationKeywords = programKeywords.map(k => k.toLowerCase());
 
@@ -131,12 +154,7 @@ if (specializationKeywords.length > 0) {
 
   if (allEntries.length > 0) {
     // needed to comment this out because otherwise includes jobs that don't pertain to undergraduates
-    const excludeWords = [
-  "fellow",
-  "postdoctoral",
-  "professor",
-
-];
+    const excludeWords = ["fellow", "postdoctoral", "professor"];
 
 allEntries = allEntries.filter(job =>
   !excludeWords.some(w =>
@@ -186,7 +204,7 @@ const recommendedCareers = relatedCareers.map(c => c.title);
 
 res.json({
   location: state || "United States",
-  recommendedCareers,
+  recommendedCareers: ML_recs,
   jobs: jobArray
 });
 });

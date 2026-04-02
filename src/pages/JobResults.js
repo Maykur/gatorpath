@@ -12,11 +12,12 @@ import {baseUrl} from '../constants.js'
 export function JobResults() {
     const location = useLocation();
     const [jobResults, setJobResults] = useState([]);
+    const [recommendations, setRecommendations] = useState([]);
     const [error, setError] = useState(""); // do i need to change here
     const [loading, setLoading] = useState(true);
     const [selectState, setSelectState] = useState("Florida");
     // In case we want to have a dropdown to select and update the state by having user select
-const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", 
+    const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", 
     "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", 
     "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
     "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", 
@@ -24,6 +25,20 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
     "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];  
 
     
+    // Format salary, ex: $47k vs 47k-47k
+    // idk why this isnt working but whatever
+    // function formatSalary(salary) {
+
+    //     // trim spaces around nums and split
+    //     const nums = salary.split("-").map(p => p.trim());
+    //     if (nums.length === 2 && nums[0] === nums[1]) {
+    //         // just show one number if they're the same
+    //         return nums[0];
+    //     }
+    //     // Will show range if it differs
+    //     return salary;
+    // }
+
     useEffect(() => {
 
         async function fetchResults() {
@@ -43,15 +58,15 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
                 }
 
                 const minor = params.get("minor");
-                const skills = params.get("skills");
-                 const certificate = params.get("certificate");
+                const courses = params.get("courses");
+                const certificate = params.get("certificate");
                 // const state = params.get("state");
 
                 const query = new URLSearchParams({
                     major,
                     minor,
                     certificate,
-                    skills,
+                    courses,
                     state: selectState === "United States" ? "" : selectState
                 });
 
@@ -62,6 +77,8 @@ const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas",
                 const data = await response.json();
 
                 setJobResults(data.jobs || []);
+                // Store reccomendations
+                setRecommendations(data.recommendedCareers || []);
 
             } catch (err) {
 

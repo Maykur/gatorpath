@@ -1,7 +1,6 @@
 // References: https://www.w3schools.com/react/react_usecontext.asp
 
 import { HashRouter as Router, Routes, Route} from 'react-router-dom'
-import { Home } from './pages/Home'
 import { SignUp } from './pages/SignUp'
 import { LogIn } from './pages/LogIn'
 import { StartUp } from './pages/StartPage'
@@ -26,7 +25,6 @@ function App() {
             <Route path="/" element={<StartUp/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
-            <Route path="/home" element={<Protected><Home/></Protected>}/>
             <Route path="/majors/:id" element={<Protected><MajorPage/></Protected>}/>
             <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
             <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>

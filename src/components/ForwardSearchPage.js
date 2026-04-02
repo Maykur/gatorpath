@@ -9,7 +9,7 @@ const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox=
 const inputStyle = {
   width: "100%", height: "44px", borderRadius: "4px",
   border: "1px solid #ccc", fontSize: "15px", padding: "0 12px",
-  boxSizing: "border-box", backgroundColor: "#F7F8FA", outline: "none",
+  boxSizing: "border-box", backgroundColor: "#ffffff", outline: "none",
   fontFamily: "'Georgia', serif",
 };
 
@@ -296,6 +296,7 @@ return (
             <label style={labelStyle}>Major (required)</label>
             <Select
               options={majors.map(m => ({ value: m._id, label: m.major }))}
+
               value={majors.map(m => ({ value: m._id, label: m.major })).find(o => o.value === majorId) || null}
               onChange={(selected) => setMajorId(selected ? selected.value : "")}
               style={inputStyle}

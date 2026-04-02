@@ -24,7 +24,9 @@
     "eject": "react-scripts eject",
     "frontStart": "npm start",
     "backStart": "cd backend && npx nodemon index.js",
-    "serverStart": "run-p frontStart backStart"
+    "MLinstall":"pip install -r requirements.txt",
+    "MLstart": "cd ML && python app.py",
+    "serverStart": "run-p frontStart backStart MLstart"
   },
   "eslintConfig": {
     "extends": [

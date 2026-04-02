@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
-import {baseUrl} from "../constants";
-import {Tab} from "../App.js";
+import { baseUrl } from "../constants";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -10,6 +9,28 @@ const MOCK_CAREERS = [
   { title: "Cyber Security: Analyst", description: "Your coursework, optional minor, and certifications would make you an ideal candidate for this role.", avg: 70000, rangeMin: 40000, rangeMax: 100000 },
   { title: "Cloud Security Engineer", description: "Your coursework, optional minor, and certifications would make you an ideal candidate for this role.", avg: 90000, rangeMin: 60000, rangeMax: 120000 },
   { title: "Software Engineer", description: "Your coursework, optional minor, and certifications would make you an ideal candidate for this role.", avg: 95000, rangeMin: 40000, rangeMax: 150000 },
+];
+
+const MOCK_RESOURCES = [
+  "Coursera — IBM Data Engineering Professional Certificate",
+  "Data Engineering Zoomcamp",
+  '"Fundamentals of Data Engineering" by Reis & Housley',
+  "Data Engineering Weekly Newsletter",
+];
+
+const MOCK_EXTRACURRICULARS = ["Languages to Master", "Platforms to Utilize", "Certifications/Courses to Find"];
+
+const MOCK_LANGUAGES = ["SQL", "Python", "Scala/Java", "Bash/Shell"];
+const MOCK_PLATFORMS = [
+  { name: "Apache Spark & Airflow", desc: "data processing & orchestration" },
+  { name: "Snowflake / BigQuery", desc: "data warehousing" },
+  { name: "Kafka", desc: "data streaming" },
+  { name: "Git / Docker / Terraform", desc: "DevOps and infrastructure" },
+];
+const MOCK_CERTS = [
+  "AWS Certified Data Engineer",
+  "Google Data Analytics Certificate",
+  "DASCA Associate Big Data Engineer",
 ];
 
 const TABS = ["Career Information", "Learning Pathways", "CISE Majors"];
@@ -21,7 +42,8 @@ const colStyle = {
 };
 
 const colHeaderStyle = {
-  fontSize: "16px", fontWeight: "bold", textAlign: "center",
+  // Bolder to indicate header
+  fontSize: "24px", fontWeight: "bold", textAlign: "center",
   marginBottom: "16px", color: "#111", lineHeight: "1.4",
 };
 
@@ -38,170 +60,47 @@ function SalaryBar({ min, max, overall }) {
   );
 }
 
-// Learning Pathways function that implements seeded data recommendation system
-function LearningPathways({learningData, loading}) {
+function LearningPathways() {
   const [showNote, setShowNote] = useState(true);
-
-  const languages = learningData?.languages || [];
-  const platforms = learningData?.platforms || [];
-  const certifications = learningData?.certifications || [];
-  const resources = learningData?.resources || [];
-  const youtubeResources = learningData?.youtubeResources || [];
-
   return (
     <div style={{ padding: "0 28px 40px", position: "relative" }}>
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
           <h2 style={{ fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Proposed Resources for Specified Career:</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.5fr 1fr",
-              gap: "24px",
-              marginBottom: "40px",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  padding: "10px 16px",
-                  backgroundColor: "rgba(255,255,255,0.7)",
-                  fontStyle: "italic",
-                  marginBottom: "14px",
-                  fontSize: "14px",
-                }}
-              >
-                Recommended Resources
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {loading ? (
-                  <p style={{ color: "#777" }}>Loading recommended resources...</p>
-                ) : resources.length ? (
-                  resources.map((r, i) => (
-                    <a
-                      key={i}
-                      href={r.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        padding: "12px 18px",
-                        fontSize: "14px",
-                        color: "#2E03A5",
-                        fontStyle: "italic",
-                        backgroundColor: "rgba(255,255,255,0.7)",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        display: "block",
-                      }}
-                    >
-                      {r.provider} — {r.title}
-                    </a>
-                  ))
-                ) : (
-                  <div style={{ color: "#777", fontSize: "14px" }}>No recommended resources found yet.</div>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <div
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  padding: "10px 16px",
-                  backgroundColor: "rgba(255,255,255,0.7)",
-                  fontStyle: "italic",
-                  marginBottom: "14px",
-                  fontSize: "14px",
-                }}
-              >
-                YouTube Searches
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {loading ? (
-                  <p style={{ color: "#777" }}>Loading YouTube searches...</p>
-                ) : youtubeResources.length ? (
-                  youtubeResources.map((r, i) => (
-                    <a
-                      key={i}
-                      href={r.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        padding: "12px 18px",
-                        fontSize: "14px",
-                        color: "#2E03A5",
-                        fontStyle: "italic",
-                        backgroundColor: "rgba(255,255,255,0.7)",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        display: "block",
-                      }}
-                    >
-                      {r.provider} — {r.title}
-                    </a>
-                  ))
-                ) : (
-                  <div style={{ color: "#777", fontSize: "14px" }}>No YouTube searches found yet.</div>
-                )}
-              </div>
-            </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "40px" }}>
+            {MOCK_RESOURCES.map((r, i) => (
+              <div key={i} style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "12px 18px", fontSize: "14px", color: "#2E03A5", fontStyle: "italic", backgroundColor: "rgba(255,255,255,0.7)", maxWidth: "500px", cursor: "pointer" }}>{r}</div>
+            ))}
           </div>
-
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages to Master:</div>
-              {languages.length ? (
-                languages.map((l, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    {l}
-                  </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No language suggestions yet.</div>
-              )}
+              {MOCK_LANGUAGES.map((l, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
+                  <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />{l}
+                </div>
+              ))}
             </div>
-
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Platforms to Utilize:</div>
-              {platforms.length ? (
-                platforms.map((p, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    {p}
-                  </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No platform suggestions yet.</div>
-              )}
+              {MOCK_PLATFORMS.map((p, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "10px", fontSize: "14px" }}>
+                  <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0, marginTop: "2px" }} />
+                  <span><strong>{p.name}</strong> <span style={{ fontSize: "12px", color: "#777" }}>- {p.desc}</span></span>
+                </div>
+              ))}
             </div>
-
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Certifications to Add:</div>
-              {certifications.length ? (
-                certifications.map((c, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    <strong>{c}</strong>
-                  </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No certification suggestions yet.</div>
-              )}
+              {MOCK_CERTS.map((c, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px" }}>
+                  <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} /><strong>{c}</strong>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
         {showNote && (
           <div style={{ width: "220px", flexShrink: 0, backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #ddd", borderRadius: "8px", padding: "16px", boxShadow: "0 2px 12px rgba(0,0,0,0.1)", position: "relative", fontSize: "13px" }}>
             <button onClick={() => setShowNote(false)} style={{ position: "absolute", top: "8px", right: "10px", background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: "#888" }}>✕</button>
@@ -222,14 +121,12 @@ function Dashboard() {
   const [searchData, setSearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const {activeTab, setActiveTab} = useContext(Tab);
+  const [activeTab, setActiveTab] = useState(-1);
   const [majorData, setMajorData] = useState(null);
   const [allMajors, setAllMajors] = useState([]);
   const [selectedMajor, setSelectedMajor] = useState(null);
   const [jobListings, setJobListings] = useState(null);
   const [jobsLoading, setJobsLoading] = useState(false);
-  const [learningData, setLearningData] = useState(null);
-  const [learningLoading, setLearningLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -287,48 +184,6 @@ function Dashboard() {
       }
     }
     loadJobListings();
-  }, [searchData]);
-
-  // Fetch learning pathways when searchData loads
-  useEffect(() => {
-    // If no search data or missing ID, skip fetching learning pathways
-    if (!searchData?._id) {
-      return;
-    }
-
-    // Async function to fetch learning pathways from backend API using search ID
-    async function loadLearningPathways() {
-      setLearningLoading(true);
-
-      try {
-        // Auth token
-        const token = localStorage.getItem("token");
-
-        // Fetch learning pathways
-        const res = await fetch(`${baseUrl}/dashboard/learning-pathways/${searchData._id}`, {
-          headers: {"Content-Type": "application/json",Authorization: `Bearer ${token}`},
-        });
-
-        const data = await res.json();
-
-        // If no resulting data then error
-        if (!res.ok) {
-          throw new Error(data.message || "Failed to load learning pathways");
-        }
-
-        setLearningData(data);
-      }
-      // If error then log
-      catch (err) {
-        console.error("Learning pathways error:", err);
-        setLearningData(null);
-      }
-      // Finish loading
-      finally {
-        setLearningLoading(false);
-      }
-    }
-    loadLearningPathways();
   }, [searchData]);
 
   // Fetch user's major courses for col 3
@@ -398,7 +253,7 @@ function Dashboard() {
 
   // Use real job data or fall back to mock
   const recommendedCareers = jobListings?.recommendedCareers || [];
-  const jobResults = jobListings?.jobs || [];
+  //const jobResults = jobListings?.jobs || [];
 
   return (
     <div
@@ -538,15 +393,16 @@ function Dashboard() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px", padding: "0 28px 40px" }}>
           {/* Col 1: Career Paths */}
           <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Career Paths Based on the Information You Entered</h3>
+            <h3 style={colHeaderStyle}>Career Paths Based on Your Information</h3>
             <p style={{ fontSize: "13px", color: "#777", marginBottom: "20px", fontStyle: "italic" }}>By Best Match</p>
             {jobsLoading ? (
               <p style={{ color: "#aaa", fontSize: "13px", textAlign: "center" }}>Loading career matches...</p>
-            ) : jobResults.length > 0 ? (
+            ) : recommendedCareers.length > 0 ? (
               <>
-                {jobResults.slice(0, 4).map((job, i) => (
+                {recommendedCareers.slice(0, 4).map((job, i) => (
                   <div key={i} style={{ marginBottom: "20px", paddingBottom: "16px", borderBottom: i < 3 ? "1px solid #eee" : "none" }}>
                     <div style={{ fontWeight: "bold", fontSize: "14px", color: "#111", marginBottom: "2px" }}>{job.title}</div>
+                    <div style={{ fontWeight: "bold", fontSize: "12px", color: "#464545", marginBottom: "2px" }}>ML Match Score: {Math.round(job.score * 100)}%</div>
                     <div style={{ fontSize: "12px", color: "#999", marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
                     {job.salary !== "N/A" ? (
                       <div style={{ fontSize: "15px", fontWeight: "bold", color: "#2E03A5" }}>
@@ -563,7 +419,7 @@ function Dashboard() {
                   padding: "8px", fontSize: "13px", cursor: "pointer",
                   fontFamily: "'Georgia', serif", fontWeight: "600",
                 }}>
-                  View All Career Info →
+                  View All Career Info
                 </button>
               </>
             ) : (
@@ -580,50 +436,15 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>Proposed Resources for Specified Career:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
-              {learningLoading ? (
-                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
-              ) : learningData?.resources?.length ? (
-                learningData.resources.map((r, i) => (
-                  <a
-                    key={i}
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "10px 14px",
-                      fontSize: "13px",
-                      color: "#2E03A5",
-                      fontStyle: "italic",
-                      backgroundColor: "rgba(255,255,255,0.6)",
-                      textDecoration: "none",
-                      display: "block",
-                    }}
-                  >
-                    {r.provider} — {r.title}
-                  </a>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
-              )}
+              {MOCK_RESOURCES.map((r, i) => (
+                <div key={i} style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", color: "#2E03A5", fontStyle: "italic", backgroundColor: "rgba(255,255,255,0.6)" }}>{r}</div>
+              ))}
             </div>
             <h3 style={colHeaderStyle}>Extracurriculars:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Languages to Master</strong>
-                {learningData?.languages?.length ? learningData.languages.slice(0, 3).join(", ") : "No language suggestions yet."}
-              </div>
-
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Platforms to Utilize</strong>
-                {learningData?.platforms?.length ? learningData.platforms.slice(0, 3).join(", ") : "No platform suggestions yet."}
-              </div>
-
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Certifications to Add</strong>
-                {learningData?.certifications?.length ? learningData.certifications.slice(0, 3).join(", ") : "No certification suggestions yet."}
-              </div>
+              {MOCK_EXTRACURRICULARS.map((e, i) => (
+                <div key={i} style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", fontStyle: "italic", backgroundColor: "rgba(255,255,255,0.6)" }}>{e}</div>
+              ))}
             </div>
           </div>
 
@@ -681,19 +502,19 @@ function Dashboard() {
         <div style={{ padding: "0 28px 40px" }}>
           <div style={{ ...colStyle, minHeight: "unset" }}>
             <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
-              Career Paths Based on the Information You Entered
+              Career Paths Based on Your Information
             </h2>
             <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "32px" }}>By Best Match</p>
 
             {jobsLoading ? (
               <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
-            ) : jobResults.length > 0 ? (
+            ) : recommendedCareers.length > 0 ? (
               <>
-                {jobResults.map((job, i) => (
+                {recommendedCareers.map((job, i) => (
                   <div key={i} style={{
                     display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
                     gap: "24px", alignItems: "center",
-                    borderBottom: i < jobResults.length - 1 ? "1px solid #eee" : "none",
+                    borderBottom: i < recommendedCareers.length - 1 ? "1px solid #eee" : "none",
                     paddingBottom: "20px", marginBottom: "20px",
                   }}>
                     {/* Title */}
@@ -721,7 +542,7 @@ function Dashboard() {
                           display: "inline-block",
                         }}
                       >
-                        View Jobs →
+                        View Jobs
                       </a>
                     </div>
                   </div>
@@ -755,7 +576,7 @@ function Dashboard() {
       )}
 
       {/* LEARNING PATHWAYS TAB */}
-      {activeTab === 1 && <LearningPathways learningData={learningData} loading={learningLoading} />}
+      {activeTab === 1 && <LearningPathways />}
 
       {/* CISE MAJORS TAB */}
       {activeTab === 2 && (

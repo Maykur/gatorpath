@@ -45,7 +45,7 @@ function extractKeywords(progName) {
 }
 
 
-// main function used by your routes
+// main function used by the routes
 function getProgWords(progName) {
 
   if (!progName) return []; // empty array bc we need prog for it
