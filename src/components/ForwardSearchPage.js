@@ -292,6 +292,7 @@ return (
           <div style={sectionTitle}>Academic Information</div>
 
 
+
           <div style={fieldStyle}>
             <label style={labelStyle}>Major (required)</label>
             <Select
