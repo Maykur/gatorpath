@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
-import { baseUrl } from "../constants";
+import {baseUrl} from "../constants";
+import {Tab} from "../App.js";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -20,8 +21,7 @@ const colStyle = {
 };
 
 const colHeaderStyle = {
-  // Bolder to indicate header
-  fontSize: "24px", fontWeight: "bold", textAlign: "center",
+  fontSize: "16px", fontWeight: "bold", textAlign: "center",
   marginBottom: "16px", color: "#111", lineHeight: "1.4",
 };
 
@@ -167,6 +167,7 @@ function LearningPathways({ learningData, loading }) {
                 <div style={{ color: "#777", fontSize: "13px" }}>No language suggestions yet.</div>
               )}
             </div>
+
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Platforms to Utilize:</div>
               {platforms.length ? (
@@ -180,6 +181,7 @@ function LearningPathways({ learningData, loading }) {
                 <div style={{ color: "#777", fontSize: "13px" }}>No platform suggestions yet.</div>
               )}
             </div>
+
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Certifications to Add:</div>
               {certifications.length ? (
@@ -195,6 +197,7 @@ function LearningPathways({ learningData, loading }) {
             </div>
           </div>
         </div>
+
         {showNote && (
           <div style={{ width: "220px", flexShrink: 0, backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #ddd", borderRadius: "8px", padding: "16px", boxShadow: "0 2px 12px rgba(0,0,0,0.1)", position: "relative", fontSize: "13px" }}>
             <button onClick={() => setShowNote(false)} style={{ position: "absolute", top: "8px", right: "10px", background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: "#888" }}>✕</button>
@@ -215,7 +218,7 @@ function Dashboard() {
   const [searchData, setSearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState(-1);
+  const {activeTab, setActiveTab} = useContext(Tab);
   const [majorData, setMajorData] = useState(null);
   const [allMajors, setAllMajors] = useState([]);
   const [selectedMajor, setSelectedMajor] = useState(null);
@@ -391,7 +394,7 @@ function Dashboard() {
 
   // Use real job data or fall back to mock
   const recommendedCareers = jobListings?.recommendedCareers || [];
-  //const jobResults = jobListings?.jobs || [];
+  const jobResults = jobListings?.jobs || [];
 
   return (
     <div
@@ -531,16 +534,15 @@ function Dashboard() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px", padding: "0 28px 40px" }}>
           {/* Col 1: Career Paths */}
           <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Career Paths Based on Your Information</h3>
+            <h3 style={colHeaderStyle}>Career Paths Based on the Information You Entered</h3>
             <p style={{ fontSize: "13px", color: "#777", marginBottom: "20px", fontStyle: "italic" }}>By Best Match</p>
             {jobsLoading ? (
               <p style={{ color: "#aaa", fontSize: "13px", textAlign: "center" }}>Loading career matches...</p>
-            ) : recommendedCareers.length > 0 ? (
+            ) : jobResults.length > 0 ? (
               <>
-                {recommendedCareers.slice(0, 4).map((job, i) => (
+                {jobResults.slice(0, 4).map((job, i) => (
                   <div key={i} style={{ marginBottom: "20px", paddingBottom: "16px", borderBottom: i < 3 ? "1px solid #eee" : "none" }}>
                     <div style={{ fontWeight: "bold", fontSize: "14px", color: "#111", marginBottom: "2px" }}>{job.title}</div>
-                    <div style={{ fontWeight: "bold", fontSize: "12px", color: "#464545", marginBottom: "2px" }}>ML Match Score: {Math.round(job.score * 100)}%</div>
                     <div style={{ fontSize: "12px", color: "#999", marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
                     {job.salary !== "N/A" ? (
                       <div style={{ fontSize: "15px", fontWeight: "bold", color: "#2E03A5" }}>
@@ -557,7 +559,7 @@ function Dashboard() {
                   padding: "8px", fontSize: "13px", cursor: "pointer",
                   fontFamily: "'Georgia', serif", fontWeight: "600",
                 }}>
-                  View All Career Info
+                  View All Career Info →
                 </button>
               </>
             ) : (
@@ -574,6 +576,33 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>Proposed Resources for Specified Career:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
+              {learningLoading ? (
+                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
+              ) : learningData?.resources?.length ? (
+                learningData.resources.map((r, i) => (
+                  <a
+                    key={i}
+                    href={r.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "10px 14px",
+                      fontSize: "13px",
+                      color: "#2E03A5",
+                      fontStyle: "italic",
+                      backgroundColor: "rgba(255,255,255,0.6)",
+                      textDecoration: "none",
+                      display: "block",
+                    }}
+                  >
+                    {r.provider} — {r.title}
+                  </a>
+                ))
+              ) : (
+                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
+              )}
               {learningLoading ? (
                 <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
               ) : learningData?.resources?.length ? (
@@ -675,19 +704,19 @@ function Dashboard() {
         <div style={{ padding: "0 28px 40px" }}>
           <div style={{ ...colStyle, minHeight: "unset" }}>
             <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
-              Career Paths Based on Your Information
+              Career Paths Based on the Information You Entered
             </h2>
             <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "32px" }}>By Best Match</p>
 
             {jobsLoading ? (
               <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
-            ) : recommendedCareers.length > 0 ? (
+            ) : jobResults.length > 0 ? (
               <>
-                {recommendedCareers.map((job, i) => (
+                {jobResults.map((job, i) => (
                   <div key={i} style={{
                     display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
                     gap: "24px", alignItems: "center",
-                    borderBottom: i < recommendedCareers.length - 1 ? "1px solid #eee" : "none",
+                    borderBottom: i < jobResults.length - 1 ? "1px solid #eee" : "none",
                     paddingBottom: "20px", marginBottom: "20px",
                   }}>
                     {/* Title */}
@@ -715,7 +744,7 @@ function Dashboard() {
                           display: "inline-block",
                         }}
                       >
-                        View Jobs
+                        View Jobs →
                       </a>
                     </div>
                   </div>
