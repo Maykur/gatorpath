@@ -155,7 +155,7 @@ function LearningPathways({ learningData, loading }) {
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages to Master:</div>
+              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages or Skills to Master:</div>
               {languages.length ? (
                 languages.map((l, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
@@ -489,7 +489,7 @@ function Dashboard() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
+          <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} variant="icon"/>
 
           <button
             onClick={() => navigate("/past-searches")}
@@ -634,7 +634,7 @@ function Dashboard() {
             <h3 style={colHeaderStyle}>Extracurriculars:</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Languages to Master</strong>
+                <strong style={{ display: "block", marginBottom: "6px" }}>Languages or Skills to Master</strong>
                 {learningData?.languages?.length ? learningData.languages.slice(0, 3).join(", ") : "No language suggestions yet."}
               </div>
 
