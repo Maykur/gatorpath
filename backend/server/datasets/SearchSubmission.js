@@ -56,7 +56,7 @@ const SearchSubmissionSchema = new mongoose.Schema(
         // Search Section B
         additional: {
             // ex: "Fall 2026"
-            expectedGraduationTerm: {
+            expectedGraduationDate: {
                 type: String,
                 default: ''
             },

@@ -289,7 +289,7 @@ return (
       width: "100%"  
     }}>
         <form onSubmit={onSubmit}>
-          <div style={sectionTitle}>Section A: Academic Information</div>
+          <div style={sectionTitle}>Academic Information</div>
 
 
           <div style={fieldStyle}>
@@ -341,7 +341,7 @@ return (
             />
           </div>
 
-          <div style={sectionTitle}>Section B: Additional Information</div>
+          <div style={sectionTitle}>Additional Information</div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div style={fieldStyle}>

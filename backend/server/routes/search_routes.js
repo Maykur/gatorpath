@@ -11,6 +11,18 @@ const computeExpiry = () => new Date(Date.now() + TWENTY_FOUR_HOURS_MS);
 
 const router = express.Router();
 
+// Get /searches to get all searches for the user
+router.get("/", authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const searches = await SearchSubmission.find({ userId }).sort({ updatedAt: -1 });
+    res.json(searches);
+  } catch (err) {
+    console.error("GET ALL SEARCHES ERROR", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // Post /searches to create new search submission
 router.post("/", authenticateToken, async (req, res) => {
     console.log("REQ HEADERS content-type:", req.headers["content-type"]);
