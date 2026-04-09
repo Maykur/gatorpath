@@ -50,7 +50,7 @@ function LearningPathways({ learningData, loading }) {
     <div style={{ padding: "0 28px 40px", position: "relative" }}>
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
-          <h2 style={{ fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Proposed Resources for Specified Career:</h2>
+          <h2 style={{fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center"}}>Proposed Resources for Specified Career</h2>
           <div
             style={{
               display: "grid",
@@ -152,7 +152,7 @@ function LearningPathways({ learningData, loading }) {
               </div>
             </div>
             </div>
-          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
+          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center" }}>Extracurriculars</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
               <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages or Skills to Master:</div>
@@ -283,7 +283,11 @@ function Dashboard() {
       }
     }
     loadJobListings();
-  }, [searchData]);
+  }, [
+    searchData?.academic?.majorLabel,
+    searchData?.academic?.minor,
+    searchData?.academic?.certificate,
+  ]);
 
   // Fetch learning pathways when searchData loads
   useEffect(() => {
@@ -325,7 +329,7 @@ function Dashboard() {
       }
     }
     loadLearningPathways();
-  }, [searchData]);
+  }, [searchData?._id]);
 
   // Fetch user's major courses for col 3
   useEffect(() => {
@@ -338,7 +342,7 @@ function Dashboard() {
       } catch (err) { console.error(err); }
     }
     loadMajor();
-  }, [searchData]);
+  }, [searchData?.academic?.majorId]);
 
   // Fetch all majors for CISE tab
   useEffect(() => {
@@ -363,7 +367,7 @@ function Dashboard() {
       } catch (err) { console.error(err); }
     }
     autoLoad();
-  }, [activeTab, searchData]);
+  }, [activeTab, searchData?.academic?.majorId]);
 
   async function handleSelectMajor(id) {
     if (selectedMajor?._id === id) { setSelectedMajor(null); return; }
@@ -489,7 +493,21 @@ function Dashboard() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} variant="icon"/>
+          <StarButtonToggle 
+          search={searchData}
+          onUpdated={(updated) =>
+            setSearchData((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    starred: updated.starred,
+                    expiresAt: updated.expiresAt,
+                    updatedAt: updated.updatedAt,
+                  }
+                : updated
+            )
+          }
+          variant="icon"/>
 
           <button
             onClick={() => navigate("/past-searches")}
@@ -574,7 +592,7 @@ function Dashboard() {
 
           {/* Col 2: Resources + Extracurriculars */}
           <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Proposed Resources for Specified Career:</h3>
+            <h3 style={colHeaderStyle}>Proposed Resources for Specified Career</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
               {learningLoading ? (
                 <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
@@ -603,35 +621,8 @@ function Dashboard() {
               ) : (
                 <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
               )}
-              {learningLoading ? (
-                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
-              ) : learningData?.resources?.length ? (
-                learningData.resources.map((r, i) => (
-                  <a
-                    key={i}
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "10px 14px",
-                      fontSize: "13px",
-                      color: "#2E03A5",
-                      fontStyle: "italic",
-                      backgroundColor: "rgba(255,255,255,0.6)",
-                      textDecoration: "none",
-                      display: "block",
-                    }}
-                  >
-                    {r.provider} — {r.title}
-                  </a>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
-              )}
             </div>
-            <h3 style={colHeaderStyle}>Extracurriculars:</h3>
+            <h3 style={colHeaderStyle}>Extracurriculars</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
                 <strong style={{ display: "block", marginBottom: "6px" }}>Languages or Skills to Master</strong>
