@@ -109,7 +109,7 @@ export default function ForwardSearchPage() {
     if (majors.length === 0) return;
 
     try {
-      const storedUser = localStorage.getItem("user");
+      const storedUser = sessionStorage.getItem("user");
       if (!storedUser) {
         console.log("No user found in localStorage");
         return;
@@ -167,7 +167,7 @@ export default function ForwardSearchPage() {
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       setError("You must be logged in.");
       navigate("/login");
@@ -289,7 +289,7 @@ return (
       width: "100%"  
     }}>
         <form onSubmit={onSubmit}>
-          <div style={sectionTitle}>Section A: Academic Information</div>
+          <div style={sectionTitle}>Academic Information</div>
 
 
           <div style={fieldStyle}>
@@ -341,7 +341,7 @@ return (
             />
           </div>
 
-          <div style={sectionTitle}>Section B: Additional Information</div>
+          <div style={sectionTitle}>Additional Information</div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div style={fieldStyle}>

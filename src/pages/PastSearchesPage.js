@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../constants";
+import StarButtonToggle from "../components/StarButtonToggle";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -12,12 +13,33 @@ export default function PastSearchesPage() {
   const [renameError, setRenameError] = useState("");
   const navigate = useNavigate();
 
+  // Format the expiration date
+  function formatExpiry(expiresAt) {
+    if (!expiresAt) return "";
+    const date = new Date(expiresAt);
+
+    return date.toLocaleString([], {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  }
+
+  // Allow changing of starred/unstarred in Past Searches
+  function handleSearchUpdated(updatedSearch) {
+    setSaved((prev) =>
+      prev.map((item) => (item._id === updatedSearch._id ? updatedSearch : item))
+    );
+  }
+
   async function loadSaved() {
     setError("");
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) return navigate("/searches");
 
-    const res = await fetch(`${baseUrl}/searches/saved`, {
+    const res = await fetch(`${baseUrl}/searches`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -38,7 +60,7 @@ export default function PastSearchesPage() {
   }
 
   async function saveRename(id) {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const res = await fetch(`${baseUrl}/searches/${id}/rename`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -160,22 +182,47 @@ export default function PastSearchesPage() {
                     {s.academic?.majorLabel || "—"}
                     {s.academic?.minor && ` · Minor: ${s.academic.minor}`}
                   </div>
-                  {s.additional?.expectedGraduationTerm && (
+                  {s.additional?.expectedGraduationDate && (
                     <div style={{ fontSize: "12px", color: "#aaa", marginTop: "2px" }}>
-                      Graduating: {s.additional.expectedGraduationTerm}
+                      Graduating: {s.additional.expectedGraduationDate}
+                    </div>
+                  )}
+                  {/*Expiration for unstarred searches*/}
+                  {!s.starred && s.expiresAt && (
+                    <div style={{fontSize: "12px", color: "#C05A00", marginTop: "6px", fontWeight: "bold"}}>
+                      Expires: {formatExpiry(s.expiresAt)}
                     </div>
                   )}
                 </div>
 
                 {/* Right: select button */}
-                <button onClick={() => onSelect(s)} style={{
-                  backgroundColor: "#F97000", color: "white", border: "none",
-                  borderRadius: "20px", padding: "10px 24px", fontSize: "14px",
-                  fontWeight: "bold", cursor: "pointer", fontFamily: "'Georgia', serif",
-                  boxShadow: "0 2px 8px rgba(249,112,0,0.3)", whiteSpace: "nowrap",
-                }}>
-                  Load Search →
-                </button>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+                  <StarButtonToggle
+                    search={s}
+                    showLabel={true}
+                    onUpdated={handleSearchUpdated}
+                    variant="pill"
+                  />
+
+                  <button
+                    onClick={() => onSelect(s)}
+                    style={{
+                      backgroundColor: "#F97000",borderLeft: "4px solid #2E03A5",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "20px",
+                      padding: "10px 24px",
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                      fontFamily: "'Georgia', serif",
+                      boxShadow: "0 2px 8px rgba(249,112,0,0.3)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Load Search →
+                  </button>
+                </div>
               </div>
             ))}
           </div>

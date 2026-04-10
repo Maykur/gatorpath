@@ -58,7 +58,7 @@ export function SignUp() {
   const [avatarColor, setAvatarColor] = useState("#2E03A5");
   const [avatarStyle, setAvatarStyle] = useState("initials");
 
-  const isLoggedIn = !!localStorage.getItem("token");
+  const isLoggedIn = !!sessionStorage.getItem("token");
 
   useEffect(() => {
     (async () => {
@@ -73,7 +73,7 @@ export function SignUp() {
 
     if (isLoggedIn) {
       try {
-        const stored = localStorage.getItem("user");
+        const stored = sessionStorage.getItem("user");
         if (stored) {
           const u = JSON.parse(stored);
           if (u.name) setName(u.name);
@@ -159,7 +159,7 @@ export function SignUp() {
       formData.append("profileIcon", new File([blob], "avatar.png", { type: "image/png" }));
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const url = isLoggedIn ? `http://${baseUrl}/profile` : `http://${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
     const headers = isLoggedIn ? { Authorization: `Bearer ${token}` } : {};
@@ -173,9 +173,9 @@ export function SignUp() {
     }
 
     if (data.token) {
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
     }
-    localStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("user", JSON.stringify(data.user));
     setSuccess(true);
     setTimeout(() => navigate("/dashboard"), 1500);
   };
