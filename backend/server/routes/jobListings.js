@@ -12,8 +12,41 @@ const { getProgWords } = require("../progWords");
 const onetData = require("../datasets/oneNetData.json");
 const majorToOnet = require("../datasets/oneNetMap");
 const express = require("express");
+const router = express.Router();
 
-const router = express.Router(); // specific section
+// ← MOVE BOTH FUNCTIONS UP HERE
+function getSeniority(title) {
+    const t = title.toLowerCase();
+    if (t.includes("senior") || t.includes("sr.")) return "Senior";
+    if (t.includes("junior") || t.includes("jr.")) return "Junior";
+    if (t.includes("lead") || t.includes("principal")) return "Lead";
+    if (t.includes("manager") || t.includes("director")) return "Manager";
+    if (t.includes("intern")) return "Internship";
+    return "Mid Level";
+}
+
+function getState(locationObj) {
+    // Adzuna returns location as an object with an area array
+    // area format: ["US", "State", "City"] or similar
+    if (!locationObj) return "Unknown";
+    
+    const area = locationObj.area || [];
+    console.log("Location area:", area); // debug
+
+    // area[1] is usually the state
+    if (area.length >= 2) {
+        return area[1].trim();
+    }
+    if (area.length === 1) {
+        return area[0].trim();
+    }
+
+    // fallback to display_name parsing
+    const display = locationObj.display_name || "";
+    const parts = display.split(",");
+    if (parts.length >= 2) return parts[parts.length - 2].trim();
+    return display.trim() || "Unknown";
+}
 
 // listing info from api
 
@@ -142,25 +175,22 @@ const data = await response.json();
 const specializationKeywords = programKeywords.map(k => k.toLowerCase());
 
 if (specializationKeywords.length > 0) {
-
-  allEntries = allEntries.filter(job => {
-    // const text = (job.title + " " + job.description).toLowerCase();
+  const filtered = allEntries.filter(job => {
     const text = ((job.title || "") + " " + (job.description || "")).toLowerCase();
-
-    return specializationKeywords.some(keyword =>
-      text.includes(keyword)
-    );
+    return specializationKeywords.some(keyword => text.includes(keyword));
   });
 
-  if (allEntries.length > 0) {
-    // needed to comment this out because otherwise includes jobs that don't pertain to undergraduates
-    const excludeWords = ["fellow", "postdoctoral", "professor"];
+  // Only apply specialization filter if it keeps enough results
+  if (filtered.length >= 5) {
+    allEntries = filtered;
+  }
+  // Otherwise keep all entries (fallback)
 
-allEntries = allEntries.filter(job =>
-  !excludeWords.some(w =>
-    job.title.toLowerCase().includes(w)
-  )
-);
+  if (allEntries.length > 0) {
+    const excludeWords = ["fellow", "postdoctoral", "professor"];
+    allEntries = allEntries.filter(job =>
+      !excludeWords.some(w => job.title.toLowerCase().includes(w))
+    );
   }
 }
     allEntries.forEach(jobType => {
@@ -178,8 +208,7 @@ allEntries = allEntries.filter(job =>
             minSalary: jobType.salary_min,
             maxSalary: jobType.salary_max,
             description: jobType.description,
-            // location : jobType.location.display_name
-            location : jobType.location?.display_name || "Unknown"
+            location: getState(jobType.location)  // ← pass whole location object, not just display_name
         });
     }
     else{
@@ -197,7 +226,9 @@ allEntries = allEntries.filter(job =>
 const jobArray = Array.from(jobTitles.values()).map(job => ({
     title: job.title,
     salary: job.minSalary != null && job.maxSalary != null ? `$${Math.round((job.minSalary / 1000))}k - $${Math.round((job.maxSalary / 1000))}k` : 'N/A', // average salary
-    found: job.count
+    found: job.count,
+    location: job.location,  // ← already processed, no need for getState again
+    seniority: getSeniority(job.title)  // ← ADD
 }));
 
 const recommendedCareers = relatedCareers.map(c => c.title);

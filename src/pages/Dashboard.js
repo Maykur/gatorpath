@@ -227,6 +227,9 @@ function Dashboard() {
   const [learningData, setLearningData] = useState(null);
   const [learningLoading, setLearningLoading] = useState(false);
   const [showStarTooltip, setShowStarTooltip] = useState(false);
+  const [seniorityFilter, setSeniorityFilter] = useState("All");
+  const [locationFilter, setLocationFilter] = useState("All");
+  const SENIORITY_OPTIONS = ["All", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -272,7 +275,7 @@ function Dashboard() {
           major: searchData.academic.majorLabel || "",
           minor: searchData.academic.minor || "",
           certificate: searchData.academic.certificate || "",
-          state: "Florida",
+          state: "United States",  // changed from "Florida"
         });
         const res = await fetch(`${baseUrl}/jobListings?${params}`);
         const data = await res.json();
@@ -400,6 +403,15 @@ function Dashboard() {
   // Use real job data or fall back to mock
   const recommendedCareers = jobListings?.recommendedCareers || [];
   const jobResults = jobListings?.jobs || [];
+
+  // ← Build location dropdown options from actual job data
+  const locationOptions = ["All", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown" && l !== undefined))];
+
+  const filteredJobResults = jobResults.filter(job => {
+    if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
+    if (locationFilter !== "All" && job.location !== locationFilter) return false;
+    return true;
+  });
 
   return (
     <div
@@ -765,52 +777,57 @@ function Dashboard() {
             <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
               Career Paths Based on the Information You Entered
             </h2>
-            <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "32px" }}>By Best Match</p>
+            <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "16px" }}>By Best Match</p>
+
+            {/* ← ADD FILTERS HERE */}
+            <div style={{ display: "flex", gap: "12px", marginBottom: "24px", flexWrap: "wrap", alignItems: "center" }}>
+              <select
+                value={seniorityFilter}
+                onChange={(e) => setSeniorityFilter(e.target.value)}
+                style={{
+                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                  backgroundColor: "white", color: "#333",
+                }}
+              >
+                {SENIORITY_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+              </select>
+
+              {/* ← CHANGE input to select dropdown */}
+              <select
+                value={locationFilter}
+                onChange={(e) => setLocationFilter(e.target.value)}
+                style={{
+                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                  backgroundColor: "white", color: "#333",
+                }}
+              >
+                {locationOptions.map(loc => <option key={loc} value={loc}>{loc}</option>)}
+              </select>
+
+              {(seniorityFilter !== "All" || locationFilter !== "All") && (
+                <button
+                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
+                  style={{
+                    padding: "8px 14px", borderRadius: "20px", border: "1px solid #F97000",
+                    fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                    backgroundColor: "transparent", color: "#F97000",
+                  }}
+                >
+                  Clear Filters ✕
+                </button>
+              )}
+
+              <span style={{ fontSize: "12px", color: "#999", fontStyle: "italic" }}>
+                {filteredJobResults.length} result{filteredJobResults.length !== 1 ? "s" : ""}
+              </span>
+            </div>
 
             {jobsLoading ? (
               <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
-            ) : jobResults.length > 0 ? (
-              <>
-                {jobResults.map((job, i) => (
-                  <div key={i} style={{
-                    display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
-                    gap: "24px", alignItems: "center",
-                    borderBottom: i < jobResults.length - 1 ? "1px solid #eee" : "none",
-                    paddingBottom: "20px", marginBottom: "20px",
-                  }}>
-                    {/* Title */}
-                    <div>
-                      <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
-                      <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
-                    </div>
-                    {/* Salary */}
-                    <div>
-                      <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
-                        {job.salary}
-                      </span>
-                      {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
-                    </div>
-                    {/* View jobs button */}
-                    <div>
-                      <a
-                        href={`https://www.adzuna.com/search?q=${encodeURIComponent(job.title)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                          backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
-                          borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
-                          fontWeight: "600", fontFamily: "'Georgia', serif",
-                          display: "inline-block",
-                        }}
-                      >
-                        View Jobs →
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              // Fallback to mock
+            ) : jobResults.length === 0 ? (
+              // No real data at all → show mock
               MOCK_CAREERS.map((c, i) => (
                 <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? "1px solid #eee" : "none", paddingBottom: "24px", marginBottom: "24px" }}>
                   <div>
@@ -828,6 +845,60 @@ function Dashboard() {
                     </div>
                     <SalaryBar min={c.rangeMin} max={c.rangeMax} overall={salaryOverall} />
                     <div style={{ fontSize: "11px", color: "#aaa", marginTop: "4px" }}>Range Based on Your Area</div>
+                  </div>
+                </div>
+              ))
+            ) : filteredJobResults.length === 0 ? (
+              // Real data exists but filters return nothing → show message
+              <div style={{ textAlign: "center", padding: "60px 0", color: "#999" }}>
+                <p style={{ fontSize: "18px", marginBottom: "12px" }}>No jobs found for the selected filters.</p>
+                <p style={{ fontSize: "14px", marginBottom: "20px" }}>Try adjusting your seniority or location filter.</p>
+                <button
+                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
+                  style={{
+                    padding: "10px 24px", borderRadius: "20px", border: "none",
+                    backgroundColor: "#2E03A5", color: "white", fontSize: "14px",
+                    fontFamily: "'Georgia', serif", cursor: "pointer", fontWeight: "600",
+                  }}
+                >
+                  Clear Filters
+                </button>
+              </div>
+            ) : (
+              filteredJobResults.map((job, i) => (
+                <div key={i} style={{
+                  display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
+                  gap: "24px", alignItems: "center",
+                  borderBottom: i < filteredJobResults.length - 1 ? "1px solid #eee" : "none",
+                  paddingBottom: "20px", marginBottom: "20px",
+                }}>
+                  {/* Title */}
+                  <div>
+                    <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
+                    <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                  </div>
+                  {/* Salary */}
+                  <div>
+                    <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
+                      {job.salary}
+                    </span>
+                    {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
+                  </div>
+                  {/* View jobs button */}
+                  <div>
+                    <a
+                      href={`https://www.adzuna.com/search?q=${encodeURIComponent(job.title)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
+                        borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
+                        fontWeight: "600", fontFamily: "'Georgia', serif",
+                        display: "inline-block",
+                      }}
+                    >
+                      View Jobs →
+                    </a>
                   </div>
                 </div>
               ))
