@@ -151,7 +151,7 @@ function LearningPathways({ learningData, loading }) {
                 )}
               </div>
             </div>
-            </div>
+          </div>
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center" }}>Extracurriculars</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
@@ -494,22 +494,53 @@ function Dashboard() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          <StarButtonToggle 
-          search={searchData}
-          onUpdated={(updated) =>
-            setSearchData((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    starred: updated.starred,
-                    expiresAt: updated.expiresAt,
-                    updatedAt: updated.updatedAt,
-                  }
-                : updated
-            )
-          }
-          variant="icon"/>
-
+          <div
+            style={{ position: "relative" }}
+            onMouseEnter={() => setShowStarTooltip(true)}
+            onMouseLeave={() => setShowStarTooltip(false)}
+          >
+            <StarButtonToggle 
+              search={searchData}
+              onUpdated={(updated) =>
+                setSearchData((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        starred: updated.starred,
+                        expiresAt: updated.expiresAt,
+                        updatedAt: updated.updatedAt,
+                      }
+                    : updated
+                )
+              }
+              variant="icon"
+            />
+            {showStarTooltip && (
+              <div style={{
+                position: "absolute",
+                bottom: "calc(100% + 8px)",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#333",
+                color: "white",
+                fontSize: "12px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                whiteSpace: "nowrap",
+                zIndex: 100,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              }}>
+                {searchData?.starred ? "Unstar to remove from Past Searches" : "Star to save & access in Past Searches"}
+                <div style={{
+                  position: "absolute",
+                  top: "100%", left: "50%",
+                  transform: "translateX(-50%)",
+                  borderWidth: "5px", borderStyle: "solid",
+                  borderColor: "#333 transparent transparent transparent",
+                }} />
+              </div>
+            )}
+          </div>
           <button
             onClick={() => navigate("/past-searches")}
             style={{
@@ -668,6 +699,8 @@ function Dashboard() {
                 <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
                 {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
                 {searchData.academic?.certificate && <div style={{ marginBottom: "3px" }}><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+                {searchData.academic?.coursesTaken?.length > 0 && <div style={{ marginBottom: "3px" }}><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
+                {searchData.additional?.expectedGraduationDate && <div style={{ marginBottom: "3px" }}><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
                 <div style={{
                   marginTop: "8px",
                   paddingTop: "8px",

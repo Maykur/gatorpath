@@ -47,7 +47,6 @@ export default function StarButtonToggle({search, onUpdated, variant = "icon"}) 
       <button
         onClick={toggleStar}
         disabled={loading || !search?._id}
-        title={starred ? "Unsave Search" : "Save Search"}
         style={
           isPill
             ? {
