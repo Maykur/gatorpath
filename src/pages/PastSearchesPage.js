@@ -36,7 +36,7 @@ export default function PastSearchesPage() {
 
   async function loadSaved() {
     setError("");
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) return navigate("/searches");
 
     const res = await fetch(`${baseUrl}/searches`, {
@@ -60,7 +60,7 @@ export default function PastSearchesPage() {
   }
 
   async function saveRename(id) {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const res = await fetch(`${baseUrl}/searches/${id}/rename`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
