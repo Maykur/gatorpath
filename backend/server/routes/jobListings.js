@@ -208,7 +208,7 @@ if (specializationKeywords.length > 0) {
             minSalary: jobType.salary_min,
             maxSalary: jobType.salary_max,
             description: jobType.description,
-            location: getState(jobType.location)  // ← pass whole location object, not just display_name
+            location: getState(jobType.location)  // pass whole location object, not just display_name
         });
     }
     else{
@@ -227,8 +227,8 @@ const jobArray = Array.from(jobTitles.values()).map(job => ({
     title: job.title,
     salary: job.minSalary != null && job.maxSalary != null ? `$${Math.round((job.minSalary / 1000))}k - $${Math.round((job.maxSalary / 1000))}k` : 'N/A', // average salary
     found: job.count,
-    location: job.location,  // ← already processed, no need for getState again
-    seniority: getSeniority(job.title)  // ← ADD
+    location: job.location,  // already processed, no need for getState again
+    seniority: getSeniority(job.title) 
 }));
 
 const recommendedCareers = relatedCareers.map(c => c.title);
@@ -243,5 +243,3 @@ res.json({
 
 module.exports = router;
 
-
-// In case we want to have a dropdown to select and update the state by having user select
