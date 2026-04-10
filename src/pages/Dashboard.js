@@ -151,7 +151,7 @@ function LearningPathways({ learningData, loading }) {
                 )}
               </div>
             </div>
-            </div>
+          </div>
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
@@ -226,6 +226,7 @@ function Dashboard() {
   const [jobsLoading, setJobsLoading] = useState(false);
   const [learningData, setLearningData] = useState(null);
   const [learningLoading, setLearningLoading] = useState(false);
+  const [showStarTooltip, setShowStarTooltip] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -489,7 +490,41 @@ function Dashboard() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
+          <div
+            style={{ position: "relative", display: "inline-block" }}
+            onMouseEnter={() => setShowStarTooltip(true)}
+            onMouseLeave={() => setShowStarTooltip(false)}
+          >
+            <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
+            {showStarTooltip && (
+              <div style={{
+                position: "absolute",
+                bottom: "calc(100% + 8px)",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#333",
+                color: "white",
+                fontSize: "12px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                whiteSpace: "nowrap", //im making a hover popup on the star
+                pointerEvents: "none",
+                zIndex: 100,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              }}>
+                ⭐ Star this search for quick access in Past Searches
+                <div style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  borderWidth: "5px",
+                  borderStyle: "solid",
+                  borderColor: "#333 transparent transparent transparent",
+                }} />
+              </div>
+            )}
+          </div>
 
           <button
             onClick={() => navigate("/past-searches")}
@@ -654,10 +689,44 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>CISE Majors</h3>
             {searchData && (
-              <div style={{ backgroundColor: "rgba(46,3,165,0.06)", borderRadius: "6px", padding: "10px 14px", marginBottom: "16px", fontSize: "13px", color: "#444", borderLeft: "3px solid #2E03A5" }}>
-                <div><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
-                {searchData.academic?.minor && <div><strong>Minor:</strong> {searchData.academic.minor}</div>}
-                {searchData.academic?.certificate && <div><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+              <div style={{
+                backgroundColor: "rgba(46,3,165,0.06)",
+                borderRadius: "8px",
+                padding: "12px 14px",
+                marginBottom: "16px",
+                fontSize: "13px",
+                color: "#444",
+                borderLeft: "3px solid #2E03A5",
+              }}>
+                <div style={{
+                  fontSize: "11px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.6px",
+                  color: "#2E03A5",
+                  marginBottom: "6px",
+                }}>
+                  Based on Your Search
+                </div>
+                <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
+                {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
+                {searchData.academic?.certificate && <div style={{ marginBottom: "3px" }}><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+                <div style={{
+                  marginTop: "8px",
+                  paddingTop: "8px",
+                  borderTop: "1px solid rgba(46,3,165,0.15)",
+                  fontSize: "11px",
+                  color: "#888",
+                  fontStyle: "italic",
+                }}>
+                   {" "}
+                  <span
+                    onClick={() => navigate("/search")}
+                    style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    Update your search →
+                  </span>
+                </div>
               </div>
             )}
             {!majorData && <p style={{ color: "#999", fontSize: "13px", textAlign: "center" }}>Submit a search to see your major's courses here.</p>}
@@ -784,12 +853,46 @@ function Dashboard() {
       {activeTab === 2 && (
         <div style={{ padding: "0 28px 40px" }}>
           {searchData && (
-            <div style={{ backgroundColor: "rgba(46,3,165,0.06)", borderRadius: "6px", padding: "14px 18px", marginBottom: "20px", fontSize: "13px", color: "#444", borderLeft: "4px solid #2E03A5", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-              <div><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
-              {searchData.academic?.minor && <div><strong>Minor:</strong> {searchData.academic.minor}</div>}
-              {searchData.academic?.certificate && <div><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
-              {searchData.academic?.coursesTaken?.length > 0 && <div><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
-              {searchData.additional?.expectedGraduationDate && <div><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
+            <div style={{
+              backgroundColor: "rgba(46,3,165,0.06)",
+              borderRadius: "8px",
+              padding: "12px 14px",
+              marginBottom: "16px",
+              fontSize: "13px",
+              color: "#444",
+              borderLeft: "3px solid #2E03A5",
+            }}>
+              <div style={{
+                fontSize: "11px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "0.6px",
+                color: "#2E03A5",
+                marginBottom: "6px",
+              }}>
+                📋 Based on Your Search
+              </div>
+              <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
+              {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
+              {searchData.academic?.certificate && <div style={{ marginBottom: "3px" }}><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+              {searchData.academic?.coursesTaken?.length > 0 && <div style={{ marginBottom: "3px" }}><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
+              {searchData.additional?.expectedGraduationDate && <div style={{ marginBottom: "3px" }}><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
+              <div style={{
+                marginTop: "8px",
+                paddingTop: "8px",
+                borderTop: "1px solid rgba(46,3,165,0.15)",
+                fontSize: "11px",
+                color: "#888",
+                fontStyle: "italic",
+              }}>
+                All career paths, resources, and course recommendations below are tailored to this profile.{" "}
+                <span
+                  onClick={() => navigate("/search")}
+                  style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
+                >
+                  Update your search →
+                </span>
+              </div>
             </div>
           )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "24px" }}>
