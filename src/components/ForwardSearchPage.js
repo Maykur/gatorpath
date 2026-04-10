@@ -109,7 +109,7 @@ export default function ForwardSearchPage() {
     if (majors.length === 0) return;
 
     try {
-      const storedUser = localStorage.getItem("user");
+      const storedUser = sessionStorage.getItem("user");
       if (!storedUser) {
         console.log("No user found in localStorage");
         return;
@@ -167,7 +167,7 @@ export default function ForwardSearchPage() {
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       setError("You must be logged in.");
       navigate("/login");

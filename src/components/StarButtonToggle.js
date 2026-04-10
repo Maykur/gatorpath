@@ -12,7 +12,7 @@ export default function StarButtonToggle({search, onUpdated, variant = "icon"}) 
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         setError("Not logged in.");
         return;

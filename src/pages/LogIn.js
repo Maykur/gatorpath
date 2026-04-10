@@ -30,8 +30,8 @@ export function LogIn() {
     const data = await result.json();
     if (!result.ok) { setError("Invalid email or password."); return; }
 
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("user", JSON.stringify(data.user));
     navigate("/dashboard");
   };
 

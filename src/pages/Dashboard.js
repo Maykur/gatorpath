@@ -233,7 +233,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         const activeSearch = location.state?.activeSearch;
         if (!token) { navigate("/"); return; }
 
@@ -302,7 +302,7 @@ function Dashboard() {
 
       try {
         // Auth token
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
 
         // Fetch learning pathways
         const res = await fetch(`${baseUrl}/dashboard/learning-pathways/${searchData._id}`, {
