@@ -28,6 +28,35 @@ const progKeyOverrides = {
     "biotech"
   ],
 
+  "Computer Science (CSE) - College of Engineering": [
+  "software engineer",
+  "software developer",
+  "data scientist",
+  "machine learning engineer",
+  "systems engineer"
+],
+
+"Computer Science (CSC) - College of Liberal Arts & Sciences": [
+  "software engineer",
+  "software developer",
+  "data analsis",
+  "web developer",
+  "it consultant"
+],
+
+"Artificial Intelligence Fundamentals and Applications": [
+  "ai engineer",
+  "machine learning engineer",
+  "data scientist",
+  "data engineer"
+],
+
+"Data Analytics": [
+  "data analyst",
+  "data scientist",
+  "data engineer"
+]
+
 };
 
 
@@ -51,11 +80,8 @@ function getProgWords(progName) {
   if (!progName) return []; // empty array bc we need prog for it
 
 // check to see if we need to convert from upper to lowercase
-  const key = progName.toLowerCase().trim();
-console.log("Looking up program:", progName);
-console.log("Available keys:", Object.keys(progKeyOverrides));
+const key = progName.toLowerCase().trim();
 
-console.log("Looking up program:", progName);
 const match = Object.keys(progKeyOverrides)
   .find(keyInput => keyInput.toLowerCase() === key);
 

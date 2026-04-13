@@ -26,7 +26,8 @@ career_titles = [job["title"] for job in onet_data]
 career_descriptions = [job.get("description", "") for job in onet_data]
 
 career_corpus = [
-    f"{job['title']} {job.get('description', '')}"
+    # Play around with weighting titles
+    f"{job['title']} {job['title']} {job['title']} {job.get('description', '')}"
     for job in onet_data
 ]
 
@@ -51,15 +52,27 @@ def get_career_recs(major, minor="", certificate="", courses=[], majorDescriptio
         courses = []
 
     # Build a query string from args
+    # Join major/minor/cert names with their respective descriptions
+    if isinstance(majorDescription, list):
+        majorDescription = " ".join(majorDescription)
+    if isinstance(minorDescription, list):
+        minorDescription = " ".join(minorDescription)
+    if isinstance(certDescription, list):
+        certDescription = " ".join(certDescription)
+    
+    majorDescription = majorDescription or ""
+    minorDescription = minorDescription or ""
+    certDescription = certDescription or ""
+
     # Weight the query for better results
     query = " ".join([
         major, major, major,
         certificate, certificate,
         minor,
         " ".join(courses),
-        majorDescription[:300],
-        certDescription[:100],
-        minorDescription[:200]
+        majorDescription[:120],
+        certDescription[:75],
+        minorDescription[:95]
     ]).strip()
             
     # Transform query into same vector space as careers

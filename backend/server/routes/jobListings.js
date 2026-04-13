@@ -2,19 +2,16 @@
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 https://medium.com/@davidmedina0907/using-split-and-trim-for-data-cleaning-in-javascript-1167ceb1d4d6
-
-
-
-
-
 */
-// const { getProgWords } = require("../progWords");
+
 const onetData = require("../datasets/oneNetData.json");
 const majorToOnet = require("../datasets/oneNetMap");
+const progInfo = require("../program_info");
 const express = require("express");
 const router = express.Router();
+const { getProgWords } = require("../progWords"); // bringing it back
 
-// ← MOVE BOTH FUNCTIONS UP HERE
+// MOVE BOTH FUNCTIONS UP HERE
 function getSeniority(title) {
     const t = title.toLowerCase();
     if (t.includes("senior") || t.includes("sr.")) return "Senior";
@@ -49,7 +46,6 @@ function getState(locationObj) {
 }
 
 // listing info from api
-
 router.get("/", async (req, res) => {
     console.log("JOB ROUTE HIT");
     // const {major, minor, certifications, skills, state} = req.query; // get job listings based on this data
@@ -64,11 +60,7 @@ if (state && state !== "United States" && state !== "null") {
 }
     // const locationFilter = state || "Florida"; 
         
-// Simplify major name (remove degree suffix)
-const simplifiedMajor = major
-  ? major.split("(")[0].split("-")[0].trim()
-  : "";
-  const onetCodes = majorToOnet[simplifiedMajor] || [];
+  const onetCodes = majorToOnet[major] || [];
   const relatedCareers = onetData.filter(job =>
   onetCodes.includes(job.soc)
 );
@@ -78,8 +70,8 @@ const onetKeywords = relatedCareers.map(c =>
 
 // MongoDB lookup for major minors certs
 const [majorProgs, minorProgs, certProgs] = await Promise.all([
-    // Get POJOs from mongo based on type, replace with null or major name if not found
-    simplifiedMajor ? progInfo.findOne({ program_name: simplifiedMajor, program_type: "Major" }).lean() : simplifiedMajor,
+    // Get entries from mongo based on type, replace with null or major name if not found
+    major ? progInfo.findOne({ program_name: major, program_type: "Major" }).lean() : major,
     minor ? progInfo.findOne({ program_name: minor, program_type: "Minor" }).lean() : null,
     certificate ? progInfo.findOne({ program_name: certificate, program_type: "Certificate" }).lean() : null,
   ]); 
@@ -98,11 +90,21 @@ const certDescription = certProgs?.description || "";
 //   "Cybersecurity": "security engineer"
 // };
 
-//const baseKeyword = majorKeywordMap[simplifiedMajor] || simplifiedMajor;
-const baseKeyword = simplifiedMajor;
+const baseKeyword = major;
 
-// Remove since ml model is working
-const programKeywords = [];
+// use to refine model output
+const majorKeywords = getProgWords(major);
+const minorKeywords = getProgWords(minor);
+const certKeywords = getProgWords(certificate);
+
+// Count major heaviest, then minor, then certificate
+const weightedProgramKeywords = [
+  ...getProgWords(major),
+  ...getProgWords(major),
+  ...getProgWords(minor),
+  ...getProgWords(certificate),
+  ...getProgWords(certificate)
+];
 // console.log("Minor received:", minor);
 // console.log("Minor keywords:", getProgWords(minor));
 
@@ -114,7 +116,7 @@ try {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            major: simplifiedMajor,
+            major: major,
             minor: minor || "",
             certificate: certificate || "",
             majorDescription,
@@ -140,15 +142,22 @@ try {
 }
 
 // Let ML model do most of the rec
-const ML_career_recs = ML_recs.map(r => r.title.toLowerCase());
+bannedTitles = ["teacher", "postsecondary", "professor", "lecturer", "instructor"];
+const ML_career_recs = ML_recs
+  .filter(r => r.score >= 0.33)
+  .filter(r => {
+    const t = r.title.toLowerCase();
+    return !bannedTitles.some(word => t.includes(word));
+  })
+  .map(r => r.title.toLowerCase());
 
-// Use ML recs, fallback on key words
-const searchRoles = ML_career_recs.length > 0 ? ML_career_recs : [
-  baseKeyword,          
-  ...programKeywords,    
-  
-  ...onetKeywords
-].filter(v => v && v !== "null" && v !== "undefined");
+// Let keyword mapping filter out bad matches
+const searchRoles = [...new Set([
+  ...ML_career_recs,
+  ...weightedProgramKeywords.map(k => k.toLowerCase()),
+  ...onetKeywords,
+  baseKeyword?.toLowerCase()
+].filter(v => v && v !== "null" && v !== "undefined"))];
 
 const listing = searchRoles.slice(0, 3).join(" ");
 
@@ -161,7 +170,7 @@ console.log("Adzuna search query:", listing);
     const whereParameters= locationFilter
   ? `&where=${encodeURIComponent(locationFilter)}`
   : "";
-  for (const role of uniqueRoles.slice(0, 6)) {
+  for (const role of uniqueRoles.slice(0, 8)) {
 
     for (let page = 1; page <= 1; page++) { // page 3 otherwise too long?
 const response = await fetch(
@@ -193,7 +202,7 @@ const data = await response.json();
     // const data = await response.json();
     const jobTitles = new Map();
 
-const specializationKeywords = programKeywords.map(k => k.toLowerCase());
+const specializationKeywords = weightedProgramKeywords.map(k => k.toLowerCase());
 
 if (specializationKeywords.length > 0) {
   const filtered = allEntries.filter(job => {
@@ -201,41 +210,64 @@ if (specializationKeywords.length > 0) {
     return specializationKeywords.some(keyword => text.includes(keyword));
   });
 
-  // Only apply specialization filter if it keeps enough results
+   // Filter entries
   if (filtered.length >= 5) {
     allEntries = filtered;
   }
-  // Otherwise keep all entries (fallback)
+  }
 
+  // Exclude certain words
   if (allEntries.length > 0) {
-    const excludeWords = ["fellow", "postdoctoral", "professor"];
+    const excludeWords = ["fellow", "postdoctoral", "professor", "postsecondary", "teacher"];
 
-  allEntries = allEntries.filter(job =>
-  !excludeWords.some(w =>
-    job.title.toLowerCase().includes(w)));
-  }}
-    const mlMatchScores = {};
-    ML_recs.forEach(r => {
-        mlMatchScores[r.title.toLowerCase()] = r.score;
-    });
+    allEntries = allEntries.filter(job =>
+      !excludeWords.some(w => job.title.toLowerCase().includes(w))
+    );
+  }
 
-    allEntries.forEach(jobType => {
-        if (!jobType.salary_min || !jobType.salary_max || jobType.salary_min == 0 || jobType.salary_max == 0) {
-            jobType.salary_min = null;
-            jobType.salary_max = null;
-        }
+  // Filter out things that arent really jobs
+  const notRealJobs = [
+    "training program",
+    "bootcamp",
+    "course",
+    "certificate program",
+    "job training",
+    "academy",
+    "education",
+    "counselor",
+    "school"
+  ];
 
-        const salaryAvg = (jobType.salary_min + jobType.salary_max) / 2; 
+allEntries = allEntries.filter(job =>
+    !notRealJobs.some(pattern =>
+      job.title.toLowerCase().includes(pattern)
+    )
+  );
 
-        if (!jobTitles.has(jobType.title)) { //dupe check
-            jobTitles.set(jobType.title, {
-            title: jobType.title,
-            count: 1,
-            minSalary: jobType.salary_min,
-            maxSalary: jobType.salary_max,
-            description: jobType.description,
-            location: getState(jobType.location)  // pass whole location object, not just display_name
-        });
+  // Compute ML match score to sort by
+  const mlMatchScores = {};
+  ML_recs.forEach(r => {
+    mlMatchScores[r.title.toLowerCase()] = r.score;
+  });
+
+  // Build all job entries: salary, title, etc
+  allEntries.forEach(jobType => {
+      if (!jobType.salary_min || !jobType.salary_max || jobType.salary_min == 0 || jobType.salary_max == 0) {
+          jobType.salary_min = null;
+          jobType.salary_max = null;
+      }
+
+      const salaryAvg = (jobType.salary_min + jobType.salary_max) / 2; 
+
+      if (!jobTitles.has(jobType.title)) { //dupe check
+          jobTitles.set(jobType.title, {
+          title: jobType.title,
+          count: 1,
+          minSalary: jobType.salary_min,
+          maxSalary: jobType.salary_max,
+          description: jobType.description,
+          location: getState(jobType.location)  // pass whole location object, not just display_name
+      });
     }
     else{
         const existingJob = jobTitles.get(jobType.title); // does it exist currently then increase count

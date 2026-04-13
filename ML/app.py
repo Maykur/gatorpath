@@ -12,14 +12,14 @@ def home():
     # Get user data from express
     user_info = request.get_json()
 
-    # Split up data
+    # Split up user data
     major = user_info.get('major', '')
-    minor = user_info.get('minor', [])
-    certs = user_info.get('certificates', [])
-    courses = user_info.get('courses', [])
-    majorDescription = user_info.get('majorDescription', [])
-    minorDescription = user_info.get('minorDescription', [])
-    certDescription = user_info.get('certDescription', [])
+    minor = user_info.get('minor', '') or ''
+    certs = user_info.get('certificate', '') or ''
+    courses = user_info.get('courses', []) or []
+    majorDescription = user_info.get('majorDescription', '') or ''
+    minorDescription = user_info.get('minorDescription', '') or ''
+    certDescription = user_info.get('certDescription', '') or ''
 
     # Return reccomendation results
     user_recs = get_career_recs(major, minor, certs, courses, majorDescription, minorDescription, certDescription)
