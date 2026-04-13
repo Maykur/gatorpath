@@ -931,7 +931,7 @@ function Dashboard() {
                 color: "#2E03A5",
                 marginBottom: "6px",
               }}>
-                📋 Based on Your Search
+                Based on Your Search
               </div>
               <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
               {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
