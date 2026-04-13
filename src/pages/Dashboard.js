@@ -62,7 +62,7 @@ function LearningPathways({ learningData, loading }) {
     <div style={{ padding: "0 28px 40px", position: "relative" }}>
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
-          <h2 style={{ fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Proposed Resources for Specified Career:</h2>
+          <h2 style={{fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center"}}>Proposed Resources for Specified Career</h2>
           <div
             style={{
               display: "grid",
@@ -163,11 +163,11 @@ function LearningPathways({ learningData, loading }) {
                 )}
               </div>
             </div>
-            </div>
-          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px" }}>Extracurriculars:</h2>
+          </div>
+          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center" }}>Extracurriculars</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             <div>
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages to Master:</div>
+              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages or Skills to Master:</div>
               {languages.length ? (
                 languages.map((l, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
@@ -238,6 +238,10 @@ function Dashboard() {
   const [jobsLoading, setJobsLoading] = useState(false);
   const [learningData, setLearningData] = useState(null);
   const [learningLoading, setLearningLoading] = useState(false);
+  const [showStarTooltip, setShowStarTooltip] = useState(false);
+  const [seniorityFilter, setSeniorityFilter] = useState("All");
+  const [locationFilter, setLocationFilter] = useState("All");
+  const SENIORITY_OPTIONS = ["All", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -245,7 +249,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         const activeSearch = location.state?.activeSearch;
         if (!token) { navigate("/"); return; }
 
@@ -284,7 +288,7 @@ function Dashboard() {
           major: searchData.academic.majorLabel || "",
           minor: searchData.academic.minor || "",
           certificate: searchData.academic.certificate || "",
-          state: "Florida",
+          state: "United States",  // changed from "Florida"
         });
         const res = await fetch(`${baseUrl}/jobListings?${params}`);
         const data = await res.json();
@@ -296,7 +300,11 @@ function Dashboard() {
       }
     }
     loadJobListings();
-  }, [searchData]);
+  }, [
+    searchData?.academic?.majorLabel,
+    searchData?.academic?.minor,
+    searchData?.academic?.certificate,
+  ]);
 
   // Fetch learning pathways when searchData loads
   useEffect(() => {
@@ -311,7 +319,7 @@ function Dashboard() {
 
       try {
         // Auth token
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
 
         // Fetch learning pathways
         const res = await fetch(`${baseUrl}/dashboard/learning-pathways/${searchData._id}`, {
@@ -338,7 +346,7 @@ function Dashboard() {
       }
     }
     loadLearningPathways();
-  }, [searchData]);
+  }, [searchData?._id]);
 
   // Fetch user's major courses for col 3
   useEffect(() => {
@@ -351,7 +359,7 @@ function Dashboard() {
       } catch (err) { console.error(err); }
     }
     loadMajor();
-  }, [searchData]);
+  }, [searchData?.academic?.majorId]);
 
   // Fetch all majors for CISE tab
   useEffect(() => {
@@ -376,7 +384,7 @@ function Dashboard() {
       } catch (err) { console.error(err); }
     }
     autoLoad();
-  }, [activeTab, searchData]);
+  }, [activeTab, searchData?.academic?.majorId]);
 
   async function handleSelectMajor(id) {
     if (selectedMajor?._id === id) { setSelectedMajor(null); return; }
@@ -408,6 +416,15 @@ function Dashboard() {
   // Use real job data or fall back to mock
   const recommendedCareers = jobListings?.recommendedCareers || [];
   const jobResults = jobListings?.jobs || [];
+
+  // ← Build location dropdown options from actual job data
+  const locationOptions = ["All", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown" && l !== undefined))];
+
+  const filteredJobResults = jobResults.filter(job => {
+    if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
+    if (locationFilter !== "All" && job.location !== locationFilter) return false;
+    return true;
+  });
 
   return (
     <div
@@ -502,8 +519,53 @@ function Dashboard() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          <StarButtonToggle search={searchData} onUpdated={(updated) => setSearchData(updated)} />
-
+          <div
+            style={{ position: "relative" }}
+            onMouseEnter={() => setShowStarTooltip(true)}
+            onMouseLeave={() => setShowStarTooltip(false)}
+          >
+            <StarButtonToggle 
+              search={searchData}
+              onUpdated={(updated) =>
+                setSearchData((prev) =>
+                  prev
+                    ? {
+                        ...prev,
+                        starred: updated.starred,
+                        expiresAt: updated.expiresAt,
+                        updatedAt: updated.updatedAt,
+                      }
+                    : updated
+                )
+              }
+              variant="icon"
+            />
+            {showStarTooltip && (
+              <div style={{
+                position: "absolute",
+                bottom: "calc(100% + 8px)",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#333",
+                color: "white",
+                fontSize: "12px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                whiteSpace: "nowrap",
+                zIndex: 100,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              }}>
+                {searchData?.starred ? "Unstar to remove from Past Searches" : "Star to save & access in Past Searches"}
+                <div style={{
+                  position: "absolute",
+                  top: "100%", left: "50%",
+                  transform: "translateX(-50%)",
+                  borderWidth: "5px", borderStyle: "solid",
+                  borderColor: "#333 transparent transparent transparent",
+                }} />
+              </div>
+            )}
+          </div>
           <button
             onClick={() => navigate("/past-searches")}
             style={{
@@ -587,7 +649,7 @@ function Dashboard() {
 
           {/* Col 2: Resources + Extracurriculars */}
           <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Proposed Resources for Specified Career:</h3>
+            <h3 style={colHeaderStyle}>Proposed Resources for Specified Career</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
               {learningLoading ? (
                 <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
@@ -616,38 +678,11 @@ function Dashboard() {
               ) : (
                 <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
               )}
-              {learningLoading ? (
-                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
-              ) : learningData?.resources?.length ? (
-                learningData.resources.map((r, i) => (
-                  <a
-                    key={i}
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "10px 14px",
-                      fontSize: "13px",
-                      color: "#2E03A5",
-                      fontStyle: "italic",
-                      backgroundColor: "rgba(255,255,255,0.6)",
-                      textDecoration: "none",
-                      display: "block",
-                    }}
-                  >
-                    {r.provider} — {r.title}
-                  </a>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
-              )}
             </div>
-            <h3 style={colHeaderStyle}>Extracurriculars:</h3>
+            <h3 style={colHeaderStyle}>Extracurriculars</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Languages to Master</strong>
+                <strong style={{ display: "block", marginBottom: "6px" }}>Languages or Skills to Master</strong>
                 {learningData?.languages?.length ? learningData.languages.slice(0, 3).join(", ") : "No language suggestions yet."}
               </div>
 
@@ -667,10 +702,46 @@ function Dashboard() {
           <div style={colStyle}>
             <h3 style={colHeaderStyle}>CISE Majors</h3>
             {searchData && (
-              <div style={{ backgroundColor: "rgba(46,3,165,0.06)", borderRadius: "6px", padding: "10px 14px", marginBottom: "16px", fontSize: "13px", color: "#444", borderLeft: "3px solid #2E03A5" }}>
-                <div><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
-                {searchData.academic?.minor && <div><strong>Minor:</strong> {searchData.academic.minor}</div>}
-                {searchData.academic?.certificate && <div><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+              <div style={{
+                backgroundColor: "rgba(46,3,165,0.06)",
+                borderRadius: "8px",
+                padding: "12px 14px",
+                marginBottom: "16px",
+                fontSize: "13px",
+                color: "#444",
+                borderLeft: "3px solid #2E03A5",
+              }}>
+                <div style={{
+                  fontSize: "11px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.6px",
+                  color: "#2E03A5",
+                  marginBottom: "6px",
+                }}>
+                  Based on Your Search
+                </div>
+                <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
+                {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
+                {searchData.academic?.certificate && <div style={{ marginBottom: "3px" }}><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+                {searchData.academic?.coursesTaken?.length > 0 && <div style={{ marginBottom: "3px" }}><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
+                {searchData.additional?.expectedGraduationDate && <div style={{ marginBottom: "3px" }}><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
+                <div style={{
+                  marginTop: "8px",
+                  paddingTop: "8px",
+                  borderTop: "1px solid rgba(46,3,165,0.15)",
+                  fontSize: "11px",
+                  color: "#888",
+                  fontStyle: "italic",
+                }}>
+                   {" "}
+                  <span
+                    onClick={() => navigate("/search")}
+                    style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    Update your search →
+                  </span>
+                </div>
               </div>
             )}
             {!majorData && <p style={{ color: "#999", fontSize: "13px", textAlign: "center" }}>Submit a search to see your major's courses here.</p>}
@@ -719,57 +790,57 @@ function Dashboard() {
             <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
               Career Paths Based on the Information You Entered
             </h2>
-            <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "32px" }}>By Best Match</p>
+            <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "16px" }}>By Best Match</p>
+
+            {/* ← ADD FILTERS HERE */}
+            <div style={{ display: "flex", gap: "12px", marginBottom: "24px", flexWrap: "wrap", alignItems: "center" }}>
+              <select
+                value={seniorityFilter}
+                onChange={(e) => setSeniorityFilter(e.target.value)}
+                style={{
+                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                  backgroundColor: "white", color: "#333",
+                }}
+              >
+                {SENIORITY_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+              </select>
+
+              {/* ← CHANGE input to select dropdown */}
+              <select
+                value={locationFilter}
+                onChange={(e) => setLocationFilter(e.target.value)}
+                style={{
+                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                  backgroundColor: "white", color: "#333",
+                }}
+              >
+                {locationOptions.map(loc => <option key={loc} value={loc}>{loc}</option>)}
+              </select>
+
+              {(seniorityFilter !== "All" || locationFilter !== "All") && (
+                <button
+                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
+                  style={{
+                    padding: "8px 14px", borderRadius: "20px", border: "1px solid #F97000",
+                    fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
+                    backgroundColor: "transparent", color: "#F97000",
+                  }}
+                >
+                  Clear Filters ✕
+                </button>
+              )}
+
+              <span style={{ fontSize: "12px", color: "#999", fontStyle: "italic" }}>
+                {filteredJobResults.length} result{filteredJobResults.length !== 1 ? "s" : ""}
+              </span>
+            </div>
 
             {jobsLoading ? (
               <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
-            ) : jobResults.length > 0 ? (
-              <>
-                {jobResults.map((job, i) => (
-                  <div key={i} style={{
-                    display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
-                    gap: "24px", alignItems: "center",
-                    borderBottom: i < jobResults.length - 1 ? "1px solid #eee" : "none",
-                    paddingBottom: "20px", marginBottom: "20px",
-                  }}>
-                    {/* Title */}
-                    <div>
-                      <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
-                      <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
-                    </div>
-                    {job.matchScore != null && (
-                      <div style={{ fontSize: "12px", color: "#777", marginBottom: "6px" }}>
-                        ML Match: {(job.matchScore * 100).toFixed(1)}%
-                      </div>
-                    )}
-                    {/* Salary */}
-                    <div>
-                      <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
-                        {job.salary}
-                      </span>
-                      {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
-                    </div>
-                    {/* View jobs button */}
-                    <div>
-                      <a
-                        href={`https://www.adzuna.com/search?q=${encodeURIComponent(job.title)}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                          backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
-                          borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
-                          fontWeight: "600", fontFamily: "'Georgia', serif",
-                          display: "inline-block",
-                        }}
-                      >
-                        View Jobs →
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              // Fallback to mock
+            ) : jobResults.length === 0 ? (
+              // No real data at all → show mock
               MOCK_CAREERS.map((c, i) => (
                 <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? "1px solid #eee" : "none", paddingBottom: "24px", marginBottom: "24px" }}>
                   <div>
@@ -790,6 +861,60 @@ function Dashboard() {
                   </div>
                 </div>
               ))
+            ) : filteredJobResults.length === 0 ? (
+              // Real data exists but filters return nothing → show message
+              <div style={{ textAlign: "center", padding: "60px 0", color: "#999" }}>
+                <p style={{ fontSize: "18px", marginBottom: "12px" }}>No jobs found for the selected filters.</p>
+                <p style={{ fontSize: "14px", marginBottom: "20px" }}>Try adjusting your seniority or location filter.</p>
+                <button
+                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
+                  style={{
+                    padding: "10px 24px", borderRadius: "20px", border: "none",
+                    backgroundColor: "#2E03A5", color: "white", fontSize: "14px",
+                    fontFamily: "'Georgia', serif", cursor: "pointer", fontWeight: "600",
+                  }}
+                >
+                  Clear Filters
+                </button>
+              </div>
+            ) : (
+              filteredJobResults.map((job, i) => (
+                <div key={i} style={{
+                  display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
+                  gap: "24px", alignItems: "center",
+                  borderBottom: i < filteredJobResults.length - 1 ? "1px solid #eee" : "none",
+                  paddingBottom: "20px", marginBottom: "20px",
+                }}>
+                  {/* Title */}
+                  <div>
+                    <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
+                    <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                  </div>
+                  {/* Salary */}
+                  <div>
+                    <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
+                      {job.salary}
+                    </span>
+                    {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
+                  </div>
+                  {/* View jobs button */}
+                  <div>
+                    <a
+                      href={`https://www.adzuna.com/search?q=${encodeURIComponent(job.title)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
+                        borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
+                        fontWeight: "600", fontFamily: "'Georgia', serif",
+                        display: "inline-block",
+                      }}
+                    >
+                      View Jobs →
+                    </a>
+                  </div>
+                </div>
+              ))
             )}
           </div>
         </div>
@@ -802,12 +927,46 @@ function Dashboard() {
       {activeTab === 2 && (
         <div style={{ padding: "0 28px 40px" }}>
           {searchData && (
-            <div style={{ backgroundColor: "rgba(46,3,165,0.06)", borderRadius: "6px", padding: "14px 18px", marginBottom: "20px", fontSize: "13px", color: "#444", borderLeft: "4px solid #2E03A5", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-              <div><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
-              {searchData.academic?.minor && <div><strong>Minor:</strong> {searchData.academic.minor}</div>}
-              {searchData.academic?.certificate && <div><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
-              {searchData.academic?.coursesTaken?.length > 0 && <div><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
-              {searchData.additional?.expectedGraduationDate && <div><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
+            <div style={{
+              backgroundColor: "rgba(46,3,165,0.06)",
+              borderRadius: "8px",
+              padding: "12px 14px",
+              marginBottom: "16px",
+              fontSize: "13px",
+              color: "#444",
+              borderLeft: "3px solid #2E03A5",
+            }}>
+              <div style={{
+                fontSize: "11px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "0.6px",
+                color: "#2E03A5",
+                marginBottom: "6px",
+              }}>
+                📋 Based on Your Search
+              </div>
+              <div style={{ marginBottom: "3px" }}><strong>Major:</strong> {searchData.academic?.majorLabel || "—"}</div>
+              {searchData.academic?.minor && <div style={{ marginBottom: "3px" }}><strong>Minor:</strong> {searchData.academic.minor}</div>}
+              {searchData.academic?.certificate && <div style={{ marginBottom: "3px" }}><strong>Certificate:</strong> {searchData.academic.certificate}</div>}
+              {searchData.academic?.coursesTaken?.length > 0 && <div style={{ marginBottom: "3px" }}><strong>Courses Taken:</strong> {searchData.academic.coursesTaken.map(c => c.code).join(", ")}</div>}
+              {searchData.additional?.expectedGraduationDate && <div style={{ marginBottom: "3px" }}><strong>Graduating:</strong> {searchData.additional.expectedGraduationDate}</div>}
+              <div style={{
+                marginTop: "8px",
+                paddingTop: "8px",
+                borderTop: "1px solid rgba(46,3,165,0.15)",
+                fontSize: "11px",
+                color: "#888",
+                fontStyle: "italic",
+              }}>
+                All career paths, resources, and course recommendations below are tailored to this profile.{" "}
+                <span
+                  onClick={() => navigate("/search")}
+                  style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
+                >
+                  Update your search →
+                </span>
+              </div>
             </div>
           )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "24px" }}>

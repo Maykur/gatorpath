@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "frontStart": "npm start",
     "backStart": "cd backend && npx nodemon index.js",
-    "MLinstall": "cd ML && pip install - r requirements.txt",
+    "preMLstart": "cd ML && pip install -r requirements.txt",
+    "MLinstall": "cd ML && pip install -r requirements.txt",
     "MLstart": "cd ML && python app.py",
     "serverStart": "run-p frontStart backStart MLstart"
   },

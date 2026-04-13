@@ -16,6 +16,10 @@ export function JobResults() {
     const [error, setError] = useState(""); // do i need to change here
     const [loading, setLoading] = useState(true);
     const [selectState, setSelectState] = useState("Florida");
+    const SENIORITY_OPTIONS = ["All", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
+    const [locationFilter, setLocationFilter] = useState("");
+    const [seniorityFilter, setSeniorityFilter] = useState("All");
+
     // In case we want to have a dropdown to select and update the state by having user select
     const statesOfUS = ["United States", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", 
     "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", 
@@ -115,12 +119,28 @@ export function JobResults() {
         ))}
     </select>
 
+    <select value={seniorityFilter} onChange={(e) => setSeniorityFilter(e.target.value)}>
+        {SENIORITY_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+
+    <input
+        placeholder="Filter by city/state..."
+        value={locationFilter}
+        onChange={(e) => setLocationFilter(e.target.value)}
+    />
+
             <ul>
-                {jobResults.map((job, index) => (
+                {jobResults.filter(job => {
+                    if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
+                    if (locationFilter && !job.location?.toLowerCase().includes(locationFilter.toLowerCase())) return false;
+                    return true;
+                }).map((job, index) => (
                     <li key={index} style={{marginBottom: "20px", borderBottom: "1px solid #ccc", paddingBottom: "10px"}}>
                         <h3>{job.title}</h3>
                         <p>Salary: {job.salary}</p>
                         <p>Listings Found: {job.found}</p>
+                        <p>Location: {job.location || "N/A"}</p>       {/* ← ADD */}
+                        <p>Seniority: {job.seniority || "N/A"}</p>     {/* ← ADD */}
                     </li>
                 ))}
             </ul>

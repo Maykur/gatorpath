@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
 import {Tab} from "../App.js";
@@ -6,8 +6,22 @@ import {Tab} from "../App.js";
 export function NavBar() {
   const navigate = useNavigate();
   const { setActiveTab } = useContext(Tab);
-  const loggedIn = !!localStorage.getItem("token");
+  const loggedIn = !!sessionStorage.getItem("token");
   const [showProfile, setShowProfile] = useState(false);
+  const profilePopup = useRef(null);
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (profilePopup.current && !profilePopup.current.contains(e.target)) {
+        setShowProfile(false);
+      }
+    };
+    if (showProfile) {
+      document.addEventListener("mousedown", handleClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [showProfile]);
   const handleNavigate = () => {
     if (!loggedIn) {
       return;
@@ -20,15 +34,16 @@ export function NavBar() {
     setActiveTab(-1);
   }
   let user = null;
-  const storeUser = localStorage.getItem("user");
+  const storeUser = sessionStorage.getItem("user");
   if (storeUser) {
     try { user = JSON.parse(storeUser); }
     catch (e) { user = null; }
   }
 
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    setShowProfile(false);
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     navigate("/");
   };
 
@@ -63,7 +78,12 @@ export function NavBar() {
 
         {/* RIGHT: GatorPath/Profile */}
         <button
-          onClick={() => setShowProfile(true)}
+          onClick={() => {
+            if (!loggedIn) {
+              return;
+            }
+            setShowProfile(true);
+          }}
           style={{
             marginRight: "12px",
             backgroundColor: "#efefef",
@@ -109,7 +129,7 @@ export function NavBar() {
 
       {/* Profile pop-up panel */}
       {showProfile && loggedIn && user && (
-        <div className="profile-popup">
+        <div className="profile-popup" ref={profilePopup}>
           <button className="profile-popup-close" onClick={() => setShowProfile(false)}>✕</button>
           <div className="profile-popup-header">
             <img
