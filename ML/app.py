@@ -17,9 +17,12 @@ def home():
     minor = user_info.get('minor', [])
     certs = user_info.get('certificates', [])
     courses = user_info.get('courses', [])
+    majorDescription = user_info.get('majorDescription', [])
+    minorDescription = user_info.get('minorDescription', [])
+    certDescription = user_info.get('certDescription', [])
 
     # Return reccomendation results
-    user_recs = get_career_recs(major, minor, certs, courses)
+    user_recs = get_career_recs(major, minor, certs, courses, majorDescription, minorDescription, certDescription)
 
     # Send results back as a json file
     return jsonify({"recommendations": user_recs})

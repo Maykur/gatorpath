@@ -8,11 +8,12 @@ https://medium.com/@davidmedina0907/using-split-and-trim-for-data-cleaning-in-ja
 
 
 */
-const { getProgWords } = require("../progWords");
+// const { getProgWords } = require("../progWords");
 const onetData = require("../datasets/oneNetData.json");
 const majorToOnet = require("../datasets/oneNetMap");
 const express = require("express");
-
+// Descriptions, names, prog types
+const progInfo = require("../program_info");
 const router = express.Router(); // specific section
 
 // listing info from api
@@ -21,7 +22,7 @@ router.get("/", async (req, res) => {
     console.log("JOB ROUTE HIT");
     // const {major, minor, certifications, skills, state} = req.query; // get job listings based on this data
     // const locationFilter = (!state || state === "null") ? "Florida" : state;
-    const {major, minor, certificate, skills, state} = req.query;
+    const {major, minor, certificate, courses, state} = req.query;
 
 // if "United States" is selected, remove the location filter
 let locationFilter = "";
@@ -43,6 +44,20 @@ const onetKeywords = relatedCareers.map(c =>
   c.title.toLowerCase()
 );
 
+// MongoDB lookup for major minors certs
+const [majorProgs, minorProgs, certProgs] = await Promise.all([
+    // Get POJOs from mongo based on type, replace with null or major name if not found
+    simplifiedMajor ? progInfo.findOne({ program_name: simplifiedMajor, program_type: "Major" }).lean() : simplifiedMajor,
+    minor ? progInfo.findOne({ program_name: minor, program_type: "Minor" }).lean() : null,
+    certificate ? progInfo.findOne({ program_name: certificate, program_type: "Certificate" }).lean() : null,
+  ]); 
+
+
+// Get just descriptions from mongo POJOs
+const majorDescription = majorProgs?.description || "";
+const minorDescription = minorProgs?.description || "";
+const certDescription = certProgs?.description || "";
+
 // Map majors → job role keywords
 // const majorKeywordMap = {
 //   "Computer Engineering": "software engineer",
@@ -54,19 +69,15 @@ const onetKeywords = relatedCareers.map(c =>
 //const baseKeyword = majorKeywordMap[simplifiedMajor] || simplifiedMajor;
 const baseKeyword = simplifiedMajor;
 
-
-const programKeywords = [
-  ...getProgWords(minor),
-  ...getProgWords(certificate)
-  
-];
-console.log("Minor received:", minor);
-console.log("Minor keywords:", getProgWords(minor));
+// Remove since ml model is working
+const programKeywords = [];
+// console.log("Minor received:", minor);
+// console.log("Minor keywords:", getProgWords(minor));
 
 // Call Flask ML service for career recommendations
 let ML_recs = [];
 try {
-    // Get ML recs from
+    // Get ML recs from reccomend end point
     const ML_results = await fetch(`http://localhost:5001/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,9 +85,20 @@ try {
             major: simplifiedMajor,
             minor: minor || "",
             certificate: certificate || "",
-            courses: skills ? skills.split(",").map(s => s.trim()) : []
+            majorDescription,
+            minorDescription,
+            certDescription,
+            courses: courses ? courses.split(",").map(s => s.trim()) : []
         })
     });
+
+  // ML is rage baiting me so heres some error guarding 
+  if (!ML_results.ok) {
+    const text = await ML_results.text();
+    console.error("ML service returned error:", text);
+    throw new Error("ML service failed");
+  }
+  
     const ML_data = await ML_results.json();
     ML_recs = ML_data.recommendations || [];
     console.log(ML_recs)
@@ -156,13 +178,15 @@ if (specializationKeywords.length > 0) {
     // needed to comment this out because otherwise includes jobs that don't pertain to undergraduates
     const excludeWords = ["fellow", "postdoctoral", "professor"];
 
-allEntries = allEntries.filter(job =>
+  allEntries = allEntries.filter(job =>
   !excludeWords.some(w =>
-    job.title.toLowerCase().includes(w)
-  )
-);
-  }
-}
+    job.title.toLowerCase().includes(w)));
+  }}
+    const mlMatchScores = {};
+    ML_recs.forEach(r => {
+        mlMatchScores[r.title.toLowerCase()] = r.score;
+    });
+
     allEntries.forEach(jobType => {
         if (!jobType.salary_min || !jobType.salary_max || jobType.salary_min == 0 || jobType.salary_max == 0) {
             jobType.salary_min = null;
@@ -197,15 +221,18 @@ allEntries = allEntries.filter(job =>
 const jobArray = Array.from(jobTitles.values()).map(job => ({
     title: job.title,
     salary: job.minSalary != null && job.maxSalary != null ? `$${Math.round((job.minSalary / 1000))}k - $${Math.round((job.maxSalary / 1000))}k` : 'N/A', // average salary
-    found: job.count
+    found: job.count,
+    matchScore: mlMatchScores[job.title.toLowerCase()] ?? null
 }));
 
 const recommendedCareers = relatedCareers.map(c => c.title);
+// Sort by match score descending so best matches appear first
+jobArray.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
 
 res.json({
   location: state || "United States",
   recommendedCareers: ML_recs,
-  jobs: jobArray
+  jobs: jobArray,
 });
 });
 
