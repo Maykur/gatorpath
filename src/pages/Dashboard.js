@@ -27,6 +27,18 @@ const colHeaderStyle = {
 
 const salaryOverall = { min: 0, max: 200000 };
 
+// Format salary if its not a range
+function formatSalary(salary) {
+  if (!salary || salary === "N/A") return "N/A";
+
+  const parts = salary.split("-").map((part) => part.trim());
+  if (parts.length === 2 && parts[0] === parts[1]) {
+    return parts[0];
+  }
+
+  return salary;
+}
+
 function SalaryBar({ min, max, overall }) {
   const pct = (v) => Math.round(((v - overall.min) / (overall.max - overall.min)) * 100);
   return (
@@ -268,6 +280,7 @@ function Dashboard() {
   // Fetch job listings when searchData loads
   useEffect(() => {
     if (!searchData?.academic?.majorLabel) return;
+    if (searchData.current) return;
     async function loadJobListings() {
       setJobsLoading(true);
       try {
@@ -608,7 +621,7 @@ function Dashboard() {
                     <div style={{ fontSize: "12px", color: "#999", marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
                     {job.salary !== "N/A" ? (
                       <div style={{ fontSize: "15px", fontWeight: "bold", color: "#2E03A5" }}>
-                        {job.salary} <span style={{ fontSize: "11px", fontWeight: "normal", color: "#888" }}>/ year</span>
+                        {formatSalary(job.salary)} <span style={{ fontSize: "11px", fontWeight: "normal", color: "#888" }}>/ year</span>
                       </div>
                     ) : (
                       <div style={{ fontSize: "12px", color: "#bbb" }}>Salary data unavailable</div>
@@ -621,7 +634,7 @@ function Dashboard() {
                   padding: "8px", fontSize: "13px", cursor: "pointer",
                   fontFamily: "'Georgia', serif", fontWeight: "600",
                 }}>
-                  View All Career Info →
+                  View All Career Info
                 </button>
               </>
             ) : (

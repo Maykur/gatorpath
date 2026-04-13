@@ -29,19 +29,17 @@ export function JobResults() {
     "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];  
 
     
-    // Format salary, ex: $47k vs 47k-47k
-    // idk why this isnt working but whatever
-    // function formatSalary(salary) {
+   // Format salary if its not a range
+    function formatSalary(salary) {
+    if (!salary || salary === "N/A") return "N/A";
 
-    //     // trim spaces around nums and split
-    //     const nums = salary.split("-").map(p => p.trim());
-    //     if (nums.length === 2 && nums[0] === nums[1]) {
-    //         // just show one number if they're the same
-    //         return nums[0];
-    //     }
-    //     // Will show range if it differs
-    //     return salary;
-    // }
+    const parts = salary.split("-").map((part) => part.trim());
+    if (parts.length === 2 && parts[0] === parts[1]) {
+        return parts[0];
+    }
+
+    return salary;
+}
 
     useEffect(() => {
 
@@ -99,6 +97,12 @@ export function JobResults() {
 
     }, [location.search, selectState]); // if state changes update results? 
 
+    useEffect(() => {
+    if (jobResults.length > 0) {
+        console.log("Sample salary:", jobResults[0].salary, typeof jobResults[0].salary);
+    }
+}, [jobResults]);
+
     return (
 
         <div>
@@ -137,7 +141,7 @@ export function JobResults() {
                 }).map((job, index) => (
                     <li key={index} style={{marginBottom: "20px", borderBottom: "1px solid #ccc", paddingBottom: "10px"}}>
                         <h3>{job.title}</h3>
-                        <p>Salary: {job.salary}</p>
+                        <p>Salary: {formatSalary(job.salary)}</p>
                         <p>Listings Found: {job.found}</p>
                         <p>Location: {job.location || "N/A"}</p>       {/* ← ADD */}
                         <p>Seniority: {job.seniority || "N/A"}</p>     {/* ← ADD */}
@@ -147,4 +151,5 @@ export function JobResults() {
 
         </div>
     );
+
 }
