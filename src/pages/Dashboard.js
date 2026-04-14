@@ -239,8 +239,8 @@ function Dashboard() {
   const [learningData, setLearningData] = useState(null);
   const [learningLoading, setLearningLoading] = useState(false);
   const [showStarTooltip, setShowStarTooltip] = useState(false);
-  const [seniorityFilter, setSeniorityFilter] = useState("All");
-  const [locationFilter, setLocationFilter] = useState("All");
+  const [seniorityFilter, setSeniorityFilter] = useState("Select Seniority");
+  const [locationFilter, setLocationFilter] = useState("Select State");
   const SENIORITY_OPTIONS = ["All", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
 
   const location = useLocation();
