@@ -862,12 +862,12 @@ function Dashboard() {
                 </div>
               ))
             ) : filteredJobResults.length === 0 ? (
-              // Real data exists but filters return nothing → show message
+              // Real data exists but filters return nothing it will show message
               <div style={{ textAlign: "center", padding: "60px 0", color: "#999" }}>
                 <p style={{ fontSize: "18px", marginBottom: "12px" }}>No jobs found for the selected filters.</p>
                 <p style={{ fontSize: "14px", marginBottom: "20px" }}>Try adjusting your seniority or location filter.</p>
                 <button
-                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
+                  onClick={() => { setSeniorityFilter("Select Seniority"); setLocationFilter("Select State"); }}
                   style={{
                     padding: "10px 24px", borderRadius: "20px", border: "none",
                     backgroundColor: "#2E03A5", color: "white", fontSize: "14px",
