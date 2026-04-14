@@ -270,7 +270,7 @@ return (
 
       <div style={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         marginTop: "6px"
       }}>
         <Link to="/dashboard">
