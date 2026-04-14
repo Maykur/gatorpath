@@ -63,7 +63,7 @@ export function SignUp() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`http://${baseUrl}/majors`);
+        const res = await fetch(`${baseUrl}/majors`);
         const data = await res.json();
         setMajors(Array.isArray(data) ? data : []);
       } catch (err) {
@@ -160,7 +160,7 @@ export function SignUp() {
     }
 
     const token = sessionStorage.getItem("token");
-    const url = isLoggedIn ? `http://${baseUrl}/profile` : `http://${baseUrl}/register`;
+    const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
     const headers = isLoggedIn ? { Authorization: `Bearer ${token}` } : {};
 

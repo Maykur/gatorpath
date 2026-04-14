@@ -241,7 +241,7 @@ function Dashboard() {
   const [showStarTooltip, setShowStarTooltip] = useState(false);
   const [seniorityFilter, setSeniorityFilter] = useState("Select Seniority");
   const [locationFilter, setLocationFilter] = useState("Select State");
-  const SENIORITY_OPTIONS = ["All", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
+  const SENIORITY_OPTIONS = ["Filter by Seniority", "Internship", "Junior", "Mid Level", "Senior", "Lead", "Manager"];
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -417,8 +417,8 @@ function Dashboard() {
   const recommendedCareers = jobListings?.recommendedCareers || [];
   const jobResults = jobListings?.jobs || [];
 
-  // ← Build location dropdown options from actual job data
-  const locationOptions = ["All", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown" && l !== undefined))];
+  // Build location dropdown options from actual job data
+  const locationOptions = ["Filter by State", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown" && l !== undefined))];
 
   const filteredJobResults = jobResults.filter(job => {
     if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
