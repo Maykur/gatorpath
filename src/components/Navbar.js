@@ -51,8 +51,11 @@ export function NavBar() {
     <>
       <nav style={navStyle}>
         {/* LEFT: UF */}
-        <div
+        <button         onClick={() => navigate("/dashboard")}
           style={{
+            display: "flex",
+alignItems: "center",
+justifyContent: "center",
             marginLeft: "12px",
             backgroundColor: "#F97000",
             color: "white",
@@ -71,10 +74,21 @@ export function NavBar() {
           onClick={() => handleNavigate()}
         >
           UF
-        </div>
+        </button>
 
         {/* CENTER: keep empty spacer (remove User Dashboard button only) */}
-        <div style={{ flex: 1 }} />
+       <div
+  style={{
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
+    fontSize: "40px",
+    fontWeight: "bold",
+    pointerEvents: "none", 
+  }}
+>
+  GatorPath
+</div>
 
         {/* RIGHT: GatorPath/Profile */}
         <button
@@ -100,7 +114,7 @@ export function NavBar() {
             fontFamily: "'Georgia', serif",
           }}
         >
-          <span>GatorPath</span>
+          <span>Profile</span>
           {user?.profileIcon ? (
             <img
               src={user.profileIcon}
