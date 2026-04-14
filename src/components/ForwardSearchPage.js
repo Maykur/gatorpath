@@ -270,13 +270,13 @@ return (
 
       <div style={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         marginTop: "6px"
       }}>
         <Link to="/dashboard">
           Back to Dashboard
         </Link>
-        </div>
+      </div>
   </div>
 
 
@@ -290,6 +290,7 @@ return (
     }}>
         <form onSubmit={onSubmit}>
           <div style={sectionTitle}>Academic Information</div>
+
 
 
           <div style={fieldStyle}>
