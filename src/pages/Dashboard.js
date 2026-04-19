@@ -543,8 +543,8 @@ function Dashboard() {
   const locationOptions = ["All", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown"))];
 
   const filteredJobResults = jobResults.filter(job => {
-    if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
-    if (locationFilter !== "All" && job.location !== locationFilter) return false;
+    if (seniorityFilter !== "Select Seniority" && seniorityFilter !== "Filter by Seniority" && job.seniority !== seniorityFilter) return false;
+    if (locationFilter !== "Select State" && locationFilter !== "Filter by State" && job.location !== locationFilter) return false;
     return true;
   });
 
@@ -875,7 +875,7 @@ function Dashboard() {
       {activeTab === 0 && (
         <div style={{ padding: "0 28px 40px" }}>
           <div style={{
-            backgroundColor: t.card,
+            backgroundColor: isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)",
             borderRadius: "6px",
             padding: "24px",
             boxShadow: t.shadow,
@@ -917,9 +917,9 @@ function Dashboard() {
                 {locationOptions.filter((option) => option !== "All").map(option => <option key={option} value={option}>{option}</option>)}
               </select>
 
-              {(seniorityFilter !== "All" || locationFilter !== "All") && (
+              {(seniorityFilter !== "Select Seniority" || locationFilter !== "Select State") && (
                 <button
-                  onClick={() => {setSeniorityFilter("All"); setSeniorityTouched(false); setLocationFilter("All"); setLocationTouched(false);}}
+                  onClick={() => { setSeniorityFilter("Select Seniority"); setLocationFilter("Select State"); }}
                   style={{
                     padding: "8px 14px", borderRadius: "20px", border: `1px solid ${t.orange}`,
                     fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
@@ -937,27 +937,6 @@ function Dashboard() {
             {jobsLoading ? (
               <p style={{ textAlign: "center", color: t.textLight, fontSize: "14px" }}>Loading job listings...</p>
             ) : jobResults.length === 0 ? (
-              MOCK_CAREERS.map((c, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? `1px solid ${t.border}` : "none", paddingBottom: "24px", marginBottom: "24px" }}>
-                  <div>
-                    <div style={{ fontWeight: "bold", fontSize: "17px", color: t.text, marginBottom: "8px" }}>{c.title}</div>
-                    <div style={{ fontSize: "13px", color: t.textMuted, lineHeight: "1.6" }}>{c.description}</div>
-                  </div>
-                  <div>
-                    <span style={{ fontSize: "30px", fontWeight: "bold", color: t.text }}>${c.avg.toLocaleString()}</span>
-                    <span style={{ fontSize: "12px", color: t.textMuted }}> / avg. per year</span>
-                  </div>
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: t.textMuted, marginBottom: "2px" }}>
-                      <span>Annual Salary Range</span>
-                      <span>${(c.rangeMin / 1000).toFixed(0)}K–{(c.rangeMax / 1000).toFixed(0)}K</span>
-                    </div>
-                    <SalaryBar min={c.rangeMin} max={c.rangeMax} overall={salaryOverall} />
-                    <div style={{ fontSize: "11px", color: t.textLight, marginTop: "4px" }}>Range Based on Your Area</div>
-                  </div>
-                </div>
-              ))
-            ) : filteredJobResults.length === 0 ? (
               <div style={{ textAlign: "center", padding: "60px 0", color: t.textMuted }}>
                 <p style={{ fontSize: "18px", marginBottom: "12px" }}>No jobs found for the selected filters.</p>
                 <p style={{ fontSize: "14px", marginBottom: "20px" }}>Try adjusting your seniority or location filter.</p>
@@ -1056,7 +1035,9 @@ function Dashboard() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "24px" }}>
             {allMajors.map((m) => (
               <div key={m._id} onClick={() => handleSelectMajor(m._id)} style={{
-                backgroundColor: selectedMajor?._id === m._id ? t.accentLight : t.card,
+                backgroundColor: selectedMajor?._id === m._id 
+                  ? t.accentLight 
+                  : isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)",
                 border: selectedMajor?._id === m._id ? `2px solid ${t.accent}` : "2px solid transparent",
                 borderRadius: "6px", padding: "20px", cursor: "pointer", boxShadow: t.shadow, transition: "all 0.2s",
               }}>

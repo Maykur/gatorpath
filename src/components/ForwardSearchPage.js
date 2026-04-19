@@ -20,6 +20,32 @@ function normalizeText(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function getNextSemesters() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth(); // 0-indexed
+
+  let semesterIndex;
+  if (month <= 4) semesterIndex = 0;      // Spring (Jan–May)
+  else if (month <= 7) semesterIndex = 1; // Summer (Jun–Aug)
+  else semesterIndex = 2;                 // Fall (Sep–Dec)
+
+  const semesterOrder = ["Spring", "Summer", "Fall"];
+  const semesters = [];
+  let currentYear = year;
+  let currentIndex = semesterIndex;
+
+  for (let i = 0; i < 9; i++) {
+    semesters.push(`${semesterOrder[currentIndex]} ${currentYear}`);
+    currentIndex++;
+    if (currentIndex >= semesterOrder.length) {
+      currentIndex = 0;
+      currentYear++;
+    }
+  }
+  return semesters;
+}
+
 export default function ForwardSearchPage() {
   const { isDark } = useTheme();
   const t = isDark ? darkTheme : lightTheme;
@@ -84,17 +110,13 @@ export default function ForwardSearchPage() {
   }, []);
 
   useEffect(() => {
-    if (majors.length === 0) return;
+    if (majors.length === 0 || minors.length === 0 || certificates.length === 0) return;
 
     try {
       const storedUser = sessionStorage.getItem("user");
-      if (!storedUser) {
-        console.log("No user found in localStorage");
-        return;
-      }
+      if (!storedUser) return;
 
       const user = JSON.parse(storedUser);
-      console.log("USER FROM LOCALSTORAGE:", user);
 
       const academic =
         user?.academic ||
@@ -102,36 +124,47 @@ export default function ForwardSearchPage() {
         user?.profile?.academic ||
         user;
 
-      const userMajor =
-        academic?.majorLabel ||
-        academic?.major ||
-        "";
-
-      const userMinor = Array.isArray(academic?.minor)
-        ? academic.minor.join(", ")
-        : (academic?.minor || "");
-
-      const userCertificate = Array.isArray(academic?.certificate)
-        ? academic.certificate.join(", ")
-        : (academic?.certificate || "");
-
-      console.log("PREFILL VALUES:", {
-        userMajor,
-        userMinor,
-        userCertificate,
-      });
-
+      // Auto-populate major
+      const userMajor = academic?.majorLabel || academic?.major || "";
       const matchedMajor = majors.find(
         (m) => normalizeText(m.major) === normalizeText(userMajor)
       );
+      if (matchedMajor) setMajorId(matchedMajor._id);
 
-      console.log("MATCHED MAJOR:", matchedMajor);
+      // Auto-populate minors
+      const userMinors = Array.isArray(academic?.minor)
+        ? academic.minor
+        : academic?.minor ? [academic.minor] : [];
+      const matchedMinors = minors
+        .filter(m => userMinors.some(um => normalizeText(um) === normalizeText(m.program_name)))
+        .map(m => ({ value: m._id, label: m.program_name }));
+      if (matchedMinors.length > 0) setSelectedMinors(matchedMinors);
 
-      setMajorId(matchedMajor?._id || "");
+      // Auto-populate certificates
+      const userCerts = Array.isArray(academic?.certificate)
+        ? academic.certificate
+        : academic?.certificate ? [academic.certificate] : [];
+      const matchedCerts = certificates
+        .filter(c => userCerts.some(uc => normalizeText(uc) === normalizeText(c.program_name)))
+        .map(c => ({ value: c._id, label: c.program_name }));
+      if (matchedCerts.length > 0) setSelectedCerts(matchedCerts);
+
+      // Auto-populate courses
+      const userCourses = Array.isArray(academic?.coursesTaken)
+        ? academic.coursesTaken.map(c => c.code || c).join(", ")
+        : (academic?.coursesTaken || "");
+      if (userCourses) setCoursesTakenText(userCourses);
+
+      // Auto-populate graduation
+      const userGrad =
+        user?.additional?.expectedGraduationDate ||
+        academic?.expectedGraduationDate || "";
+      if (userGrad) setExpectedGraduationDate(userGrad);
+
     } catch (err) {
-      console.error("Failed to prefill from localStorage:", err);
+      console.error("Failed to prefill from sessionStorage:", err);
     }
-  }, [majors]);
+  }, [majors, minors, certificates]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -307,7 +340,7 @@ export default function ForwardSearchPage() {
             <div style={sectionTitle}>Academic Information</div>
 
             <div style={fieldStyle}>
-              <label style={labelStyle}>Major (Required)</label>
+              <label style={labelStyle}>Major <span style={{ color: t.orange }}>*</span></label>
               <Select
                 options={majors.map(m => ({ value: m._id, label: m.major }))
                 }
@@ -324,6 +357,7 @@ export default function ForwardSearchPage() {
                 <Select
                   isMulti
                   options={minorList}
+                  value={selectedMinors}
                   onChange={(selected) => {
                     setSelectedMinors(selected || []);
                   }}
@@ -336,6 +370,7 @@ export default function ForwardSearchPage() {
                 <Select
                   isMulti
                   options={certList}
+                  value={selectedCerts}
                   onChange={(selected) => {
                     setSelectedCerts(selected || []);
                   }}
@@ -358,7 +393,16 @@ export default function ForwardSearchPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Expected Graduation</label>
-                <input style={inputStyle} placeholder="e.g., Fall 2026" value={expectedGraduationDate} onChange={(e) => setExpectedGraduationDate(e.target.value)} />
+                <select
+                  style={{ ...inputStyle, cursor: "pointer", appearance: "auto" }}
+                  value={expectedGraduationDate}
+                  onChange={(e) => setExpectedGraduationDate(e.target.value)}
+                >
+                  <option value="">Select Graduation Semester</option>
+                  {getNextSemesters().map(s => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
               </div>
               <div style={fieldStyle}>
                 <label style={labelStyle}>Course Preference</label>
