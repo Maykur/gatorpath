@@ -18,7 +18,6 @@ export function JobResults() {
 
     const location = useLocation();
     const [jobResults, setJobResults] = useState([]);
-    const [recommendations, setRecommendations] = useState([]);
     const [error, setError] = useState(""); // do i need to change here
     const [loading, setLoading] = useState(true);
     const [selectState, setSelectState] = useState("Florida");
@@ -85,8 +84,6 @@ export function JobResults() {
                 const data = await response.json();
 
                 setJobResults(data.jobs || []);
-                // Store reccomendations
-                setRecommendations(data.recommendedCareers || []);
 
             } catch (err) {
 
