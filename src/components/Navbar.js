@@ -73,8 +73,8 @@ export function NavBar() {
               onClick={() => setShowProfile(true)}
               style={{
                 marginRight: "12px", backgroundColor: "#efefef", color: "#222",
-                border: "1px solid #ddd", borderRadius: "8px", padding: "8px 14px",
-                fontWeight: "700", fontSize: "16px", cursor: "pointer",
+                border: "1px solid #ddd", borderRadius: "8px", padding: "10px 18px",
+                fontWeight: "700", fontSize: "18px", cursor: "pointer",
                 display: "flex", alignItems: "center", gap: "10px",
                 fontFamily: "'Georgia', serif",
               }}
@@ -82,12 +82,12 @@ export function NavBar() {
               <span>My Profile</span>
               {user?.profileIcon ? (
                 <img src={user.profileIcon} alt="avatar"
-                  style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />
+                  style={{ width: 36, height: 36, borderRadius: "50%", objectFit: "cover" }} />
               ) : (
                 <span style={{
-                  width: 28, height: 28, borderRadius: "50%", backgroundColor: "#d9d9d9",
+                  width: 32, height: 32, borderRadius: "50%", backgroundColor: "#d9d9d9",
                   display: "inline-flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "14px", lineHeight: 1,
+                  fontSize: "16px", lineHeight: 1,
                 }}>👤</span>
               )}
             </button>
