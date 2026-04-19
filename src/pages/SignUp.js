@@ -138,8 +138,6 @@ export function SignUp() {
       formData.append("profileIcon", new File([blob], "avatar.png", { type: "image/png" }));
     }
 
-    const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
-    const method = isLoggedIn ? "PUT" : "POST";
     const token = sessionStorage.getItem("token");
     const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
