@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../constants";
+import { useTheme } from "../context/ThemeContext";
+import { lightTheme, darkTheme } from "../context/theme";
 
-export function MajorPage(){
+export function MajorPage() {
+    const { isDark } = useTheme();
+    const t = isDark ? darkTheme : lightTheme;
+
     const { id } = useParams();
     const [majorInfo, setMajorInfo] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -27,93 +32,70 @@ export function MajorPage(){
         fetchInfo();
     }, [id]);
 
-    console.log(id);
-    if (loading) return <div>Loading...</div>;
-    if (!majorInfo) return <div>Major not found</div>;
+    if (loading) return (
+        <div style={{ minHeight: "100vh", backgroundColor: t.bg, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: t.textMuted, fontSize: "18px" }}>
+            Loading...
+        </div>
+    );
+
+    if (!majorInfo) return (
+        <div style={{ minHeight: "100vh", backgroundColor: t.bg, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: t.textMuted, fontSize: "18px" }}>
+            Major not found
+        </div>
+    );
 
     return (
         <div style={{
-            padding: "100px 30px 100px 30px", // Top padding for navbar, extra bottom padding
-            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-            backgroundColor: "#ffffff",
-            color: "#333333"
+            minHeight: "100vh",
+            padding: "100px 40px 60px",
+            fontFamily: "'Georgia', serif",
+            backgroundColor: t.bg,
+            color: t.text,
         }}>
             <Link to="/dashboard" style={{ textDecoration: "none" }}>
                 <button style={{
-                    backgroundColor: "#0021A5",
-                    color: "white",
-                    border: "none",
-                    padding: "12px 20px",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    marginBottom: "30px",
-                    transition: "background-color 0.2s"
+                    backgroundColor: t.accent, color: "white", border: "none",
+                    padding: "12px 20px", borderRadius: "4px", cursor: "pointer",
+                    fontSize: "14px", fontWeight: "600", marginBottom: "30px",
+                    fontFamily: "'Georgia', serif",
                 }}>
-                    ← Back to Home
+                    ← Back to Dashboard
                 </button>
             </Link>
 
             <h1 style={{
-                color: "#0021A5",
-                borderBottom: "3px solid #FA4616",
-                paddingBottom: "15px",
-                marginBottom: "20px",
-                fontSize: "28px",
-                fontWeight: "600",
-                letterSpacing: "-0.5px"
+                color: t.accent, borderBottom: `3px solid ${t.orange}`,
+                paddingBottom: "15px", marginBottom: "10px",
+                fontSize: "32px", fontWeight: "700", letterSpacing: "-0.5px",
             }}>
                 {majorInfo.major}
             </h1>
-            
-            <p style={{ 
-                fontSize: "16px", 
-                color: "#666666", 
-                marginBottom: "40px",
-                fontWeight: "500"
-            }}>
+
+            <p style={{ fontSize: "16px", color: t.textMuted, marginBottom: "40px", fontWeight: "500" }}>
                 {majorInfo.university}
             </p>
 
             {/* Core Coursework */}
             <div style={{ marginBottom: "40px" }}>
                 <h2 style={{
-                    backgroundColor: "#0021A5",
-                    color: "white",
-                    padding: "15px 20px",
-                    borderRadius: "4px",
-                    margin: "0 0 20px 0",
-                    fontSize: "18px",
-                    fontWeight: "600",
-                    letterSpacing: "0.5px"
+                    backgroundColor: t.accent, color: "white",
+                    padding: "15px 20px", borderRadius: "4px",
+                    margin: "0 0 20px 0", fontSize: "18px",
+                    fontWeight: "600", letterSpacing: "0.5px",
                 }}>
                     CORE COURSEWORK
                 </h2>
-                <div style={{
-                    backgroundColor: "#f8f9fa",
-                    padding: "20px",
-                    borderRadius: "4px",
-                    border: "1px solid #e9ecef"
-                }}>
+                <div style={{ backgroundColor: t.cardSolid, padding: "20px", borderRadius: "4px", border: `1px solid ${t.border}` }}>
                     {majorInfo.core_coursework && majorInfo.core_coursework.map((course, index) => (
                         <div key={index} style={{
-                            padding: "15px",
-                            margin: "10px 0",
-                            backgroundColor: "white",
-                            borderRadius: "3px",
-                            border: "1px solid #dee2e6",
-                            borderLeft: "3px solid #0021A5"
+                            padding: "15px", margin: "10px 0",
+                            backgroundColor: t.card, borderRadius: "3px",
+                            border: `1px solid ${t.border}`,
+                            borderLeft: `3px solid ${t.accent}`,
                         }}>
-                            <strong style={{ 
-                                color: "#0021A5", 
-                                fontSize: "14px",
-                                fontWeight: "600"
-                            }}>
-                                {course.code}
-                            </strong>
-                            <span style={{ color: "#666", margin: "0 8px" }}>—</span>
-                            <span style={{ color: "#333" }}>{course.title}</span>
+                            <strong style={{ color: t.accent, fontSize: "14px", fontWeight: "600" }}>{course.code}</strong>
+                            <span style={{ color: t.textMuted, margin: "0 8px" }}>—</span>
+                            <span style={{ color: t.text }}>{course.title}</span>
                         </div>
                     ))}
                 </div>
@@ -123,41 +105,24 @@ export function MajorPage(){
             {majorInfo.required_foundation && majorInfo.required_foundation.length > 0 && (
                 <div style={{ marginBottom: "40px" }}>
                     <h2 style={{
-                        backgroundColor: "#FA4616",
-                        color: "white",
-                        padding: "15px 20px",
-                        borderRadius: "4px",
-                        margin: "0 0 20px 0",
-                        fontSize: "18px",
-                        fontWeight: "600",
-                        letterSpacing: "0.5px"
+                        backgroundColor: t.orange, color: "white",
+                        padding: "15px 20px", borderRadius: "4px",
+                        margin: "0 0 20px 0", fontSize: "18px",
+                        fontWeight: "600", letterSpacing: "0.5px",
                     }}>
                         REQUIRED FOUNDATION
                     </h2>
-                    <div style={{
-                        backgroundColor: "#f8f9fa",
-                        padding: "20px",
-                        borderRadius: "4px",
-                        border: "1px solid #e9ecef"
-                    }}>
+                    <div style={{ backgroundColor: t.cardSolid, padding: "20px", borderRadius: "4px", border: `1px solid ${t.border}` }}>
                         {majorInfo.required_foundation.map((course, index) => (
                             <div key={index} style={{
-                                padding: "15px",
-                                margin: "10px 0",
-                                backgroundColor: "white",
-                                borderRadius: "3px",
-                                border: "1px solid #dee2e6",
-                                borderLeft: "3px solid #FA4616"
+                                padding: "15px", margin: "10px 0",
+                                backgroundColor: t.card, borderRadius: "3px",
+                                border: `1px solid ${t.border}`,
+                                borderLeft: `3px solid ${t.orange}`,
                             }}>
-                                <strong style={{ 
-                                    color: "#FA4616",
-                                    fontSize: "14px",
-                                    fontWeight: "600"
-                                }}>
-                                    {course.code}
-                                </strong>
-                                <span style={{ color: "#666", margin: "0 8px" }}>—</span>
-                                <span style={{ color: "#333" }}>{course.title}</span>
+                                <strong style={{ color: t.orange, fontSize: "14px", fontWeight: "600" }}>{course.code}</strong>
+                                <span style={{ color: t.textMuted, margin: "0 8px" }}>—</span>
+                                <span style={{ color: t.text }}>{course.title}</span>
                             </div>
                         ))}
                     </div>
@@ -168,38 +133,23 @@ export function MajorPage(){
             {majorInfo.elective_areas && majorInfo.elective_areas.length > 0 && (
                 <div style={{ marginBottom: "60px" }}>
                     <h2 style={{
-                        backgroundColor: "#2c3e50",
-                        color: "white",
-                        padding: "15px 20px",
-                        borderRadius: "4px",
-                        margin: "0 0 20px 0",
-                        fontSize: "18px",
-                        fontWeight: "600",
-                        letterSpacing: "0.5px"
+                        backgroundColor: t.cardSolid, color: t.text,
+                        padding: "15px 20px", borderRadius: "4px",
+                        margin: "0 0 20px 0", fontSize: "18px",
+                        fontWeight: "600", letterSpacing: "0.5px",
+                        border: `1px solid ${t.border}`,
                     }}>
                         ELECTIVE AREAS
                     </h2>
-                    <div style={{
-                        backgroundColor: "#f8f9fa",
-                        padding: "20px",
-                        borderRadius: "4px",
-                        border: "1px solid #e9ecef"
-                    }}>
+                    <div style={{ backgroundColor: t.cardSolid, padding: "20px", borderRadius: "4px", border: `1px solid ${t.border}` }}>
                         {majorInfo.elective_areas.map((area, index) => (
                             <div key={index} style={{
-                                padding: "15px",
-                                margin: "10px 0",
-                                backgroundColor: "white",
-                                borderRadius: "3px",
-                                border: "1px solid #dee2e6",
-                                borderLeft: "3px solid #0021A5"
+                                padding: "15px", margin: "10px 0",
+                                backgroundColor: t.card, borderRadius: "3px",
+                                border: `1px solid ${t.border}`,
+                                borderLeft: `3px solid ${t.border}`,
                             }}>
-                                <span style={{ 
-                                    color: "#333",
-                                    fontWeight: "500"
-                                }}>
-                                    {area}
-                                </span>
+                                <span style={{ color: t.text, fontWeight: "500" }}>{area}</span>
                             </div>
                         ))}
                     </div>

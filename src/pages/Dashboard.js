@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import StarButtonToggle from "../components/StarButtonToggle";
-import {baseUrl} from "../constants";
-import {Tab} from "../App.js";
+import { baseUrl } from "../constants";
+import { Tab } from "../App.js";
+import { useTheme } from "../context/ThemeContext";
+import { lightTheme, darkTheme } from "../context/theme";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
 
@@ -40,18 +42,22 @@ function formatSalary(salary) {
 }
 
 function SalaryBar({ min, max, overall }) {
+  const { isDark } = useTheme();
+  const t = isDark ? darkTheme : lightTheme;
   const pct = (v) => Math.round(((v - overall.min) / (overall.max - overall.min)) * 100);
   return (
-    <div style={{ position: "relative", height: "6px", backgroundColor: "#ddd", borderRadius: "3px", margin: "8px 0" }}>
-      <div style={{ position: "absolute", left: `${pct(min)}%`, width: `${pct(max) - pct(min)}%`, height: "100%", backgroundColor: "#2E03A5", borderRadius: "3px" }} />
-      <div style={{ position: "absolute", left: `${pct(min)}%`, top: "-4px", width: "14px", height: "14px", borderRadius: "50%", backgroundColor: "#2E03A5", transform: "translateX(-50%)" }} />
-      <div style={{ position: "absolute", left: `${pct(max)}%`, top: "-4px", width: "14px", height: "14px", borderRadius: "50%", backgroundColor: "#2E03A5", transform: "translateX(-50%)" }} />
+    <div style={{ position: "relative", height: "6px", backgroundColor: t.border, borderRadius: "3px", margin: "8px 0" }}>
+      <div style={{ position: "absolute", left: `${pct(min)}%`, width: `${pct(max) - pct(min)}%`, height: "100%", backgroundColor: t.accent, borderRadius: "3px" }} />
+      <div style={{ position: "absolute", left: `${pct(min)}%`, top: "-4px", width: "14px", height: "14px", borderRadius: "50%", backgroundColor: t.accent, transform: "translateX(-50%)" }} />
+      <div style={{ position: "absolute", left: `${pct(max)}%`, top: "-4px", width: "14px", height: "14px", borderRadius: "50%", backgroundColor: t.accent, transform: "translateX(-50%)" }} />
     </div>
   );
 }
 
 // Learning Pathways function that implements seeded data recommendation system
 function LearningPathways({ learningData, loading }) {
+  const { isDark } = useTheme();
+  const t = isDark ? darkTheme : lightTheme;
   const [showNote, setShowNote] = useState(true);
   const languages = learningData?.languages || [];
   const platforms = learningData?.platforms || [];
@@ -62,163 +68,71 @@ function LearningPathways({ learningData, loading }) {
     <div style={{ padding: "0 28px 40px", position: "relative" }}>
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
-          <h2 style={{fontSize: "28px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center"}}>Proposed Resources for Specified Career</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.5fr 1fr",
-              gap: "24px",
-              marginBottom: "40px",
-            }}
-          >
+          <h2 style={{ fontSize: "28px", fontWeight: "bold", color: t.text, marginBottom: "20px", textAlign: "center" }}>Proposed Resources for Specified Career</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: "24px", marginBottom: "40px" }}>
             <div>
-              <div
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  padding: "10px 16px",
-                  backgroundColor: "rgba(255,255,255,0.7)",
-                  fontStyle: "italic",
-                  marginBottom: "14px",
-                  fontSize: "14px",
-                }}
-              >
-                Recommended Resources
-              </div>
-
+              <div style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "10px 16px", backgroundColor: t.card, fontStyle: "italic", marginBottom: "14px", fontSize: "14px", color: t.text }}>Recommended Resources</div>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {loading ? (
-                  <p style={{ color: "#777" }}>Loading recommended resources...</p>
+                  <p style={{ color: t.textMuted }}>Loading recommended resources...</p>
                 ) : resources.length ? (
                   resources.map((r, i) => (
-                    <a
-                      key={i}
-                      href={r.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        padding: "12px 18px",
-                        fontSize: "14px",
-                        color: "#2E03A5",
-                        fontStyle: "italic",
-                        backgroundColor: "rgba(255,255,255,0.7)",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        display: "block",
-                      }}
-                    >
+                    <a key={i} href={r.url} target="_blank" rel="noreferrer" style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "12px 18px", fontSize: "14px", color: t.accent, fontStyle: "italic", backgroundColor: t.card, cursor: "pointer", textDecoration: "none", display: "block" }}>
                       {r.provider} — {r.title}
                     </a>
                   ))
                 ) : (
-                  <div style={{ color: "#777", fontSize: "14px" }}>No recommended resources found yet.</div>
+                  <div style={{ color: t.textMuted, fontSize: "14px" }}>No recommended resources found yet.</div>
                 )}
               </div>
             </div>
             <div>
-              <div
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  padding: "10px 16px",
-                  backgroundColor: "rgba(255,255,255,0.7)",
-                  fontStyle: "italic",
-                  marginBottom: "14px",
-                  fontSize: "14px",
-                }}
-              >
-                YouTube Searches
-              </div>
-
+              <div style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "10px 16px", backgroundColor: t.card, fontStyle: "italic", marginBottom: "14px", fontSize: "14px", color: t.text }}>YouTube Searches</div>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {loading ? (
-                  <p style={{ color: "#777" }}>Loading YouTube searches...</p>
+                  <p style={{ color: t.textMuted }}>Loading YouTube searches...</p>
                 ) : youtubeResources.length ? (
                   youtubeResources.map((r, i) => (
-                    <a
-                      key={i}
-                      href={r.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        padding: "12px 18px",
-                        fontSize: "14px",
-                        color: "#2E03A5",
-                        fontStyle: "italic",
-                        backgroundColor: "rgba(255,255,255,0.7)",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        display: "block",
-                      }}
-                    >
+                    <a key={i} href={r.url} target="_blank" rel="noreferrer" style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "12px 18px", fontSize: "14px", color: t.accent, fontStyle: "italic", backgroundColor: t.card, cursor: "pointer", textDecoration: "none", display: "block" }}>
                       {r.provider} — {r.title}
                     </a>
                   ))
                 ) : (
-                  <div style={{ color: "#777", fontSize: "14px" }}>No YouTube searches found yet.</div>
+                  <div style={{ color: t.textMuted, fontSize: "14px" }}>No YouTube searches found yet.</div>
                 )}
               </div>
             </div>
           </div>
-          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", marginBottom: "20px", textAlign: "center" }}>Extracurriculars</h2>
+          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: t.text, marginBottom: "20px", textAlign: "center" }}>Extracurriculars</h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
-            <div>
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Languages or Skills to Master:</div>
-              {languages.length ? (
-                languages.map((l, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    {l}
+            {[
+              { label: "Languages or Skills to Master:", items: languages },
+              { label: "Platforms to Utilize:", items: platforms },
+              { label: "Certifications to Add:", items: certifications },
+            ].map(({ label, items }, idx) => (
+              <div key={idx}>
+                <div style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "10px 16px", backgroundColor: t.card, fontStyle: "italic", marginBottom: "14px", fontSize: "14px", color: t.text }}>{label}</div>
+                {items.length ? items.map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold", color: t.text }}>
+                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: `2px solid ${t.textMuted}`, flexShrink: 0 }} />
+                    {item}
                   </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No language suggestions yet.</div>
-              )}
-            </div>
-
-            <div>
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Platforms to Utilize:</div>
-              {platforms.length ? (
-                platforms.map((p, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", fontWeight: "bold" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    {p}
-                  </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No platform suggestions yet.</div>
-              )}
-            </div>
-
-            <div>
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px 16px", backgroundColor: "rgba(255,255,255,0.7)", fontStyle: "italic", marginBottom: "14px", fontSize: "14px" }}>Certifications to Add:</div>
-              {certifications.length ? (
-                certifications.map((c, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px" }}>
-                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #555", flexShrink: 0 }} />
-                    <strong>{c}</strong>
-                  </div>
-                ))
-              ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No certification suggestions yet.</div>
-              )}
-            </div>
+                )) : (
+                  <div style={{ color: t.textMuted, fontSize: "13px" }}>No suggestions yet.</div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
-
         {showNote && (
-          <div style={{ width: "220px", flexShrink: 0, backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #ddd", borderRadius: "8px", padding: "16px", boxShadow: "0 2px 12px rgba(0,0,0,0.1)", position: "relative", fontSize: "13px" }}>
-            <button onClick={() => setShowNote(false)} style={{ position: "absolute", top: "8px", right: "10px", background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: "#888" }}>✕</button>
+          <div style={{ width: "220px", flexShrink: 0, backgroundColor: t.card, border: `1px solid ${t.border}`, borderRadius: "8px", padding: "16px", boxShadow: t.shadow, position: "relative", fontSize: "13px" }}>
+            <button onClick={() => setShowNote(false)} style={{ position: "absolute", top: "8px", right: "10px", background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: t.textLight }}>✕</button>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "6px", marginBottom: "8px" }}>
-              <span style={{ fontSize: "16px" }}>ℹ</span>
-              <strong style={{ fontSize: "13px", lineHeight: "1.4" }}>Note: These resources are proposed to be directly correlated to potential careers</strong>
+              <span style={{ fontSize: "16px", color: t.text }}>ℹ</span>
+              <strong style={{ fontSize: "13px", lineHeight: "1.4", color: t.text }}>Note: These resources are proposed to be directly correlated to potential careers</strong>
             </div>
-            <p style={{ color: "#555", lineHeight: "1.5", marginBottom: "12px" }}>You may also manually add your extracurricular activities. These experiences can help you land different job opportunities!</p>
-            <button onClick={() => setShowNote(false)} style={{ backgroundColor: "#2E03A5", color: "white", border: "none", borderRadius: "4px", padding: "6px 16px", cursor: "pointer", fontSize: "13px", fontFamily: "'Georgia', serif" }}>Great!</button>
+            <p style={{ color: t.textMuted, lineHeight: "1.5", marginBottom: "12px" }}>You may also manually add your extracurricular activities. These experiences can help you land different job opportunities!</p>
+            <button onClick={() => setShowNote(false)} style={{ backgroundColor: t.accent, color: "white", border: "none", borderRadius: "4px", padding: "6px 16px", cursor: "pointer", fontSize: "13px", fontFamily: "'Georgia', serif" }}>Great!</button>
           </div>
         )}
       </div>
@@ -227,6 +141,8 @@ function LearningPathways({ learningData, loading }) {
 }
 
 function Dashboard() {
+  const { isDark } = useTheme();
+  const t = isDark ? darkTheme : lightTheme;
   const [searchData, setSearchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -396,19 +312,19 @@ function Dashboard() {
   }
 
   if (loading) return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: "#2E03A5", fontSize: "18px" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: t.bg, backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: t.accent, fontSize: "18px" }}>
       Loading dashboard...
     </div>
   );
 
   if (error) return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: "red" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: t.bg, backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: "red" }}>
       {error}
     </div>
   );
 
   if (!searchData) return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: "#888" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: t.bg, backgroundImage: texture, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', serif", color: t.textMuted }}>
       No dashboard data found.
     </div>
   );
@@ -427,93 +343,56 @@ function Dashboard() {
   });
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#FAF3EA",
-        backgroundImage: texture,
-        backgroundRepeat: "repeat",
-        backgroundPosition: "top left",
-        fontFamily: "'Georgia', serif",
-        paddingTop: "50px", // increase from current value
-        marginTop: 0,
-      }}
-    >
-      {/* Page Title */}
-      <div
-        style={{
-          textAlign: "center",
-          marginTop: "6px",
-          marginBottom: "24px", // was 10px
-          paddingBottom: "6px",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "48px",
-            fontWeight: "700",
-            color: "#2E03A5",
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-            margin: 0,
-            lineHeight: 1.1,
-            fontFamily: "'Georgia', serif",
-            textShadow: "1px 2px 6px rgba(180,180,200,0.35)",
-          }}
-        >
+    <div style={{
+      minHeight: "100vh",
+      backgroundColor: t.bg,
+      backgroundImage: texture,
+      backgroundRepeat: "repeat",
+      backgroundPosition: "top left",
+      fontFamily: "'Georgia', serif",
+      paddingTop: "50px",
+      marginTop: 0,
+    }}>
+      <div style={{ textAlign: "center", marginTop: "6px", marginBottom: "24px", paddingBottom: "6px" }}>
+        <h1 style={{
+          fontSize: "48px", fontWeight: "700", color: t.accent,
+          letterSpacing: "2px", textTransform: "uppercase", margin: 0,
+          lineHeight: 1.1, fontFamily: "'Georgia', serif",
+          textShadow: "1px 2px 6px rgba(180,180,200,0.35)",
+        }}>
           User Dashboard
         </h1>
-        <p
-          style={{
-            marginTop: "6px",
-            color: "#8f8f8f",
-            fontSize: "20px",
-            fontFamily: "'Georgia', serif",
-          }}
-        >
+        <p style={{ marginTop: "6px", color: t.textMuted, fontSize: "20px", fontFamily: "'Georgia', serif" }}>
           Personalized Career Insights
         </p>
       </div>
 
-      {/* Tabs + actions row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "12px 28px 14px 28px", // was 8px top
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "12px 28px 14px 28px",
+        flexWrap: "wrap",
+        gap: "10px",
+      }}>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {TABS.map((tab, i) => (
             <button key={tab} onClick={() => setActiveTab(i)} style={{
-              padding: "8px 20px", borderRadius: "20px", border: "1px solid #bbb",
-              backgroundColor: activeTab === i ? "#2E03A5" : "rgba(255,255,255,0.7)",
-              color: activeTab === i ? "white" : "#333",
+              padding: "8px 20px", borderRadius: "20px", border: `1px solid ${t.border}`,
+              backgroundColor: activeTab === i ? t.accent : t.card,
+              color: activeTab === i ? "white" : t.text,
               fontWeight: activeTab === i ? "600" : "400",
               cursor: "pointer", fontSize: "14px", fontFamily: "'Georgia', serif",
             }}>
               {tab}
             </button>
           ))}
-
           {activeTab !== -1 && (
-            <button
-              onClick={() => setActiveTab(-1)}
-              style={{
-                padding: "8px 20px",
-                borderRadius: "20px",
-                border: "1px solid #2E03A5",
-                backgroundColor: "white",
-                color: "#2E03A5",
-                fontWeight: "600",
-                cursor: "pointer",
-                fontSize: "14px",
-                fontFamily: "'Georgia', serif",
-              }}
-            >
+            <button onClick={() => setActiveTab(-1)} style={{
+              padding: "8px 20px", borderRadius: "20px", border: `1px solid ${t.accent}`,
+              backgroundColor: "transparent", color: t.accent,
+              fontWeight: "600", cursor: "pointer", fontSize: "14px", fontFamily: "'Georgia', serif",
+            }}>
               Main Dashboard
             </button>
           )}
@@ -569,33 +448,20 @@ function Dashboard() {
           <button
             onClick={() => navigate("/past-searches")}
             style={{
-              backgroundColor: "#2E03A5",
-              color: "white",
-              border: "none",
-              borderRadius: "20px",
-              padding: "8px 20px",
-              fontSize: "16px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontFamily: "'Georgia', serif",
+              backgroundColor: t.accent, color: "white", border: "none",
+              borderRadius: "20px", padding: "8px 20px", fontSize: "16px",
+              fontWeight: "bold", cursor: "pointer", fontFamily: "'Georgia', serif",
               boxShadow: "0 3px 10px rgba(46,3,165,0.35)",
             }}
           >
             Past Searches
           </button>
-
           <button
             onClick={() => navigate("/search")}
             style={{
-              backgroundColor: "#F97000",
-              color: "white",
-              border: "none",
-              borderRadius: "20px",
-              padding: "8px 20px",
-              fontSize: "16px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontFamily: "'Georgia', serif",
+              backgroundColor: t.orange, color: "white", border: "none",
+              borderRadius: "20px", padding: "8px 20px", fontSize: "16px",
+              fontWeight: "bold", cursor: "pointer", fontFamily: "'Georgia', serif",
               boxShadow: "0 3px 10px rgba(249,112,0,0.35)",
             }}
           >
@@ -608,29 +474,40 @@ function Dashboard() {
       {activeTab === -1 && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px", padding: "0 28px 40px" }}>
           {/* Col 1: Career Paths */}
-          <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Career Paths Based on the Information You Entered</h3>
-            <p style={{ fontSize: "13px", color: "#777", marginBottom: "20px", fontStyle: "italic" }}>By Best Match</p>
+          <div style={{
+            backgroundColor: isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)",
+            borderRadius: "6px",
+            padding: "24px",
+            boxShadow: t.shadow,
+            minHeight: "500px",
+          }}>
+            <h3 style={{
+              fontSize: "16px", fontWeight: "bold", textAlign: "center", color: t.text,
+              marginBottom: "16px", lineHeight: "1.4",
+            }}>
+              Career Paths Based on the Information You Entered
+            </h3>
+            <p style={{ fontSize: "13px", color: t.textMuted, marginBottom: "20px", fontStyle: "italic" }}>By Best Match</p>
             {jobsLoading ? (
-              <p style={{ color: "#aaa", fontSize: "13px", textAlign: "center" }}>Loading career matches...</p>
+              <p style={{ color: t.textLight, fontSize: "13px", textAlign: "center" }}>Loading career matches...</p>
             ) : jobResults.length > 0 ? (
               <>
                 {jobResults.slice(0, 4).map((job, i) => (
-                  <div key={i} style={{ marginBottom: "20px", paddingBottom: "16px", borderBottom: i < 3 ? "1px solid #eee" : "none" }}>
-                    <div style={{ fontWeight: "bold", fontSize: "14px", color: "#111", marginBottom: "2px" }}>{job.title}</div>
-                    <div style={{ fontSize: "12px", color: "#999", marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                  <div key={i} style={{ marginBottom: "20px", paddingBottom: "16px", borderBottom: i < 3 ? `1px solid ${t.border}` : "none" }}>
+                    <div style={{ fontWeight: "bold", fontSize: "14px", color: t.text, marginBottom: "2px" }}>{job.title}</div>
+                    <div style={{ fontSize: "12px", color: t.textLight, marginBottom: "6px" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
                     {job.salary !== "N/A" ? (
-                      <div style={{ fontSize: "15px", fontWeight: "bold", color: "#2E03A5" }}>
-                        {formatSalary(job.salary)} <span style={{ fontSize: "11px", fontWeight: "normal", color: "#888" }}>/ year</span>
+                      <div style={{ fontSize: "15px", fontWeight: "bold", color: t.accent }}>
+                        {formatSalary(job.salary)} <span style={{ fontSize: "11px", fontWeight: "normal", color: t.textMuted }}>/ year</span>
                       </div>
                     ) : (
-                      <div style={{ fontSize: "12px", color: "#bbb" }}>Salary data unavailable</div>
+                      <div style={{ fontSize: "12px", color: t.textLight }}>Salary data unavailable</div>
                     )}
                   </div>
                 ))}
                 <button onClick={() => setActiveTab(0)} style={{
                   marginTop: "8px", width: "100%", backgroundColor: "transparent",
-                  border: "1px solid #2E03A5", color: "#2E03A5", borderRadius: "20px",
+                  border: `1px solid ${t.accent}`, color: t.accent, borderRadius: "20px",
                   padding: "8px", fontSize: "13px", cursor: "pointer",
                   fontFamily: "'Georgia', serif", fontWeight: "600",
                 }}>
@@ -640,83 +517,87 @@ function Dashboard() {
             ) : (
               MOCK_CAREERS.map((c, i) => (
                 <div key={i} style={{ marginBottom: "24px" }}>
-                  <div style={{ fontWeight: "bold", fontSize: "14px", borderBottom: "2px solid #333", paddingBottom: "4px", marginBottom: "6px", display: "inline-block" }}>{c.title}</div>
-                  <p style={{ fontSize: "13px", color: "#555", margin: 0, lineHeight: "1.5" }}>{c.description}</p>
+                  <div style={{ fontWeight: "bold", fontSize: "14px", borderBottom: `2px solid ${t.text}`, paddingBottom: "4px", marginBottom: "6px", display: "inline-block", color: t.text }}>{c.title}</div>
+                  <p style={{ fontSize: "13px", color: t.textMuted, margin: 0, lineHeight: "1.5" }}>{c.description}</p>
                 </div>
               ))
             )}
           </div>
 
           {/* Col 2: Resources + Extracurriculars */}
-          <div style={colStyle}>
-            <h3 style={colHeaderStyle}>Proposed Resources for Specified Career</h3>
+          <div style={{
+            backgroundColor: isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)",
+            borderRadius: "6px",
+            padding: "24px",
+            boxShadow: t.shadow,
+            minHeight: "500px",
+          }}>
+            <h3 style={{
+              fontSize: "16px", fontWeight: "bold", textAlign: "center", color: t.text,
+              marginBottom: "16px", lineHeight: "1.4",
+            }}>
+              Proposed Resources for Specified Career
+            </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "28px" }}>
               {learningLoading ? (
-                <p style={{ color: "#777", fontSize: "13px" }}>Loading learning resources...</p>
+                <p style={{ color: t.textMuted, fontSize: "13px" }}>Loading learning resources...</p>
               ) : learningData?.resources?.length ? (
                 learningData.resources.map((r, i) => (
-                  <a
-                    key={i}
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "10px 14px",
-                      fontSize: "13px",
-                      color: "#2E03A5",
-                      fontStyle: "italic",
-                      backgroundColor: "rgba(255,255,255,0.6)",
-                      textDecoration: "none",
-                      display: "block",
-                    }}
-                  >
+                  <a key={i} href={r.url} target="_blank" rel="noreferrer" style={{
+                    border: `1px solid ${t.border}`, borderRadius: "4px", padding: "10px 14px",
+                    fontSize: "13px", color: t.accent, fontStyle: "italic",
+                    backgroundColor: t.cardSolid, textDecoration: "none", display: "block",
+                  }}>
                     {r.provider} — {r.title}
                   </a>
                 ))
               ) : (
-                <div style={{ color: "#777", fontSize: "13px" }}>No resources found yet.</div>
+                <div style={{ color: t.textMuted, fontSize: "13px" }}>No resources found yet.</div>
               )}
             </div>
-            <h3 style={colHeaderStyle}>Extracurriculars</h3>
+            <h3 style={{
+              fontSize: "16px", fontWeight: "bold", textAlign: "center", color: t.text,
+              marginBottom: "16px", lineHeight: "1.4",
+            }}>
+              Extracurriculars
+            </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Languages or Skills to Master</strong>
-                {learningData?.languages?.length ? learningData.languages.slice(0, 3).join(", ") : "No language suggestions yet."}
-              </div>
-
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Platforms to Utilize</strong>
-                {learningData?.platforms?.length ? learningData.platforms.slice(0, 3).join(", ") : "No platform suggestions yet."}
-              </div>
-
-              <div style={{ border: "1px solid #ddd", borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                <strong style={{ display: "block", marginBottom: "6px" }}>Certifications to Add</strong>
-                {learningData?.certifications?.length ? learningData.certifications.slice(0, 3).join(", ") : "No certification suggestions yet."}
-              </div>
+              {[
+                { label: "Languages or Skills to Master", data: learningData?.languages },
+                { label: "Platforms to Utilize", data: learningData?.platforms },
+                { label: "Certifications to Add", data: learningData?.certifications },
+              ].map(({ label, data }, i) => (
+                <div key={i} style={{ border: `1px solid ${t.border}`, borderRadius: "4px", padding: "10px 14px", fontSize: "13px", backgroundColor: t.cardSolid, color: t.text }}>
+                  <strong style={{ display: "block", marginBottom: "6px" }}>{label}</strong>
+                  {data?.length ? data.slice(0, 3).join(", ") : "No suggestions yet."}
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Col 3: CISE Majors from DB */}
-          <div style={colStyle}>
-            <h3 style={colHeaderStyle}>CISE Majors</h3>
+          <div style={{
+            backgroundColor: isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)",
+            borderRadius: "6px",
+            padding: "24px",
+            boxShadow: t.shadow,
+            minHeight: "500px",
+          }}>
+            <h3 style={{
+              fontSize: "16px", fontWeight: "bold", textAlign: "center", color: t.text,
+              marginBottom: "16px", lineHeight: "1.4",
+            }}>
+              CISE Majors
+            </h3>
             {searchData && (
               <div style={{
-                backgroundColor: "rgba(46,3,165,0.06)",
-                borderRadius: "8px",
-                padding: "12px 14px",
-                marginBottom: "16px",
-                fontSize: "13px",
-                color: "#444",
-                borderLeft: "3px solid #2E03A5",
-              }}>
+                backgroundColor: t.accentLight, borderRadius: "8px", padding: "12px 14px", marginBottom: "16px", fontSize: "13px", color: t.text, borderLeft: `3px solid ${t.accent}` }}>
                 <div style={{
                   fontSize: "11px",
                   fontWeight: "bold",
                   textTransform: "uppercase",
                   letterSpacing: "0.6px",
-                  color: "#2E03A5",
+                  color: t.accent,
                   marginBottom: "6px",
                 }}>
                   Based on Your Search
@@ -729,51 +610,45 @@ function Dashboard() {
                 <div style={{
                   marginTop: "8px",
                   paddingTop: "8px",
-                  borderTop: "1px solid rgba(46,3,165,0.15)",
+                  borderTop: `1px solid ${t.border}`,
                   fontSize: "11px",
-                  color: "#888",
+                  color: t.textLight,
                   fontStyle: "italic",
                 }}>
-                   {" "}
-                  <span
-                    onClick={() => navigate("/search")}
-                    style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
-                  >
-                    Update your search →
-                  </span>
+                  <span onClick={() => navigate("/search")} style={{ color: t.accent, cursor: "pointer", textDecoration: "underline" }}>Update your search →</span>
                 </div>
               </div>
             )}
-            {!majorData && <p style={{ color: "#999", fontSize: "13px", textAlign: "center" }}>Submit a search to see your major's courses here.</p>}
+            {!majorData && <p style={{ color: t.textLight, fontSize: "13px", textAlign: "center" }}>Submit a search to see your major's courses here.</p>}
             {majorData && (
               <>
                 {majorData.core_coursework?.length > 0 && (
                   <div style={{ marginBottom: "20px" }}>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#2E03A5", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #2E03A5", paddingBottom: "4px" }}>Core Coursework</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.accent, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: `2px solid ${t.accent}`, paddingBottom: "4px" }}>Core Coursework</div>
                     {majorData.core_coursework.slice(0, 4).map((c, i) => (
-                      <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: "2px solid #2E03A5" }}>
-                        <span style={{ fontWeight: "bold", fontSize: "13px", color: "#2E03A5" }}>{c.code}</span>
-                        <span style={{ fontSize: "13px", color: "#444" }}> — {c.title}</span>
+                      <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: `2px solid ${t.accent}` }}>
+                        <span style={{ fontWeight: "bold", fontSize: "13px", color: t.accent }}>{c.code}</span>
+                        <span style={{ fontSize: "13px", color: t.text }}> — {c.title}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {majorData.required_foundation?.length > 0 && (
                   <div style={{ marginBottom: "20px" }}>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#F97000", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #F97000", paddingBottom: "4px" }}>Required Foundation</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.orange, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: `2px solid ${t.orange}`, paddingBottom: "4px" }}>Required Foundation</div>
                     {majorData.required_foundation.slice(0, 4).map((c, i) => (
-                      <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: "2px solid #F97000" }}>
-                        <span style={{ fontWeight: "bold", fontSize: "13px", color: "#F97000" }}>{c.code}</span>
-                        <span style={{ fontSize: "13px", color: "#444" }}> — {c.title}</span>
+                      <div key={i} style={{ marginBottom: "8px", paddingLeft: "8px", borderLeft: `2px solid ${t.orange}` }}>
+                        <span style={{ fontWeight: "bold", fontSize: "13px", color: t.orange }}>{c.code}</span>
+                        <span style={{ fontSize: "13px", color: t.text }}> — {c.title}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {majorData.elective_areas?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#555", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: "2px solid #aaa", paddingBottom: "4px" }}>Elective Areas</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.textMuted, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px", borderBottom: `2px solid ${t.border}`, paddingBottom: "4px" }}>Elective Areas</div>
                     {majorData.elective_areas.slice(0, 4).map((area, i) => (
-                      <div key={i} style={{ marginBottom: "6px", paddingLeft: "8px", borderLeft: "2px solid #aaa", fontSize: "13px", color: "#444" }}>{area}</div>
+                      <div key={i} style={{ marginBottom: "6px", paddingLeft: "8px", borderLeft: `2px solid ${t.border}`, fontSize: "13px", color: t.text }}>{area}</div>
                     ))}
                   </div>
                 )}
@@ -786,21 +661,25 @@ function Dashboard() {
       {/* CAREER INFORMATION TAB */}
       {activeTab === 0 && (
         <div style={{ padding: "0 28px 40px" }}>
-          <div style={{ ...colStyle, minHeight: "unset" }}>
-            <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: "#111", marginBottom: "6px" }}>
+          <div style={{
+            backgroundColor: t.card,
+            borderRadius: "6px",
+            padding: "24px",
+            boxShadow: t.shadow,
+            minHeight: "unset",
+          }}>
+            <h2 style={{ fontSize: "26px", fontWeight: "bold", textAlign: "center", color: t.text, marginBottom: "6px" }}>
               Career Paths Based on the Information You Entered
             </h2>
-            <p style={{ textAlign: "center", fontWeight: "bold", color: "#333", marginBottom: "16px" }}>By Best Match</p>
-
-            {/* ← ADD FILTERS HERE */}
+            <p style={{ textAlign: "center", fontWeight: "bold", color: t.textMuted, marginBottom: "16px" }}>By Best Match</p>
             <div style={{ display: "flex", gap: "12px", marginBottom: "24px", flexWrap: "wrap", alignItems: "center" }}>
               <select
                 value={seniorityFilter}
                 onChange={(e) => setSeniorityFilter(e.target.value)}
                 style={{
-                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  padding: "8px 14px", borderRadius: "20px", border: `1px solid ${t.border}`,
                   fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
-                  backgroundColor: "white", color: "#333",
+                  backgroundColor: t.inputBg, color: t.text,
                 }}
               >
                 {SENIORITY_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -811,9 +690,9 @@ function Dashboard() {
                 value={locationFilter}
                 onChange={(e) => setLocationFilter(e.target.value)}
                 style={{
-                  padding: "8px 14px", borderRadius: "20px", border: "1px solid #bbb",
+                  padding: "8px 14px", borderRadius: "20px", border: `1px solid ${t.border}`,
                   fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
-                  backgroundColor: "white", color: "#333",
+                  backgroundColor: t.inputBg, color: t.text,
                 }}
               >
                 {locationOptions.map(loc => <option key={loc} value={loc}>{loc}</option>)}
@@ -823,54 +702,51 @@ function Dashboard() {
                 <button
                   onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
                   style={{
-                    padding: "8px 14px", borderRadius: "20px", border: "1px solid #F97000",
+                    padding: "8px 14px", borderRadius: "20px", border: `1px solid ${t.orange}`,
                     fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
-                    backgroundColor: "transparent", color: "#F97000",
+                    backgroundColor: "transparent", color: t.orange,
                   }}
                 >
                   Clear Filters ✕
                 </button>
               )}
 
-              <span style={{ fontSize: "12px", color: "#999", fontStyle: "italic" }}>
+              <span style={{ fontSize: "12px", color: t.textLight, fontStyle: "italic" }}>
                 {filteredJobResults.length} result{filteredJobResults.length !== 1 ? "s" : ""}
               </span>
             </div>
-
             {jobsLoading ? (
-              <p style={{ textAlign: "center", color: "#aaa", fontSize: "14px" }}>Loading job listings...</p>
+              <p style={{ textAlign: "center", color: t.textLight, fontSize: "14px" }}>Loading job listings...</p>
             ) : jobResults.length === 0 ? (
-              // No real data at all → show mock
               MOCK_CAREERS.map((c, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? "1px solid #eee" : "none", paddingBottom: "24px", marginBottom: "24px" }}>
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr", gap: "32px", alignItems: "center", borderBottom: i < MOCK_CAREERS.length - 1 ? `1px solid ${t.border}` : "none", paddingBottom: "24px", marginBottom: "24px" }}>
                   <div>
-                    <div style={{ fontWeight: "bold", fontSize: "17px", color: "#111", marginBottom: "8px" }}>{c.title}</div>
-                    <div style={{ fontSize: "13px", color: "#666", lineHeight: "1.6" }}>{c.description}</div>
+                    <div style={{ fontWeight: "bold", fontSize: "17px", color: t.text, marginBottom: "8px" }}>{c.title}</div>
+                    <div style={{ fontSize: "13px", color: t.textMuted, lineHeight: "1.6" }}>{c.description}</div>
                   </div>
                   <div>
-                    <span style={{ fontSize: "30px", fontWeight: "bold", color: "#111" }}>${c.avg.toLocaleString()}</span>
-                    <span style={{ fontSize: "12px", color: "#888" }}> / avg. per year</span>
+                    <span style={{ fontSize: "30px", fontWeight: "bold", color: t.text }}>${c.avg.toLocaleString()}</span>
+                    <span style={{ fontSize: "12px", color: t.textMuted }}> / avg. per year</span>
                   </div>
                   <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#555", marginBottom: "2px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: t.textMuted, marginBottom: "2px" }}>
                       <span>Annual Salary Range</span>
                       <span>${(c.rangeMin / 1000).toFixed(0)}K–{(c.rangeMax / 1000).toFixed(0)}K</span>
                     </div>
                     <SalaryBar min={c.rangeMin} max={c.rangeMax} overall={salaryOverall} />
-                    <div style={{ fontSize: "11px", color: "#aaa", marginTop: "4px" }}>Range Based on Your Area</div>
+                    <div style={{ fontSize: "11px", color: t.textLight, marginTop: "4px" }}>Range Based on Your Area</div>
                   </div>
                 </div>
               ))
             ) : filteredJobResults.length === 0 ? (
-              // Real data exists but filters return nothing it will show message
-              <div style={{ textAlign: "center", padding: "60px 0", color: "#999" }}>
+              <div style={{ textAlign: "center", padding: "60px 0", color: t.textMuted }}>
                 <p style={{ fontSize: "18px", marginBottom: "12px" }}>No jobs found for the selected filters.</p>
                 <p style={{ fontSize: "14px", marginBottom: "20px" }}>Try adjusting your seniority or location filter.</p>
                 <button
-                  onClick={() => { setSeniorityFilter("Select Seniority"); setLocationFilter("Select State"); }}
+                  onClick={() => { setSeniorityFilter("All"); setLocationFilter("All"); }}
                   style={{
                     padding: "10px 24px", borderRadius: "20px", border: "none",
-                    backgroundColor: "#2E03A5", color: "white", fontSize: "14px",
+                    backgroundColor: t.accent, color: "white", fontSize: "14px",
                     fontFamily: "'Georgia', serif", cursor: "pointer", fontWeight: "600",
                   }}
                 >
@@ -882,20 +758,20 @@ function Dashboard() {
                 <div key={i} style={{
                   display: "grid", gridTemplateColumns: "2fr 1fr 1fr",
                   gap: "24px", alignItems: "center",
-                  borderBottom: i < filteredJobResults.length - 1 ? "1px solid #eee" : "none",
+                  borderBottom: i < filteredJobResults.length - 1 ? `1px solid ${t.border}` : "none",
                   paddingBottom: "20px", marginBottom: "20px",
                 }}>
                   {/* Title */}
                   <div>
-                    <div style={{ fontWeight: "bold", fontSize: "16px", color: "#111", marginBottom: "4px" }}>{job.title}</div>
-                    <div style={{ fontSize: "12px", color: "#999" }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
+                    <div style={{ fontWeight: "bold", fontSize: "16px", color: t.text, marginBottom: "4px" }}>{job.title}</div>
+                    <div style={{ fontSize: "12px", color: t.textLight }}>{job.found} listing{job.found !== 1 ? "s" : ""} found</div>
                   </div>
                   {/* Salary */}
                   <div>
-                    <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? "#111" : "#aaa" }}>
+                    <span style={{ fontSize: "20px", fontWeight: "bold", color: job.salary !== "N/A" ? t.text : t.textLight }}>
                       {job.salary}
                     </span>
-                    {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: "#888" }}> / year</span>}
+                    {job.salary !== "N/A" && <span style={{ fontSize: "12px", color: t.textMuted }}> / year</span>}
                   </div>
                   {/* View jobs button */}
                   <div>
@@ -904,10 +780,9 @@ function Dashboard() {
                       target="_blank"
                       rel="noreferrer"
                       style={{
-                        backgroundColor: "#2E03A5", color: "white", textDecoration: "none",
+                        backgroundColor: t.accent, color: "white", textDecoration: "none",
                         borderRadius: "20px", padding: "8px 18px", fontSize: "13px",
-                        fontWeight: "600", fontFamily: "'Georgia', serif",
-                        display: "inline-block",
+                        fontWeight: "600", fontFamily: "'Georgia', serif", display: "inline-block",
                       }}
                     >
                       View Jobs →
@@ -928,20 +803,13 @@ function Dashboard() {
         <div style={{ padding: "0 28px 40px" }}>
           {searchData && (
             <div style={{
-              backgroundColor: "rgba(46,3,165,0.06)",
-              borderRadius: "8px",
-              padding: "12px 14px",
-              marginBottom: "16px",
-              fontSize: "13px",
-              color: "#444",
-              borderLeft: "3px solid #2E03A5",
-            }}>
+              backgroundColor: t.accentLight, borderRadius: "8px", padding: "12px 14px", marginBottom: "16px", fontSize: "13px", color: t.text, borderLeft: `3px solid ${t.accent}` }}>
               <div style={{
                 fontSize: "11px",
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 letterSpacing: "0.6px",
-                color: "#2E03A5",
+                color: t.accent,
                 marginBottom: "6px",
               }}>
                 Based on Your Search
@@ -954,63 +822,57 @@ function Dashboard() {
               <div style={{
                 marginTop: "8px",
                 paddingTop: "8px",
-                borderTop: "1px solid rgba(46,3,165,0.15)",
+                borderTop: `1px solid ${t.border}`,
                 fontSize: "11px",
-                color: "#888",
+                color: t.textLight,
                 fontStyle: "italic",
               }}>
                 All career paths, resources, and course recommendations below are tailored to this profile.{" "}
-                <span
-                  onClick={() => navigate("/search")}
-                  style={{ color: "#2E03A5", cursor: "pointer", textDecoration: "underline" }}
-                >
-                  Update your search →
-                </span>
+                <span onClick={() => navigate("/search")} style={{ color: t.accent, cursor: "pointer", textDecoration: "underline" }}>Update your search →</span>
               </div>
             </div>
           )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "24px" }}>
             {allMajors.map((m) => (
               <div key={m._id} onClick={() => handleSelectMajor(m._id)} style={{
-                backgroundColor: selectedMajor?._id === m._id ? "rgba(46,3,165,0.08)" : "rgba(255,255,255,0.7)",
-                border: selectedMajor?._id === m._id ? "2px solid #2E03A5" : "2px solid transparent",
-                borderRadius: "6px", padding: "20px", cursor: "pointer",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.08)", transition: "all 0.2s",
+                backgroundColor: selectedMajor?._id === m._id ? t.accentLight : t.card,
+                border: selectedMajor?._id === m._id ? `2px solid ${t.accent}` : "2px solid transparent",
+                borderRadius: "6px", padding: "20px", cursor: "pointer", boxShadow: t.shadow, transition: "all 0.2s",
               }}>
-                <div style={{ fontWeight: "bold", fontSize: "15px", color: "#2E03A5", marginBottom: "4px" }}>{m.major}</div>
-                <div style={{ fontSize: "12px", color: "#888" }}>{m.university}</div>
+                <div style={{ fontWeight: "bold", fontSize: "15px", color: t.accent, marginBottom: "4px" }}>{m.major}</div>
+                <div style={{ fontSize: "12px", color: t.textMuted }}>{m.university}</div>
               </div>
             ))}
           </div>
           {selectedMajor && (
-            <div style={{ ...colStyle, minHeight: "unset" }}>
-              <h3 style={{ ...colHeaderStyle, fontSize: "20px", marginBottom: "24px" }}>{selectedMajor.major}</h3>
+            <div style={{ backgroundColor: t.card, borderRadius: "6px", padding: "24px", boxShadow: t.shadow }}>
+              <h3 style={{ fontSize: "20px", fontWeight: "bold", textAlign: "center", marginBottom: "24px", color: t.text, lineHeight: "1.4" }}>{selectedMajor.major}</h3>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "32px" }}>
                 {selectedMajor.core_coursework?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#2E03A5", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: "2px solid #2E03A5", paddingBottom: "4px" }}>Core Coursework</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.accent, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: `2px solid ${t.accent}`, paddingBottom: "4px" }}>Core Coursework</div>
                     {selectedMajor.core_coursework.map((c, i) => (
-                      <div key={i} style={{ fontSize: "13px", color: "#444", paddingLeft: "8px", borderLeft: "2px solid #2E03A5", marginBottom: "8px" }}>
-                        <strong style={{ color: "#2E03A5" }}>{c.code}</strong> — {c.title}
+                      <div key={i} style={{ fontSize: "13px", color: t.text, paddingLeft: "8px", borderLeft: `2px solid ${t.accent}`, marginBottom: "8px" }}>
+                        <strong style={{ color: t.accent }}>{c.code}</strong> — {c.title}
                       </div>
                     ))}
                   </div>
                 )}
                 {selectedMajor.required_foundation?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#F97000", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: "2px solid #F97000", paddingBottom: "4px" }}>Required Foundation</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.orange, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: `2px solid ${t.orange}`, paddingBottom: "4px" }}>Required Foundation</div>
                     {selectedMajor.required_foundation.map((c, i) => (
-                      <div key={i} style={{ fontSize: "13px", color: "#444", paddingLeft: "8px", borderLeft: "2px solid #F97000", marginBottom: "8px" }}>
-                        <strong style={{ color: "#F97000" }}>{c.code}</strong> — {c.title}
+                      <div key={i} style={{ fontSize: "13px", color: t.text, paddingLeft: "8px", borderLeft: `2px solid ${t.orange}`, marginBottom: "8px" }}>
+                        <strong style={{ color: t.orange }}>{c.code}</strong> — {c.title}
                       </div>
                     ))}
                   </div>
                 )}
                 {selectedMajor.elective_areas?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: "bold", color: "#555", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: "2px solid #aaa", paddingBottom: "4px" }}>Elective Areas</div>
+                    <div style={{ fontSize: "12px", fontWeight: "bold", color: t.textMuted, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px", borderBottom: `2px solid ${t.border}`, paddingBottom: "4px" }}>Elective Areas</div>
                     {selectedMajor.elective_areas.map((area, i) => (
-                      <div key={i} style={{ fontSize: "13px", color: "#444", paddingLeft: "8px", borderLeft: "2px solid #aaa", marginBottom: "8px" }}>{area}</div>
+                      <div key={i} style={{ marginBottom: "6px", paddingLeft: "8px", borderLeft: `2px solid ${t.border}`, fontSize: "13px", color: t.text }}>{area}</div>
                     ))}
                   </div>
                 )}

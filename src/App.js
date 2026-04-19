@@ -12,28 +12,31 @@ import ForwardSearchPage from './components/ForwardSearchPage'
 import PastSearchesPage from './pages/PastSearchesPage'
 import { JobResults } from "./pages/JobResults";
 import {createContext, useState } from 'react'
+import { ThemeProvider } from "./context/ThemeContext";
 
 export const Tab = createContext();
 function App() {
   const [activeTab, setActiveTab] = useState(-1);
   return (
-    <Router>
-      <Tab value={{activeTab, setActiveTab}}>
-        <NavBar />
-        <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA" }}>
-          <Routes>
-            <Route path="/" element={<StartUp/>}/>
-            <Route path="/login" element={<LogIn/>}/>
-            <Route path="/signup" element={<SignUp/>}/>
-            <Route path="/majors/:id" element={<Protected><MajorPage/></Protected>}/>
-            <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
-            <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>
-            <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}/>
-            <Route path="/jobResults" element={<Protected><JobResults/></Protected>}/>
-          </Routes>
-        </div>
-      </Tab>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Tab value={{activeTab, setActiveTab}}>
+          <NavBar />
+          <div style={{ minHeight: "100vh", backgroundColor: "#FAF3EA" }}>
+            <Routes>
+              <Route path="/" element={<StartUp/>}/>
+              <Route path="/login" element={<LogIn/>}/>
+              <Route path="/signup" element={<SignUp/>}/>
+              <Route path="/majors/:id" element={<Protected><MajorPage/></Protected>}/>
+              <Route path="/search" element={<Protected><ForwardSearchPage/></Protected>}/>
+              <Route path="/past-searches" element={<Protected><PastSearchesPage/></Protected>}/>
+              <Route path="/dashboard" element={<Protected><Dashboard/></Protected>}/>
+              <Route path="/jobResults" element={<Protected><JobResults/></Protected>}/>
+            </Routes>
+          </div>
+        </Tab>
+      </Router>
+    </ThemeProvider>
   )
 }
 

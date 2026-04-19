@@ -7,39 +7,17 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { baseUrl } from "../constants";
+import { useTheme } from "../context/ThemeContext";
+import { lightTheme, darkTheme } from "../context/theme";
 
 const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.10'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
-
-const inputStyle = {
-  width: "100%", height: "48px", borderRadius: "4px",
-  border: "1px solid #ccc", fontSize: "15px", padding: "0 12px",
-  boxSizing: "border-box", backgroundColor: "#F7F8FA", outline: "none",
-};
-
-const labelStyle = {
-  fontSize: "14px", fontWeight: "600", color: "#444",
-  marginBottom: "6px", display: "block",
-};
-
-const fieldStyle = {
-  display: "flex", flexDirection: "column", marginBottom: "16px",
-};
-
-const addBtnStyle = {
-  background: "none", border: "none", color: "#2E03A5",
-  fontSize: "13px", cursor: "pointer", padding: "4px 0",
-  textAlign: "left", fontWeight: "600",
-};
-
-const removeBtnStyle = {
-  background: "none", border: "none", color: "#aaa",
-  fontSize: "18px", cursor: "pointer", padding: "0 6px",
-  lineHeight: 1, flexShrink: 0,
-};
 
 const AVATAR_COLORS = ["#2E03A5", "#F97000", "#e63946", "#2a9d8f", "#6d6875", "#264653"];
 
 export function SignUp() {
+  const { isDark } = useTheme();
+  const t = isDark ? darkTheme : lightTheme;
+
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [name, setName] = useState("");
@@ -57,13 +35,14 @@ export function SignUp() {
   const [avatarMode, setAvatarMode] = useState(false);
   const [avatarColor, setAvatarColor] = useState("#2E03A5");
   const [avatarStyle, setAvatarStyle] = useState("initials");
+  const [hexInput, setHexInput] = useState("");
 
   const isLoggedIn = !!sessionStorage.getItem("token");
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`http://${baseUrl}/majors`);
+        const res = await fetch(`${baseUrl}/majors`);
         const data = await res.json();
         setMajors(Array.isArray(data) ? data : []);
       } catch (err) {
@@ -86,7 +65,7 @@ export function SignUp() {
         }
       } catch (e) {}
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const handlePreview = (e) => {
     const file = e.target.files[0];
@@ -159,9 +138,9 @@ export function SignUp() {
       formData.append("profileIcon", new File([blob], "avatar.png", { type: "image/png" }));
     }
 
-    const token = sessionStorage.getItem("token");
-    const url = isLoggedIn ? `http://${baseUrl}/profile` : `http://${baseUrl}/register`;
+    const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
+    const token = sessionStorage.getItem("token");
     const headers = isLoggedIn ? { Authorization: `Bearer ${token}` } : {};
 
     let result = await fetch(url, { method, headers, body: formData });
@@ -180,30 +159,60 @@ export function SignUp() {
     setTimeout(() => navigate("/dashboard"), 1500);
   };
 
+  const inputStyle = {
+    width: "100%", height: "48px", borderRadius: "4px",
+    border: `1px solid ${t.border}`, fontSize: "15px", padding: "0 12px",
+    boxSizing: "border-box", backgroundColor: t.inputBg,
+    outline: "none", color: t.text,
+  };
+
+  const labelStyle = {
+    fontSize: "14px", fontWeight: "600", color: t.textMuted,
+    marginBottom: "6px", display: "block",
+  };
+
+  const fieldStyle = {
+    display: "flex", flexDirection: "column", marginBottom: "16px",
+  };
+
+  const addBtnStyle = {
+    background: "none", border: "none", color: t.accent,
+    fontSize: "13px", cursor: "pointer", padding: "4px 0",
+    textAlign: "left", fontWeight: "600",
+  };
+
+  const removeBtnStyle = {
+    background: "none", border: "none", color: t.textLight,
+    fontSize: "18px", cursor: "pointer", padding: "0 6px",
+    lineHeight: 1, flexShrink: 0,
+  };
+
   return (
     <div style={{
-      minHeight: "100vh", backgroundColor: "#FAF3EA", backgroundImage: texture,
+      minHeight: "100vh", backgroundColor: t.bg, backgroundImage: texture,
       paddingTop: "80px", fontFamily: "'Georgia', serif",
       display: "flex", flexDirection: "column", alignItems: "center",
     }}>
       <div style={{ marginTop: "32px", marginBottom: "28px", textAlign: "center" }}>
         <h1 style={{
-          fontSize: "40px", fontWeight: "bold", color: "#2E03A5",
+          fontSize: "40px", fontWeight: "bold", color: t.accent,
           letterSpacing: "4px", textTransform: "uppercase", margin: 0,
           textShadow: "1px 2px 6px rgba(180,180,200,0.5)",
         }}>
           {isLoggedIn ? "Update Profile" : "Create Account"}
         </h1>
-        <p style={{ color: "#888", fontSize: "14px", marginTop: "8px", letterSpacing: "1px" }}>
+        <p style={{ color: t.textMuted, fontSize: "14px", marginTop: "8px", letterSpacing: "1px" }}>
           {isLoggedIn ? "Update your information below" : "Join GatorPath today"}
         </p>
       </div>
 
+      {/* Main card */}
       <div style={{
-        backgroundColor: "rgba(255,255,255,0.5)", borderRadius: "10px",
-        boxShadow: "0 6px 28px rgba(0,0,0,0.12)", padding: "36px 40px",
+        backgroundColor: t.card, borderRadius: "10px",
+        boxShadow: t.shadow, padding: "36px 40px",
         width: "90%", maxWidth: "860px",
-        display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", marginBottom: "24px",
+        display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px",
+        marginBottom: "24px", border: `1px solid ${t.border}`,
       }}>
         {/* Left column */}
         <div>
@@ -218,7 +227,7 @@ export function SignUp() {
           <div style={fieldStyle}>
             <label style={labelStyle}>
               Password{" "}
-              {isLoggedIn && <span style={{ fontWeight: "normal", color: "#aaa", fontSize: "12px" }}>(leave blank to keep current)</span>}
+              {isLoggedIn && <span style={{ fontWeight: "normal", color: t.textLight, fontSize: "12px" }}>(leave blank to keep current)</span>}
             </label>
             <div style={{ position: "relative" }}>
               <input
@@ -231,7 +240,8 @@ export function SignUp() {
               <button onClick={() => setShowPass(p => !p)} style={{
                 position: "absolute", right: "12px", top: "50%",
                 transform: "translateY(-50%)", background: "none",
-                border: "none", cursor: "pointer", fontSize: "13px", color: "#888", padding: 0,
+                border: "none", cursor: "pointer", fontSize: "13px",
+                color: t.textMuted, padding: 0,
               }}>
                 {showPass ? "Hide" : "Show"}
               </button>
@@ -240,7 +250,7 @@ export function SignUp() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
             <div style={fieldStyle}>
               <label style={labelStyle}>Major</label>
-              <select value={major} onChange={(e) => setMajor(e.target.value)} style={{ ...inputStyle, backgroundColor: "#F7F8FA" }}>
+              <select value={major} onChange={(e) => setMajor(e.target.value)} style={{ ...inputStyle, backgroundColor: t.inputBg }}>
                 <option value="">Select a major…</option>
                 {majors.map((m) => (
                   <option key={m._id} value={m.major}>{m.major}</option>
@@ -249,7 +259,7 @@ export function SignUp() {
             </div>
             <div style={fieldStyle}>
               <label style={labelStyle}>Year</label>
-              <select value={year} onChange={(e) => setYear(e.target.value)} style={{ ...inputStyle, backgroundColor: "#F7F8FA" }}>
+              <select value={year} onChange={(e) => setYear(e.target.value)} style={{ ...inputStyle, backgroundColor: t.inputBg }}>
                 <option value="">Select Year</option>
                 <option value="First Year">First Year</option>
                 <option value="Second Year">Second Year</option>
@@ -264,12 +274,12 @@ export function SignUp() {
         {/* Right column: profile picture / avatar */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
           {/* Tabs */}
-          <div style={{ display: "flex", borderRadius: "6px", overflow: "hidden", border: "1px solid #ddd", width: "100%" }}>
+          <div style={{ display: "flex", borderRadius: "6px", overflow: "hidden", border: `1px solid ${t.border}`, width: "100%" }}>
             {["Upload Photo", "Choose Avatar"].map((tab, i) => (
               <button key={tab} onClick={() => { setAvatarMode(i === 1); setImage(null); setPreview(""); }} style={{
                 flex: 1, padding: "10px", border: "none", cursor: "pointer",
-                backgroundColor: avatarMode === (i === 1) ? "#2E03A5" : "transparent",
-                color: avatarMode === (i === 1) ? "white" : "#444",
+                backgroundColor: avatarMode === (i === 1) ? t.accent : "transparent",
+                color: avatarMode === (i === 1) ? "white" : t.textMuted,
                 fontSize: "13px", fontWeight: "600", fontFamily: "'Georgia', serif",
               }}>{tab}</button>
             ))}
@@ -278,15 +288,15 @@ export function SignUp() {
           {/* Preview circle */}
           <div style={{
             width: "160px", height: "160px", borderRadius: "50%",
-            backgroundColor: "#e8eaf0", display: "flex", alignItems: "center",
-            justifyContent: "center", overflow: "hidden", border: "2px solid #ddd",
+            backgroundColor: t.inputBg, display: "flex", alignItems: "center",
+            justifyContent: "center", overflow: "hidden", border: `2px solid ${t.border}`,
           }}>
             {!avatarMode && preview ? (
               <img src={preview} alt="avatar preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             ) : !avatarMode ? (
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <circle cx="40" cy="30" r="18" fill="#2E03A5" opacity="0.4"/>
-                <ellipse cx="40" cy="65" rx="28" ry="16" fill="#2E03A5" opacity="0.4"/>
+                <circle cx="40" cy="30" r="18" fill={t.accent} opacity="0.4"/>
+                <ellipse cx="40" cy="65" rx="28" ry="16" fill={t.accent} opacity="0.4"/>
               </svg>
             ) : (
               <div style={{ width: "100%", height: "100%", backgroundColor: avatarColor, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -305,13 +315,13 @@ export function SignUp() {
             <>
               <label style={labelStyle}>Profile Picture</label>
               <label style={{
-                backgroundColor: "#2E03A5", color: "white", padding: "10px 24px",
+                backgroundColor: t.accent, color: "white", padding: "10px 24px",
                 borderRadius: "4px", cursor: "pointer", fontSize: "14px", fontWeight: "600",
               }}>
                 Choose File
                 <input type="file" accept="image/*" onChange={handlePreview} style={{ display: "none" }} />
               </label>
-              {image && <span style={{ fontSize: "12px", color: "#666" }}>{image.name}</span>}
+              {image && <span style={{ fontSize: "12px", color: t.textMuted }}>{image.name}</span>}
             </>
           )}
 
@@ -321,23 +331,56 @@ export function SignUp() {
               <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginBottom: "14px" }}>
                 {[["initials", "Initials"], ["gator", "🐊 Gator"]].map(([val, label]) => (
                   <button key={val} onClick={() => setAvatarStyle(val)} style={{
-                    padding: "8px 18px", borderRadius: "20px", border: "2px solid #2E03A5",
-                    backgroundColor: avatarStyle === val ? "#2E03A5" : "transparent",
-                    color: avatarStyle === val ? "white" : "#2E03A5",
+                    padding: "8px 18px", borderRadius: "20px", border: `2px solid ${t.accent}`,
+                    backgroundColor: avatarStyle === val ? t.accent : "transparent",
+                    color: avatarStyle === val ? "white" : t.accent,
                     cursor: "pointer", fontSize: "13px", fontWeight: "600", fontFamily: "'Georgia', serif",
                   }}>{label}</button>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
+
+              {/* Preset color swatches */}
+              <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap", marginBottom: "14px" }}>
                 {AVATAR_COLORS.map(color => (
-                  <div key={color} onClick={() => setAvatarColor(color)} style={{
+                  <div key={color} onClick={() => { setAvatarColor(color); setHexInput(""); }} style={{
                     width: "32px", height: "32px", borderRadius: "50%", backgroundColor: color,
                     cursor: "pointer",
-                    border: avatarColor === color ? "3px solid #333" : "3px solid transparent",
+                    border: avatarColor === color && !hexInput ? "3px solid #333" : "3px solid transparent",
                     transition: "border 0.15s",
                   }} />
                 ))}
               </div>
+
+              {/* Custom hex input */}
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center" }}>
+                <div style={{
+                  width: "28px", height: "28px", borderRadius: "50%",
+                  backgroundColor: avatarColor, border: `2px solid ${t.border}`, flexShrink: 0,
+                }} />
+                <input
+                  type="text"
+                  placeholder="#2E03A5"
+                  value={hexInput}
+                  maxLength={7}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setHexInput(val);
+                    if (/^#[0-9A-Fa-f]{6}$/.test(val)) setAvatarColor(val);
+                  }}
+                  style={{
+                    ...inputStyle, width: "120px", height: "36px",
+                    fontSize: "13px", fontFamily: "monospace",
+                    border: hexInput && !/^#[0-9A-Fa-f]{6}$/.test(hexInput)
+                      ? "1px solid #e53e3e" : `1px solid ${t.border}`,
+                  }}
+                />
+                {hexInput && !/^#[0-9A-Fa-f]{6}$/.test(hexInput) && (
+                  <span style={{ fontSize: "11px", color: "#e53e3e" }}>Invalid hex</span>
+                )}
+              </div>
+              <p style={{ fontSize: "11px", color: t.textLight, textAlign: "center", marginTop: "6px" }}>
+                Enter a hex code (e.g. #FA4616) or pick a colour above
+              </p>
             </div>
           )}
         </div>
@@ -345,11 +388,11 @@ export function SignUp() {
 
       {/* Minor + Certificate */}
       <div style={{
-        backgroundColor: "rgba(255,255,255,0.5)", borderRadius: "10px",
-        boxShadow: "0 6px 28px rgba(0,0,0,0.12)", padding: "28px 40px",
+        backgroundColor: t.card, borderRadius: "10px",
+        boxShadow: t.shadow, padding: "28px 40px",
         width: "90%", maxWidth: "860px",
         display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px",
-        marginBottom: "24px",
+        marginBottom: "24px", border: `1px solid ${t.border}`,
       }}>
         <div>
           <label style={labelStyle}>Minor(s)</label>
@@ -382,7 +425,7 @@ export function SignUp() {
 
       <button onClick={handleOnSubmit} style={{
         width: "340px", height: "60px", backgroundColor: "transparent",
-        border: "3px solid #F97000", color: "#F97000", fontSize: "22px",
+        border: `3px solid ${t.orange}`, color: t.orange, fontSize: "22px",
         fontWeight: "bold", borderRadius: "4px", cursor: "pointer",
         marginBottom: "24px", letterSpacing: "1px", fontFamily: "'Georgia', serif",
       }}>
@@ -390,9 +433,9 @@ export function SignUp() {
       </button>
 
       {!isLoggedIn && (
-        <p style={{ color: "#555", fontSize: "14px", marginBottom: "40px" }}>
+        <p style={{ color: t.textMuted, fontSize: "14px", marginBottom: "40px" }}>
           Already have an account?{" "}
-          <Link to="/login" style={{ color: "#2E03A5", fontWeight: "bold" }}>Login</Link>
+          <Link to="/login" style={{ color: t.accent, fontWeight: "bold" }}>Login</Link>
         </p>
       )}
     </div>

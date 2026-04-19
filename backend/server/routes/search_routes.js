@@ -140,4 +140,19 @@ router.put("/:id/rename", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+router.delete("/:id", authenticateToken, async (req, res) => {
+  try {
+    const search = await SearchSubmission.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user.userId,
+    });
+    if (!search) return res.status(404).json({ message: "Search not found" });
+    res.json({ message: "Search deleted" });
+  } catch (err) {
+    console.error("DELETE SEARCH ERROR", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;
