@@ -141,6 +141,8 @@ export function SignUp() {
     const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
     const method = isLoggedIn ? "PUT" : "POST";
     const token = sessionStorage.getItem("token");
+    const url = isLoggedIn ? `${baseUrl}/profile` : `${baseUrl}/register`;
+    const method = isLoggedIn ? "PUT" : "POST";
     const headers = isLoggedIn ? { Authorization: `Bearer ${token}` } : {};
 
     let result = await fetch(url, { method, headers, body: formData });
