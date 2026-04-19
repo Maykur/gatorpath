@@ -6,6 +6,9 @@
     https://www.w3schools.com/tags/tag_li.asp
     https://cheerio.js.org/
 */
+const dns = require("node:dns");
+dns.setDefaultResultOrder("ipv4first");
+
 require("dotenv").config({path: __dirname + "/.env"});
 const connectDB = require("./server/db");
 const app = require("./server/app");

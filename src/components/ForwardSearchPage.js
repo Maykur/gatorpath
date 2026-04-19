@@ -30,8 +30,6 @@ export default function ForwardSearchPage() {
   const [majorId, setMajorId] = useState([]);
   const [minors, setMinors] = useState([]);
   const [certificates, setCerts] = useState([]);
-  const [minorIds, setMinorIds] = useState([]);
-  const [certificateIds, setCertificateIds] = useState([]);
   const [selectedMinors, setSelectedMinors] = useState([]);
   const [selectedCerts, setSelectedCerts] = useState([]);
   const [coursesTakenText, setCoursesTakenText] = useState("");
@@ -122,9 +120,6 @@ export default function ForwardSearchPage() {
         userMinor,
         userCertificate,
       });
-
-      // setMinor(userMinor);
-      // setCertificate(userCertificate);
 
       const matchedMajor = majors.find(
         (m) => normalizeText(m.major) === normalizeText(userMajor)
@@ -226,6 +221,7 @@ export default function ForwardSearchPage() {
 
   const sectionTitle = {
     fontSize: "16px", fontWeight: "bold", color: t.accent,
+    textAlign: "center",
     letterSpacing: "1px", textTransform: "uppercase",
     borderBottom: `2px solid ${t.orange}`, paddingBottom: "8px",
     marginBottom: "20px", marginTop: "8px",
@@ -311,7 +307,7 @@ export default function ForwardSearchPage() {
             <div style={sectionTitle}>Academic Information</div>
 
             <div style={fieldStyle}>
-              <label style={labelStyle}>Major (required)</label>
+              <label style={labelStyle}>Major (Required)</label>
               <Select
                 options={majors.map(m => ({ value: m._id, label: m.major }))
                 }
@@ -330,7 +326,6 @@ export default function ForwardSearchPage() {
                   options={minorList}
                   onChange={(selected) => {
                     setSelectedMinors(selected || []);
-                    setMinorIds((selected || []).map(s => s.value));
                   }}
                   placeholder="e.g., Mathematics"
                   styles={selectStyles}
@@ -343,7 +338,6 @@ export default function ForwardSearchPage() {
                   options={certList}
                   onChange={(selected) => {
                     setSelectedCerts(selected || []);
-                    setCertificateIds((selected || []).map(s => s.value));
                   }}
                   placeholder="e.g., Cybersecurity"
                   styles={selectStyles}
@@ -352,7 +346,7 @@ export default function ForwardSearchPage() {
             </div>
 
             <div style={fieldStyle}>
-              <label style={labelStyle}>Courses Taken (comma-separated codes)</label>
+              <label style={labelStyle}>Courses Taken (Comma-Separated Codes)</label>
               <input
                 style={inputStyle} placeholder="e.g., CIS4301, CIS4914"
                 value={coursesTakenText} onChange={(e) => setCoursesTakenText(e.target.value)}
@@ -373,28 +367,13 @@ export default function ForwardSearchPage() {
             </div>
 
             <div style={fieldStyle}>
-              <label style={labelStyle}>Search Name (nickname)</label>
+              <label style={labelStyle}>Search Name (Nickname)</label>
               <input style={inputStyle} placeholder="e.g., CS_with_DS_and_AI" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
             </div>
 
             {error && <p style={{ color: "red", fontSize: "13px", marginBottom: "12px" }}>{error}</p>}
 
-            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "10px", marginTop: "18px" }}>
-              <button
-                type="submit"
-                disabled={submitting}
-                style={{
-                  border: `2px solid ${t.orange}`,
-                  background: isDark ? "rgba(249,112,0,0.15)" : "rgba(249,112,0,0.08)",
-                  color: t.orange,
-                  borderRadius: "6px", padding: "12px 16px",
-                  fontSize: "20px", fontWeight: "700",
-                  fontFamily: "'Georgia', serif", cursor: "pointer",
-                }}
-              >
-                {submitting ? "Submitting..." : "Submit Search"}
-              </button>
-
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "10px", marginTop: "18px" }}>
               <button
                 type="button"
                 onClick={() => navigate("/past-searches")}
@@ -408,6 +387,20 @@ export default function ForwardSearchPage() {
                 }}
               >
                 Past Searches
+              </button>
+              <button
+                type="submit"
+                disabled={submitting}
+                style={{
+                  border: `2px solid ${t.orange}`,
+                  background: isDark ? "rgba(249,112,0,0.15)" : "rgba(249,112,0,0.08)",
+                  color: t.orange,
+                  borderRadius: "6px", padding: "12px 16px",
+                  fontSize: "20px", fontWeight: "700",
+                  fontFamily: "'Georgia', serif", cursor: "pointer",
+                }}
+              >
+                {submitting ? "Submitting..." : "Submit Search"}
               </button>
             </div>
           </form>

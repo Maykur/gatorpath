@@ -3,8 +3,6 @@
 
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { useState } from 'react'
-import Navbar from "../components/Navbar"
 import '../components/CenteredButton.css';
 import { useTheme } from "../context/ThemeContext";
 import { lightTheme, darkTheme } from "../context/theme";
@@ -14,7 +12,6 @@ const texture = "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox=
 export function StartUp() {
   const { isDark } = useTheme();
   const t = isDark ? darkTheme : lightTheme;
-  const navigate = useNavigate();
 
   return (
     <div style={{

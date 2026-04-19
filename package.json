@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.5",
     "cheerio": "^1.2.0",
+    "flask": "^0.2.10",
+    "node.js": "^0.0.1-security",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.12.0",
@@ -23,7 +25,6 @@
     "eject": "react-scripts eject",
     "frontStart": "npm start",
     "backStart": "cd backend && npx nodemon index.js",
-    "preMLstart": "cd ML && pip install -r requirements.txt",
     "MLinstall": "cd ML && pip install -r requirements.txt",
     "MLstart": "cd ML && python app.py",
     "serverStart": "run-p frontStart backStart MLstart"

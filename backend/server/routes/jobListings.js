@@ -10,6 +10,7 @@ const progInfo = require("../program_info");
 const express = require("express");
 const router = express.Router();
 const { getProgWords } = require("../progWords"); // bringing it back
+const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://localhost:5001";
 
 // MOVE BOTH FUNCTIONS UP HERE
 function getSeniority(title) {
@@ -112,7 +113,7 @@ const weightedProgramKeywords = [
 let ML_recs = [];
 try {
     // Get ML recs from reccomend end point
-    const ML_results = await fetch(`http://localhost:5001/recommend`, {
+    const ML_results = await fetch(`${ML_SERVICE_URL}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
