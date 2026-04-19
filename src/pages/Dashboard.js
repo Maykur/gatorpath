@@ -543,8 +543,8 @@ function Dashboard() {
   const locationOptions = ["All", ...new Set(jobResults.map(job => job.location).filter(l => l && l !== "Unknown"))];
 
   const filteredJobResults = jobResults.filter(job => {
-    if (seniorityFilter !== "Select Seniority" && seniorityFilter !== "Filter by Seniority" && job.seniority !== seniorityFilter) return false;
-    if (locationFilter !== "Select State" && locationFilter !== "Filter by State" && job.location !== locationFilter) return false;
+    if (seniorityFilter !== "All" && job.seniority !== seniorityFilter) return false;
+    if (locationFilter !== "All" && job.location !== locationFilter) return false;
     return true;
   });
 
@@ -917,9 +917,9 @@ function Dashboard() {
                 {locationOptions.filter((option) => option !== "All").map(option => <option key={option} value={option}>{option}</option>)}
               </select>
 
-              {(seniorityFilter !== "Select Seniority" || locationFilter !== "Select State") && (
+              {(seniorityFilter !== "All" || locationFilter !== "All") && (
                 <button
-                  onClick={() => { setSeniorityFilter("Select Seniority"); setLocationFilter("Select State"); }}
+                  onClick={() => {setSeniorityFilter("All"); setSeniorityTouched(false); setLocationFilter("All"); setLocationTouched(false);}}
                   style={{
                     padding: "8px 14px", borderRadius: "20px", border: `1px solid ${t.orange}`,
                     fontSize: "13px", fontFamily: "'Georgia', serif", cursor: "pointer",
